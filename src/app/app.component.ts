@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Booster';
-
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
 }
