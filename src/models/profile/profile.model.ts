@@ -8,7 +8,7 @@ export class Profile {
   description: string;
 }
 
-enum Roles {
+export enum Roles {
   fan,
   musician,
   band
