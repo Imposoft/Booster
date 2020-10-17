@@ -3,10 +3,11 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Tipo de perfil</ng-template>
       <mat-form-field appearance="fill">
-        <mat-label>Select an option</mat-label>
+        <mat-label>Dinos quien eres</mat-label>
         <mat-select [(value)]="selected" formControlName="firstCtrl">
-          <mat-option>None</mat-option>
-          <mat-option value="option1">Usuario</mat-option>
+          <mat-option></mat-option>
+          <!-- TODO Segun la opcion poner un texto de descripcion distinto -->
+          <mat-option value="option1">Aficionado</mat-option>
           <mat-option value="option2">Musico</mat-option>
           <mat-option value="option3">Banda</mat-option>
         </mat-select>
