@@ -8,20 +8,23 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ExampleComponentComponent} from '../components/example-component/example-component.component';
 import {HomeView} from '../views/home/home.view';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {RegisterMusicianComponent} from '../components/register-musician/register-musician.component';
+
 import {RegisterView} from '../views/register/register.view';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {ProfileView} from '../views/profile/profile.view';
+import {RegisterProfileComponent} from '../components/register-profile/register-profile.component';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     /**  COMPONENTS  */
     AppComponent,
     ExampleComponentComponent,
-    RegisterMusicianComponent,
+    RegisterProfileComponent,
 
     /** VIEWS */
     HomeView,
@@ -38,7 +41,9 @@ import {ProfileView} from '../views/profile/profile.view';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
