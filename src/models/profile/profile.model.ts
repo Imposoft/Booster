@@ -5,7 +5,6 @@ export class Profile {
   imageSource: string;
   location: string;
   role: Roles;
-  description: string;
 }
 
 export enum Roles {
