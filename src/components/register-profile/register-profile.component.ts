@@ -17,13 +17,17 @@ export class RegisterProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      profileRole: ['', [Validators.required]],
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      imageurl: ['', [Validators.required]],
     });
     this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      location: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
   }
 }

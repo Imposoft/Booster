@@ -4,7 +4,7 @@
       <ng-template matStepLabel>Tipo de perfil</ng-template>
       <mat-form-field appearance="fill">
         <mat-label>Dinos quien eres</mat-label>
-        <mat-select [(value)]="selected" formControlName="firstCtrl">
+        <mat-select [(value)]="selected" formControlName="profileRole">
           <mat-option></mat-option>
           <!-- TODO Segun la opcion poner un texto de descripcion distinto -->
           <mat-option value="option1">Aficionado</mat-option>
@@ -21,19 +21,19 @@
     <form [formGroup]="secondFormGroup">
       <mat-form-field>
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Antonio" formControlName="secondCtrl" required>
+        <input matInput placeholder="Antonio" formControlName="name" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput placeholder="usuario@email.com" formControlName="secondCtrl" required>
+        <input matInput placeholder="usuario@email.com" formControlName="email" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Contrasenya</mat-label>
-        <input matInput placeholder="*******" formControlName="secondCtrl" required>
+        <input matInput placeholder="*******" formControlName="password" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Imagen</mat-label>
-        <input matInput placeholder="En formato jpg y png" formControlName="secondCtrl" required>
+        <input matInput placeholder="En formato jpg y png" formControlName="imageurl" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -45,12 +45,12 @@
       <!-- TODO Encontrar coordenadas con una direccion -->
       <mat-form-field>
         <mat-label>Ubicacion:</mat-label>
-        <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Gran Via, Valencia, 46001"
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
                required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Descripcion:</mat-label>
-        <input matInput formControlName="thirdCtrl" placeholder="Date a conecer!"
+        <input matInput formControlName="description" placeholder="Date a conecer!"
                required>
       </mat-form-field>
       <div>
@@ -71,3 +71,6 @@
   </mat-step>
   -->
 </mat-horizontal-stepper>
+{{firstFormGroup.value | json}}
+{{secondFormGroup.value | json}}
+{{thirdFormGroup.value | json}}
