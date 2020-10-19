@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Profile, Roles} from '../../models/profile/profile.model';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -8,8 +10,10 @@ import {Profile, Roles} from '../../models/profile/profile.model';
 })
 export class ProfileView implements OnInit {
   exampleProfile: Profile;
+  items: Observable<any[]>;
 
-  constructor() {
+  constructor(firestore: AngularFirestore) {
+    this.items = firestore.collection('test').valueChanges();
   }
 
   ngOnInit(): void {

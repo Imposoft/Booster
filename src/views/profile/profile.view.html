@@ -35,5 +35,10 @@
 
   Pellentesque convallis velit quis purus finibus tempor. Vivamus ante ligula, finibus et ultricies eget, dapibus id mauris. Suspendisse potenti. Quisque consectetur mauris lacus, nec malesuada metus vulputate eget. Proin eu laoreet felis. Nulla vitae faucibus lorem. Morbi nec eleifend metus, vitae interdum nulla. Quisque risus felis, fermentum vel felis eu, lobortis tempor risus. Aliquam semper ornare egestas
 </div>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.test}}
+  </li>
+</ul>
 
 <!-- TODO Add Map Component -->

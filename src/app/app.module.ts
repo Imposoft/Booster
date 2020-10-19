@@ -19,6 +19,11 @@ import {RegisterProfileComponent} from '../components/register-profile/register-
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     /**  COMPONENTS  */
@@ -44,6 +49,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     MatOptionModule,
     MatSelectModule,
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "booster-dceeb": {
+      "hosting": {
+        "Booster": [
+          "booster-dceeb"
+        ]
+      }
+    }
+  }
+}
