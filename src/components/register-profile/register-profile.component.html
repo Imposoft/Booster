@@ -53,7 +53,7 @@
         <mat-label>Descripcion:</mat-label>
         <input matInput formControlName="description" placeholder="Date a conecer!"
                required>
-      </mat-form-field>
+      </mat-form-field><br>
       <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='musician' ||firstFormGroup.get('profileRole').value=='band')">
         <mat-label>Precio suscripcion:</mat-label>
         <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
