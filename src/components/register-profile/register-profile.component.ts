@@ -28,6 +28,7 @@ export class RegisterProfileComponent implements OnInit {
     this.thirdFormGroup = this.formBuilder.group({
       location: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      precioSuscripcion: ['', [Validators.required]],
     });
   }
 }

@@ -7,9 +7,9 @@
         <mat-select [(value)]="selected" formControlName="profileRole">
           <mat-option></mat-option>
           <!-- TODO Segun la opcion poner un texto de descripcion distinto -->
-          <mat-option value="option1">Aficionado</mat-option>
-          <mat-option value="option2">Musico</mat-option>
-          <mat-option value="option3">Banda</mat-option>
+          <mat-option value="fan">Aficionado</mat-option>
+          <mat-option value="musician">Musico</mat-option>
+          <mat-option value="band">Banda</mat-option>
         </mat-select>
       </mat-form-field>
       <div>
@@ -36,6 +36,7 @@
         <input matInput placeholder="En formato jpg y png" formControlName="imageurl" required>
       </mat-form-field>
       <div>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
@@ -48,9 +49,14 @@
         <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
                required>
       </mat-form-field><br>
-      <mat-form-field>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='musician' ||firstFormGroup.get('profileRole').value=='band')">
         <mat-label>Descripcion:</mat-label>
         <input matInput formControlName="description" placeholder="Date a conecer!"
+               required>
+      </mat-form-field>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='musician' ||firstFormGroup.get('profileRole').value=='band')">
+        <mat-label>Precio suscripcion:</mat-label>
+        <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
                required>
       </mat-form-field>
       <div>
@@ -71,6 +77,7 @@
   </mat-step>
   -->
 </mat-horizontal-stepper>
+{{firstFormGroup.get('profileRole').value}}
 {{firstFormGroup.value | json}}
 {{secondFormGroup.value | json}}
 {{thirdFormGroup.value | json}}
