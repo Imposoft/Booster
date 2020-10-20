@@ -4,11 +4,13 @@ export class Profile {
   password: string;
   imageSource: string;
   location: string;
-  role: Roles;
+  phone: string;
+  socialNetworks: Map<SocialNetwork, string>;
 }
 
-export enum Roles {
-  fan,
-  musician,
-  band
+export enum SocialNetwork {
+  INSTRAGRAM,
+  FACEBOOK,
+  TWITTER,
+  REDDIT
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Profile, Roles} from '../../models/profile/profile.model';
+import {Profile, SocialNetwork} from '../../models/profile/profile.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
@@ -23,8 +23,8 @@ export class ProfileView implements OnInit {
       password: '1234512345',
       imageSource: 'assets/profile/img_avatar.png',
       location: 'Marbella',
-      role: Roles.musician,
-      description: 'TestDescription',
+      phone: '656121212',
+      socialNetworks: new Map([[SocialNetwork.FACEBOOK, 'linkfacebook']]),
     };
   }
 
