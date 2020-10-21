@@ -6,6 +6,8 @@ import {SocialNetwork} from '../../models/profile/profile.model';
 import {Genre} from '../../models/genre/genre.model';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {Band} from '../../models/band/band.model';
+import { Fan } from 'src/models/fan/fan.model';
 
 @Component({
   selector: 'app-register-profile',
@@ -22,12 +24,16 @@ export class RegisterProfileComponent implements OnInit {
   selected = 'option2';
 
   musicianProfiles;
+  fanProfiles;
+  bandProfiles;
 
   successMessage = '';
   private _success = new Subject<string>();
 
   constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
     this.musicianProfiles = afs.collection<Musician>('musicianProfiles');
+    this.fanProfiles = afs.collection<Fan>('fanProfiles');
+    this.bandProfiles = afs.collection<Band>('bandProfiles');
   }
 
   ngOnInit(): void {
@@ -65,7 +71,7 @@ export class RegisterProfileComponent implements OnInit {
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
-        phone: 'ejemplotelef',
+        phone: this.secondFormGroup.value.phone,
         description: this.thirdFormGroupMusician.value.description,
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupMusician.value.location,
@@ -81,9 +87,9 @@ export class RegisterProfileComponent implements OnInit {
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
-        phone: 'ejemplotelef'
+        phone: this.secondFormGroup.value.phone
       };
-      this.musicianProfiles.add(fan);
+      this.fanProfiles.add(fan);
       this._success.next('Perfil creado con exito!');
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       // TODO Implement band logic
@@ -92,14 +98,14 @@ export class RegisterProfileComponent implements OnInit {
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
-        phone: 'ejemplotelef',
+        phone: this.secondFormGroup.value.phone,
         description: this.thirdFormGroupBand.value.description,
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupBand.value.location,
         socialNetworks: SocialNetwork.FACEBOOK,
         subscriptionPrice: this.thirdFormGroupBand.value.precioSuscripcion
       };
-      this.musicianProfiles.add(band);
+      this.bandProfiles.add(band);
       this._success.next('Perfil creado con exito!');
     } // else {
       // TODO Implement contratante logic
