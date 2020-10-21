@@ -61,7 +61,7 @@
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </form>
@@ -77,7 +77,4 @@
   </mat-step>
   -->
 </mat-horizontal-stepper>
-{{firstFormGroup.get('profileRole').value}}
-{{firstFormGroup.value | json}}
-{{secondFormGroup.value | json}}
-{{thirdFormGroup.value | json}}
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
