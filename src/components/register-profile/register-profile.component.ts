@@ -16,6 +16,7 @@ export class RegisterProfileComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroupMusician: FormGroup;
   thirdFormGroup: FormGroup;
   selected = 'option2';
 
@@ -38,7 +39,7 @@ export class RegisterProfileComponent implements OnInit {
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
     });
-    this.thirdFormGroup = this.formBuilder.group({
+    this.thirdFormGroupMusician = this.formBuilder.group({
       location: ['', [Validators.required]],
       description: ['', [Validators.required]],
       precioSuscripcion: ['', [Validators.required]],
@@ -59,11 +60,11 @@ export class RegisterProfileComponent implements OnInit {
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
         phone: 'ejemplotelef',
-        description: this.thirdFormGroup.value.description,
+        description: this.thirdFormGroupMusician.value.description,
         genres: ['EjemploGenero'],
-        location: this.thirdFormGroup.value.location,
+        location: this.thirdFormGroupMusician.value.location,
         socialNetworks: SocialNetwork.FACEBOOK,
-        subscriptionPrice: this.thirdFormGroup.value.precioSuscripcion
+        subscriptionPrice: this.thirdFormGroupMusician.value.precioSuscripcion
       };
       this.musicianProfiles.add(musician);
       this._success.next('Perfil creado con exito!');

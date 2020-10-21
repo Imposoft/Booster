@@ -42,19 +42,65 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" label="Datos avanzados">
-    <form [formGroup]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroupMusician" *ngIf="(firstFormGroup.get('profileRole').value=='musician')">
       <!-- TODO Encontrar coordenadas con una direccion -->
       <mat-form-field>
         <mat-label>Ubicacion:</mat-label>
         <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
                required>
       </mat-form-field><br>
-      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='musician' ||firstFormGroup.get('profileRole').value=='band')">
+      <mat-form-field>
         <mat-label>Descripcion:</mat-label>
         <input matInput formControlName="description" placeholder="Date a conecer!"
                required>
       </mat-form-field><br>
-      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='musician' ||firstFormGroup.get('profileRole').value=='band')">
+      <mat-form-field>
+        <mat-label>Precio suscripcion:</mat-label>
+        <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+    <form [formGroup]="thirdFormGroupMusician" *ngIf="(firstFormGroup.get('profileRole').value=='band')">
+      <!-- TODO Encontrar coordenadas con una direccion -->
+      <mat-form-field>
+        <mat-label>Ubicacion banda:</mat-label>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
+               required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Descripcion:</mat-label>
+        <input matInput formControlName="description" placeholder="Date a conecer!"
+               required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Precio suscripcion:</mat-label>
+        <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+    <form [formGroup]="thirdFormGroupMusician" *ngIf="(firstFormGroup.get('profileRole').value=='fan')">
+      <!-- TODO Encontrar coordenadas con una direccion -->
+      <mat-form-field>
+        <mat-label>Ubicacion fan:</mat-label>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
+               required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Descripcion:</mat-label>
+        <input matInput formControlName="description" placeholder="Date a conecer!"
+               required>
+      </mat-form-field><br>
+      <mat-form-field>
         <mat-label>Precio suscripcion:</mat-label>
         <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
                required>
