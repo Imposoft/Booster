@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
 import {BandView} from '../views/band/band.view';
 import {FanView} from '../views/fan/fan.view';
 import {NavigationbarComponent} from '../components/navigationbar/navigationbar.component';
+import {SocialLinksComponent} from '../components/social-links/social-links.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {NavigationbarComponent} from '../components/navigationbar/navigationbar.
     ProfileView,
     BandView,
     FanView,
-    NavigationbarComponent
+    NavigationbarComponent,
+    SocialLinksComponent
   ],
   imports: [
     BrowserModule,

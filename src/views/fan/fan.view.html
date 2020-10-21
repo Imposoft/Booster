@@ -1,13 +1,17 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
+<div class="container-fluid d-flex justify-content-center bg-light" >
+
+  <div class="row bg-white" style="width:90vw">
+    <div class="col-md-4 col-sm-12">
       <img src={{profile.imageSource}} alt="Imagen de perfil" style="max-width: 200px">
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8 col-sm-12">
       <div class="row">
         <div class="col-md-12">
           <!-- TODO Cambiar a {{profile.name}} -->
+          <br>
           <h1>{{profile.name}}</h1>
+          <br>
+          <app-social-links [socialNetworks]="profile.socialNetworks"></app-social-links>
         </div>
       </div>
 

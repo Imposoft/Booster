@@ -26,7 +26,7 @@ export class FanView implements OnInit {
       imageSource: 'assets/fan/avatar-man.jpg',
       location: 'Marbella',
       phone: '656121212',
-      socialNetworks: new Map([[SocialNetwork.FACEBOOK, 'linkfacebook']]),
+      socialNetworks: new Map([[SocialNetwork.FACEBOOK, 'https://fb.com'], [SocialNetwork.TWITTER, 'https://twitter.com'], [SocialNetwork.INSTRAGRAM, 'https://instagram.com']]),
     };
   }
 }
