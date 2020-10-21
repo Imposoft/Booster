@@ -18,6 +18,7 @@ export class RegisterProfileComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroupMusician: FormGroup;
   thirdFormGroup: FormGroup;
+  thirdFormGroupBand: FormGroup;
   selected = 'option2';
 
   musicianProfiles;
@@ -42,6 +43,11 @@ export class RegisterProfileComponent implements OnInit {
     this.thirdFormGroupMusician = this.formBuilder.group({
       location: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      precioSuscripcion: ['', [Validators.required]],
+    });
+    this.thirdFormGroupBand = this.formBuilder.group({
+      location: ['', [Validators.required]],
+      description: ['', []],
       precioSuscripcion: ['', [Validators.required]],
     });
 
@@ -70,8 +76,33 @@ export class RegisterProfileComponent implements OnInit {
       this._success.next('Perfil creado con exito!');
     } else if (this.firstFormGroup.value.profileRole  === 'fan'){
       // TODO Implement fan logic
+      const fan = {
+        name: this.secondFormGroup.value.name,
+        email: this.secondFormGroup.value.email,
+        password: this.secondFormGroup.value.password,
+        imageSource: this.secondFormGroup.value.imageurl,
+        phone: 'ejemplotelef'
+      };
+      this.musicianProfiles.add(fan);
+      this._success.next('Perfil creado con exito!');
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       // TODO Implement band logic
-    }
+      const band = {
+        name: this.secondFormGroup.value.name,
+        email: this.secondFormGroup.value.email,
+        password: this.secondFormGroup.value.password,
+        imageSource: this.secondFormGroup.value.imageurl,
+        phone: 'ejemplotelef',
+        description: this.thirdFormGroupBand.value.description,
+        genres: ['EjemploGenero'],
+        location: this.thirdFormGroupBand.value.location,
+        socialNetworks: SocialNetwork.FACEBOOK,
+        subscriptionPrice: this.thirdFormGroupBand.value.precioSuscripcion
+      };
+      this.musicianProfiles.add(band);
+      this._success.next('Perfil creado con exito!');
+    } // else {
+      // TODO Implement contratante logic
+    // }
   }
 }

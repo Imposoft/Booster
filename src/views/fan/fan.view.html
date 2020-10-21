@@ -1,0 +1,28 @@
+<!--Navbar-->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">
+    <img src="assets/icon/booster.png" width="120" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <a [routerLink]="'/home'"><button type="button" class="btn btn-outline-light">Inicio</button></a>
+  </div>
+  <div>
+    <img src={{profile.imageSource}} alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <img src={{profile.imageSource}} alt="Imagen de perfil" style="max-width: 200px">
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- TODO Cambiar a {{profile.name}} -->
+          <h1>{{profile.name}}</h1>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

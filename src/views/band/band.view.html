@@ -6,19 +6,18 @@
     <a [routerLink]="'/home'"><button type="button" class="btn btn-outline-light">Inicio</button></a>
   </div>
   <div>
-    <img src={{exampleProfile.imageSource}} alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+    <img src={{profile.imageSource}} alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
   </div>
 </nav>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
-      <img src={{exampleProfile.imageSource}} alt="Imagen de perfil" style="max-width: 200px">
+      <img src={{profile.imageSource}} alt="Imagen de perfil" style="max-width: 200px">
     </div>
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-12">
-          <!-- TODO Cambiar a {{profile.name}} -->
-          <h1>{{exampleProfile.name}}</h1>
+          <h1>{{profile.name}}</h1>
         </div>
       </div>
       <div class="row">
@@ -29,6 +28,7 @@
       <div class="row">
         <div class="col-md-12">
           Breve descripcion?
+          {{profile.description}}
         </div>
       </div>
     </div>
@@ -45,19 +45,6 @@
   Quisque ultrices lacus sed ligula iaculis, eu consequat nibh interdum. Sed tristique lobortis tellus, non rutrum diam. Proin tristique nulla ut ornare laoreet. Proin id orci porta, tempor erat sed, condimentum est. Donec placerat varius magna, non consectetur lectus posuere in. Donec congue porta nisl a viverra. Fusce quis arcu eget velit dignissim porttitor. Duis viverra neque ex, quis finibus tortor pretium vitae. Ut pharetra ornare elit, ac ultricies eros lacinia euismod. Vivamus fermentum placerat orci in tempor. Suspendisse potenti. Proin in imperdiet tellus. Quisque molestie nisi et laoreet rhoncus.
 
   Pellentesque convallis velit quis purus finibus tempor. Vivamus ante ligula, finibus et ultricies eget, dapibus id mauris. Suspendisse potenti. Quisque consectetur mauris lacus, nec malesuada metus vulputate eget. Proin eu laoreet felis. Nulla vitae faucibus lorem. Morbi nec eleifend metus, vitae interdum nulla. Quisque risus felis, fermentum vel felis eu, lobortis tempor risus. Aliquam semper ornare egestas
-
-  <span>&nbsp;</span>
-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt auctor libero et congue. Morbi dictum metus ac lorem molestie fermentum. Nam vehicula vestibulum maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse pharetra porta turpis. Maecenas placerat dui a est efficitur feugiat. Maecenas et mi a mauris congue congue. Pellentesque aliquet quam quis elementum vehicula. Donec eu efficitur velit, in congue elit. Ut tempus, ex ac posuere feugiat, magna lectus luctus tortor, id vehicula purus sem quis lorem. Pellentesque dignissim augue at tortor malesuada sagittis. In at erat et lectus ultricies ultricies.
-
-  Maecenas ut placerat lacus. Ut enim erat, faucibus ac aliquet ac, ornare sed massa. Nullam faucibus purus non nisl commodo, vitae scelerisque nisl malesuada. Pellentesque semper nisi a velit dignissim, sit amet tincidunt ipsum commodo. Donec malesuada vitae leo a convallis. Donec nec nulla augue. Ut sagittis rhoncus lacus molestie viverra. Aenean vel dapibus ex. Nunc pharetra ultricies lorem vel facilisis. Proin ornare tincidunt massa, non pellentesque mauris euismod vitae.
-
-  Donec quis nulla consectetur nisl molestie fermentum sit amet sit amet tortor. Maecenas a risus id tellus iaculis laoreet. Nunc ullamcorper gravida lectus in facilisis. Integer ultricies lacinia mattis. Vestibulum vitae justo vel lorem sagittis molestie. Sed condimentum quam et nibh commodo, nec vulputate arcu iaculis. Ut gravida erat turpis, et luctus neque fermentum non. Nulla id varius orci. Duis non urna id orci luctus venenatis. Suspendisse blandit, odio nec tempus rhoncus, justo velit cursus libero, quis condimentum nisi eros sed urna. Nunc consequat dolor id dui lobortis pharetra. Ut ex nisl, mollis vel orci eget, accumsan facilisis libero. Donec eget aliquam lorem. Nullam lacinia lacus eu velit pellentesque lobortis.
-
-  Quisque ultrices lacus sed ligula iaculis, eu consequat nibh interdum. Sed tristique lobortis tellus, non rutrum diam. Proin tristique nulla ut ornare laoreet. Proin id orci porta, tempor erat sed, condimentum est. Donec placerat varius magna, non consectetur lectus posuere in. Donec congue porta nisl a viverra. Fusce quis arcu eget velit dignissim porttitor. Duis viverra neque ex, quis finibus tortor pretium vitae. Ut pharetra ornare elit, ac ultricies eros lacinia euismod. Vivamus fermentum placerat orci in tempor. Suspendisse potenti. Proin in imperdiet tellus. Quisque molestie nisi et laoreet rhoncus.
-
-  Pellentesque convallis velit quis purus finibus tempor. Vivamus ante ligula, finibus et ultricies eget, dapibus id mauris. Suspendisse potenti. Quisque consectetur mauris lacus, nec malesuada metus vulputate eget. Proin eu laoreet felis. Nulla vitae faucibus lorem. Morbi nec eleifend metus, vitae interdum nulla. Quisque risus felis, fermentum vel felis eu, lobortis tempor risus. Aliquam semper ornare egestas
-
 </div>
 <ul>
   <li class="text" *ngFor="let item of items | async">
@@ -66,3 +53,4 @@
 </ul>
 
 <!-- TODO Add Map Component -->
+

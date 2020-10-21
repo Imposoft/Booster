@@ -23,6 +23,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import {BandView} from '../views/band/band.view';
+import {FanView} from '../views/fan/fan.view';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { environment } from '../environments/environment';
     /** VIEWS */
     HomeView,
     RegisterView,
-    ProfileView
+    ProfileView,
+    BandView,
+    FanView
   ],
   imports: [
     BrowserModule,

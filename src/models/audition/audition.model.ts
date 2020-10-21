@@ -1,4 +1,4 @@
-export class Auditions {
+export class Audition {
   // category:[Category];
   salary?: number;
 }
