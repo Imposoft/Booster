@@ -25,6 +25,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import {BandView} from '../views/band/band.view';
 import {FanView} from '../views/fan/fan.view';
+import {NavigationbarComponent} from '../components/navigationbar/navigationbar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {FanView} from '../views/fan/fan.view';
     RegisterView,
     ProfileView,
     BandView,
-    FanView
+    FanView,
+    NavigationbarComponent
   ],
   imports: [
     BrowserModule,
