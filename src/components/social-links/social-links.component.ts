@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SocialNetwork} from '../../models/profile/profile.model';
+import {SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 
 @Component({
   selector: 'app-social-links',
@@ -7,15 +8,11 @@ import {SocialNetwork} from '../../models/profile/profile.model';
   styleUrls: ['./social-links.component.sass']
 })
 export class SocialLinksComponent implements OnInit {
-  @Input() socialNetworks: Map<SocialNetwork, string>;
+  @Input() socialNetworks: SocialNetworks[];
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  getKeys(map): Array<SocialNetwork>{
-    return Array.from(map.keys());
   }
 
 }

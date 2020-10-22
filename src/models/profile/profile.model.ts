@@ -1,3 +1,5 @@
+import {SocialNetworks} from '../socialnetworks/socialnetworks.model';
+
 export class Profile {
   name: string;
   email: string;
@@ -5,12 +7,12 @@ export class Profile {
   imageSource: string;
   location: string;
   phone: string;
-  socialNetworks: Map<SocialNetwork, string>;
+  socialNetworks: SocialNetworks[];
 }
 
 export enum SocialNetwork {
-  INSTRAGRAM,
-  FACEBOOK,
-  TWITTER,
-  REDDIT
+  INSTRAGRAM = 'INSTRAGRAM',
+  FACEBOOK = 'FACEBOOK',
+  TWITTER = 'TWITTER',
+  REDDIT = 'REDDIT'
 }

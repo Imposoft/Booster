@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Band} from '../../models/band/band.model';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
-import {SocialNetwork} from '../../models/profile/profile.model';
+import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 
 @Component({
   selector: 'app-fan',
@@ -13,9 +12,11 @@ import {SocialNetwork} from '../../models/profile/profile.model';
 export class FanView implements OnInit {
   profile: Fan;
   items: Observable<any[]>;
+  fanProfiles: any;
 
   constructor(firestore: AngularFirestore) {
     this.items = firestore.collection('test').valueChanges();
+    this.fanProfiles = firestore.collection<Fan>('fanProfiles');
   }
 
   ngOnInit(): void {
@@ -26,10 +27,14 @@ export class FanView implements OnInit {
       imageSource: 'assets/fan/avatar-man.jpg',
       location: 'Marbella',
       phone: '656121212',
-      socialNetworks: new Map([[SocialNetwork.FACEBOOK, 'https://fb.com'],
-        [SocialNetwork.TWITTER, 'https://twitter.com'],
-        [SocialNetwork.INSTRAGRAM, 'https://instagram.com'],
-        [SocialNetwork.REDDIT, 'https://reddit.com']]),
+      socialNetworks: [{socialNetwork: SocialNetworkEnum.FACEBOOK, url: 'https://www.facebook.com/'},
+        {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
+        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
+        {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
     };
+  }
+
+  sendForm(): void {
+    this.fanProfiles.add(this.profile);
   }
 }
