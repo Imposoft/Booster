@@ -38,6 +38,10 @@
       <mat-form-field>
         <mat-label>Telefono</mat-label>
         <input matInput placeholder="999888777" formControlName="phone" >
+      </mat-form-field><br>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='band')">
+        <mat-label>Miembros</mat-label>
+        <input matInput placeholder="Miembros" formControlName="name" >
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
