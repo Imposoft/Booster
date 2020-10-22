@@ -3,6 +3,7 @@ import {Band} from '../../models/band/band.model';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-band',
@@ -32,7 +33,7 @@ export class BandView implements OnInit {
         {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
         {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
       genres: [{name: 'Heavy'}, {name: 'Pop'}],
-      members: [undefined],
+      members: [],
       subscriptionPrice: 0
     };
   }

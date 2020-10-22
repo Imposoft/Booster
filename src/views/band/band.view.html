@@ -11,6 +11,7 @@
           <h1>{{profile.name}}</h1>
           <h3>Contacto: {{profile.phone}}</h3>
           <div *ngFor= "let genre of profile.genres">{{genre.name}} </div>
+         
           <app-social-links [socialNetworks]="profile.socialNetworks"></app-social-links>
         </div>
       </div>
