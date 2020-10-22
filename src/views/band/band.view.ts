@@ -32,7 +32,7 @@ export class BandView implements OnInit {
         {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
         {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
         {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
-      genres: [undefined],
+      genres: [{name: 'Heavy'},{name: 'Pop'}    ],
       members: [undefined],
       subscriptionPrice: 0
     };

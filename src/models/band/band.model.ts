@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs';
 export class Band extends Profile{
   description?: string;
   members: [Musician];
-  genres: [Genre];
+  genres: Genre[];
   subscriptionPrice: number;
   auditions?: [Audition];
   // lista de ofertas de trabajo a las que se suscribe
