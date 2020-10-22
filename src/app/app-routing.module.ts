@@ -6,6 +6,7 @@ import {RegisterView} from '../views/register/register.view';
 import {ProfileView} from '../views/profile/profile.view';
 import {BandView} from '../views/band/band.view';
 import {FanView} from '../views/fan/fan.view';
+import {BandModificationView} from '../views/band-modification/band-modification.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileView},
   {path: 'bandProfile', component: BandView},
   {path: 'fanProfile', component: FanView},
+  {path: 'bandModification', component: BandModificationView},
 ];
 
 @NgModule({

@@ -5,11 +5,11 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 
 @Component({
-  selector: 'app-band',
-  templateUrl: './band.view.html',
-  styleUrls: ['./band.view.sass']
+  selector: 'app-band-modification',
+  templateUrl: './band-modification.view.html',
+  styleUrls: ['./band-modification.view.sass']
 })
-export class BandView implements OnInit {
+export class BandModificationView implements OnInit {
 
   profile: Band;
   items: Observable<any[]>;
@@ -36,4 +36,5 @@ export class BandView implements OnInit {
       subscriptionPrice: 0
     };
   }
+
 }
