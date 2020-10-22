@@ -27,6 +27,7 @@ import {BandView} from '../views/band/band.view';
 import {FanView} from '../views/fan/fan.view';
 import {NavigationbarComponent} from '../components/navigationbar/navigationbar.component';
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
+import {BandModificationView} from '../views/band-modification/band-modification.view';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {SocialLinksComponent} from '../components/social-links/social-links.comp
     RegisterView,
     ProfileView,
     BandView,
+    BandModificationView,
     FanView,
     NavigationbarComponent,
     SocialLinksComponent
