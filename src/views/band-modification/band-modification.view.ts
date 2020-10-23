@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Band} from '../../models/band/band.model';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetwork} from '../../models/profile/profile.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-band-modification',
@@ -13,9 +16,14 @@ export class BandModificationView implements OnInit {
 
   profile: Band;
   items: Observable<any[]>;
+  bandProfiles;
+  formGroup: FormGroup;
 
-  constructor(firestore: AngularFirestore) {
-    this.items = firestore.collection('test').valueChanges();
+  successMessage = '';
+  private _success = new Subject<string>();
+
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
+    this.bandProfiles = afs.collection<Band>('bandProfiles');
   }
 
   ngOnInit(): void {
@@ -35,6 +43,44 @@ export class BandModificationView implements OnInit {
       members: [undefined],
       subscriptionPrice: 0
     };
+
+    this.formGroup =  this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      imageurl: ['', [Validators.required]],
+      members: ['', []],
+      phone: ['', []],
+      location: ['', [Validators.required]],
+      description: ['', []],
+      precioSuscripcion: ['', [Validators.required]],
+    });
+
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = '');
+  }
+
+  sendForm(): void {
+    const band = {
+      name: this.formGroup.value.name,
+      email: this.formGroup.value.email,
+      password: this.formGroup.value.password,
+      imageSource: this.formGroup.value.imageurl,
+      phone: this.formGroup.value.phone,
+      members: this.formGroup.value.members,
+      description: this.formGroup.value.description,
+      genres: [{name: 'Heavy'}, {name: 'Pop'}, {name: 'Rock'}],
+      location: this.formGroup.value.location,
+      socialNetworks: [{socialNetwork: SocialNetworkEnum.FACEBOOK, url: 'https://www.facebook.com/'},
+        {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
+        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
+        {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
+      subscriptionPrice: this.formGroup.value.precioSuscripcion
+    };
+    this.bandProfiles.add(band);
+    this._success.next('Perfil creado con exito!');
   }
 
 }

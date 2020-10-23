@@ -1,21 +1,32 @@
 <div class="container-fluid p-2">
-  <div class="input-group mb-3">
+  <div class="input-group mb-3" [formGroup]="formGroup">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
     </div>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    <textarea type="text" class="form-control"  formControlName="name" placeholder="Username" aria-label="Username"
+              aria-describedby="basic-addon1" rows="1"> {{profile.name}}</textarea>
   </div>
 
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
-    <input type="text" class="form-control" placeholder="emailusuario@ejemplo.es" aria-label="email" aria-describedby="basic-addon2">
+    <textarea type="text" class="form-control" formControlName="email" placeholder="emailusuario@ejemplo.es" aria-label="email"
+              aria-describedby="basic-addon2" rows="1">{{profile.email}}</textarea>
+    <div class="input-group-append">
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon5" style="width:9vw">Telefono</span>
+    <textarea type="text" class="form-control" formControlName="phone" placeholder="666555444" aria-label="phone"
+              aria-describedby="basic-addon5" rows="1">{{profile.phone}}</textarea>
     <div class="input-group-append">
     </div>
   </div>
 
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon3" style="width:9vw">Imagen</span>
-    <input type="text" class="form-control" placeholder="/PATH de la imagen" aria-label="emailusuario@ejemplo.es" aria-describedby="basic-addon3">
+    <textarea type="text" class="form-control" formControlName="imageurl" placeholder="Imagen en jpg o png" aria-label="imgurl"
+              aria-describedby="basic-addon3" rows="1">{{profile.imageSource.valueOf()}}</textarea>
     <div class="input-group-append">
     </div>
   </div>
@@ -24,14 +35,16 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon4" style="width:9vw">Redes Sociales</span>
     </div>
-    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon4">
+    <textarea type="text" class="form-control" formControlName="social" id="basic-url"
+              aria-describedby="basic-addon4" rows="1">{{profile.socialNetworks}}</textarea>
   </div>
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" style="width:12.5vw">Precio de suscripcion</span>
     </div>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+    <textarea type="text" class="form-control" formControlName="subscriptionPrice" aria-label="Amount (to the nearest dollar)"
+              rows="1">{{profile.subscriptionPrice}}</textarea>
     <div class="input-group-append">
       <!-- <span class="input-group-text">.00</span> -->
     </div>
@@ -41,6 +54,12 @@
     <div class="input-group-prepend">
       <span class="input-group-text" style="width:9vw">Descripcion</span>
     </div>
-    <textarea class="form-control" rows="8" aria-label="With textarea">{{profile.description}}</textarea>
+    <textarea class="form-control" rows="5" formControlName="description" aria-label="Description">{{profile.description}}</textarea>
   </div>
+  <a [routerLink]="'/bandModification'">
+    <button type="button" class="btn btn-outline-primary d-flex justify-content-end ml-auto m-2" (click)="sendForm()">Guardar</button>
+  </a>
 </div>
+
+
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
