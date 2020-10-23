@@ -1,46 +1,68 @@
 <div class="container-fluid p-2">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
+  <form>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
+      </div>
+      <input class="form-control" placeholder="{{profile.name}}" aria-label="Nombre" formControlName="name">
     </div>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-  </div>
 
-  <div class="input-group mb-3">
+    <div class="input-group mb-3 form-row">
     <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
-    <input type="text" class="form-control" placeholder="emailusuario@ejemplo.es" aria-label="email" aria-describedby="basic-addon2">
-    <div class="input-group-append">
+      <input class="form-control" rows="1" placeholder="{{profile.email}}" aria-label="email" formControlName="email">
+      <div class="input-group-append">
+      </div>
     </div>
-  </div>
 
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon3" style="width:9vw">Imagen</span>
-    <input type="text" class="form-control" placeholder="/PATH de la imagen" aria-label="emailusuario@ejemplo.es" aria-describedby="basic-addon3">
-    <div class="input-group-append">
+    <div class="input-group mb-3 form-row">
+      <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+      <input class="form-control" rows="1" placeholder="{{profile.phone}}" aria-label="phone" formControlName="phone">
+      <div class="input-group-append">
+      </div>
     </div>
-  </div>
 
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon4" style="width:9vw">Redes Sociales</span>
+    <div class="input-group mb-3 form-row">
+      <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
+        <input class="form-control" rows="1" placeholder="{{profile.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
     </div>
-    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon4">
-  </div>
 
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" style="width:12.5vw">Precio de suscripcion</span>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
+      </div>
+      <input class="form-control" rows="1" placeholder="{{profile.location}}" aria-label="location" formControlName="location">
     </div>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-    <div class="input-group-append">
-      <!-- <span class="input-group-text">.00</span> -->
-    </div>
-  </div>
 
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text" style="width:9vw">Descripcion</span>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
+      </div>
+      <input class="form-control" rows="1" placeholder="{{profile.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
     </div>
-    <textarea class="form-control" rows="8" aria-label="With textarea">{{profile.description}}</textarea>
-  </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="width:12.5vw" >Precio de suscripcion</span>
+      </div>
+      <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
+      <input class="form-control" rows="1" placeholder="{{profile.subscriptionPrice}}" aria-label="Precio suscripcion" formControlName="subscriptionPrice" >
+      <div class="input-group-append">
+        <!-- <span class="input-group-text">.00</span> -->
+      </div>
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="width:9vw">Descripcion</span>
+      </div>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{profile.description}}</textarea>
+    </div>
+  </form>
 </div>
+
+<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+    <button class="btn btn-outline-primary" (click)="sendForm()">Guardar</button>
+</div>
+
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+
