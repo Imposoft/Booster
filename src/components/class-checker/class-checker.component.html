@@ -1,8 +1,16 @@
 <div class="card" style="width: 70vw">
-  <div class="card-body">
-    <h1 class="card-title">{{classToCheck.title}}</h1>
-    <p class="card-text">{{classToCheck.body}}</p>
-    <p class="card-text">{{classToCheck.price}}</p>
+  <div class="card-body p-0 overflow-hidden">
+    <div class="row">
+      <div class="col-sm-3">
+        <img src="{{classToCheck.imgUrl}}" alt="" class="img-fluid z-depth-0 align-center my-2 my-sm-0" width="300px">
+      </div>
+      <div class="col-sm-9 p-1">
+        <h1 class="card-title">{{classToCheck.title}}</h1>
+        <p class="card-text">{{classToCheck.body}}</p>
+        <p class="card-text">Precio: {{classToCheck.price}}€</p>
+      </div>
+    </div>
+    <div></div>
   </div>
   <ul class="list-group list-group-flush" *ngIf="usersShown">
     <li *ngFor="let user of classToCheck.userWaitList" class="list-group-item">
@@ -35,7 +43,7 @@
     <button mat-raised-button color="primary" (click)="toggleVisible()">Ver Usuarios</button>
   </div>
 </div>
-
+<!-- Modal to show on contact press -->
 <ng-template #content let-modal>
   <div class="modal-header">
     <h2 class="modal-title" id="modal-basic-title">Datos de {{chosenUser.name}}</h2>

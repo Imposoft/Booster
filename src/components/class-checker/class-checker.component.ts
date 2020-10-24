@@ -23,7 +23,7 @@ export class ClassCheckerComponent implements OnInit {
     this.usersShown = false;
     this.classToCheck = {
       body: 'Test cuerpo de la clase',
-      imgUrl: 'assets/fan/avatar-man.jpg',
+      imgUrl: 'assets/class/guitarclass.jpg',
       exclusive: false,
       price: 25,
       promoted: false,
