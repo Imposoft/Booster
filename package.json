@@ -24,11 +24,14 @@
     "@angular/platform-browser-dynamic": "~10.1.4",
     "@angular/router": "~10.1.4",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.3",
+    "firebase": "^7.13.1",
+    "jquery": "^3.5.1",
+    "node.js": "0.0.1-security",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "firebase": "^7.13.1"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.4",
