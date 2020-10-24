@@ -28,24 +28,26 @@ import {FanView} from '../views/fan/fan.view';
 import {NavigationbarComponent} from '../components/navigationbar/navigationbar.component';
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
 import {BandModificationView} from '../views/band-modification/band-modification.view';
+import {ClassCheckerComponent} from '../components/class-checker/class-checker.component';
 
 @NgModule({
-  declarations: [
-    /**  COMPONENTS  */
-    AppComponent,
-    ExampleComponentComponent,
-    RegisterProfileComponent,
+    declarations: [
+        /**  COMPONENTS  */
+        AppComponent,
+        ExampleComponentComponent,
+        RegisterProfileComponent,
 
-    /** VIEWS */
-    HomeView,
-    RegisterView,
-    ProfileView,
-    BandView,
-    BandModificationView,
-    FanView,
-    NavigationbarComponent,
-    SocialLinksComponent
-  ],
+        /** VIEWS */
+        HomeView,
+        RegisterView,
+        ProfileView,
+        BandView,
+        BandModificationView,
+        FanView,
+        NavigationbarComponent,
+        SocialLinksComponent,
+        ClassCheckerComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

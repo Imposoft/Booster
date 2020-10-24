@@ -1,0 +1,56 @@
+<div class="card" style="width: 70vw">
+  <div class="card-body">
+    <h1 class="card-title">{{classToCheck.title}}</h1>
+    <p class="card-text">{{classToCheck.body}}</p>
+    <p class="card-text">{{classToCheck.price}}</p>
+  </div>
+  <ul class="list-group list-group-flush" *ngIf="usersShown">
+    <li *ngFor="let user of classToCheck.userWaitList" class="list-group-item">
+      <div class="d-flex bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+          <img src="{{user.imageurl}}" alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+        </div>
+        <div class="p-2 bd-highlight">{{user.name}}</div>
+        <div class="ml-auto p-2 bd-highlight">
+          <button type="button" class="btn btn-outline-primary" style="width: fit-content" (click)="openModal(content, user)">
+            <svg width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.026-3.493-6.817-2.106 1.039c-7.202 3.755 4.233 25.982 11.6 22.615.121-.055 2.102-1.029 2.11-1.033z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="p-2 bd-highlight">
+          <button type="button" class="btn btn-outline-primary" style="width: fit-content" (click)="deleteUserInfo(user)">
+            <svg width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="classToCheck.userWaitList.length<=0">
+      Aun no tienes nadie apuntado a esta clase, sigue esperando!
+    </li>
+  </ul>
+  <div class="d-flex flex-row-reverse card-footer">
+    <button mat-raised-button color="primary" (click)="toggleVisible()">Ver Usuarios</button>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Datos de {{chosenUser.name}}</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        {{chosenUser.contact}}
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

@@ -3,4 +3,5 @@ export class Post {
   body: string;
   promoted: boolean;
   exclusive: boolean;
+  imgUrl: string;
 }
