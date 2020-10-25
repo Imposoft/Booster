@@ -3,7 +3,6 @@ import {Band} from '../../models/band/band.model';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
-import {SocialNetwork} from '../../models/profile/profile.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 
