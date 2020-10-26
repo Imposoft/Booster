@@ -29,6 +29,7 @@ import {NavigationbarComponent} from '../components/navigationbar/navigationbar.
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
 import {BandModificationView} from '../views/band-modification/band-modification.view';
 import {ClassCheckerComponent} from '../components/class-checker/class-checker.component';
+import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import {ClassCheckerComponent} from '../components/class-checker/class-checker.c
         FanView,
         NavigationbarComponent,
         SocialLinksComponent,
+        FanModificationView,
         ClassCheckerComponent
     ],
   imports: [
