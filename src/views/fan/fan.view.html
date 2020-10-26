@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid d-flex justify-content-center bg-light" >
   <div class="row bg-white" style="width:90vw">
     <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
@@ -9,10 +7,10 @@
       <div class="row">
         <div class="col-md-12">
           <br>
-          <h1>{{profile.name}}</h1>
-          <h3>Contacto: {{profile.phone}}</h3>
+          <h1>{{(profile | async)?.name}}</h1>
+          <h3>Contacto: {{(profile | async)?.phone}}</h3>
 
-          <app-social-links [socialNetworks]="profile.socialNetworks"></app-social-links>
+          <app-social-links [socialNetworks]="(profile | async)?.socialNetworks"></app-social-links>
         </div>
       </div>
     </div>

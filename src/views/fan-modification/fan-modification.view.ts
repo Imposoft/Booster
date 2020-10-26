@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Fan} from '../../models/fan/fan.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
 
@@ -13,21 +13,23 @@ import {debounceTime} from 'rxjs/operators';
 })
 export class FanModificationView implements OnInit {
 
-  profile: Fan;
+  printedProfile: any;
+  profile: any;
   fanProfiles;
   modificationForm: FormGroup;
-  items: Observable<any[]>;
 
   private _success = new Subject<string>();
   successMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
-    this.fanProfiles = afs.collection<Fan>('fanProfiles');
+  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
+    this.fanProfiles = firestore.collection<Fan>('fanProfiles');
+    this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+    this.profile = this.printedProfile.valueChanges();
   }
 
 
   ngOnInit(): void {
-    this.profile = {
+    /*this.profile = {
       name: 'Rammstein',
       email: 'rammstein@email.com',
       password: '1234512345',
@@ -38,7 +40,7 @@ export class FanModificationView implements OnInit {
         {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
         {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
         {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
-    };
+    };*/
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
