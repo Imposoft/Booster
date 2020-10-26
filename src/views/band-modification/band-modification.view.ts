@@ -5,6 +5,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
+import {SocialNetwork} from '../../models/profile/profile.model';
 
 @Component({
   selector: 'app-band-modification',
