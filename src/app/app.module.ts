@@ -31,6 +31,7 @@ import {BandModificationView} from '../views/band-modification/band-modification
 import {ClassCheckerComponent} from '../components/class-checker/class-checker.component';
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
 import {TutorialView} from '../views/tutorial/tutorial.view';
+import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import {TutorialView} from '../views/tutorial/tutorial.view';
         SocialLinksComponent,
         FanModificationView,
         TutorialView,
+        TutorialModificationView,
         ClassCheckerComponent
     ],
   imports: [

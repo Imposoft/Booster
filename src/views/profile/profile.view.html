@@ -24,9 +24,16 @@
   </div>
 </div>
 <br> <br>
-<a [routerLink]="'/tutorial'">
-  <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Crear clase particular</button>
-</a>
+<div class="row">
+  <div class="btn-group" role="group">
+    <a [routerLink]="'/tutorial'">
+      <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Crear clase particular</button>
+    </a>
+    <a [routerLink]="'/tutorialModification'">
+      <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar clases particulares</button>
+    </a>
+  </div>
+</div>
 <br> <br>
 <span>&nbsp;</span>
 <div>
