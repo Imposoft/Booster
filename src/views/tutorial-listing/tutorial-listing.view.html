@@ -1,4 +1,6 @@
-<app-class-checker *ngFor="let class of classList" [classInput]="class"></app-class-checker>
+<div class="d-block-flex justify-content-center">
+  <app-class-checker class="d-flex justify-content-center mt-2" *ngFor="let class of classList" [classInput]="class"></app-class-checker>
+</div>
 <a [routerLink]="'/profile'">
   <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Atrás </button>
 </a>
