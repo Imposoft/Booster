@@ -26,14 +26,17 @@
     </div>
   </form>
 </div>
-<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-  <a [routerLink]="'/profile'">
-    <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Cancelar </button>
-  </a>
+<div class="mat-action-row">
+  <div class="text-right">
+    <div class="btn-group" role="group">
+      <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+        <a [routerLink]="'/profile'">
+          <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Cancelar </button>
+        </a>
+        <button class="d-flex align-self-baseline btn btn-outline-primary m-2"  (click)="sendForm()">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-  <button class="btn btn-outline-primary" (click)="sendForm()">Guardar</button>
-</div>
-
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
 
