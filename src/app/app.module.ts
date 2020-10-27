@@ -29,25 +29,27 @@ import {NavigationbarComponent} from '../components/navigationbar/navigationbar.
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
 import {BandModificationView} from '../views/band-modification/band-modification.view';
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
+import {AddSocialLinksComponent} from '../components/add-social-links/add-social-links.component';
 
 @NgModule({
-  declarations: [
-    /**  COMPONENTS  */
-    AppComponent,
-    ExampleComponentComponent,
-    RegisterProfileComponent,
+    declarations: [
+        /**  COMPONENTS  */
+        AppComponent,
+        ExampleComponentComponent,
+        RegisterProfileComponent,
 
-    /** VIEWS */
-    HomeView,
-    RegisterView,
-    ProfileView,
-    BandView,
-    BandModificationView,
-    FanView,
-    FanModificationView,
-    NavigationbarComponent,
-    SocialLinksComponent
-  ],
+        /** VIEWS */
+        HomeView,
+        RegisterView,
+        ProfileView,
+        BandView,
+        BandModificationView,
+        FanView,
+        FanModificationView,
+        NavigationbarComponent,
+        SocialLinksComponent,
+        AddSocialLinksComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

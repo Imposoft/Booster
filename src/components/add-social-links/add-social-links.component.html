@@ -23,7 +23,7 @@
             <label for="inputState">Red social</label>
             <select id="inputState" class="form-control">
               <option selected>Selecciona una opcion...</option>
-              <option>{{options}}</option>
+              <option *ngFor="let key of keys">{{key}}</option>
             </select>
           </div>
         </td>

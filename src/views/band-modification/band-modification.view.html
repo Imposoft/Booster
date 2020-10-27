@@ -1,3 +1,4 @@
+<app-add-social-links></app-add-social-links>
 <div class="container-fluid p-2">
   <form>
     <div class="input-group mb-3 form-row">
@@ -33,17 +34,18 @@
       <input class="form-control" rows="1" placeholder="{{profile.location}}" aria-label="location" formControlName="location">
     </div>
 
-<<<<<<< Updated upstream
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
-=======
+      </div>
+    </div>
+
     <div class="form-group mb-3">
       <div class="form-group col-md-3">
         <label for="inputState">Red social</label>
         <select id="inputState" class="form-control">
           <option selected>Selecciona una opcion...</option>
-          <option>{{SocialNetwork.INSTRAGRAM}}</option>
+          <option>Test</option>
         </select>
       </div>
       <div class="input-group col-md-9">
@@ -51,7 +53,6 @@
           <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
         </div>
         <input class="form-control" rows="1" value="{{(profile | async)?.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
->>>>>>> Stashed changes
       </div>
       <input class="form-control" rows="1" placeholder="{{profile.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
     </div>

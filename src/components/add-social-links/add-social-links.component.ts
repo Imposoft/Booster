@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Profile, SocialNetwork} from '../../models/profile/profile.model';
+import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 
 @Component({
   selector: 'app-add-social-links',
@@ -11,13 +12,15 @@ export class AddSocialLinksComponent implements OnInit {
 
   productForm: FormGroup;
   options: Array<SocialNetwork>;
+  keys: string[];
 
   constructor(private fb: FormBuilder) {
-
     this.productForm = this.fb.group({
       name: '',
       quantities: this.fb.array([]) ,
     });
+
+    this.keys = Object.keys(SocialNetworkEnum);
   }
 
   ngOnInit(): void {
