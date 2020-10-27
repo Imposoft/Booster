@@ -30,7 +30,7 @@
           </button>
         </div>
         <div class="p-2 bd-highlight">
-          <button type="button" class="btn btn-outline-primary" style="width: fit-content" (click)="deleteUserInfo(user)">
+          <button type="button" class="btn btn-outline-primary" style="width: fit-content" (click)="openModal(contentDel,user)">
             <svg width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
               <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>
             </svg>
@@ -62,6 +62,26 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>
+<!-- Modal to show on delete press -->
+<ng-template #contentDel let-modalDelete>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Borrar usuario {{chosenUser.name}}</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modalDelete.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        ESTAS SEGURO DE QUE QUIERES BORRAR ESTE PERFIL? {{chosenUser.name}}
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="deleteUserInfo(chosenUser);modalDelete.close('Save click')">Eliminar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modalDelete.close('Close click')">Cerrar</button>
   </div>
 </ng-template>
