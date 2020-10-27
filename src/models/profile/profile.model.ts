@@ -16,3 +16,6 @@ export enum SocialNetwork {
   TWITTER = 'TWITTER',
   REDDIT = 'REDDIT'
 }
+
+const enumAsArray = Object.values(SocialNetwork);
+enumAsArray.splice(0, enumAsArray.length / 2);
