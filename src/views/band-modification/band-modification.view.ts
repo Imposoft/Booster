@@ -26,8 +26,8 @@ export class BandModificationView implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.bandProfiles = firestore.collection<Band>('bandProfiles');
-    this.bandProfiles = firestore.collection<Fan>('bandProfiles');
-    this.printedProfile = firestore.doc<Fan>('bandProfiles/weIkWire0cHcIjKbacdR');
+    this.bandProfiles = firestore.collection<Band>('bandProfiles');
+    this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
     this.profile = this.printedProfile.valueChanges();
   }
 
@@ -76,10 +76,12 @@ export class BandModificationView implements OnInit {
       description: this.modificationForm.value.description,
       genres: [{name: 'Heavy'}, {name: 'Pop'}],
       location: this.modificationForm.value.location,
-      socialNetworks: SocialNetwork.FACEBOOK,
-      subscriptionPrice: this.modificationForm.value.precioSuscripcion
+      socialNetworks: [{socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://twitter.com/BTS_twt'},
+        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/bts.bighitofficial/'}],
+      subscriptionPrice: this.modificationForm.value.subscriptionPrice
     };
-    this.bandProfiles.add(band);
+    this.printedProfile.update(band)
+      .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
   }
 

@@ -56,7 +56,8 @@ export class FanModificationView implements OnInit {
       name: this.modificationForm.value.name,
       phone: this.modificationForm.value.phone,
     };
-    this.fanProfiles.add(Fan);
+    this.printedProfile.update(fan)
+      .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
   }
 

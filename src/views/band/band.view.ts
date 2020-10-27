@@ -21,8 +21,8 @@ export class BandView implements OnInit {
 
   constructor(firestore: AngularFirestore) {
     this.items = firestore.collection('test').valueChanges();
-    this.bandProfiles = firestore.collection<Fan>('bandProfiles');
-    this.printedProfile = firestore.doc<Fan>('bandProfiles/weIkWire0cHcIjKbacdR');
+    this.bandProfiles = firestore.collection<Band>('bandProfiles');
+    this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
     this.profile = this.printedProfile.valueChanges();
   }
 

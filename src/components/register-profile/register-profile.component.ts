@@ -51,12 +51,12 @@ export class RegisterProfileComponent implements OnInit {
     this.thirdFormGroupMusician = this.formBuilder.group({
       location: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      precioSuscripcion: ['', [Validators.required]],
+      subscriptionPrice: ['', [Validators.required]],
     });
     this.thirdFormGroupBand = this.formBuilder.group({
       location: ['', [Validators.required]],
       description: ['', []],
-      precioSuscripcion: ['', [Validators.required]],
+      subscriptionPrice: ['', [Validators.required]],
     });
 
     this._success.subscribe(message => this.successMessage = message);
@@ -78,7 +78,7 @@ export class RegisterProfileComponent implements OnInit {
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupMusician.value.location,
         socialNetworks: SocialNetwork.FACEBOOK,
-        subscriptionPrice: this.thirdFormGroupMusician.value.precioSuscripcion
+        subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
       };
       this.musicianProfiles.add(musician);
       this._success.next('Perfil creado con exito!');
@@ -106,7 +106,7 @@ export class RegisterProfileComponent implements OnInit {
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupBand.value.location,
         socialNetworks: SocialNetwork.FACEBOOK,
-        subscriptionPrice: this.thirdFormGroupBand.value.precioSuscripcion
+        subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
       };
       this.bandProfiles.add(band);
       this._success.next('Perfil creado con exito!');
