@@ -29,15 +29,22 @@ import {NavigationbarComponent} from '../components/navigationbar/navigationbar.
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
 import {BandModificationView} from '../views/band-modification/band-modification.view';
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
+<<<<<<< Updated upstream
+=======
+import {TutorialView} from '../views/tutorial/tutorial.view';
+import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
+import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
+>>>>>>> Stashed changes
 import {AddSocialLinksComponent} from '../components/add-social-links/add-social-links.component';
 
 @NgModule({
-    declarations: [
-        /**  COMPONENTS  */
-        AppComponent,
-        ExampleComponentComponent,
-        RegisterProfileComponent,
+  declarations: [
+    /**  COMPONENTS  */
+    AppComponent,
+    ExampleComponentComponent,
+    RegisterProfileComponent,
 
+<<<<<<< Updated upstream
         /** VIEWS */
         HomeView,
         RegisterView,
@@ -50,6 +57,24 @@ import {AddSocialLinksComponent} from '../components/add-social-links/add-social
         SocialLinksComponent,
         AddSocialLinksComponent
     ],
+=======
+    /** VIEWS */
+    HomeView,
+    RegisterView,
+    ProfileView,
+    BandView,
+    BandModificationView,
+    FanView,
+    NavigationbarComponent,
+    SocialLinksComponent,
+    FanModificationView,
+    TutorialView,
+    TutorialModificationView,
+    ClassCheckerComponent,
+    TutorialListingView,
+    AddSocialLinksComponent
+  ],
+>>>>>>> Stashed changes
   imports: [
     BrowserModule,
     AppRoutingModule,

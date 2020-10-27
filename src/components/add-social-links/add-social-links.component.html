@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <p>add-social-links works!</p>
 <div class="container">
 
@@ -20,6 +21,16 @@
           Red Social :
           <!-- <input type="text" formControlName="socialLink" class="form-control"> -->
           <div class="form-group col-md-3">
+=======
+<div class="container">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <table class="table table-bordered" formArrayName="socialNetworks">
+      <button type="button" (click)="addSocialLink()" class="btn btn-primary">Add More</button>
+      <tr *ngFor="let socialNetwork of socialLinks().controls; let i=index" [formGroupName]="i">
+        <td>
+          <input type="text" formControlName="socialLink" class="form-control">
+          <div class="form-group col-md-5">
+>>>>>>> Stashed changes
             <label for="inputState">Red social</label>
             <select id="inputState" class="form-control">
               <option selected>Selecciona una opcion...</option>
@@ -28,6 +39,7 @@
           </div>
         </td>
         <td>
+<<<<<<< Updated upstream
           Price:
           <input type="text" formControlName="socialLinkURL" class="form-control">
         </td>
@@ -41,6 +53,18 @@
 
   </form>
 
+=======
+          URL:
+          <input type="text" formControlName="socialLinkURL" class="form-control">
+        </td>
+        <td>
+          <button (click)="removeSocialLink(i)" class="btn btn-danger">Remove</button>
+        </td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+>>>>>>> Stashed changes
   <br/>
   {{this.productForm.value | json}}
 </div>
