@@ -45,7 +45,8 @@ export class TutorialModificationView implements OnInit {
       price: this.modificationForm.value.price,
       userWaitList: this.modificationForm.value.userWaitList
     };
-    this.tutorialPosts.add(tutorial);
+    this.printedTutorial.update(tutorial)
+      .catch(error => console.log(error));
     this._success.next('Clase particular guardada con exito!');
   }
 
