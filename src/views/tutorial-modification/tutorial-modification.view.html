@@ -4,7 +4,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
       </div>
-      <input class="form-control" value="{{(tutorial | async)?.title}}" aria-label="Titulo" formControlName="titulo">
+      <input class="form-control" value="{{(tutorial | async)?.title}}" aria-label="Titulo" formControlName="title">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -23,7 +23,7 @@
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
       <!-- <textarea id="descriptionInput" class="form-control" rows="5" aria-label="With textarea" formControlName="description" [attr.disabled]="!click ? '' : null">{{(tutorial | async)?.description}}</textarea> -->
-      <textarea id="descriptionInput" class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{(tutorial | async)?.description}}</textarea>
+      <textarea id="descriptionInput" class="form-control" rows="5" value="{{(tutorial | async)?.description}}" aria-label="With textarea" formControlName="description"></textarea>
     </div>
   </form>
 </div>
