@@ -10,6 +10,7 @@ import {BandModificationView} from '../views/band-modification/band-modification
 import {FanModificationView} from '../views/fan-modification/fan-modification.view';
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from '../views/tutorial-modification/tutorial-modification.view';
+import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'bandModification', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorialModification', component: TutorialModificationView},
-  {path: 'fanModification', component: FanModificationView}
+  {path: 'tutorialListing', component: TutorialListingView},
+  {path: 'fanModification', component: FanModificationView},
 ];
 
 @NgModule({

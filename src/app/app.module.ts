@@ -32,6 +32,7 @@ import {ClassCheckerComponent} from '../components/class-checker/class-checker.c
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
+import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial
         FanModificationView,
         TutorialView,
         TutorialModificationView,
-        ClassCheckerComponent
+        ClassCheckerComponent,
+        TutorialListingView
     ],
   imports: [
     BrowserModule,
