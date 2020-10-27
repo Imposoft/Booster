@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Band} from '../../models/band/band.model';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-band',
@@ -15,10 +16,17 @@ export class BandView implements OnInit {
   bandProfiles;
   printedProfile: any;
 
-  constructor(firestore: AngularFirestore) {
-    this.items = firestore.collection('test').valueChanges();
-    this.bandProfiles = firestore.collection<Band>('bandProfiles');
-    this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+        }
+      }
+    );
     this.profile = this.printedProfile.valueChanges();
   }
 
