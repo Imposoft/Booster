@@ -8,21 +8,23 @@
     </div>
 
     <div class="input-group mb-3 form-row">
-    <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
+      </div>
       <input class="form-control" rows="1" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
-      <div class="input-group-append">
-      </div>
     </div>
 
     <div class="input-group mb-3 form-row">
-      <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+      </div>
       <input class="form-control" rows="1" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
-      <div class="input-group-append">
-      </div>
     </div>
 
     <div class="input-group mb-3 form-row">
-      <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
+      </div>
         <input class="form-control" rows="1" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
     </div>
 

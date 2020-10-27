@@ -44,6 +44,9 @@ export class FanModificationView implements OnInit {
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      imageurl: ['', [Validators.required]],
+      location: ['', []],
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -55,6 +58,9 @@ export class FanModificationView implements OnInit {
     const fan = {
       name: this.modificationForm.value.name,
       phone: this.modificationForm.value.phone,
+      email: this.modificationForm.value.email,
+      imageSource: this.modificationForm.value.imageurl,
+      location: this.modificationForm.value.location,
     };
     this.printedProfile.update(fan)
       .catch(error => console.log(error));
