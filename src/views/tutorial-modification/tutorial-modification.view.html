@@ -12,7 +12,7 @@
         <span class="input-group-text" style="width:12.5vw" >Precio de la clase</span>
       </div>
       <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
-      <input class="form-control" rows="1" value="{{(tutorial | async)?.price}}" aria-label="Precio de la clase" formControlName="price" >
+      <input class="form-control" rows="1" value="{{(tutorial | async)?.price}}" aria-label="Precio de la clase" formControlName="price">
       <div class="input-group-append">
         <!-- <span class="input-group-text">.00</span> -->
       </div>
@@ -22,7 +22,8 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{(tutorial | async)?.description}}</textarea>
+      <!-- <textarea id="descriptionInput" class="form-control" rows="5" aria-label="With textarea" formControlName="description" [attr.disabled]="!click ? '' : null">{{(tutorial | async)?.description}}</textarea> -->
+      <textarea id="descriptionInput" class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{(tutorial | async)?.description}}</textarea>
     </div>
   </form>
 </div>
@@ -30,10 +31,11 @@
   <div class="text-right">
     <div class="btn-group" role="group">
       <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-        <a [routerLink]="'/profile'">
+        <button class="d-flex align-self-baseline btn btn-outline-primary m-2" id="saveButton" (click)="sendForm()">Guardar</button>
+        <!-- button class="d-flex align-self-baseline btn btn-outline-primary m-2" id="modificateButton" [disabled]="click" (click)="enableProp()">Modificar</button> -->
+        <a [routerLink]="'/tutorialListing'">
           <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Cancelar </button>
         </a>
-        <button class="d-flex align-self-baseline btn btn-outline-primary m-2"  (click)="sendForm()">Guardar</button>
       </div>
     </div>
   </div>
