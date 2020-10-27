@@ -35,11 +35,20 @@
       <input class="form-control" rows="1" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
     </div>
 
-    <div class="input-group mb-3 form-row">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
+    <div class="form-group mb-3">
+      <div class="form-group col-md-3">
+        <label for="inputState">Red social</label>
+        <select id="inputState" class="form-control">
+          <option selected>Selecciona una opcion...</option>
+          <option>...</option>
+        </select>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
+      <div class="input-group col-md-9">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
+        </div>
+        <input class="form-control" rows="1" value="{{(profile | async)?.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
+      </div>
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -63,8 +72,8 @@
 </div>
 
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-    <button class="btn btn-outline-primary" (click)="sendForm()">Guardar</button>
-    <button class="btn btn-outline-primary" [routerLink]="'/bandProfile'">Cancelar</button>
+    <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
+    <button class="btn btn-outline-primary m-1" [routerLink]="'/bandProfile'">Cancelar</button>
 </div>
 
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>

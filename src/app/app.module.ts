@@ -33,7 +33,6 @@ import {FanModificationView} from 'src/views/fan-modification/fan-modification.v
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
 import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
-import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     declarations: [
