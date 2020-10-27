@@ -21,17 +21,7 @@ export class ClassCheckerComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersShown = false;
-    this.classToCheck = {
-      body: 'Test cuerpo de la clase',
-      imgUrl: 'assets/class/guitarclass.jpg',
-      exclusive: false,
-      price: 25,
-      promoted: false,
-      title: 'Test Titulo',
-      userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo', contact: '611222333'},
-        {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo2', contact: '611222334'},
-        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo3', contact: '611222336'}]
-    };
+    this.classToCheck = this.classInput;
   }
 
   toggleVisible(): void{
