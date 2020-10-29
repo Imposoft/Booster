@@ -8,6 +8,7 @@ import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {UserDetails} from '../../models/userDetails/user-details.model';
 import {Band} from '../../models/band/band.model';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {Fan} from '../../models/fan/fan.model';
 
 @Component({
   selector: 'app-tutorial',
@@ -16,6 +17,7 @@ import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.mode
 })
 export class TutorialView implements OnInit {
   tutorial;
+  tutorialPosts;
   modificationForm: FormGroup;
 
   private _success = new Subject<string>();
@@ -23,6 +25,8 @@ export class TutorialView implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
     this.tutorial = afs.collection('tutorial');
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore){
+    this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
   }
     ngOnInit(): void {
       this.modificationForm = this.formBuilder.group({
@@ -38,10 +42,13 @@ export class TutorialView implements OnInit {
   sendForm(): void {
     const tutorial = {
       tittle: this.modificationForm.value.title,
+      title: this.modificationForm.value.title,
       description: this.modificationForm.value.description,
       price: this.modificationForm.value.price
+      price: this.modificationForm.value.price,
     };
     this.tutorial.add(tutorial);
+    this.tutorialPosts.add(tutorial);
     this._success.next('Clase creada con exito!');
   }
 }
