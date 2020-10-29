@@ -42,4 +42,11 @@ export class TutorialListingView implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteClass(delClass: Tutorial): void {
+    for (let i = 0; i < this.classList.length; i++) {
+      if (this.classList[i] === delClass){
+        this.classList.splice(i, 1);
+      }
+    }
+  }
 }

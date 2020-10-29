@@ -8,9 +8,12 @@
         <h1 class="card-title">{{classToCheck.title}}</h1>
         <p class="card-text">{{classToCheck.body}}</p>
         <p class="card-text">Precio: {{classToCheck.price}}€</p>
-        <a [routerLink]="'/tutorialModification'">
-          <button class="d-flex align-self-baseline btn btn-outline-primary m-2">Modificar</button>
-        </a>
+        <div class="d-flex align-self-baseline">
+          <ng-content></ng-content>
+          <a [routerLink]="'/tutorialModification'">
+            <button class="btn btn-outline-primary m-2">Modificar</button>
+          </a>
+        </div>
       </div>
     </div>
     <div></div>
