@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Band} from '../../models/band/band.model';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
+<<<<<<< Updated upstream
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {Musician} from '../../models/musician/musician.model';
+=======
+import {ActivatedRoute, Router} from '@angular/router';
+import {Profile} from '../../models/profile/profile.model';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-band',
@@ -14,10 +19,39 @@ export class BandView implements OnInit {
 
   profile: Band;
   items: Observable<any[]>;
+<<<<<<< Updated upstream
 
   constructor(firestore: AngularFirestore) {
     this.items = firestore.collection('test').valueChanges();
+=======
+  bandProfiles;
+  printedProfile: any;
+  members: Profile[];
+
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+        }
+      }
+    );
+    this.profile = this.printedProfile.valueChanges();
+    this.members = [{socialNetworks: null,
+      phone: '12341512',
+      location: 'test',
+      imageSource: 'https://firebasestorage.googleapis.com/v0/b/booster-dceeb.appspot.com/o/temp%2Fblank-profile-picture-973460_640.png?alt=media&token=abf85b4d-7827-44d2-8bc3-8ee90964b4e9',
+      password: '1234512',
+      email: '123123',
+      name: 'pepe'}];
+
+>>>>>>> Stashed changes
   }
+
+
 
   ngOnInit(): void {
     this.profile = {
@@ -37,4 +71,5 @@ export class BandView implements OnInit {
       subscriptionPrice: 0
     };
   }
+
 }
