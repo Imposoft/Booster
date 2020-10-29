@@ -1,43 +1,38 @@
-<app-add-social-links></app-add-social-links>
-<div class="container-fluid p-2">
-  <form>
+<div class="container-fluid p-2" >
+  <form [formGroup]="modificationForm">
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
       </div>
-      <input class="form-control" placeholder="{{profile.name}}" aria-label="Nombre" formControlName="name">
+      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="Nombre" formControlName="name">
     </div>
 
     <div class="input-group mb-3 form-row">
-    <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
-      <input class="form-control" rows="1" placeholder="{{profile.email}}" aria-label="email" formControlName="email">
-      <div class="input-group-append">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
       </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
     </div>
 
     <div class="input-group mb-3 form-row">
-      <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
-      <input class="form-control" rows="1" placeholder="{{profile.phone}}" aria-label="phone" formControlName="phone">
-      <div class="input-group-append">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
       </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
     </div>
 
     <div class="input-group mb-3 form-row">
-      <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
-        <input class="form-control" rows="1" placeholder="{{profile.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
+      </div>
+        <input class="form-control" rows="1" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
       </div>
-      <input class="form-control" rows="1" placeholder="{{profile.location}}" aria-label="location" formControlName="location">
-    </div>
-
-    <div class="input-group mb-3 form-row">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon6" style="width:9vw">Redes Sociales</span>
-      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
     </div>
 
     <div class="form-group mb-3">
@@ -45,7 +40,7 @@
         <label for="inputState">Red social</label>
         <select id="inputState" class="form-control">
           <option selected>Selecciona una opcion...</option>
-          <option>Test</option>
+          <option>...</option>
         </select>
       </div>
       <div class="input-group col-md-9">
@@ -54,7 +49,6 @@
         </div>
         <input class="form-control" rows="1" value="{{(profile | async)?.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
       </div>
-      <input class="form-control" rows="1" placeholder="{{profile.socialNetworks}}" aria-label="Redes Sociales" formControlName="socialLinks">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -62,7 +56,7 @@
         <span class="input-group-text" style="width:12.5vw" >Precio de suscripcion</span>
       </div>
       <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
-      <input class="form-control" rows="1" placeholder="{{profile.subscriptionPrice}}" aria-label="Precio suscripcion" formControlName="subscriptionPrice" >
+      <input class="form-control" rows="1" value="{{(profile | async)?.subscriptionPrice}}" aria-label="Precio suscripcion" formControlName="subscriptionPrice" >
       <div class="input-group-append">
         <!-- <span class="input-group-text">.00</span> -->
       </div>
@@ -72,13 +66,14 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{profile.description}}</textarea>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" value="{{(profile | async)?.description}}"></textarea>
     </div>
   </form>
 </div>
 
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-    <button class="btn btn-outline-primary" (click)="sendForm()">Guardar</button>
+    <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
+    <button class="btn btn-outline-primary m-1" [routerLink]="'/bandProfile'">Cancelar</button>
 </div>
 
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>

@@ -28,8 +28,11 @@ import {FanView} from '../views/fan/fan.view';
 import {NavigationbarComponent} from '../components/navigationbar/navigationbar.component';
 import {SocialLinksComponent} from '../components/social-links/social-links.component';
 import {BandModificationView} from '../views/band-modification/band-modification.view';
+import {ClassCheckerComponent} from '../components/class-checker/class-checker.component';
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
-import {AddSocialLinksComponent} from '../components/add-social-links/add-social-links.component';
+import {TutorialView} from '../views/tutorial/tutorial.view';
+import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
+import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
 
 @NgModule({
     declarations: [
@@ -45,10 +48,13 @@ import {AddSocialLinksComponent} from '../components/add-social-links/add-social
         BandView,
         BandModificationView,
         FanView,
-        FanModificationView,
         NavigationbarComponent,
         SocialLinksComponent,
-        AddSocialLinksComponent
+        FanModificationView,
+        TutorialView,
+        TutorialModificationView,
+        ClassCheckerComponent,
+        TutorialListingView
     ],
   imports: [
     BrowserModule,
