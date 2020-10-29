@@ -1,11 +1,10 @@
 <div class="container-fluid p-2">
-  <form>
+  <form [formGroup]="modificationForm">
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
       </div>
-      <input class="form-control" placeholder="{{tutorial.title}}" aria-label="Titulo" formControlName="titulo">
-      <input class="form-control" placeholder="{{tutorialPosts.title}}" aria-label="Titulo" formControlName="titulo">
+      <input class="form-control" placeholder="{{tutorialPosts.title}}" aria-label="Titulo" formControlName="title">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -13,7 +12,6 @@
         <span class="input-group-text" style="width:12.5vw" >Precio de la clase</span>
       </div>
       <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
-      <input class="form-control" rows="1" placeholder="{{tutorial.price}}" aria-label="Precio de la clase" formControlName="price" >
       <input class="form-control" rows="1" placeholder="{{tutorialPosts.price}}" aria-label="Precio de la clase" formControlName="price" >
       <div class="input-group-append">
         <!-- <span class="input-group-text">.00</span> -->
@@ -24,7 +22,6 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{tutorial.description}}</textarea>
       <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description">{{tutorialPosts.description}}</textarea>
     </div>
   </form>

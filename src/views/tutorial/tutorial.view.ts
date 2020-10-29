@@ -16,7 +16,6 @@ import {Fan} from '../../models/fan/fan.model';
   styleUrls: ['./tutorial.view.sass']
 })
 export class TutorialView implements OnInit {
-  tutorial;
   tutorialPosts;
   modificationForm: FormGroup;
 
@@ -24,30 +23,27 @@ export class TutorialView implements OnInit {
   successMessage = '';
 
   constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
-    this.tutorial = afs.collection('tutorial');
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore){
     this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
   }
-    ngOnInit(): void {
-      this.modificationForm = this.formBuilder.group({
-        tittle: ['', [Validators.required]],
-        description: ['', []],
-        price: ['', [Validators.required]]
-      });
-      this._success.subscribe(message => this.successMessage = message);
-      this._success.pipe(
-        debounceTime(5000)
-      ).subscribe(() => this.successMessage = '');
-    }
+
+  ngOnInit(): void {
+    this.modificationForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', []],
+      price: ['', [Validators.required]]
+    });
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = '');
+  }
+
   sendForm(): void {
     const tutorial = {
-      tittle: this.modificationForm.value.title,
       title: this.modificationForm.value.title,
       description: this.modificationForm.value.description,
-      price: this.modificationForm.value.price
       price: this.modificationForm.value.price,
     };
-    this.tutorial.add(tutorial);
     this.tutorialPosts.add(tutorial);
     this._success.next('Clase creada con exito!');
   }
