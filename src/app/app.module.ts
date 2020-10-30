@@ -34,13 +34,14 @@ import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
 import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutorial-listing.view';
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
+import {LoginUserComponent} from '../components/login-user/login-user.component';
 
 @NgModule({
-    declarations: [
-        /**  COMPONENTS  */
-        AppComponent,
-        ExampleComponentComponent,
-        RegisterProfileComponent,
+  declarations: [
+    /**  COMPONENTS  */
+    AppComponent,
+    ExampleComponentComponent,
+    RegisterProfileComponent,
 
         /** VIEWS */
         HomeView,
@@ -56,7 +57,8 @@ import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation
         TutorialModificationView,
         ClassCheckerComponent,
         UserTutorialListingView,
-        TutorialCreationView
+        TutorialCreationView,
+        LoginUserComponent
     ],
   imports: [
     BrowserModule,
