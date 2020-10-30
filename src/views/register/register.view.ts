@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.view.sass']
 })
 export class RegisterView implements OnInit {
-
+  showingLogin: boolean;
   constructor() { }
 
   ngOnInit(): void {
+    this.showingLogin = false;
+  }
+
+  toggleLogin(): void{
+    this.showingLogin = !this.showingLogin;
   }
 
 }

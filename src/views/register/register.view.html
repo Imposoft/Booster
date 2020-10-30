@@ -1,11 +1,19 @@
 <div class="d-flex justify-content-center mt-3">
   <div class="card" style="width: 50vw">
     <div class="card-body">
-      <h2 class="card-title">Registro:</h2>
-      <!--TODO Implementar selector de tipo de perfil -->
+      <h2 class="card-title" *ngIf="!showingLogin">Registro:</h2>
+      <h2 class="card-title" *ngIf="showingLogin">Iniciar sesion:</h2>
       <p class="card-text">
-        <app-register-profile></app-register-profile>
+        <app-register-profile *ngIf="!showingLogin"></app-register-profile>
+        <app-login-user *ngIf="showingLogin"></app-login-user>
       </p>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex" *ngIf="!showingLogin">
+        Si ya tienes una cuenta:
+        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Iniciar Sesion</button>
+      </div>
+      <button class="d-flex align-self-baseline btn btn-outline-primary m-2" *ngIf="showingLogin" (click)="toggleLogin()">Registrarse</button>
     </div>
   </div>
 </div>

@@ -34,30 +34,32 @@ import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
 import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
+import {LoginUserComponent} from '../components/login-user/login-user.component';
 
 @NgModule({
-    declarations: [
-        /**  COMPONENTS  */
-        AppComponent,
-        ExampleComponentComponent,
-        RegisterProfileComponent,
+  declarations: [
+    /**  COMPONENTS  */
+    AppComponent,
+    ExampleComponentComponent,
+    RegisterProfileComponent,
 
-        /** VIEWS */
-        HomeView,
-        RegisterView,
-        ProfileView,
-        BandView,
-        BandModificationView,
-        FanView,
-        NavigationbarComponent,
-        SocialLinksComponent,
-        FanModificationView,
-        TutorialView,
-        TutorialModificationView,
-        ClassCheckerComponent,
-        TutorialListingView,
-        TutorialCreationView
-    ],
+    /** VIEWS */
+    HomeView,
+    RegisterView,
+    ProfileView,
+    BandView,
+    BandModificationView,
+    FanView,
+    NavigationbarComponent,
+    SocialLinksComponent,
+    FanModificationView,
+    TutorialView,
+    TutorialModificationView,
+    ClassCheckerComponent,
+    TutorialListingView,
+    TutorialCreationView,
+    LoginUserComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
