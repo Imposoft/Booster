@@ -16,35 +16,31 @@ import {Fan} from '../../models/fan/fan.model';
   styleUrls: ['./tutorial.view.sass']
 })
 export class TutorialView implements OnInit {
-  tutorialPosts;
-  modificationForm: FormGroup;
+  tutorialPost: Tutorial;
 
-  private _success = new Subject<string>();
-  successMessage = '';
+  printedProfile: any;
+  profile: Fan;
+  items: Observable<any[]>;
+  fanProfiles: any;
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
-    this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
+  constructor(private afs: AngularFirestore) {
+    /*this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
+    this.items = afs.collection('test').valueChanges();
+    this.fanProfiles = afs.collection<Fan>('fanProfiles');
+    this.printedProfile = afs.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+    this.profile = this.printedProfile.valueChanges();*/
   }
 
   ngOnInit(): void {
-    this.modificationForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      description: ['', []],
-      price: ['', [Validators.required]]
-    });
-    this._success.subscribe(message => this.successMessage = message);
-    this._success.pipe(
-      debounceTime(5000)
-    ).subscribe(() => this.successMessage = '');
-  }
-
-  sendForm(): void {
-    const tutorial = {
-      title: this.modificationForm.value.title,
-      description: this.modificationForm.value.description,
-      price: this.modificationForm.value.price,
+    this.tutorialPost = {
+      body: 'Cuerpo del tutorial',
+      description: 'Descripcion de la clase particular',
+      exclusive: false,
+      imgUrl: 'assets/class/guitarclass.jpg',
+      price: 25,
+      promoted: false,
+      title: 'Clases de piano',
+      userWaitList: []
     };
-    this.tutorialPosts.add(tutorial);
-    this._success.next('Clase creada con exito!');
   }
 }
