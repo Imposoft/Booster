@@ -11,6 +11,7 @@ import {FanModificationView} from '../views/fan-modification/fan-modification.vi
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from '../views/tutorial-modification/tutorial-modification.view';
 import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
+import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'fanProfile', component: FanView},
   {path: 'bandModification', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
+  {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification', component: TutorialModificationView},
   {path: 'tutorialListing', component: TutorialListingView},
   {path: 'fanModification', component: FanModificationView},
