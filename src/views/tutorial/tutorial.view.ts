@@ -50,7 +50,9 @@ export class TutorialView implements OnInit {
       price: 25,
       promoted: false,
       title: 'Clases de piano',
-      userWaitList: [],
+      userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pedro', contact: '611222333'},
+        {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Juan', contact: '611222334'},
+        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}],
       owner: this.tutorialOwner
     };
   }
