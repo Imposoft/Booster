@@ -10,7 +10,7 @@ import {BandModificationView} from '../views/band-modification/band-modification
 import {FanModificationView} from '../views/fan-modification/fan-modification.view';
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from '../views/tutorial-modification/tutorial-modification.view';
-import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
+import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutorial-listing.view';
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 
 const routes: Routes = [
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification', component: TutorialModificationView},
-  {path: 'tutorialListing', component: TutorialListingView},
+  {path: 'tutorialListing', component: UserTutorialListingView},
   {path: 'fanModification', component: FanModificationView},
 ];
 
