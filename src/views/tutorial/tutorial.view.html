@@ -16,14 +16,14 @@
     <br> <br>
     <div class="d-flex p-4 col-md-12">
       <div class="col-md-2 col-sm-12 d-flex align-items-center justify-content-center">
-        <img [src]="tutorialOwner.imageurl" alt="Imagen de perfil" style="max-width: 100px">
+        <img [src]="tutorialOwner.imageurl" alt="Imagen de perfil" style="max-width: 75px">
       </div>
       <div class="col-md-10 col-sm-12">
         <h2>Profesor/a: <b>{{tutorialOwner.name}}</b></h2>
-        <h3>Contacto: <b>{{tutorialPost.owner.contact}}</b></h3>
+        <h3>Contacto: <b>{{tutorialOwner.contact}}</b></h3>
       </div>
     </div>
     <br>
-    <div><h3>{{tutorialPost.body}}</h3></div>
+    <div class="p-2"><h3>{{tutorialPost.body}}</h3></div>
   </div>
 </div>
