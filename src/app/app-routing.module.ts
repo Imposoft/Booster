@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification', component: TutorialModificationView},
-  {path: 'tutorialListing', component: UserTutorialListingView},
+  {path: 'userTutorialListing', component: UserTutorialListingView},
   {path: 'fanModification', component: FanModificationView},
 ];
 
