@@ -1,69 +1,41 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <img src={{exampleProfile.imageSource}} alt="Imagen de perfil" style="max-width: 200px">
+<div class="container-fluid d-flex justify-content-center bg-light">
+  <div class="row bg-white" style="width:90vw">
+    <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+      <img [src]="(profile | async)?.imageSource" alt="Imagen de perfil" style="max-width: 200px">
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6 col-sm-12">
       <div class="row">
         <div class="col-md-12">
-          <!-- TODO Cambiar a {{profile.name}} -->
-          <h1>{{exampleProfile.name}}</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Instrumento</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          Breve descripcion?
+          <br>
+          <h1>{{(profile | async)?.name}}</h1>
+          <h3>Contacto: {{(profile | async)?.phone}}</h3>
+          <br>
+          <h2>Instrumentos: {{(profile | async)?.instruments.toString()}}</h2>
+
+          <app-social-links class="m-1" [socialNetworks]="(profile | async)?.socialNetworks"></app-social-links>
         </div>
       </div>
     </div>
+    <div *ngFor= "let genre of profile.genres" class="d-inline-flex m-1"><h2 class="m-0"><span class="badge badge-primary">{{genre.name}}</span></h2></div>
+
+    <br>
+    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight">
+      <a [routerLink]="'/bandModification'">
+        <button class="btn btn-outline-primary m-2"> Modificar Perfil</button>
+      </a>
+      <br>
+      <a [routerLink]="'/tutorialCreation'">
+        <button class="btn btn-outline-primary m-2"> Crear clase particular</button>
+      </a>
+      <a [routerLink]="'/tutorialListing'">
+        <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button>
+      </a>
+    </div>
+
+    <br> <br>
+    <div class="d-flex justify-content-center p-3">
+      <h2>{{(profile | async)?.description}}</h2>
+    </div>
   </div>
 </div>
-<br> <br>
-<div class="row">
-  <div class="btn-group" role="group">
-    <a [routerLink]="'/tutorialCreation'">
-      <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Crear clase particular</button>
-    </a>
-    <a [routerLink]="'/tutorialListing'">
-      <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Revisar mis clases particulares</button>
-    </a>
-  </div>
-</div>
-<br> <br>
-<span>&nbsp;</span>
-<div>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt auctor libero et congue. Morbi dictum metus ac lorem molestie fermentum. Nam vehicula vestibulum maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse pharetra porta turpis. Maecenas placerat dui a est efficitur feugiat. Maecenas et mi a mauris congue congue. Pellentesque aliquet quam quis elementum vehicula. Donec eu efficitur velit, in congue elit. Ut tempus, ex ac posuere feugiat, magna lectus luctus tortor, id vehicula purus sem quis lorem. Pellentesque dignissim augue at tortor malesuada sagittis. In at erat et lectus ultricies ultricies.
-
-  Maecenas ut placerat lacus. Ut enim erat, faucibus ac aliquet ac, ornare sed massa. Nullam faucibus purus non nisl commodo, vitae scelerisque nisl malesuada. Pellentesque semper nisi a velit dignissim, sit amet tincidunt ipsum commodo. Donec malesuada vitae leo a convallis. Donec nec nulla augue. Ut sagittis rhoncus lacus molestie viverra. Aenean vel dapibus ex. Nunc pharetra ultricies lorem vel facilisis. Proin ornare tincidunt massa, non pellentesque mauris euismod vitae.
-
-  Donec quis nulla consectetur nisl molestie fermentum sit amet sit amet tortor. Maecenas a risus id tellus iaculis laoreet. Nunc ullamcorper gravida lectus in facilisis. Integer ultricies lacinia mattis. Vestibulum vitae justo vel lorem sagittis molestie. Sed condimentum quam et nibh commodo, nec vulputate arcu iaculis. Ut gravida erat turpis, et luctus neque fermentum non. Nulla id varius orci. Duis non urna id orci luctus venenatis. Suspendisse blandit, odio nec tempus rhoncus, justo velit cursus libero, quis condimentum nisi eros sed urna. Nunc consequat dolor id dui lobortis pharetra. Ut ex nisl, mollis vel orci eget, accumsan facilisis libero. Donec eget aliquam lorem. Nullam lacinia lacus eu velit pellentesque lobortis.
-
-  Quisque ultrices lacus sed ligula iaculis, eu consequat nibh interdum. Sed tristique lobortis tellus, non rutrum diam. Proin tristique nulla ut ornare laoreet. Proin id orci porta, tempor erat sed, condimentum est. Donec placerat varius magna, non consectetur lectus posuere in. Donec congue porta nisl a viverra. Fusce quis arcu eget velit dignissim porttitor. Duis viverra neque ex, quis finibus tortor pretium vitae. Ut pharetra ornare elit, ac ultricies eros lacinia euismod. Vivamus fermentum placerat orci in tempor. Suspendisse potenti. Proin in imperdiet tellus. Quisque molestie nisi et laoreet rhoncus.
-
-  Pellentesque convallis velit quis purus finibus tempor. Vivamus ante ligula, finibus et ultricies eget, dapibus id mauris. Suspendisse potenti. Quisque consectetur mauris lacus, nec malesuada metus vulputate eget. Proin eu laoreet felis. Nulla vitae faucibus lorem. Morbi nec eleifend metus, vitae interdum nulla. Quisque risus felis, fermentum vel felis eu, lobortis tempor risus. Aliquam semper ornare egestas
-
-  <span>&nbsp;</span>
-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt auctor libero et congue. Morbi dictum metus ac lorem molestie fermentum. Nam vehicula vestibulum maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse pharetra porta turpis. Maecenas placerat dui a est efficitur feugiat. Maecenas et mi a mauris congue congue. Pellentesque aliquet quam quis elementum vehicula. Donec eu efficitur velit, in congue elit. Ut tempus, ex ac posuere feugiat, magna lectus luctus tortor, id vehicula purus sem quis lorem. Pellentesque dignissim augue at tortor malesuada sagittis. In at erat et lectus ultricies ultricies.
-
-  Maecenas ut placerat lacus. Ut enim erat, faucibus ac aliquet ac, ornare sed massa. Nullam faucibus purus non nisl commodo, vitae scelerisque nisl malesuada. Pellentesque semper nisi a velit dignissim, sit amet tincidunt ipsum commodo. Donec malesuada vitae leo a convallis. Donec nec nulla augue. Ut sagittis rhoncus lacus molestie viverra. Aenean vel dapibus ex. Nunc pharetra ultricies lorem vel facilisis. Proin ornare tincidunt massa, non pellentesque mauris euismod vitae.
-
-  Donec quis nulla consectetur nisl molestie fermentum sit amet sit amet tortor. Maecenas a risus id tellus iaculis laoreet. Nunc ullamcorper gravida lectus in facilisis. Integer ultricies lacinia mattis. Vestibulum vitae justo vel lorem sagittis molestie. Sed condimentum quam et nibh commodo, nec vulputate arcu iaculis. Ut gravida erat turpis, et luctus neque fermentum non. Nulla id varius orci. Duis non urna id orci luctus venenatis. Suspendisse blandit, odio nec tempus rhoncus, justo velit cursus libero, quis condimentum nisi eros sed urna. Nunc consequat dolor id dui lobortis pharetra. Ut ex nisl, mollis vel orci eget, accumsan facilisis libero. Donec eget aliquam lorem. Nullam lacinia lacus eu velit pellentesque lobortis.
-
-  Quisque ultrices lacus sed ligula iaculis, eu consequat nibh interdum. Sed tristique lobortis tellus, non rutrum diam. Proin tristique nulla ut ornare laoreet. Proin id orci porta, tempor erat sed, condimentum est. Donec placerat varius magna, non consectetur lectus posuere in. Donec congue porta nisl a viverra. Fusce quis arcu eget velit dignissim porttitor. Duis viverra neque ex, quis finibus tortor pretium vitae. Ut pharetra ornare elit, ac ultricies eros lacinia euismod. Vivamus fermentum placerat orci in tempor. Suspendisse potenti. Proin in imperdiet tellus. Quisque molestie nisi et laoreet rhoncus.
-
-  Pellentesque convallis velit quis purus finibus tempor. Vivamus ante ligula, finibus et ultricies eget, dapibus id mauris. Suspendisse potenti. Quisque consectetur mauris lacus, nec malesuada metus vulputate eget. Proin eu laoreet felis. Nulla vitae faucibus lorem. Morbi nec eleifend metus, vitae interdum nulla. Quisque risus felis, fermentum vel felis eu, lobortis tempor risus. Aliquam semper ornare egestas
-
-</div>
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.test}}
-  </li>
-</ul>
-
 <!-- TODO Add Map Component -->

@@ -10,6 +10,7 @@ import {Band} from '../../models/band/band.model';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {Fan} from '../../models/fan/fan.model';
 import {Musician} from '../../models/musician/musician.model';
+import {Routes} from '@angular/router';
 
 @Component({
   selector: 'app-tutorial',
@@ -36,7 +37,7 @@ export class TutorialView implements OnInit {
   ngOnInit(): void {
     this.tutorialOwner = {
       contact: '1231231312',
-      id: 'asdadsada',
+      id: 'FVgBtsJlkRl0qZU4VaiW',
       imageurl: 'https://image.freepik.com/free-vector/man-avatar-profile-round-icon_24640-14044.jpg',
       name: 'Pepe'
     };
@@ -55,5 +56,8 @@ export class TutorialView implements OnInit {
         {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}],
       owner: this.tutorialOwner
     };
+  }
+
+  applyForTutorial(): void{
   }
 }

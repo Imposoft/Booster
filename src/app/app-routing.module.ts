@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'home', component: HomeView},
   {path: 'register', component: RegisterView},
   {path: 'profile', component: ProfileView},
+  {path: 'profile/:id', component: ProfileView},
   {path: 'bandProfile', component: BandView},
   {path: 'bandProfile/:id', component: BandView},
   {path: 'fanProfile', component: FanView},
