@@ -9,6 +9,7 @@ import {UserDetails} from '../../models/userDetails/user-details.model';
 import {Band} from '../../models/band/band.model';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {Fan} from '../../models/fan/fan.model';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-tutorial',
@@ -17,6 +18,7 @@ import {Fan} from '../../models/fan/fan.model';
 })
 export class TutorialView implements OnInit {
   tutorialPost: Tutorial;
+  tutorialOwner: UserDetails;
 
   printedProfile: any;
   profile: Fan;
@@ -32,6 +34,13 @@ export class TutorialView implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tutorialOwner = {
+      contact: '1231231312',
+      id: 'asdadsada',
+      imageurl: 'assets/fan/avatar-man.jpg',
+      name: 'Pepe'
+    };
+
     this.tutorialPost = {
       body: 'Cuerpo del tutorial',
       description: 'Descripcion de la clase particular',
@@ -40,7 +49,8 @@ export class TutorialView implements OnInit {
       price: 25,
       promoted: false,
       title: 'Clases de piano',
-      userWaitList: []
+      userWaitList: [],
+      owner: this.tutorialOwner
     };
   }
 }

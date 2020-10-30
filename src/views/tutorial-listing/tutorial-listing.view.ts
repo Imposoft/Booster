@@ -22,7 +22,8 @@ export class TutorialListingView implements OnInit {
       title: 'Test Titulo',
       userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo', contact: '611222333'},
         {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo2', contact: '611222334'},
-        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo3', contact: '611222336'}]
+        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo3', contact: '611222336'}],
+      owner: null
     };
     this.secondClass = {
       body: 'Cuerpo de la clase',
@@ -34,7 +35,8 @@ export class TutorialListingView implements OnInit {
       title: 'Test Titulo',
       userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pedro', contact: '611222333'},
         {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Juan', contact: '611222334'},
-        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}]
+        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}],
+      owner: null
     };
     this.classList = [this.singleClass , this.secondClass];
   }
