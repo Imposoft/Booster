@@ -39,25 +39,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr *ngFor="let member of members">
         <th scope="row">1</th>
-        <td>Miembro1</td>
+        <td>{{member.name}}</td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Miembro2</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Miembro3</td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>Miembro4</td>
-      </tr>
-
       </tbody>
-
     </table>
   </div>
 </div>
