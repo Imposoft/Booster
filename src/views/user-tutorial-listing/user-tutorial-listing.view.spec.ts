@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TutorialListingView } from './tutorial-listing.view';
+import { UserTutorialListingView } from './user-tutorial-listing.view';
 
 describe('TutorialListingView', () => {
-  let component: TutorialListingView;
-  let fixture: ComponentFixture<TutorialListingView>;
+  let component: UserTutorialListingView;
+  let fixture: ComponentFixture<UserTutorialListingView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TutorialListingView ]
+      declarations: [ UserTutorialListingView ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TutorialListingView);
+    fixture = TestBed.createComponent(UserTutorialListingView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

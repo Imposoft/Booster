@@ -1,6 +1,6 @@
 //import {Category} from '../category/category.model';
 
 export class Instrument {
-  name?: string;
+  name: string;
 //  category: [Category];
 }

@@ -3,6 +3,8 @@ import {Observable} from 'rxjs';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Band} from '../../models/band/band.model';
 
 @Component({
   selector: 'app-fan',
@@ -15,10 +17,17 @@ export class FanView implements OnInit {
   items: Observable<any[]>;
   fanProfiles: any;
 
-  constructor(firestore: AngularFirestore) {
-    this.items = firestore.collection('test').valueChanges();
-    this.fanProfiles = firestore.collection<Fan>('fanProfiles');
-    this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+        }
+      }
+    );
     this.profile = this.printedProfile.valueChanges();
   }
 

@@ -3,6 +3,9 @@ import {Profile, SocialNetwork} from '../../models/profile/profile.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {Band} from '../../models/band/band.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-profile',
@@ -11,25 +14,26 @@ import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.mode
 })
 export class ProfileView implements OnInit {
   exampleProfile: Profile;
+  profile: Musician;
   items: Observable<any[]>;
+  printedProfile: any;
 
-  constructor(firestore: AngularFirestore) {
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
     this.items = firestore.collection('test').valueChanges();
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + params.id);
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
+        }
+      }
+    );
+    this.profile = this.printedProfile.valueChanges();
   }
 
   ngOnInit(): void {
-    this.exampleProfile = {
-      name: 'Pepe',
-      email: 'test@email.com',
-      password: '1234512345',
-      imageSource: 'assets/profile/img_avatar.png',
-      location: 'Marbella',
-      phone: '656121212',
-      socialNetworks: [{socialNetwork: SocialNetworkEnum.FACEBOOK, url: 'https://www.facebook.com/'},
-        {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
-        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
-        {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
-    };
   }
 
 }

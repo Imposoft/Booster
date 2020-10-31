@@ -32,14 +32,16 @@ import {ClassCheckerComponent} from '../components/class-checker/class-checker.c
 import {FanModificationView} from 'src/views/fan-modification/fan-modification.view';
 import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from 'src/views/tutorial-modification/tutorial-modification.view';
-import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.view';
+import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutorial-listing.view';
+import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
+import {LoginUserComponent} from '../components/login-user/login-user.component';
 
 @NgModule({
-    declarations: [
-        /**  COMPONENTS  */
-        AppComponent,
-        ExampleComponentComponent,
-        RegisterProfileComponent,
+  declarations: [
+    /**  COMPONENTS  */
+    AppComponent,
+    ExampleComponentComponent,
+    RegisterProfileComponent,
 
         /** VIEWS */
         HomeView,
@@ -54,7 +56,9 @@ import {TutorialListingView} from '../views/tutorial-listing/tutorial-listing.vi
         TutorialView,
         TutorialModificationView,
         ClassCheckerComponent,
-        TutorialListingView
+        UserTutorialListingView,
+        TutorialCreationView,
+        LoginUserComponent
     ],
   imports: [
     BrowserModule,
