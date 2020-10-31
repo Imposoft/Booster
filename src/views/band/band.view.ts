@@ -42,7 +42,7 @@ export class BandView implements OnInit {
         genres: null,
         email: 'email',
         description: '',
-        imageSource: 'https://www.google.com/search?q=person+images&client=firefox-b-d&hl=es&sxsrf=ALeKk02rmH7jGYA16TkFfevUN6AuJkTR3g:1604180387208&tbm=isch&source=iu&ictx=1&fir=f3DPaclIKtdShM%252CNkC29UP8iMFKiM%252C_&vet=1&usg=AI4_-kQZqGuLjzU0iUBtNVJQqtQPsgy7Rw&sa=X&ved=2ahUKEwjd7onR5d_sAhXdAGMBHY0zA9EQ9QF6BAgFEDs&biw=1920&bih=966#imgrc=f3DPaclIKtdShM',
+        imageSource: 'url',
         socialNetworks: [],
         subscription: null,
         subscriptionPrice: 25,
@@ -56,7 +56,8 @@ export class BandView implements OnInit {
           genres: null,
           email: 'email',
           description: '',
-          imageSource: 'https://www.google.com/search?q=person+images&client=firefox-b-d&hl=es&sxsrf=ALeKk02rmH7jGYA16TkFfevUN6AuJkTR3g:1604180387208&tbm=isch&source=iu&ictx=1&fir=f3DPaclIKtdShM%252CNkC29UP8iMFKiM%252C_&vet=1&usg=AI4_-kQZqGuLjzU0iUBtNVJQqtQPsgy7Rw&sa=X&ved=2ahUKEwjd7onR5d_sAhXdAGMBHY0zA9EQ9QF6BAgFEDs&biw=1920&bih=966#imgrc=fxrC0kpSTRq7gM',
+          imageSource: '' +
+            'url',
           socialNetworks: [],
           subscription: null,
           subscriptionPrice: 25,
