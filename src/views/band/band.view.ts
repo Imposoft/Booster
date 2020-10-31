@@ -33,7 +33,7 @@ export class BandView implements OnInit {
     );
     this.profile = this.printedProfile.valueChanges();
     this.members =
-      [{name: '',
+      [{name: 'Peter Parker',
         phone: '',
         password: '',
         location: '',
@@ -47,7 +47,7 @@ export class BandView implements OnInit {
         subscription: null,
         subscriptionPrice: 25,
         tutorials: null},
-        {name: '',
+        {name: 'El tio de Peter Parker',
           phone: '',
           password: '',
           location: '',

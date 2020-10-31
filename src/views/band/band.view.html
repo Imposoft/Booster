@@ -22,34 +22,35 @@
     <div class="d-flex justify-content-center p-3">
       <h2>{{(profile | async)?.description}}</h2>
     </div>
+    <div class="row">
+      <div class="col-8 border border-dark">
+        Aqui donde va toda la descripcion de la banda segun el mockup.., consectetur adipiscing elit. Etiam tincidunt auctor libero et congue. Morbi dictum metus ac lorem molestie fermentum. Nam vehicula vestibulum maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse pharetra porta turpis. Maecenas placerat dui a est efficitur feugiat. Maecenas et mi a mauris congue congue. Pellentesque aliquet quam quis elementum vehicula. Donec eu efficitur velit, in congue elit. Ut tempus, ex ac posuere feugiat, magna lectus luctus tortor, id vehicula purus sem quis lorem. Pellentesque dignissim augue at tortor malesuada sagittis. In at erat et lectus ultricies ultricies.
+
+        Maecenas ut placerat lacus. Ut enim erat, faucibus ac aliquet ac, ornare sed massa. Nullam faucibus purus non nisl commodo, vitae scelerisque nisl malesuada. Pellentesque semper nisi a velit dignissim, sit amet tincidunt ipsum commodo. Donec malesuada vitae leo a convallis. Donec nec nulla augue. Ut sagittis rhoncus lacus molestie viverra. Aenean vel dapibus ex. Nunc pharetra ultricies lorem vel facilisis. Proin ornare tincidunt massa, non pellentesque mauris euismod vitae.
+      </div>
+      <div class="col-4">
+        <table class="table table-striped table-dark">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Miembros de la Banda</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let member of members">
+            <th scope="row">1</th>
+            <td>{{member.name}}</td>
+            <td>{{member.imageSource}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="container-fluid  d-flex justify-content-center bg-light m-1" >
-<div class="row">
-  <div class="col-8 border border-dark">
-    Aqui donde va toda la descripcion de la banda segun el mockup.., consectetur adipiscing elit. Etiam tincidunt auctor libero et congue. Morbi dictum metus ac lorem molestie fermentum. Nam vehicula vestibulum maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse pharetra porta turpis. Maecenas placerat dui a est efficitur feugiat. Maecenas et mi a mauris congue congue. Pellentesque aliquet quam quis elementum vehicula. Donec eu efficitur velit, in congue elit. Ut tempus, ex ac posuere feugiat, magna lectus luctus tortor, id vehicula purus sem quis lorem. Pellentesque dignissim augue at tortor malesuada sagittis. In at erat et lectus ultricies ultricies.
 
-    Maecenas ut placerat lacus. Ut enim erat, faucibus ac aliquet ac, ornare sed massa. Nullam faucibus purus non nisl commodo, vitae scelerisque nisl malesuada. Pellentesque semper nisi a velit dignissim, sit amet tincidunt ipsum commodo. Donec malesuada vitae leo a convallis. Donec nec nulla augue. Ut sagittis rhoncus lacus molestie viverra. Aenean vel dapibus ex. Nunc pharetra ultricies lorem vel facilisis. Proin ornare tincidunt massa, non pellentesque mauris euismod vitae.
-  </div>
-  <div class="col-4">
-    <table class="table table-striped table-dark">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Miembros de la Banda</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let member of members">
-        <th scope="row">1</th>
-        <td>{{member.name}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-</div>
 <!--<div   *ngFor="let member of members" >
   {{ member.name }}
 </div>
