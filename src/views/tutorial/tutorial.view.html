@@ -29,5 +29,5 @@
   </div>
 </div>
 <div>
-<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{successMessage ++ ((profile).userWaitList | json)}}</ngb-alert>
 </div>
