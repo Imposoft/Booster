@@ -20,7 +20,6 @@ export class TutorialModificationView implements OnInit {
   successMessage = '';
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.tutorialPosts = firestore.collection<Tutorial>('tutorialPosts');
     this.printedTutorial = firestore.doc<Tutorial>('tutorialPosts/nWog3AOCpmhE3wDQcHNo');
     this.tutorial = this.printedTutorial.valueChanges();
   }

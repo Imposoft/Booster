@@ -50,6 +50,27 @@ export class BandModificationView implements OnInit {
   }
 
   sendForm(): void {
+    this.checkValues();
+    const band = {
+      name: this.nameModification,
+      phone: this.phoneModification,
+      email: this.emailModification,
+      imageSource: this.imageModification,
+      location: this.locModification,
+      password: this.psswModification,
+      members: this.modificationForm.value.members,
+      description: this.descModification,
+      genres: [{name: 'Heavy'}, {name: 'Pop'}],
+      socialNetworks: [{socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://twitter.com/BTS_twt'},
+        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/bts.bighitofficial/'}],
+      subscriptionPrice: this.subsModification
+    };
+    this.printedProfile.update(band)
+      .catch(error => console.log(error));
+    this._success.next('Perfil guardado con exito!');
+  }
+
+  checkValues(): void {
     if (this.modificationForm.value.name === ''){
       this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
     } else {
@@ -90,23 +111,5 @@ export class BandModificationView implements OnInit {
     } else {
       this.subsModification = this.modificationForm.value.subscriptionPrice;
     }
-    const band = {
-      name: this.nameModification,
-      phone: this.phoneModification,
-      email: this.emailModification,
-      imageSource: this.imageModification,
-      location: this.locModification,
-      password: this.modificationForm.value.password,
-      members: this.modificationForm.value.members,
-      description: this.descModification,
-      genres: [{name: 'Heavy'}, {name: 'Pop'}],
-      socialNetworks: [{socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://twitter.com/BTS_twt'},
-        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/bts.bighitofficial/'}],
-      subscriptionPrice: this.subsModification
-    };
-    this.printedProfile.update(band)
-      .catch(error => console.log(error));
-    this._success.next('Perfil guardado con exito!');
   }
-
 }

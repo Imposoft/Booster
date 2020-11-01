@@ -46,6 +46,24 @@ export class FanModificationView implements OnInit {
   }
 
   sendForm(): void {
+    this.checkValues();
+    const fan = {
+      name: this.nameModification,
+      phone: this.phoneModification,
+      email: this.emailModification,
+      imageSource: this.imageModification,
+      location: this.locModification,
+    };
+    /*console.warn(fan.name + ';' +  + ';' + this.formBuilder.group(name).value.name);*/
+    /*if (fan.name === '') {
+      fan.name.setValue(this.fanProfiles.name);
+    }*/
+    this.printedProfile.update(fan)
+      .catch(error => console.log(error));
+    this._success.next('Perfil guardado con exito!');
+    this._location.back();
+  }
+  checkValues(): void {
     if (this.modificationForm.value.name === ''){
       this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
     } else {
@@ -71,21 +89,6 @@ export class FanModificationView implements OnInit {
     } else {
       this.locModification = this.modificationForm.value.location;
     }
-    const fan = {
-      name: this.nameModification,
-      phone: this.phoneModification,
-      email: this.emailModification,
-      imageSource: this.imageModification,
-      location: this.locModification,
-    };
-    /*console.warn(fan.name + ';' +  + ';' + this.formBuilder.group(name).value.name);*/
-    /*if (fan.name === '') {
-      fan.name.setValue(this.fanProfiles.name);
-    }*/
-    this.printedProfile.update(fan)
-      .catch(error => console.log(error));
-    this._success.next('Perfil guardado con exito!');
-    this._location.back();
   }
 
 }
