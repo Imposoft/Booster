@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
   templateUrl: './fan-modification.view.html',
   styleUrls: ['./fan-modification.view.sass']
 })
+
 export class FanModificationView implements OnInit {
 
   printedProfile: any;
@@ -25,6 +26,8 @@ export class FanModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any;
 
+  private nombre: string;
+
   constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
     this.profile = this.printedProfile.valueChanges();
@@ -32,6 +35,13 @@ export class FanModificationView implements OnInit {
 
 
   ngOnInit(): void {
+    this.profile.subscribe(value => {
+      this.nameModification = value.name;
+      this.phoneModification = value.phone;
+      this.emailModification = value.email;
+      this.imageModification = value.imageModification;
+      this.locModification = value.location;
+    });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -54,10 +64,7 @@ export class FanModificationView implements OnInit {
       imageSource: this.imageModification,
       location: this.locModification,
     };
-    /*console.warn(fan.name + ';' +  + ';' + this.formBuilder.group(name).value.name);*/
-    /*if (fan.name === '') {
-      fan.name.setValue(this.fanProfiles.name);
-    }*/
+    console.warn(fan.name + ';' + fan.phone + ';' + fan.email + ';' + fan.imageSource + ';'  + fan.location);
     this.printedProfile.update(fan)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
