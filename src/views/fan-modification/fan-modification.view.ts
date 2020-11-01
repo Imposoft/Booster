@@ -5,6 +5,7 @@ import {Observable, Subject} from 'rxjs';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-fan-modification',
@@ -21,7 +22,7 @@ export class FanModificationView implements OnInit {
   private _success = new Subject<string>();
   successMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
+  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.fanProfiles = firestore.collection<Fan>('fanProfiles');
     this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
     this.profile = this.printedProfile.valueChanges();
@@ -29,18 +30,6 @@ export class FanModificationView implements OnInit {
 
 
   ngOnInit(): void {
-    /*this.profile = {
-      name: 'Rammstein',
-      email: 'rammstein@email.com',
-      password: '1234512345',
-      imageSource: '',
-      location: '',
-      phone: '656121212',
-      socialNetworks: [{socialNetwork: SocialNetworkEnum.FACEBOOK, url: 'https://www.facebook.com/'},
-        {socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://www.twitter.com/'},
-        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/'},
-        {socialNetwork: SocialNetworkEnum.REDDIT, url: 'https://www.reddit.com/'}],
-    };*/
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -62,9 +51,14 @@ export class FanModificationView implements OnInit {
       imageSource: this.modificationForm.value.imageurl,
       location: this.modificationForm.value.location,
     };
+    /*console.warn(fan.name + ';' +  + ';' + this.formBuilder.group(name).value.name);*/
+    /*if (fan.name === '') {
+      fan.name.setValue(this.fanProfiles.name);
+    }*/
     this.printedProfile.update(fan)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
+    this._location.back();
   }
 
 }
