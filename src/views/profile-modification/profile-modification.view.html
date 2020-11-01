@@ -34,10 +34,25 @@
       </div>
       <input class="form-control" rows="1" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
     </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Descripción</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.description}}" aria-label="description" formControlName="description">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instrumentos</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.instruments}}" aria-label="instruments" formControlName="instruments">
+    </div>
+
   </form>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
   <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
-  <button class="btn btn-outline-primary m-1" [routerLink]="'/Profile'">Cancelar</button>
+  <button class="btn btn-outline-primary m-1" [routerLink]="'/profile'">Cancelar</button>
 </div>
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
 </div>

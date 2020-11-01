@@ -17,19 +17,17 @@ export class ProfileModificationView implements OnInit {
 
   printedProfile: any;
   profile: any;
-  profileProfiles;
   modificationForm: FormGroup;
 
   private _success = new Subject<string>();
   successMessage = '';
   private nameModification: any; private phoneModification: any;
   private emailModification: any; private imageModification: any;
-  private locModification: any;
-
-  private nombre: string;
+  private locModification: any; private descriptionModification: any;
+  private instrumentsModification: any;
 
   constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.printedProfile = firestore.doc<Profile>('profileProfiles/NKUHb5YBHaCDQmSpWUFh');
+    this.printedProfile = firestore.doc<Profile>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
     this.profile = this.printedProfile.valueChanges();
   }
 
@@ -39,8 +37,10 @@ export class ProfileModificationView implements OnInit {
       this.nameModification = value.name;
       this.phoneModification = value.phone;
       this.emailModification = value.email;
-      this.imageModification = value.imageModification;
+      this.imageModification = value.imageSource;
       this.locModification = value.location;
+      this.descriptionModification = value.description;
+      this.instrumentsModification = value.instruments;
     });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -48,6 +48,8 @@ export class ProfileModificationView implements OnInit {
       email: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
+      description: ['', []],
+      instruments: ['', []]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -56,15 +58,20 @@ export class ProfileModificationView implements OnInit {
   }
 
   sendForm(): void {
+    console.warn(this.instrumentsModification);
+    console.warn(this.imageModification);
     this.checkValues();
+    console.warn(this.imageModification);
     const profile = {
       name: this.nameModification,
       phone: this.phoneModification,
       email: this.emailModification,
       imageSource: this.imageModification,
       location: this.locModification,
+      description: this.descriptionModification,
+      instruments: this.instrumentsModification,
     };
-    console.warn(profile.name + ';' + profile.phone + ';' + profile.email + ';' + profile.imageSource + ';'  + profile.location);
+    console.warn('Okay');
     this.printedProfile.update(profile)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
@@ -95,6 +102,16 @@ export class ProfileModificationView implements OnInit {
       this.profile.subscribe((doc: { location: string; }) => { this.locModification = doc.location; });
     } else {
       this.locModification = this.modificationForm.value.location;
+    }
+    if (this.modificationForm.value.description === ''){
+      this.profile.subscribe((doc: { description: string; }) => { this.descriptionModification = doc.description; });
+    } else {
+      this.descriptionModification = this.modificationForm.value.description;
+    }
+    if (this.modificationForm.value.instruments === ''){
+      this.profile.subscribe((doc: { instruments: string; }) => { this.instrumentsModification = doc.instruments; });
+    } else {
+      this.instrumentsModification = this.modificationForm.value.instruments;
     }
   }
 
