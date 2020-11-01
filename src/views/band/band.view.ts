@@ -3,6 +3,8 @@ import {Band} from '../../models/band/band.model';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
+import {UserDetails} from '../../models/userDetails/user-details.model';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-band',
@@ -16,6 +18,8 @@ export class BandView implements OnInit {
   bandProfiles;
   printedProfile: any;
 
+  members: Musician[];
+
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
     this.route.params.subscribe( params => {
         if (params.id) {
@@ -28,6 +32,36 @@ export class BandView implements OnInit {
       }
     );
     this.profile = this.printedProfile.valueChanges();
+    this.members =
+      [{name: 'Peter Parker',
+        phone: '',
+        password: '',
+        location: '',
+        jobOffers: null,
+        instruments: null,
+        genres: null,
+        email: 'email',
+        description: '',
+        imageSource: 'url',
+        socialNetworks: [],
+        subscription: null,
+        subscriptionPrice: 25,
+        tutorials: null},
+        {name: 'El tio de Peter Parker',
+          phone: '',
+          password: '',
+          location: '',
+          jobOffers: null,
+          instruments: null,
+          genres: null,
+          email: 'email',
+          description: '',
+          imageSource: '' +
+            'url',
+          socialNetworks: [],
+          subscription: null,
+          subscriptionPrice: 25,
+          tutorials: null}];
   }
 
   ngOnInit(): void {
