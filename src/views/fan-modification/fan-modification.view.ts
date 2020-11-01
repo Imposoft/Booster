@@ -21,14 +21,11 @@ export class FanModificationView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
-  private nameModification: any;
-  private phoneModification: any;
-  private emailModification: any;
-  private imageModification: any;
+  private nameModification: any; private phoneModification: any;
+  private emailModification: any; private imageModification: any;
   private locModification: any;
 
   constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    // this.fanProfiles = firestore.collection<Fan>('fanProfiles');
     this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
     this.profile = this.printedProfile.valueChanges();
   }
@@ -62,7 +59,7 @@ export class FanModificationView implements OnInit {
     if (this.modificationForm.value.email === ''){
       this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
     } else {
-      this.phoneModification = this.modificationForm.value.phone;
+      this.emailModification = this.modificationForm.value.email;
     }
     if (this.modificationForm.value.imageurl === ''){
       this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });

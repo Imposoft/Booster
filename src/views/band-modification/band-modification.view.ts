@@ -13,7 +13,7 @@ import {debounceTime} from 'rxjs/operators';
 })
 export class BandModificationView implements OnInit {
 
-  profile: Band;
+  profile: any;
   bandProfiles;
   printedProfile: any;
   modificationForm: FormGroup;
@@ -21,10 +21,12 @@ export class BandModificationView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
+  private nameModification: any; private phoneModification: any;
+  private emailModification: any; private imageModification: any;
+  private locModification: any; private descModification: any;
+  private subsModification: any; private psswModification: any;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.bandProfiles = firestore.collection<Band>('bandProfiles');
-    this.bandProfiles = firestore.collection<Band>('bandProfiles');
     this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
     this.profile = this.printedProfile.valueChanges();
   }
@@ -48,19 +50,59 @@ export class BandModificationView implements OnInit {
   }
 
   sendForm(): void {
+    if (this.modificationForm.value.name === ''){
+      this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
+    } else {
+      this.nameModification = this.modificationForm.value.name;
+    }
+    if (this.modificationForm.value.phone === ''){
+      this.profile.subscribe((doc: { phone: string; }) => { this.phoneModification = doc.phone; });
+    } else {
+      this.phoneModification = this.modificationForm.value.phone;
+    }
+    if (this.modificationForm.value.email === ''){
+      this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
+    } else {
+      this.emailModification = this.modificationForm.value.email;
+    }
+    if (this.modificationForm.value.password === ''){
+      this.profile.subscribe((doc: { password: string; }) => { this.psswModification = doc.password; });
+    } else {
+      this.psswModification = this.modificationForm.value.password;
+    }
+    if (this.modificationForm.value.imageurl === ''){
+      this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });
+    } else {
+      this.imageModification = this.modificationForm.value.imageurl;
+    }
+    if (this.modificationForm.value.location === ''){
+      this.profile.subscribe((doc: { location: string; }) => { this.locModification = doc.location; });
+    } else {
+      this.locModification = this.modificationForm.value.location;
+    }
+    if (this.modificationForm.value.description === ''){
+      this.profile.subscribe((doc: { description: string; }) => { this.descModification = doc.description; });
+    } else {
+      this.descModification = this.modificationForm.value.description;
+    }
+    if (this.modificationForm.value.subscriptionPrice === ''){
+      this.profile.subscribe((doc: { subscriptionPrice: string; }) => { this.subsModification = doc.subscriptionPrice; });
+    } else {
+      this.subsModification = this.modificationForm.value.subscriptionPrice;
+    }
     const band = {
-      name: this.modificationForm.value.name,
-      email: this.modificationForm.value.email,
+      name: this.nameModification,
+      phone: this.phoneModification,
+      email: this.emailModification,
+      imageSource: this.imageModification,
+      location: this.locModification,
       password: this.modificationForm.value.password,
-      imageSource: this.modificationForm.value.imageurl,
-      phone: this.modificationForm.value.phone,
       members: this.modificationForm.value.members,
-      description: this.modificationForm.value.description,
+      description: this.descModification,
       genres: [{name: 'Heavy'}, {name: 'Pop'}],
-      location: this.modificationForm.value.location,
       socialNetworks: [{socialNetwork: SocialNetworkEnum.TWITTER, url: 'https://twitter.com/BTS_twt'},
         {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: 'https://www.instagram.com/bts.bighitofficial/'}],
-      subscriptionPrice: this.modificationForm.value.subscriptionPrice
+      subscriptionPrice: this.subsModification
     };
     this.printedProfile.update(band)
       .catch(error => console.log(error));
