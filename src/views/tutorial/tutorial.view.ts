@@ -27,6 +27,8 @@ export class TutorialView implements OnInit {
   items: Observable<any[]>;
   fanProfiles: any;
 
+  ButtonVisible = true;
+
   private _success = new Subject<string>();
   successMessage = '';
 
@@ -75,7 +77,7 @@ export class TutorialView implements OnInit {
   }
 
   applyForTutorial(): void{
-    this.tutorialPost.userWaitList.concat(this.fanDetails);
+    this.tutorialPost.userWaitList.push(this.fanDetails);
     // this.tutorialPost = {
     //  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium est ornare tellus molestie, eget egestas ligula faucibus. Morbi ipsum arcu, aliquet tincidunt lacus vel, consequat venenatis urna. Proin nec eleifend justo, a pretium mauris. In auctor ex vitae dictum pulvinar. Maecenas commodo elit eu consectetur rutrum. Phasellus nec nulla eleifend, hendrerit eros pulvinar, varius nibh. Pellentesque eu justo in erat posuere finibus nec nec odio. Sed iaculis rhoncus odio, porta dictum augue posuere quis. Nulla nec varius lectus, nec rhoncus nisl. Donec vel venenatis lorem. Integer elit ante, vulputate sed efficitur nec, facilisis ac purus. Donec in felis massa. Proin a nisl vel ligula finibus pulvinar nec quis nulla. Sed non convallis metus. Phasellus venenatis tristique mauris, non convallis tellus posuere ut.\n' +
     // '\n' +
@@ -92,5 +94,6 @@ export class TutorialView implements OnInit {
       owner: this.tutorialOwner
     };*/
     this._success.next('Reserva solicitada con exito!');
+    // this.ButtonVisible = false;
   }
 }
