@@ -1,0 +1,43 @@
+<div class="container-fluid p-2">
+  <form [formGroup]="modificationForm">
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="Nombre" formControlName="name">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon4" style="width:9vw">Email</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
+      </div>
+      <input class="form-control" rows="1" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
+    </div>
+  </form>
+<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+  <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
+  <button class="btn btn-outline-primary m-1" [routerLink]="'/Profile'">Cancelar</button>
+</div>
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+</div>
