@@ -12,6 +12,7 @@ import {TutorialView} from '../views/tutorial/tutorial.view';
 import {TutorialModificationView} from '../views/tutorial-modification/tutorial-modification.view';
 import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutorial-listing.view';
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
+import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'tutorialModification', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},
   {path: 'fanModification', component: FanModificationView},
+  {path: 'profileModification', component: ProfileModificationView},
 ];
 
 @NgModule({
