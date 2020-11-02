@@ -26,6 +26,7 @@ const routes: Routes = [
   {path: 'fanProfile/:id', component: FanView},
   {path: 'bandModification/:id', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
+  {path: 'tutorial/:id', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification/:id', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},
