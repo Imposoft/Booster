@@ -5,7 +5,6 @@ export class SocialNetworks {
 
 export enum SocialNetworkEnum {
   INSTRAGRAM = 'INSTRAGRAM',
-  FACEBOOK = 'FACEBOOK',
-  TWITTER = 'TWITTER',
-  REDDIT = 'REDDIT'
+  SPOTIFY = 'SPOTIFY',
+  TWITTER = 'TWITTER'
 }

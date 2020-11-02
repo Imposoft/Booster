@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Musician} from '../../models/musician/musician.model';
-import {SocialNetwork} from '../../models/profile/profile.model';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Band} from '../../models/band/band.model';
 import { Fan } from 'src/models/fan/fan.model';
 import {Router} from '@angular/router';
+import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 
 
 @Component({
@@ -83,7 +83,7 @@ export class RegisterProfileComponent implements OnInit {
         description: this.thirdFormGroupMusician.value.description,
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupMusician.value.location,
-        socialNetworks: SocialNetwork.FACEBOOK,
+        socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
       };
       this.musicianProfiles.add(musician);
@@ -145,7 +145,7 @@ export class RegisterProfileComponent implements OnInit {
         description: this.thirdFormGroupBand.value.description,
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupBand.value.location,
-        socialNetworks: SocialNetwork.FACEBOOK,
+        socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
       };
       this.bandProfiles.add(band);

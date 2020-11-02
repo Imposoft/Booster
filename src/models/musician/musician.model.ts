@@ -11,7 +11,6 @@ export class Musician extends Profile{
   subscriptionPrice: number;
   tutorials?: [Tutorial];
   instruments: [Instrument];
-  // lista de ofertas de trabajo a las que se suscribe
   jobOffers?: [JobOffer];
   subscription?: Subscription;
 }
