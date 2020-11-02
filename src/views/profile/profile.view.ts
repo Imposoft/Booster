@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Profile, SocialNetwork} from '../../models/profile/profile.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
-import {Band} from '../../models/band/band.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Musician} from '../../models/musician/musician.model';
 

@@ -9,13 +9,3 @@ export class Profile {
   phone: string;
   socialNetworks: SocialNetworks[];
 }
-
-export enum SocialNetwork {
-  INSTRAGRAM = 'INSTRAGRAM',
-  FACEBOOK = 'FACEBOOK',
-  TWITTER = 'TWITTER',
-  REDDIT = 'REDDIT'
-}
-
-const enumAsArray = Object.values(SocialNetwork);
-enumAsArray.splice(0, enumAsArray.length / 2);

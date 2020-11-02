@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SocialNetwork} from '../../models/profile/profile.model';
 import {SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 
 @Component({

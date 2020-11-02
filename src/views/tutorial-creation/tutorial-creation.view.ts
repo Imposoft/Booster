@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Profile, SocialNetwork} from '../../models/profile/profile.model';
 import {debounceTime} from 'rxjs/operators';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
-import {UserDetails} from '../../models/userDetails/user-details.model';
-import {Band} from '../../models/band/band.model';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
-import {Fan} from '../../models/fan/fan.model';
 
 @Component({
   selector: 'app-tutorial-creation',
