@@ -26,7 +26,7 @@ export class FanModificationView implements OnInit {
   successMessage = '';
   private nameModification: any; private phoneModification: any;
   private emailModification: any; private imageModification: any;
-  private locModification: any;
+  private locModification: any; private passModification: any;
 
   constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
@@ -45,10 +45,19 @@ export class FanModificationView implements OnInit {
 
 
   ngOnInit(): void {
+    this.profile.subscribe(value => {
+      this.nameModification = value.name;
+      this.phoneModification = value.phone;
+      this.emailModification = value.email;
+      this.passModification = value.password;
+      this.imageModification = value.imageSource;
+      this.locModification = value.location;
+    });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
     });
@@ -64,6 +73,7 @@ export class FanModificationView implements OnInit {
       name: this.nameModification,
       phone: this.phoneModification,
       email: this.emailModification,
+      password: this.passModification,
       imageSource: this.imageModification,
       location: this.locModification,
     };
@@ -89,6 +99,11 @@ export class FanModificationView implements OnInit {
       this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
     } else {
       this.emailModification = this.modificationForm.value.email;
+    }
+    if (this.modificationForm.value.password === ''){
+      this.profile.subscribe((doc: { password: string; }) => { this.passModification = doc.password; });
+    } else {
+      this.passModification = this.modificationForm.value.password;
     }
     if (this.modificationForm.value.imageurl === ''){
       this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });
