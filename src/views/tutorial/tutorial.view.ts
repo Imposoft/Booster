@@ -34,8 +34,6 @@ export class TutorialView implements OnInit {
 
   constructor(private afs: AngularFirestore) {
     // this.tutorialPost = afs.collection<Tutorial>('tutorialPosts/VAsSNdEArx0nRtgexSMk');
-    this.items = afs.collection('test').valueChanges();
-    this.fanProfiles = afs.collection<Fan>('fanProfiles');
     this.printedProfile = afs.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
     this.profile = this.printedProfile.valueChanges();
   }
@@ -72,7 +70,7 @@ export class TutorialView implements OnInit {
 
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
-      debounceTime(500000000)
+      debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
   }
 
@@ -93,7 +91,7 @@ export class TutorialView implements OnInit {
       this.fanDetails],
       owner: this.tutorialOwner
     };*/
-    this._success.next('Reserva solicitada con exito!');
+    this._success.next('Reserva solicitada con exito! ');
     // this.ButtonVisible = false;
   }
 }

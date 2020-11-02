@@ -28,7 +28,7 @@ export class BandModificationView implements OnInit {
   private locModification: any; private descModification: any;
   private subsModification: any; private psswModification: any;
 
-  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
       if (params.id) {
         console.log(params);
@@ -44,9 +44,19 @@ export class BandModificationView implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profile.subscribe(value => {
+      this.nameModification = value.name;
+      this.phoneModification = value.phone;
+      this.emailModification = value.email;
+      this.psswModification = value.password;
+      this.imageModification = value.imageSource;
+      this.locModification = value.location;
+      this.descModification = value.description;
+      this.subsModification = value.subscriptionPrice;
+    });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       members: ['', []],
@@ -81,50 +91,17 @@ export class BandModificationView implements OnInit {
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
     this.changeView();
-    // this._location.back();
   }
 
   checkValues(): void {
-    if (this.modificationForm.value.name === ''){
-      this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
-    } else {
-      this.nameModification = this.modificationForm.value.name;
-    }
-    if (this.modificationForm.value.phone === ''){
-      this.profile.subscribe((doc: { phone: string; }) => { this.phoneModification = doc.phone; });
-    } else {
-      this.phoneModification = this.modificationForm.value.phone;
-    }
-    if (this.modificationForm.value.email === ''){
-      this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
-    } else {
-      this.emailModification = this.modificationForm.value.email;
-    }
-    if (this.modificationForm.value.password === ''){
-      this.profile.subscribe((doc: { password: string; }) => { this.psswModification = doc.password; });
-    } else {
-      this.psswModification = this.modificationForm.value.password;
-    }
-    if (this.modificationForm.value.imageurl === ''){
-      this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });
-    } else {
-      this.imageModification = this.modificationForm.value.imageurl;
-    }
-    if (this.modificationForm.value.location === ''){
-      this.profile.subscribe((doc: { location: string; }) => { this.locModification = doc.location; });
-    } else {
-      this.locModification = this.modificationForm.value.location;
-    }
-    if (this.modificationForm.value.description === ''){
-      this.profile.subscribe((doc: { description: string; }) => { this.descModification = doc.description; });
-    } else {
-      this.descModification = this.modificationForm.value.description;
-    }
-    if (this.modificationForm.value.subscriptionPrice === ''){
-      this.profile.subscribe((doc: { subscriptionPrice: string; }) => { this.subsModification = doc.subscriptionPrice; });
-    } else {
-      this.subsModification = this.modificationForm.value.subscriptionPrice;
-    }
+    if (this.modificationForm.value.name !== ''){ this.nameModification = this.modificationForm.value.name; }
+    if (this.modificationForm.value.phone !== ''){ this.phoneModification = this.modificationForm.value.phone; }
+    if (this.modificationForm.value.email !== ''){ this.emailModification = this.modificationForm.value.email; }
+    if (this.modificationForm.value.password !== ''){ this.psswModification = this.modificationForm.value.password; }
+    if (this.modificationForm.value.imageurl !== ''){ this.imageModification = this.modificationForm.value.imageurl; }
+    if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
+    if (this.modificationForm.value.description !== ''){ this.descModification = this.modificationForm.value.description; }
+    if (this.modificationForm.value.subscriptionPrice !== ''){ this.subsModification = this.modificationForm.value.subscriptionPrice; }
   }
 
   changeView(): void {

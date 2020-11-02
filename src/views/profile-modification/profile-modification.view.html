@@ -11,49 +11,57 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
+      <input class="form-control" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon4" style="width:9vw">Email</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
+      <input class="form-control" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon4" style="width:9vw">Contraseña</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.password}}" aria-label="password" formControlName="password">
+      <input class="form-control" value="{{(profile | async)?.password}}" aria-label="password" formControlName="password">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
+      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
+      <input class="form-control" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Descripción</span>
+        <span class="input-group-text" id="basic-addon" style="width:9vw">Instrumentos</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.description}}" aria-label="description" formControlName="description">
+      <input class="form-control" value="{{(profile | async)?.instruments}}" aria-label="instruments" formControlName="instruments">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instrumentos</span>
+        <span class="input-group-text" style="width:12.5vw" >Precio de suscripcion</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.instruments}}" aria-label="instruments" formControlName="instruments">
+      <input class="form-control" value="{{(profile | async)?.subscriptionPrice}}" aria-label="Precio suscripcion (€)" formControlName="subscriptionPrice" >
+      <span class="input-group-text" style="width:2.5vw">€</span>
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="width:9vw">Descripcion</span>
+      </div>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" value="{{(profile | async)?.description}}"></textarea>
     </div>
 
   </form>

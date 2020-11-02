@@ -28,7 +28,7 @@ export class FanModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any; private passModification: any;
 
-  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
         if (params.id) {
           console.log(params);
@@ -82,39 +82,14 @@ export class FanModificationView implements OnInit {
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
     this.changeView();
-    // this._location.back();
   }
   checkValues(): void {
-    if (this.modificationForm.value.name === ''){
-      this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
-    } else {
-      this.nameModification = this.modificationForm.value.name;
-    }
-    if (this.modificationForm.value.phone === ''){
-      this.profile.subscribe((doc: { phone: string; }) => { this.phoneModification = doc.phone; });
-    } else {
-      this.phoneModification = this.modificationForm.value.phone;
-    }
-    if (this.modificationForm.value.email === ''){
-      this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
-    } else {
-      this.emailModification = this.modificationForm.value.email;
-    }
-    if (this.modificationForm.value.password === ''){
-      this.profile.subscribe((doc: { password: string; }) => { this.passModification = doc.password; });
-    } else {
-      this.passModification = this.modificationForm.value.password;
-    }
-    if (this.modificationForm.value.imageurl === ''){
-      this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });
-    } else {
-      this.imageModification = this.modificationForm.value.imageurl;
-    }
-    if (this.modificationForm.value.location === ''){
-      this.profile.subscribe((doc: { location: string; }) => { this.locModification = doc.location; });
-    } else {
-      this.locModification = this.modificationForm.value.location;
-    }
+    if (this.modificationForm.value.name !== ''){ this.nameModification = this.modificationForm.value.name; }
+    if (this.modificationForm.value.phone !== ''){ this.phoneModification = this.modificationForm.value.phone; }
+    if (this.modificationForm.value.email !== ''){ this.emailModification = this.modificationForm.value.email; }
+    if (this.modificationForm.value.password !== ''){ this.passModification = this.modificationForm.value.password; }
+    if (this.modificationForm.value.imageurl !== ''){ this.imageModification = this.modificationForm.value.imageurl; }
+    if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
   }
 
   changeView(): void {

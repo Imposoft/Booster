@@ -28,6 +28,7 @@ export class ProfileModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any; private descriptionModification: any;
   private instrumentsModification: any; private passModification: any;
+  private subsModification: any;
 
   constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
@@ -55,16 +56,18 @@ export class ProfileModificationView implements OnInit {
       this.locModification = value.location;
       this.descriptionModification = value.description;
       this.instrumentsModification = value.instruments;
+      this.subsModification = value.subscriptionPrice;
     });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
       description: ['', []],
-      instruments: ['', []]
+      instruments: ['', []],
+      subscriptionPrice: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -83,6 +86,7 @@ export class ProfileModificationView implements OnInit {
       location: this.locModification,
       description: this.descriptionModification,
       instruments: this.instrumentsModification,
+      subscriptionPrice: this.subsModification
     };
     console.warn('Okay');
     this.printedProfile.update(profile)
@@ -92,46 +96,15 @@ export class ProfileModificationView implements OnInit {
     /*this._location.back();*/
   }
   checkValues(): void {
-    if (this.modificationForm.value.name === ''){
-      this.profile.subscribe((doc: { name: string; }) => { this.nameModification = doc.name; });
-    } else {
-      this.nameModification = this.modificationForm.value.name;
-    }
-    if (this.modificationForm.value.phone === ''){
-      this.profile.subscribe((doc: { phone: string; }) => { this.phoneModification = doc.phone; });
-    } else {
-      this.phoneModification = this.modificationForm.value.phone;
-    }
-    if (this.modificationForm.value.email === ''){
-      this.profile.subscribe((doc: { email: string; }) => { this.emailModification = doc.email; });
-    } else {
-      this.emailModification = this.modificationForm.value.email;
-    }
-    if (this.modificationForm.value.pass === ''){
-      this.profile.subscribe((doc: { password: string; }) => { this.passModification = doc.password; });
-    } else {
-      this.passModification = this.modificationForm.value.password;
-    }
-    if (this.modificationForm.value.imageurl === ''){
-      this.profile.subscribe((doc: { imageSource: string; }) => { this.imageModification = doc.imageSource; });
-    } else {
-      this.imageModification = this.modificationForm.value.imageurl;
-    }
-    if (this.modificationForm.value.location === ''){
-      this.profile.subscribe((doc: { location: string; }) => { this.locModification = doc.location; });
-    } else {
-      this.locModification = this.modificationForm.value.location;
-    }
-    if (this.modificationForm.value.description === ''){
-      this.profile.subscribe((doc: { description: string; }) => { this.descriptionModification = doc.description; });
-    } else {
-      this.descriptionModification = this.modificationForm.value.description;
-    }
-    if (this.modificationForm.value.instruments === ''){
-      this.profile.subscribe((doc: { instruments: string; }) => { this.instrumentsModification = doc.instruments; });
-    } else {
-      this.instrumentsModification = this.modificationForm.value.instruments;
-    }
+    if (this.modificationForm.value.name !== ''){ this.nameModification = this.modificationForm.value.name; }
+    if (this.modificationForm.value.phone !== ''){ this.phoneModification = this.modificationForm.value.phone; }
+    if (this.modificationForm.value.email !== ''){ this.emailModification = this.modificationForm.value.email; }
+    if (this.modificationForm.value.pass !== ''){ this.passModification = this.modificationForm.value.password; }
+    if (this.modificationForm.value.imageurl !== ''){ this.imageModification = this.modificationForm.value.imageurl; }
+    if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
+    if (this.modificationForm.value.description !== ''){ this.descriptionModification = this.modificationForm.value.description; }
+    if (this.modificationForm.value.instruments !== ''){ this.instrumentsModification = this.modificationForm.value.instruments; }
+    if (this.modificationForm.value.subscriptionPrice !== ''){ this.subsModification = this.modificationForm.value.subscriptionPrice; }
   }
 
   changeView(): void {
