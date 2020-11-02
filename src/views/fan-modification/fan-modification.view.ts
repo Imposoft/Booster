@@ -3,7 +3,7 @@ import {Fan} from '../../models/fan/fan.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -27,6 +27,10 @@ export class FanModificationView implements OnInit {
   private nameModification: any; private phoneModification: any;
   private emailModification: any; private imageModification: any;
   private locModification: any; private passModification: any;
+  private instaModification: string; private spotifyModification: string; private twitterModification: string;
+  private instaNetwork: any;
+  private spotifyNetwork: any;
+  private twitterNetwork: any;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
@@ -52,6 +56,21 @@ export class FanModificationView implements OnInit {
       this.passModification = value.password;
       this.imageModification = value.imageSource;
       this.locModification = value.location;
+
+      if (value.socialNetworks === undefined) {
+        this.instaModification = '';
+        this.spotifyModification = '';
+        this.twitterModification = '';
+      } else {
+        if (value.socialNetworks[0].url !== undefined) {
+          this.instaModification = value.socialNetworks[0].url;
+        }
+        if (value.socialNetworks[1].url !== undefined) {
+          this.spotifyModification = value.socialNetworks[1].url;
+        }
+        if (value.socialNetworks[2].url !== undefined) {
+          this.twitterModification = value.socialNetworks[2].url;
+        }}
     });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -76,6 +95,7 @@ export class FanModificationView implements OnInit {
       password: this.passModification,
       imageSource: this.imageModification,
       location: this.locModification,
+      socialNetworks: this.checkNetworks(),
     };
     console.warn(fan.name + ';' + fan.phone + ';' + fan.email + ';' + fan.imageSource + ';'  + fan.location);
     this.printedProfile.update(fan)
@@ -95,5 +115,25 @@ export class FanModificationView implements OnInit {
   changeView(): void {
     this.successMessage = '';
     this.router.navigate([this.path]);
+  }
+
+  checkNetworks(): SocialNetworks[] {
+    if (this.modificationForm.value.urlInsta !== '') {
+      this.instaNetwork = { socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: this.modificationForm.value.urlInsta };
+    } else {
+      this.instaNetwork = { socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: this.instaModification };
+    }
+    if (this.modificationForm.value.urlSpotify !== '') {
+      this.spotifyNetwork = { socialNetwork: SocialNetworkEnum.SPOTIFY, url: this.modificationForm.value.urlSpotify };
+    } else {
+      this.spotifyNetwork = { socialNetwork: SocialNetworkEnum.SPOTIFY, url: this.spotifyModification };
+    }
+    if (this.modificationForm.value.urlTwitter !== '') {
+      this.twitterNetwork = { socialNetwork: SocialNetworkEnum.TWITTER, url: this.modificationForm.value.urlTwitter };
+    } else {
+      this.twitterNetwork = { socialNetwork: SocialNetworkEnum.TWITTER, url: this.twitterModification };
+    }
+
+    return [this.instaNetwork, this.spotifyNetwork, this.twitterNetwork];
   }
 }
