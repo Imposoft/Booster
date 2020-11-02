@@ -52,6 +52,7 @@ export class RegisterProfileComponent implements OnInit {
       location: ['', [Validators.required]],
       description: ['', [Validators.required]],
       subscriptionPrice: ['', [Validators.required]],
+      genre: ['', []],
     });
     this.thirdFormGroupBand = this.formBuilder.group({
       location: ['', [Validators.required]],
@@ -63,6 +64,7 @@ export class RegisterProfileComponent implements OnInit {
       member1Url: ['', []],
       member2Url: ['', []],
       member3Url: ['', []],
+      genre: ['', []],
     });
 
     this._success.subscribe(message => this.successMessage = message);
@@ -81,7 +83,7 @@ export class RegisterProfileComponent implements OnInit {
         imageSource: this.secondFormGroup.value.imageurl,
         phone: this.secondFormGroup.value.phone,
         description: this.thirdFormGroupMusician.value.description,
-        genres: ['EjemploGenero'],
+        genres: [{name: this.thirdFormGroupMusician.value.genre}],
         location: this.thirdFormGroupMusician.value.location,
         socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
@@ -143,7 +145,7 @@ export class RegisterProfileComponent implements OnInit {
         phone: this.secondFormGroup.value.phone,
         members: [user1, user2, user3],
         description: this.thirdFormGroupBand.value.description,
-        genres: ['EjemploGenero'],
+        genres: [{name: this.thirdFormGroupBand.value.genre}],
         location: this.thirdFormGroupBand.value.location,
         socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice

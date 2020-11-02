@@ -68,7 +68,11 @@
       <mat-form-field>
         <mat-label>Precio suscripcion:</mat-label>
         <input matInput formControlName="subscriptionPrice" placeholder="En €" required>
-      </mat-form-field>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Genero:</mat-label>
+        <input matInput formControlName="genre" placeholder="Pop, Rock..." required>
+      </mat-form-field><br>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
@@ -88,7 +92,11 @@
       <mat-form-field>
         <mat-label>Precio suscripcion:</mat-label>
         <input matInput formControlName="subscriptionPrice" placeholder="En €" required>
-      </mat-form-field>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Genero:</mat-label>
+        <input matInput formControlName="genre" placeholder="Pop, Rock..." required>
+      </mat-form-field><br>
       <div>Miembro 1:</div>
       <mat-form-field>
         <mat-label>Nombre</mat-label>
