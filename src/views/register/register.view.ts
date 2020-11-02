@@ -10,7 +10,7 @@ export class RegisterView implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.showingLogin = false;
+    this.showingLogin = true;
   }
 
   toggleLogin(): void{

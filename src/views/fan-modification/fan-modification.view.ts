@@ -6,6 +6,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
 import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-fan-modification',
@@ -19,6 +20,7 @@ export class FanModificationView implements OnInit {
   profile: any;
   fanProfiles;
   modificationForm: FormGroup;
+  path: string;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -26,26 +28,27 @@ export class FanModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any;
 
-  private nombre: string;
-
-  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
+          this.path = 'fanProfile/' + params.id;
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+          this.path = 'fanProfile/NKUHb5YBHaCDQmSpWUFh';
+        }
+      });
     this.profile = this.printedProfile.valueChanges();
   }
 
 
   ngOnInit(): void {
-    this.profile.subscribe(value => {
-      this.nameModification = value.name;
-      this.phoneModification = value.phone;
-      this.emailModification = value.email;
-      this.imageModification = value.imageModification;
-      this.locModification = value.location;
-    });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
     });
@@ -68,7 +71,8 @@ export class FanModificationView implements OnInit {
     this.printedProfile.update(fan)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
-    this._location.back();
+    this.changeView();
+    // this._location.back();
   }
   checkValues(): void {
     if (this.modificationForm.value.name === ''){
@@ -98,4 +102,8 @@ export class FanModificationView implements OnInit {
     }
   }
 
+  changeView(): void {
+    this.successMessage = '';
+    this.router.navigate([this.path]);
+  }
 }

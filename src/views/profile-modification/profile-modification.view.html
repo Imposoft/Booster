@@ -52,7 +52,7 @@
   </form>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
   <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
-  <button class="btn btn-outline-primary m-1" [routerLink]="'/profile'">Cancelar</button>
+  <button class="btn btn-outline-primary m-1" (click)="changeView()">Cancelar</button>
 </div>
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
 </div>

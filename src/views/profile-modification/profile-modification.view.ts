@@ -6,6 +6,8 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
 import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Fan} from '../../models/fan/fan.model';
 
 @Component({
   selector: 'app-profile-modification',
@@ -18,6 +20,7 @@ export class ProfileModificationView implements OnInit {
   printedProfile: any;
   profile: any;
   modificationForm: FormGroup;
+  path: string;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -26,8 +29,18 @@ export class ProfileModificationView implements OnInit {
   private locModification: any; private descriptionModification: any;
   private instrumentsModification: any;
 
-  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.printedProfile = firestore.doc<Profile>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
+  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {
+        if (params.id) {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('musicianProfiles/' + params.id);
+          this.path = 'profile/' + params.id;
+        } else {
+          console.log(params);
+          this.printedProfile = firestore.doc<Fan>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
+          this.path = 'profile/IfcscpI7GL2pFaZKEccf';
+        }
+      });
     this.profile = this.printedProfile.valueChanges();
   }
 
@@ -75,7 +88,8 @@ export class ProfileModificationView implements OnInit {
     this.printedProfile.update(profile)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
-    this._location.back();
+    this.changeView();
+    //this._location.back();
   }
   checkValues(): void {
     if (this.modificationForm.value.name === ''){
@@ -115,4 +129,8 @@ export class ProfileModificationView implements OnInit {
     }
   }
 
+  changeView(): void {
+    this.successMessage = '';
+    this.router.navigate([this.path]);
+  }
 }

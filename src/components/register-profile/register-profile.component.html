@@ -116,4 +116,4 @@
   </mat-step>
   -->
 </mat-horizontal-stepper>
-<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+<ngb-alert *ngIf="successMessage" type="success" (close)="changeView()">{{ successMessage }}</ngb-alert>

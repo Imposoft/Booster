@@ -5,6 +5,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-band-modification',
@@ -17,7 +19,7 @@ export class BandModificationView implements OnInit {
   bandProfiles;
   printedProfile: any;
   modificationForm: FormGroup;
-  items: Observable<any[]>;
+  path: string;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -26,8 +28,18 @@ export class BandModificationView implements OnInit {
   private locModification: any; private descModification: any;
   private subsModification: any; private psswModification: any;
 
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {
+      if (params.id) {
+        console.log(params);
+        this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
+        this.path = 'bandProfile/' + params.id;
+      } else {
+        console.log(params);
+        this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+        this.path = 'bandProfile/CBaWe62HROxtyWDY050Y';
+      }
+    });
     this.profile = this.printedProfile.valueChanges();
   }
 
@@ -68,6 +80,8 @@ export class BandModificationView implements OnInit {
     this.printedProfile.update(band)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
+    this.changeView();
+    // this._location.back();
   }
 
   checkValues(): void {
@@ -111,5 +125,10 @@ export class BandModificationView implements OnInit {
     } else {
       this.subsModification = this.modificationForm.value.subscriptionPrice;
     }
+  }
+
+  changeView(): void {
+    this.successMessage = '';
+    this.router.navigate([this.path]);
   }
 }

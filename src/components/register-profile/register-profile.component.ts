@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Musician} from '../../models/musician/musician.model';
 import {SocialNetwork} from '../../models/profile/profile.model';
-import {Genre} from '../../models/genre/genre.model';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Band} from '../../models/band/band.model';
 import { Fan } from 'src/models/fan/fan.model';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-register-profile',
@@ -30,7 +31,7 @@ export class RegisterProfileComponent implements OnInit {
   successMessage = '';
   private _success = new Subject<string>();
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore, private route: Router) {
     this.musicianProfiles = afs.collection<Musician>('musicianProfiles');
     this.fanProfiles = afs.collection<Fan>('fanProfiles');
     this.bandProfiles = afs.collection<Band>('bandProfiles');
@@ -81,7 +82,6 @@ export class RegisterProfileComponent implements OnInit {
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
       };
       this.musicianProfiles.add(musician);
-      this._success.next('Perfil creado con exito!');
     } else if (this.firstFormGroup.value.profileRole  === 'fan'){
       // TODO Implement fan logic
       const fan = {
@@ -92,7 +92,6 @@ export class RegisterProfileComponent implements OnInit {
         phone: this.secondFormGroup.value.phone
       };
       this.fanProfiles.add(fan);
-      this._success.next('Perfil creado con exito!');
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       // TODO Implement band logic
       const band = {
@@ -109,9 +108,15 @@ export class RegisterProfileComponent implements OnInit {
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
       };
       this.bandProfiles.add(band);
-      this._success.next('Perfil creado con exito!');
     } // else {
       // TODO Implement contratante logic
     // }
+    this._success.next('Perfil creado con exito!');
+    this.changeView();
+  }
+
+  changeView(): void {
+    this.successMessage = '';
+    this.route.navigate(['/home']);
   }
 }

@@ -23,6 +23,7 @@ const routes: Routes = [
   {path: 'bandProfile', component: BandView},
   {path: 'bandProfile/:id', component: BandView},
   {path: 'fanProfile', component: FanView},
+  {path: 'fanProfile/:id', component: FanView},
   {path: 'bandModification', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},

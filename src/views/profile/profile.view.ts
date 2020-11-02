@@ -13,7 +13,6 @@ import {Musician} from '../../models/musician/musician.model';
   styleUrls: ['./profile.view.sass']
 })
 export class ProfileView implements OnInit {
-  exampleProfile: Profile;
   profile: Musician;
   items: Observable<any[]>;
   printedProfile: any;

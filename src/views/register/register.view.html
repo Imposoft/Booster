@@ -9,11 +9,15 @@
       </p>
     </div>
     <div class="card-footer">
-      <div class="d-flex" *ngIf="!showingLogin">
-        Si ya tienes una cuenta:
-        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Iniciar Sesion</button>
+      <div class="d-flex justify-content-between p-1" *ngIf="!showingLogin">
+        <h3 class="d-flex align-self-center m-1"><b>Ya tienes una cuenta?</b></h3>
+        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Inicia Sesion</button>
       </div>
-      <button class="d-flex align-self-baseline btn btn-outline-primary m-2" *ngIf="showingLogin" (click)="toggleLogin()">Registrarse</button>
+      <div class="d-flex justify-content-between p-1" *ngIf="showingLogin">
+        <h3 class="d-flex align-self-center m-1"><b>Todavia no tienes una cuenta?</b></h3>
+        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Registrate</button>
+      </div>
+
     </div>
   </div>
 </div>
