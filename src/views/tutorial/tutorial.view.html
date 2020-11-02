@@ -1,3 +1,6 @@
+<div *ngIf="successMessage" class="m-0" style="width: 100%;">
+  <ngb-alert type="success" class="m-0" (close)="successMessage = ''">{{successMessage + (fanDetails.name)}}</ngb-alert>
+</div>
 <div class="container-fluid d-flex justify-content-center bg-light" >
   <div class="row bg-white" style="width:90vw">
     <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
@@ -27,7 +30,4 @@
     <br> <br>
     <div class="p-2"><h3>{{tutorialPost.body}}</h3></div>
   </div>
-</div>
-<div>
-<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{successMessage ++ ((profile).userWaitList | json)}}</ngb-alert>
 </div>

@@ -72,7 +72,7 @@ export class TutorialView implements OnInit {
 
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(500000000)
     ).subscribe(() => this.successMessage = '');
   }
 
