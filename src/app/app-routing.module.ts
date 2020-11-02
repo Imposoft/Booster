@@ -24,13 +24,13 @@ const routes: Routes = [
   {path: 'bandProfile/:id', component: BandView},
   {path: 'fanProfile', component: FanView},
   {path: 'fanProfile/:id', component: FanView},
-  {path: 'bandModification', component: BandModificationView},
+  {path: 'bandModification/:id', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},
-  {path: 'tutorialModification', component: TutorialModificationView},
+  {path: 'tutorialModification/:id', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},
-  {path: 'fanModification', component: FanModificationView},
-  {path: 'profileModification', component: ProfileModificationView},
+  {path: 'fanModification/:id', component: FanModificationView},
+  {path: 'profileModification/:id', component: ProfileModificationView},
 ];
 
 @NgModule({

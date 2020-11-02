@@ -17,6 +17,7 @@ export class BandView implements OnInit {
   items: Observable<any[]>;
   bandProfiles;
   printedProfile: any;
+  pathId: string;
 
   members: Musician[];
 
@@ -25,9 +26,11 @@ export class BandView implements OnInit {
         if (params.id) {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
+          this.pathId = params.id;
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
+          this.pathId = 'CBaWe62HROxtyWDY050Y';
         }
       }
     );

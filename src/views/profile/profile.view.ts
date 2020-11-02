@@ -16,6 +16,7 @@ export class ProfileView implements OnInit {
   profile: Musician;
   items: Observable<any[]>;
   printedProfile: any;
+  pathId: string;
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
     this.items = firestore.collection('test').valueChanges();
@@ -23,9 +24,11 @@ export class ProfileView implements OnInit {
         if (params.id) {
           console.log(params);
           this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + params.id);
+          this.pathId = params.id;
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
+          this.pathId = 'IfcscpI7GL2pFaZKEccf';
         }
       }
     );

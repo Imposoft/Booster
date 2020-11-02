@@ -16,15 +16,18 @@ export class FanView implements OnInit {
   profile: Fan;
   items: Observable<any[]>;
   fanProfiles: any;
+  pathId: string;
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
     this.route.params.subscribe( params => {
         if (params.id) {
           console.log(params);
           this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
+          this.pathId = params.id;
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+          this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
         }
       }
     );
