@@ -42,6 +42,25 @@
       <input class="form-control" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
     </div>
 
+    <div class="input-group mb-3 form-row" >
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instagram url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[0].url}}" aria-label="Instagram" formControlName="urlInsta">
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Spotify url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[1].url}}" aria-label="Spotify" formControlName="urlSpotify">
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Twitter url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
+    </div>
+
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon" style="width:9vw">Instrumentos</span>
