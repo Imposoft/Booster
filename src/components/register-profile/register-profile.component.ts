@@ -46,7 +46,6 @@ export class RegisterProfileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
-      members: ['', []],
       phone: ['', [Validators.required]],
     });
     this.thirdFormGroupMusician = this.formBuilder.group({
@@ -58,6 +57,12 @@ export class RegisterProfileComponent implements OnInit {
       location: ['', [Validators.required]],
       description: ['', []],
       subscriptionPrice: ['', [Validators.required]],
+      member1Name: ['', []],
+      member2Name: ['', []],
+      member3Name: ['', []],
+      member1Url: ['', []],
+      member2Url: ['', []],
+      member3Url: ['', []],
     });
 
     this._success.subscribe(message => this.successMessage = message);
@@ -94,13 +99,49 @@ export class RegisterProfileComponent implements OnInit {
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       // TODO Implement band logic
+      const user1 = {
+        name: this.thirdFormGroupBand.value.member1Name,
+        email: '',
+        password: '',
+        imageSource: this.thirdFormGroupBand.value.member1Url,
+        phone: '',
+        description: '',
+        genres: ['EjemploGenero'],
+        location: '',
+        socialNetworks: [],
+        subscriptionPrice: 25
+      };
+      const user2 = {
+        name: this.thirdFormGroupBand.value.member2Name,
+        email: '',
+        password: '',
+        imageSource: this.thirdFormGroupBand.value.member2Url,
+        phone: '',
+        description: '',
+        genres: ['EjemploGenero'],
+        location: '',
+        socialNetworks: [],
+        subscriptionPrice: 25
+      };
+      const user3 = {
+        name: this.thirdFormGroupBand.value.member3Name,
+        email: '',
+        password: '',
+        imageSource: this.thirdFormGroupBand.value.member3Url,
+        phone: '',
+        description: '',
+        genres: ['EjemploGenero'],
+        location: '',
+        socialNetworks: [],
+        subscriptionPrice: 25
+      };
       const band = {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
         phone: this.secondFormGroup.value.phone,
-        members: this.secondFormGroup.value.members,
+        members: [user1, user2, user3],
         description: this.thirdFormGroupBand.value.description,
         genres: ['EjemploGenero'],
         location: this.thirdFormGroupBand.value.location,

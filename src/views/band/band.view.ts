@@ -27,44 +27,20 @@ export class BandView implements OnInit {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
           this.pathId = params.id;
+          this.printedProfile.valueChanges().subscribe((tutorial) => {
+            console.log(tutorial);
+            this.profile = tutorial;
+          });
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
           this.pathId = 'CBaWe62HROxtyWDY050Y';
+          this.printedProfile.valueChanges().subscribe(tutorial => {
+            this.profile = tutorial;
+          });
         }
       }
     );
-    this.profile = this.printedProfile.valueChanges();
-    this.members =
-      [{name: 'Peter Parker',
-        phone: '',
-        password: '',
-        location: '',
-        jobOffers: null,
-        instruments: null,
-        genres: null,
-        email: 'email',
-        description: '',
-        imageSource: 'url',
-        socialNetworks: [],
-        subscription: null,
-        subscriptionPrice: 25,
-        tutorials: null},
-        {name: 'El tio de Peter Parker',
-          phone: '',
-          password: '',
-          location: '',
-          jobOffers: null,
-          instruments: null,
-          genres: null,
-          email: 'email',
-          description: '',
-          imageSource: '' +
-            'url',
-          socialNetworks: [],
-          subscription: null,
-          subscriptionPrice: 25,
-          tutorials: null}];
   }
 
   ngOnInit(): void {
