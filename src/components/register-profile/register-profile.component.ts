@@ -43,11 +43,11 @@ export class RegisterProfileComponent implements OnInit {
     });
     this.secondFormGroup = this.formBuilder.group({
       name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       members: ['', []],
-      phone: ['', []],
+      phone: ['', [Validators.required]],
     });
     this.thirdFormGroupMusician = this.formBuilder.group({
       location: ['', [Validators.required]],

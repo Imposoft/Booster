@@ -19,26 +19,35 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" label="Datos basicos">
     <form [formGroup]="secondFormGroup">
-      <mat-form-field>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value!='band')">
         <mat-label>Nombre</mat-label>
         <input matInput placeholder="Antonio" formControlName="name" required>
-      </mat-form-field><br>
+      </mat-form-field>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='band')">
+        <mat-label>Nombre de la banda</mat-label>
+        <input matInput placeholder="Nombre Banda" formControlName="name" required>
+      </mat-form-field>
+      <br>
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput placeholder="usuario@email.com" formControlName="email" required>
-      </mat-form-field><br>
+      </mat-form-field>
+      <br>
       <mat-form-field>
-        <mat-label>Contrasenya</mat-label>
-        <input matInput placeholder="*******" formControlName="password" required>
-      </mat-form-field><br>
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="*******" type="password" formControlName="password" required>
+      </mat-form-field>
+      <br>
       <mat-form-field>
         <mat-label>Imagen</mat-label>
         <input matInput placeholder="En formato jpg y png" formControlName="imageurl" required>
-      </mat-form-field><br>
+      </mat-form-field>
+      <br>
       <mat-form-field>
         <mat-label>Telefono</mat-label>
-        <input matInput placeholder="999888777" formControlName="phone" >
-      </mat-form-field><br>
+        <input matInput placeholder="999888777" formControlName="phone" required>
+      </mat-form-field>
+      <br>
       <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='band')">
         <mat-label>Miembros</mat-label>
         <input matInput placeholder="Miembros" formControlName="name" >
@@ -54,18 +63,15 @@
       <!-- TODO Encontrar coordenadas con una direccion -->
       <mat-form-field>
         <mat-label>Ubicacion:</mat-label>
-        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
-               required>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Descripcion:</mat-label>
-        <input matInput formControlName="description" placeholder="Date a conecer!"
-               required>
+        <input matInput formControlName="description" placeholder="Date a conecer!" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Precio suscripcion:</mat-label>
-        <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
-               required>
+        <input matInput formControlName="precioSuscripcion" placeholder="En €" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -77,18 +83,15 @@
       <!-- TODO Encontrar coordenadas con una direccion -->
       <mat-form-field>
         <mat-label>Ubicacion banda:</mat-label>
-        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001"
-               required>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001" required>
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Descripcion:</mat-label>
-        <input matInput formControlName="description" placeholder="Date a conecer!"
-               >
+        <input matInput formControlName="description" placeholder="Date a conecer!">
       </mat-form-field><br>
       <mat-form-field>
         <mat-label>Precio suscripcion:</mat-label>
-        <input matInput formControlName="precioSuscripcion" placeholder="Date a conecer!"
-               required>
+        <input matInput formControlName="precioSuscripcion" placeholder="En €" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>

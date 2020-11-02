@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Profile} from '../../models/profile/profile.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable, Subject} from 'rxjs';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {Subject} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {debounceTime} from 'rxjs/operators';
-import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Fan} from '../../models/fan/fan.model';
 
@@ -30,7 +27,7 @@ export class ProfileModificationView implements OnInit {
   private instrumentsModification: any; private passModification: any;
   private subsModification: any;
 
-  constructor(private _location: Location, private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
         if (params.id) {
           console.log(params);
@@ -93,7 +90,6 @@ export class ProfileModificationView implements OnInit {
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
     this.changeView();
-    /*this._location.back();*/
   }
   checkValues(): void {
     if (this.modificationForm.value.name !== ''){ this.nameModification = this.modificationForm.value.name; }
