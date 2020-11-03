@@ -4,7 +4,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="Nombre" formControlName="name">
+      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="name" formControlName="name">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -32,7 +32,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
+      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="image url" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">

@@ -6,6 +6,7 @@ import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/soc
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Genre} from '../../models/genre/genre.model';
 
 @Component({
   selector: 'app-band-modification',
@@ -26,13 +27,14 @@ export class BandModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any; private descModification: any;
   private subsModification: any; private psswModification: any;
+  private genreModification: any;
   private instaModification: string; private spotifyModification: string; private twitterModification: string;
   private instaNetwork: any;
   private spotifyNetwork: any;
   private twitterNetwork: any;
 
-
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router,
+              private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
       if (params.id) {
         console.log(params);
@@ -57,6 +59,7 @@ export class BandModificationView implements OnInit {
       this.locModification = value.location;
       this.descModification = value.description;
       this.subsModification = value.subscriptionPrice;
+      this.genreModification = value.genres;
 
       if (value.socialNetworks === undefined) {
         this.instaModification = '';
@@ -85,7 +88,8 @@ export class BandModificationView implements OnInit {
       urlSpotify: ['', []],
       urlTwitter: ['', []],
       description: ['', []],
-      subscriptionPrice: ['', [Validators.required]]
+      subscriptionPrice: ['', [Validators.required]],
+      genres: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -104,7 +108,7 @@ export class BandModificationView implements OnInit {
       password: this.psswModification,
       members: this.modificationForm.value.members,
       description: this.descModification,
-      genres: [{name: 'Heavy'}, {name: 'Pop'}],
+      genres: this.genreModification,
       socialNetworks: this.checkNetworks(),
       subscriptionPrice: this.subsModification
     };
@@ -123,6 +127,7 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
     if (this.modificationForm.value.description !== ''){ this.descModification = this.modificationForm.value.description; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.subsModification = this.modificationForm.value.subscriptionPrice; }
+    if (this.modificationForm.value.genres !== ''){ this.genreModification = this.stringToGenresB(); }
   }
 
   changeView(): void {
@@ -148,5 +153,10 @@ export class BandModificationView implements OnInit {
     }
 
     return [this.instaNetwork, this.spotifyNetwork, this.twitterNetwork];
+  }
+
+  stringToGenresB(): Genre[]{
+    const genreString = this.modificationForm.value.genre;
+    return genreString.split(', ');
   }
 }

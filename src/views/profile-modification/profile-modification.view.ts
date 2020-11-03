@@ -6,6 +6,7 @@ import {debounceTime} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Fan} from '../../models/fan/fan.model';
 import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
+import {Genre} from '../../models/genre/genre.model';
 
 @Component({
   selector: 'app-profile-modification',
@@ -26,7 +27,7 @@ export class ProfileModificationView implements OnInit {
   private emailModification: any; private imageModification: any;
   private locModification: any; private descriptionModification: any;
   private instrumentsModification: any; private passModification: any;
-  private subsModification: any;
+  private subsModification: any; private genreModification: any;
   private instaModification: string; private spotifyModification: string; private twitterModification: string;
   private instaNetwork: any;
   private spotifyNetwork: any;
@@ -59,6 +60,7 @@ export class ProfileModificationView implements OnInit {
       this.descriptionModification = value.description;
       this.instrumentsModification = value.instruments;
       this.subsModification = value.subscriptionPrice;
+      this.genreModification = value.genres;
 
       if (value.socialNetworks === undefined) {
         this.instaModification = '';
@@ -84,7 +86,8 @@ export class ProfileModificationView implements OnInit {
       location: ['', []],
       description: ['', []],
       instruments: ['', []],
-      subscriptionPrice: ['', [Validators.required]]
+      subscriptionPrice: ['', [Validators.required]],
+      genres: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -101,6 +104,7 @@ export class ProfileModificationView implements OnInit {
       password: this.passModification,
       imageSource: this.imageModification,
       location: this.locModification,
+      genres: this.genreModification,
       socialNetworks: this.checkNetworks(),
       description: this.descriptionModification,
       instruments: this.instrumentsModification,
@@ -122,6 +126,7 @@ export class ProfileModificationView implements OnInit {
     if (this.modificationForm.value.description !== ''){ this.descriptionModification = this.modificationForm.value.description; }
     if (this.modificationForm.value.instruments !== ''){ this.instrumentsModification = this.modificationForm.value.instruments; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.subsModification = this.modificationForm.value.subscriptionPrice; }
+    if (this.modificationForm.value.genres !== ''){ this.genreModification = this.stringToGenresM(); }
   }
 
   changeView(): void {
@@ -147,5 +152,10 @@ export class ProfileModificationView implements OnInit {
     }
 
     return [this.instaNetwork, this.spotifyNetwork, this.twitterNetwork];
+  }
+
+  stringToGenresM(): Genre[]{
+    const genreString = this.modificationForm.value.genre;
+    return genreString.split(', ');
   }
 }

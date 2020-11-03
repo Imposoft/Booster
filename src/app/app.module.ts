@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ExampleComponentComponent} from '../components/example-component/example-component.component';
 import {HomeView} from '../views/home/home.view';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -41,7 +40,6 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
   declarations: [
     /**  COMPONENTS  */
     AppComponent,
-    ExampleComponentComponent,
     RegisterProfileComponent,
 
         /** VIEWS */

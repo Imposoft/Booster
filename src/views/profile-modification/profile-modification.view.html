@@ -4,7 +4,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="Nombre" formControlName="name">
+      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="name" formControlName="name">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -32,7 +32,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="imageurl" formControlName="imageurl">
+      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="image url" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -63,6 +63,13 @@
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Generos</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.genres.toString()}}" aria-label="genres" placeHolder="Formato: Rock, Pop..." formControlName="genres">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon" style="width:9vw">Instrumentos</span>
       </div>
       <input class="form-control" value="{{(profile | async)?.instruments}}" aria-label="instruments" formControlName="instruments">
@@ -72,7 +79,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:12.5vw" >Precio de suscripcion</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.subscriptionPrice}}" aria-label="Precio suscripcion (€)" formControlName="subscriptionPrice" >
+      <input class="form-control" value="{{(profile | async)?.subscriptionPrice}}" aria-label="subscription price" formControlName="subscriptionPrice" >
       <span class="input-group-text" style="width:2.5vw">€</span>
     </div>
 
@@ -80,7 +87,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" value="{{(profile | async)?.description}}"></textarea>
+      <textarea class="form-control" rows="5" aria-label="description" formControlName="description" value="{{(profile | async)?.description}}"></textarea>
     </div>
 
   </form>

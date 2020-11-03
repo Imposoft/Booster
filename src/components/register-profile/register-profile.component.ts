@@ -8,6 +8,7 @@ import {Band} from '../../models/band/band.model';
 import { Fan } from 'src/models/fan/fan.model';
 import {Router} from '@angular/router';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {Genre} from '../../models/genre/genre.model';
 
 
 @Component({
@@ -83,7 +84,7 @@ export class RegisterProfileComponent implements OnInit {
         imageSource: this.secondFormGroup.value.imageurl,
         phone: this.secondFormGroup.value.phone,
         description: this.thirdFormGroupMusician.value.description,
-        genres: [{name: this.thirdFormGroupMusician.value.genre}],
+        genres: this.stringToGenresM(),
         location: this.thirdFormGroupMusician.value.location,
         socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
@@ -145,7 +146,7 @@ export class RegisterProfileComponent implements OnInit {
         phone: this.secondFormGroup.value.phone,
         members: [user1, user2, user3],
         description: this.thirdFormGroupBand.value.description,
-        genres: [{name: this.thirdFormGroupBand.value.genre}],
+        genres: this.stringToGenresB(),
         location: this.thirdFormGroupBand.value.location,
         socialNetworks: SocialNetworkEnum.INSTRAGRAM,
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
@@ -161,5 +162,14 @@ export class RegisterProfileComponent implements OnInit {
   changeView(): void {
     this.successMessage = '';
     this.route.navigate(['/home']);
+  }
+
+  stringToGenresM(): Genre[]{
+    const genreString = this.thirdFormGroupMusician.value.genre;
+    return genreString.split(', ');
+  }
+  stringToGenresB(): Genre[]{
+    const genreString = this.thirdFormGroupBand.value.genre;
+    return genreString.split(', ');
   }
 }
