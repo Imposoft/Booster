@@ -22,10 +22,18 @@ export class ProfileView implements OnInit {
           console.log(params);
           this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + params.id);
           this.pathId = params.id;
+          this.printedProfile.valueChanges().subscribe((musician) => {
+            console.log(musician);
+            this.profile = musician;
+          });
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
           this.pathId = 'IfcscpI7GL2pFaZKEccf';
+          this.printedProfile.valueChanges().subscribe((musician) => {
+            console.log(musician);
+            this.profile = musician;
+          });
         }
       }
     );
