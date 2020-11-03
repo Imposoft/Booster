@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {UserDetails} from '../../models/userDetails/user-details.model';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Band} from '../../models/band/band.model';
 
 @Component({
   selector: 'app-tutorial-listing',
@@ -13,14 +15,24 @@ export class UserTutorialListingView implements OnInit {
   singleClass: Tutorial;
   secondClass: Tutorial;
   tutorialOwner: UserDetails;
-  constructor() {
-    this.tutorialOwner = {
-      contact: '1231231312',
-      id: 'asdadsada',
-      imageurl: 'assets/fan/avatar-man.jpg',
-      name: 'Pepe'
-    };
-    this.singleClass = {
+
+  printedProfileOwner: any;
+  printedProfileSubscriber: any;
+  classListings: any;
+
+  constructor(firestore: AngularFirestore) {
+    this.printedProfileOwner = firestore.doc<Band>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
+    this.printedProfileOwner.valueChanges().subscribe((fanProfile) => {
+      console.log(fanProfile);
+      this.tutorialOwner = fanProfile;
+    });
+
+    this.classListings = firestore.collection('tutorialPosts');
+    this.classListings.valueChanges().subscribe((classList) => {
+      console.log(classList);
+      this.classList = classList;
+    });
+    /*this.singleClass = {
       body: 'Cuerpo de la clase',
       exclusive: false,
       imgUrl: 'assets/class/guitarclass.jpg',
@@ -44,7 +56,7 @@ export class UserTutorialListingView implements OnInit {
         {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}],
       owner: this.tutorialOwner
     };
-    this.classList = [this.singleClass , this.secondClass];
+    this.classList = [this.singleClass , this.secondClass];*/
   }
 
   ngOnInit(): void {
