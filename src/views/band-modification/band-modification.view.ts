@@ -32,6 +32,7 @@ export class BandModificationView implements OnInit {
   private instaNetwork: any;
   private spotifyNetwork: any;
   private twitterNetwork: any;
+  private membersOfBand: any;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router,
               private route: ActivatedRoute) {
@@ -42,8 +43,8 @@ export class BandModificationView implements OnInit {
         this.path = 'bandProfile/' + params.id;
       } else {
         console.log(params);
-        this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
-        this.path = 'bandProfile/CBaWe62HROxtyWDY050Y';
+        this.printedProfile = firestore.doc<Band>('bandProfiles/n6ZhZ1TJI7iayJS4GQrc');
+        this.path = 'bandProfile/n6ZhZ1TJI7iayJS4GQrc';
       }
     });
     this.profile = this.printedProfile.valueChanges();
@@ -60,6 +61,7 @@ export class BandModificationView implements OnInit {
       this.descModification = value.description;
       this.subsModification = value.subscriptionPrice;
       this.genreModification = value.genres;
+      this.membersOfBand = value.members;
 
       if (value.socialNetworks === undefined) {
         this.instaModification = '';
@@ -106,7 +108,7 @@ export class BandModificationView implements OnInit {
       imageSource: this.imageModification,
       location: this.locModification,
       password: this.psswModification,
-      members: this.modificationForm.value.members,
+      members: this.membersOfBand,
       description: this.descModification,
       genres: this.genreModification,
       socialNetworks: this.checkNetworks(),
