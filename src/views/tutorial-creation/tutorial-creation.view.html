@@ -22,7 +22,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control"  aria-label="Imagen" formControlName="imageUrl">
+      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imageUrl">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -34,12 +34,10 @@
   </form>
 </div>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+  <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
   <a [routerLink]="'/profile'">
-    <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Cancelar </button>
+    <button class="btn btn-outline-primary m-1" >Cancelar</button>
   </a>
-</div>
-<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-  <button class="btn btn-outline-primary" (click)="sendForm()">Guardar</button>
 </div>
 
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
