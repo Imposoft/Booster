@@ -5,9 +5,9 @@ import {Musician} from '../../models/musician/musician.model';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Band} from '../../models/band/band.model';
-import { Fan } from 'src/models/fan/fan.model';
+import {Fan} from 'src/models/fan/fan.model';
 import {Router} from '@angular/router';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {Genre} from '../../models/genre/genre.model';
 
 
@@ -29,6 +29,8 @@ export class RegisterProfileComponent implements OnInit {
   fanProfiles;
   bandProfiles;
 
+  socialNetworksTemplate: SocialNetworks[];
+
   successMessage = '';
   private _success = new Subject<string>();
 
@@ -36,6 +38,17 @@ export class RegisterProfileComponent implements OnInit {
     this.musicianProfiles = afs.collection<Musician>('musicianProfiles');
     this.fanProfiles = afs.collection<Fan>('fanProfiles');
     this.bandProfiles = afs.collection<Band>('bandProfiles');
+
+    this.socialNetworksTemplate = [{
+      url: '',
+      socialNetwork: SocialNetworkEnum.INSTRAGRAM
+    }, {
+      url: '',
+      socialNetwork: SocialNetworkEnum.SPOTIFY
+    }, {
+      url: '',
+      socialNetwork: SocialNetworkEnum.TWITTER
+    }];
   }
 
   ngOnInit(): void {
@@ -86,7 +99,7 @@ export class RegisterProfileComponent implements OnInit {
         description: this.thirdFormGroupMusician.value.description,
         genres: this.stringToGenresM(),
         location: this.thirdFormGroupMusician.value.location,
-        socialNetworks: SocialNetworkEnum.INSTRAGRAM,
+        socialNetworks: this.socialNetworksTemplate,
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
       };
       this.musicianProfiles.add(musician);
@@ -97,7 +110,8 @@ export class RegisterProfileComponent implements OnInit {
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         imageSource: this.secondFormGroup.value.imageurl,
-        phone: this.secondFormGroup.value.phone
+        phone: this.secondFormGroup.value.phone,
+        socialNetworks: this.socialNetworksTemplate
       };
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
@@ -148,7 +162,7 @@ export class RegisterProfileComponent implements OnInit {
         description: this.thirdFormGroupBand.value.description,
         genres: this.stringToGenresB(),
         location: this.thirdFormGroupBand.value.location,
-        socialNetworks: SocialNetworkEnum.INSTRAGRAM,
+        socialNetworks: this.socialNetworksTemplate,
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
       };
       this.bandProfiles.add(band);

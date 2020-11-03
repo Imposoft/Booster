@@ -79,6 +79,9 @@ export class FanModificationView implements OnInit {
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
+      urlInsta: ['', []],
+      urlSpotify: ['', []],
+      urlTwitter: ['', []],
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(

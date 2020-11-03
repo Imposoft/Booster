@@ -87,7 +87,10 @@ export class ProfileModificationView implements OnInit {
       description: ['', []],
       instruments: ['', []],
       subscriptionPrice: ['', [Validators.required]],
-      genres: ['', [Validators.required]]
+      genres: ['', [Validators.required]],
+      urlInsta: ['', []],
+      urlSpotify: ['', []],
+      urlTwitter: ['', []],
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
