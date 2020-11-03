@@ -26,7 +26,7 @@ export class TutorialCreationView implements OnInit {
       title: ['', [Validators.required]],
       description: ['', []],
       price: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -37,9 +37,13 @@ export class TutorialCreationView implements OnInit {
   sendForm(): void {
     const tutorial = {
       title: this.modificationForm.value.title,
-      description: this.modificationForm.value.description,
+      body: this.modificationForm.value.description,
       price: this.modificationForm.value.price,
-      imaUrl: this.modificationForm.value.imageUrl,
+      imgUrl: this.modificationForm.value.imageUrl,
+      promoted: false,
+      exclusive: false,
+      owner: null,
+      userWaitList: []
     };
     this.tutorialPosts.add(tutorial);
     this._success.next('Clase creada con exito!');

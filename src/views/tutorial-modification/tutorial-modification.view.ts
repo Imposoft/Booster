@@ -29,7 +29,8 @@ export class TutorialModificationView implements OnInit {
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      userWaitList: ['', [Validators.required]]
+      userWaitList: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -40,9 +41,13 @@ export class TutorialModificationView implements OnInit {
   sendForm(): void {
     const tutorial = {
       title: this.modificationForm.value.title,
-      description: this.modificationForm.value.description,
+      body: this.modificationForm.value.description,
       price: this.modificationForm.value.price,
-      userWaitList: this.modificationForm.value.userWaitList
+      userWaitList: this.modificationForm.value.userWaitList,
+      imgUrl: this.modificationForm.value.imageUrl,
+      promoted: false,
+      exclusive: false,
+      owner: null
     };
     this.printedTutorial.update(tutorial)
       .catch(error => console.log(error));
