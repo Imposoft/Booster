@@ -159,6 +159,6 @@ export class BandModificationView implements OnInit {
 
   stringToGenresB(): Genre[]{
     const genreString = this.modificationForm.value.genres;
-    return genreString.split(', ');
+    return genreString.split(',');
   }
 }
