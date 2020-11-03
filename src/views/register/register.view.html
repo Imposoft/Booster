@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center mt-3">
+  <div class="card" style="width: 50vw">
+    <div class="card-body">
+      <h2 class="card-title" *ngIf="!showingLogin">Registro:</h2>
+      <h2 class="card-title" *ngIf="showingLogin">Iniciar sesion:</h2>
+      <p class="card-text">
+        <app-register-profile *ngIf="!showingLogin"></app-register-profile>
+        <app-login-user *ngIf="showingLogin"></app-login-user>
+      </p>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-between p-1" *ngIf="!showingLogin">
+        <h3 class="d-flex align-self-center m-1"><b>¿Ya tienes una cuenta?</b></h3>
+        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Inicia Sesion</button>
+      </div>
+      <div class="d-flex justify-content-between p-1" *ngIf="showingLogin">
+        <h3 class="d-flex align-self-center m-1"><b>¿Todavia no tienes una cuenta?</b></h3>
+        <button class="d-flex flex-row-reverse btn btn-outline-primary m-2" (click)="toggleLogin()">Registrate</button>
+      </div>
+
+    </div>
+  </div>
+</div>

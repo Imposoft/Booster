@@ -1,0 +1,10 @@
+<div class="d-block-flex justify-content-center">
+  <app-class-checker class="d-flex justify-content-center mt-2" *ngFor="let class of classList" [classInput]="class">
+      <button class="btn btn-danger m-2" (click)="deleteClass(class)">Eliminar</button>
+  </app-class-checker>
+</div>
+<div class="d-flex align-items-end flex-column p-2">
+<a [routerLink]="'/profile'">
+  <button class="btn btn-outline-primary m-2"> Atrás </button>
+</a>
+</div>

@@ -1,0 +1,41 @@
+<div class="container-fluid d-flex justify-content-center bg-light">
+  <div class="row bg-white" style="width:90vw">
+    <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+      <img [src]="(profile | async)?.imageSource" alt="Imagen de perfil" style="max-width: 200px">
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <h1>{{(profile | async)?.name}}</h1>
+          <h3>Contacto: {{(profile | async)?.phone}}</h3>
+          <br>
+          <h2>Instrumentos: {{(profile | async)?.instruments.toString()}}</h2>
+
+          <app-social-links class="m-1" [socialNetworks]="(profile | async)?.socialNetworks"></app-social-links>
+        </div>
+      </div>
+    </div>
+    <div *ngFor= "let genre of profile.genres" class="d-inline-flex m-1"><h2 class="m-0"><span class="badge badge-primary">{{genre.name}}</span></h2></div>
+
+    <br>
+    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight">
+      <a [routerLink]="['/profileModification',pathId]">
+        <button class="btn btn-outline-primary m-2"> Modificar Perfil</button>
+      </a>
+      <br>
+      <a [routerLink]="'/tutorialCreation'">
+        <button class="btn btn-outline-primary m-2"> Crear clase particular</button>
+      </a>
+      <a [routerLink]="'/userTutorialListing'">
+        <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button>
+      </a>
+    </div>
+
+    <br> <br>
+    <div class="d-flex justify-content-center p-3">
+      <h2>{{(profile | async)?.description}}</h2>
+    </div>
+  </div>
+</div>
+<!-- TODO Add Map Component -->

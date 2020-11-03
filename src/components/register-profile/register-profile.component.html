@@ -1,0 +1,153 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Tipo de perfil</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Dinos quien eres</mat-label>
+        <mat-select [(value)]="selected" formControlName="profileRole">
+          <mat-option></mat-option>
+          <!-- TODO Segun la opcion poner un texto de descripcion distinto -->
+          <mat-option value="fan">Aficionado</mat-option>
+          <mat-option value="musician">Musico</mat-option>
+          <mat-option value="band">Banda</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Datos basicos">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value!='band')">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Antonio" formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value=='band')">
+        <mat-label>Nombre de la banda</mat-label>
+        <input matInput placeholder="Nombre Banda" formControlName="name" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="usuario@email.com" formControlName="email" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="*******" type="password" formControlName="password" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Imagen</mat-label>
+        <input matInput placeholder="En formato jpg y png" formControlName="imageurl" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Telefono</mat-label>
+        <input matInput placeholder="999888777" formControlName="phone" required>
+      </mat-form-field>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" label="Datos avanzados">
+    <form [formGroup]="thirdFormGroupMusician" *ngIf="(firstFormGroup.get('profileRole').value=='musician')">
+      <!-- TODO Encontrar coordenadas con una direccion -->
+      <mat-form-field>
+        <mat-label>Ubicacion:</mat-label>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Descripcion:</mat-label>
+        <input matInput formControlName="description" placeholder="Date a conecer!" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Precio suscripcion:</mat-label>
+        <input matInput formControlName="subscriptionPrice" placeholder="En €" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Genero:</mat-label>
+        <input matInput formControlName="genre" placeholder="Pop, Rock..." required>
+      </mat-form-field><br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+    <form [formGroup]="thirdFormGroupBand" *ngIf="(firstFormGroup.get('profileRole').value=='band')">
+      <!-- TODO Encontrar coordenadas con una direccion -->
+      <mat-form-field>
+        <mat-label>Ubicacion banda:</mat-label>
+        <input matInput formControlName="location" placeholder="Ex. 1 Gran Via, Valencia, 46001" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Descripcion:</mat-label>
+        <input matInput formControlName="description" placeholder="Date a conecer!">
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Precio suscripcion:</mat-label>
+        <input matInput formControlName="subscriptionPrice" placeholder="En €" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Genero:</mat-label>
+        <input matInput formControlName="genre" placeholder="Pop, Rock..." required>
+      </mat-form-field><br>
+      <div>Miembro 1:</div>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Miembro 1" formControlName="member1Name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Imagen</mat-label>
+        <input matInput placeholder="Miembros 1 imagen" formControlName="member1Url" >
+      </mat-form-field>
+      <div>Miembro 2:</div>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Miembro 2" formControlName="member2Name" >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Imagen</mat-label>
+        <input matInput placeholder="Miembro 2 imagen" formControlName="member2Url" >
+      </mat-form-field>
+      <div>Miembro 3:</div>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Miembro 3" formControlName="member3Name" >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Imagen</mat-label>
+        <input matInput placeholder="Miembro 3 imagen" formControlName="member3Url" >
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+    <form [formGroup]="thirdFormGroupMusician" *ngIf="(firstFormGroup.get('profileRole').value=='fan')">
+      <div>
+        <p>No hay mas campos a rellenar ;P </p><br>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+  </mat-step>
+  <!--
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  -->
+</mat-horizontal-stepper>
+<ngb-alert *ngIf="successMessage" type="success" (close)="changeView()">{{ successMessage }}</ngb-alert>

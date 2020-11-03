@@ -1,0 +1,15 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">
+    <img src="assets/icon/booster.png" width="120" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <a [routerLink]="'/profile'"><button type="button" class="btn btn-outline-light m-1">Perfil</button></a>
+    <a [routerLink]="'/bandProfile'"><button type="button" class="btn btn-outline-light m-1">Perfil Banda</button></a>
+    <a [routerLink]="'/fanProfile'"><button type="button" class="btn btn-outline-light m-1">Perfil Aficionado</button></a>
+    <a [routerLink]="'/tutorial'"><button type="button" class="btn btn-outline-light m-1">Clases particulares</button></a>
+  </div>
+  <div>
+    <a [routerLink]="'/register'"><button type="button" class="btn btn-outline-light m-1 mr-3">Inicio de sesion</button></a>
+    <img src="assets/fan/avatar-man.jpg" alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+  </div>
+</nav>
