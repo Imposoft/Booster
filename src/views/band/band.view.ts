@@ -27,16 +27,16 @@ export class BandView implements OnInit {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
           this.pathId = params.id;
-          this.printedProfile.valueChanges().subscribe((tutorial) => {
-            console.log(tutorial);
-            this.profile = tutorial;
+          this.printedProfile.valueChanges().subscribe((band) => {
+            console.log(band);
+            this.profile = band;
           });
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
           this.pathId = 'CBaWe62HROxtyWDY050Y';
-          this.printedProfile.valueChanges().subscribe(tutorial => {
-            this.profile = tutorial;
+          this.printedProfile.valueChanges().subscribe(band => {
+            this.profile = band;
           });
         }
       }
