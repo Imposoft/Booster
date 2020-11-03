@@ -20,10 +20,10 @@
     <br> <br>
     <div class="card p-1 col-md-2" style="width: 18rem;">
       <div class="card-body">
-        <img class="card-img" [src]="tutorialOwner.imageurl" alt="Imagen de perfil" style="max-width: 75px">
+        <img class="card-img" [src]="tutorialOwner.imageSource" alt="Imagen de perfil" style="max-width: 75px">
         <h5 class="card-title">Profesor/a: <b>{{tutorialOwner.name}}</b></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Contacto: <b>{{tutorialOwner.contact}}</b></h6>
-        <a [routerLink]="['/profile', tutorialOwner.id]" class="card-link">Perfil del musico</a>
+        <h6 class="card-subtitle mb-2 text-muted">Contacto: <b>{{tutorialOwner.phone}}</b></h6>
+        <a [routerLink]="['/profile', pathId]" class="card-link">Perfil del musico</a>
         <!--<a [routerLink]="'profile/FVgBtsJlkRl0qZU4VaiW'" class="card-link">Perfil del musico</a>-->
       </div>
     </div>
