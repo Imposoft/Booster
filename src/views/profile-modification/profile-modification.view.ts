@@ -158,7 +158,7 @@ export class ProfileModificationView implements OnInit {
   }
 
   stringToGenresM(): Genre[]{
-    const genreString = this.modificationForm.value.genre;
+    const genreString = this.modificationForm.value.genres;
     return genreString.split(', ');
   }
 }

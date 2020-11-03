@@ -37,7 +37,6 @@ export class ProfileView implements OnInit {
         }
       }
     );
-    this.profile = this.printedProfile.valueChanges();
   }
 
   ngOnInit(): void {
