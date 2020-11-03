@@ -5,6 +5,7 @@ import {debounceTime} from 'rxjs/operators';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {UserDetails} from '../../models/userDetails/user-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-tutorial',
@@ -13,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class TutorialView implements OnInit {
   tutorialPost: Tutorial;
-  tutorialOwner: UserDetails;
+  tutorialOwner: Musician;
   fanDetails: UserDetails;
 
 
@@ -46,10 +47,16 @@ export class TutorialView implements OnInit {
         }
       }
     );
+    this.printedProfile = afs.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
+    this.pathId = 'IfcscpI7GL2pFaZKEccf';
+    this.printedProfile.valueChanges().subscribe((musician) => {
+      console.log(musician);
+      this.tutorialOwner = musician;
+    });
   }
 
   ngOnInit(): void {
-    this.tutorialOwner = {
+    this.fanDetails = {
       contact: '1231231312',
       id: 'IfcscpI7GL2pFaZKEccf',
       imageurl: 'https://image.freepik.com/free-vector/woman-avatar-profile-round-icon_24640-14042.jpg',
@@ -64,7 +71,7 @@ export class TutorialView implements OnInit {
 
   applyForTutorial(): void{
     // TODO Change for logged user
-    this.tutorialPost.userWaitList.push(this.tutorialOwner);
+    this.tutorialPost.userWaitList.push(this.fanDetails);
     this.printedProfile.update(this.tutorialPost);
     this._success.next('Reserva solicitada con exito! ');
   }
