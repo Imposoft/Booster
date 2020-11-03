@@ -51,9 +51,9 @@ export class TutorialView implements OnInit {
   ngOnInit(): void {
     this.tutorialOwner = {
       contact: '1231231312',
-      id: 'FVgBtsJlkRl0qZU4VaiW',
-      imageurl: 'https://image.freepik.com/free-vector/man-avatar-profile-round-icon_24640-14044.jpg',
-      name: 'Pepe'
+      id: 'IfcscpI7GL2pFaZKEccf',
+      imageurl: 'https://image.freepik.com/free-vector/woman-avatar-profile-round-icon_24640-14042.jpg',
+      name: 'Juan Carlos'
     };
 
     this._success.subscribe(message => this.successMessage = message);
