@@ -7,7 +7,7 @@ import {Tutorial} from '../tutorial/tutorial.model';
 
 export class Musician extends Profile{
   description?: string;
-  genres: [Genre];
+  genres: Genre[];
   subscriptionPrice: number;
   tutorials?: [Tutorial];
   instruments: [Instrument];

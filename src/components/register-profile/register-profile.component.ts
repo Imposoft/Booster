@@ -30,6 +30,7 @@ export class RegisterProfileComponent implements OnInit {
   bandProfiles;
 
   socialNetworksTemplate: SocialNetworks[];
+  genresTemplate: Genre[] = [];
 
   successMessage = '';
   private _success = new Subject<string>();
@@ -178,12 +179,21 @@ export class RegisterProfileComponent implements OnInit {
     this.route.navigate(['/home']);
   }
 
-  stringToGenresM(): Genre[]{
-    const genreString = this.thirdFormGroupMusician.value.genre;
-    return genreString.split(', ');
-  }
   stringToGenresB(): Genre[]{
     const genreString = this.thirdFormGroupBand.value.genre;
-    return genreString.split(', ');
+    for (const entry of genreString.split(', ')) {
+      console.log(entry);
+      this.genresTemplate.push({name: entry});
+    }
+    return this.genresTemplate;
+  }
+
+  stringToGenresM(): Genre[]{
+    const genreString = this.thirdFormGroupMusician.value.genre;
+    for (const entry of genreString.split(', ')) {
+      console.log(entry);
+      this.genresTemplate.push({name: entry});
+    }
+    return this.genresTemplate;
   }
 }

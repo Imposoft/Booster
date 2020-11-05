@@ -38,13 +38,19 @@ export class FanModificationView implements OnInit {
           console.log(params);
           this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
           this.path = 'fanProfile/' + params.id;
+          this.printedProfile.valueChanges().subscribe((fan) => {
+            console.log(fan);
+            this.profile = fan;
+          });
         } else {
           console.log(params);
           this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
           this.path = 'fanProfile/NKUHb5YBHaCDQmSpWUFh';
+          this.printedProfile.valueChanges().subscribe(fan => {
+            this.profile = fan;
+          });
         }
       });
-    this.profile = this.printedProfile.valueChanges();
   }
 
 

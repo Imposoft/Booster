@@ -9,7 +9,7 @@
           <br>
           <h1>{{profile.name}}</h1>
           <h3>Contacto: {{profile.phone}}</h3>
-          <div *ngFor= "let genre of profile.genres" class="d-inline-flex m-1"><h2 class="m-0"><span class="badge badge-primary">{{genre}}</span></h2></div>
+          <div *ngFor= "let genre of profile.genres" class="d-inline-flex m-1"><h2 class="m-0"><span class="badge badge-primary">{{genre.name}}</span></h2></div>
 
           <app-social-links class="m-1" [socialNetworks]="profile.socialNetworks"></app-social-links>
         </div>

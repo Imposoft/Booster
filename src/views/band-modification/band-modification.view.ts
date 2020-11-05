@@ -41,41 +41,47 @@ export class BandModificationView implements OnInit {
         console.log(params);
         this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
         this.path = 'bandProfile/' + params.id;
+        this.printedProfile.valueChanges().subscribe((band) => {
+          console.log(band);
+          this.profile = band;
+        });
       } else {
         console.log(params);
         this.printedProfile = firestore.doc<Band>('bandProfiles/n6ZhZ1TJI7iayJS4GQrc');
         this.path = 'bandProfile/n6ZhZ1TJI7iayJS4GQrc';
+        this.printedProfile.valueChanges().subscribe((band) => {
+          this.profile = band;
+        });
       }
     });
-    this.profile = this.printedProfile.valueChanges();
   }
 
   ngOnInit(): void {
-    this.profile.subscribe(value => {
-      this.nameModification = value.name;
-      this.phoneModification = value.phone;
-      this.emailModification = value.email;
-      this.psswModification = value.password;
-      this.imageModification = value.imageSource;
-      this.locModification = value.location;
-      this.descModification = value.description;
-      this.subsModification = value.subscriptionPrice;
-      this.genreModification = value.genres;
-      this.membersOfBand = value.members;
+    this.profile.subscribe((band) => {
+      this.nameModification = band.name;
+      this.phoneModification = band.phone;
+      this.emailModification = band.email;
+      this.psswModification = band.password;
+      this.imageModification = band.imageSource;
+      this.locModification = band.location;
+      this.descModification = band.description;
+      this.subsModification = band.subscriptionPrice;
+      this.genreModification = band.genres;
+      this.membersOfBand = band.members;
 
-      if (value.socialNetworks === undefined) {
+      if (band.socialNetworks === undefined) {
         this.instaModification = '';
         this.spotifyModification = '';
         this.twitterModification = '';
       } else {
-        if (value.socialNetworks[0].url !== undefined) {
-          this.instaModification = value.socialNetworks[0].url;
+        if (band.socialNetworks[0].url !== undefined) {
+          this.instaModification = band.socialNetworks[0].url;
         }
-        if (value.socialNetworks[1].url !== undefined) {
-          this.spotifyModification = value.socialNetworks[1].url;
+        if (band.socialNetworks[1].url !== undefined) {
+          this.spotifyModification = band.socialNetworks[1].url;
         }
-        if (value.socialNetworks[2].url !== undefined) {
-          this.twitterModification = value.socialNetworks[2].url;
+        if (band.socialNetworks[2].url !== undefined) {
+          this.twitterModification = band.socialNetworks[2].url;
         }}
     });
     this.modificationForm = this.formBuilder.group({
@@ -159,6 +165,14 @@ export class BandModificationView implements OnInit {
 
   stringToGenresB(): Genre[]{
     const genreString = this.modificationForm.value.genres;
-    return genreString.split(',');
+    return genreString.split(', ');
+  }
+
+  genresToString(): string{
+    let result = '';
+    for (const genre of this.genreModification) {
+      result += genre.name + ', ';
+    }
+    return result;
   }
 }
