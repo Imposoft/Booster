@@ -12,7 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   styleUrls: ['./news.view.sass']
 })
 export class NewsView implements OnInit {
-  posts;
+  news;
   modificationForm: FormGroup;
 
   exclusive = false;
@@ -22,12 +22,34 @@ export class NewsView implements OnInit {
   successMessage = '';
 
   constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
-    this.posts = afs.collection<Post>('posts');
+    this.news = afs.collection<Post>('posts');
   }
 
   ngOnInit(): void {
+    this.modificationForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      imgUrl: ['', [Validators.required]],
+      body: ['', []],
+      exclusive: ['', [Validators.required]],
+      promoted: ['', [Validators.required]],
+      owner: ['', [Validators.required]]
+    });
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = '');
   }
 
   sendForm(): void {
+    const post = {
+      title: this.modificationForm.value.title,
+      imgUrl: this.modificationForm.value.imageUrl,
+      body: this.modificationForm.value.description,
+      exclusive: this.modificationForm.value.exclusive,
+      promoted: this.modificationForm.value.promoted,
+      owner: null,
+    };
+    this.news.add(post);
+    this._success.next('Noticia creada con exito!');
   }
 }
