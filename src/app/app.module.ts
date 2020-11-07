@@ -35,6 +35,7 @@ import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutor
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 import {LoginUserComponent} from '../components/login-user/login-user.component';
 import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
+import {PostView} from '../views/post/post.view';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
         UserTutorialListingView,
         TutorialCreationView,
         LoginUserComponent,
-        ProfileModificationView
+        ProfileModificationView,
+        PostView
   ],
   imports: [
     BrowserModule,
