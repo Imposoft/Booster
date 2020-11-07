@@ -1,11 +1,10 @@
 <div class="container-fluid p-2">
   <form [formGroup]="modificationForm">
-
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" style="width:9vw">Texto</span>
+        <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" placeholder="Texto..."></textarea>
+      <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title">
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
@@ -13,13 +12,17 @@
       </div>
       <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imageUrl">
     </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="width:9vw">Cuerpo</span>
+      </div>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" placeholder="Texto..."></textarea>
+    </div>
   </form>
 </div>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
   <button class="btn btn-outline-primary m-1" (click)="sendForm()">Publicar</button>
-  <a [routerLink]="'/profile'">
-    <button class="btn btn-outline-primary m-1" >Cancelar</button>
-  </a>
+  <a [routerLink]="'/profile'"><button class="btn btn-outline-primary m-1" >Cancelar</button></a>
 </div>
 
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>

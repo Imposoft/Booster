@@ -35,7 +35,8 @@ import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutor
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 import {LoginUserComponent} from '../components/login-user/login-user.component';
 import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
-import {PostView} from '../views/post/post.view';
+import {NewsView} from '../views/news/news.view';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import {PostView} from '../views/post/post.view';
         TutorialCreationView,
         LoginUserComponent,
         ProfileModificationView,
-        PostView
+        NewsView
   ],
   imports: [
     BrowserModule,
@@ -78,7 +79,8 @@ import {PostView} from '../views/post/post.view';
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,21 +3,26 @@ import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
-import {Tutorial} from '../../models/tutorial/tutorial.model';
+import {Post} from '../../models/post/post.model';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.view.html',
-  styleUrls: ['./post.view.sass']
+  selector: 'app-news',
+  templateUrl: './news.view.html',
+  styleUrls: ['./news.view.sass']
 })
-export class PostView implements OnInit {
-
+export class NewsView implements OnInit {
+  posts;
   modificationForm: FormGroup;
+
+  checked = false;
+  indeterminate = false;
 
   private _success = new Subject<string>();
   successMessage = '';
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
+    this.posts = afs.collection<Post>('posts');
+  }
 
   ngOnInit(): void {
   }
