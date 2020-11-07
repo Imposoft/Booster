@@ -12,6 +12,10 @@
       </div>
       <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imageUrl">
     </div>
+    <div>
+      <mat-checkbox class="mat-checkbox" style="margin: 20px" color='primary' [(ngModel)]="exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" color='primary' [(ngModel)]="promoted">Promoted</mat-checkbox>
+    </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Cuerpo</span>

@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Post} from '../../models/post/post.model';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-news',
@@ -14,8 +15,8 @@ export class NewsView implements OnInit {
   posts;
   modificationForm: FormGroup;
 
-  checked = false;
-  indeterminate = false;
+  exclusive = false;
+  promoted = false;
 
   private _success = new Subject<string>();
   successMessage = '';
