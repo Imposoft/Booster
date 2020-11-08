@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login-user',
@@ -9,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class LoginUserComponent implements OnInit {
   registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public auth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -19,7 +20,15 @@ export class LoginUserComponent implements OnInit {
   }
 
   logIn(): void {
-    console.warn(this.registrationForm.value.email);
-    console.warn(this.registrationForm.value.password);
+    this.auth
+      .signInWithEmailAndPassword(this.registrationForm.value.email, this.registrationForm.value.password)
+      .then(value => {
+        console.log(value.user.photoURL);
+        console.log(value.user.uid);
+        console.log('Nice, it worked!');
+      })
+      .catch(err => {
+        console.log('Something went wrong:', err.message);
+      });
   }
 }

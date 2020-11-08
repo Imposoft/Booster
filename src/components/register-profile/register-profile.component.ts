@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFirestore} from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {Musician} from '../../models/musician/musician.model';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
@@ -35,7 +36,7 @@ export class RegisterProfileComponent implements OnInit {
   successMessage = '';
   private _success = new Subject<string>();
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore, private route: Router) {
+  constructor(private formBuilder: FormBuilder, public afs: AngularFirestore, private route: Router, public fireauth: AngularFireAuth) {
     this.musicianProfiles = afs.collection<Musician>('musicianProfiles');
     this.fanProfiles = afs.collection<Fan>('fanProfiles');
     this.bandProfiles = afs.collection<Band>('bandProfiles');
@@ -103,6 +104,15 @@ export class RegisterProfileComponent implements OnInit {
         socialNetworks: this.socialNetworksTemplate,
         subscriptionPrice: this.thirdFormGroupMusician.value.subscriptionPrice
       };
+      this.fireauth.createUserWithEmailAndPassword(musician.email, musician.password)
+        .then((user) => {
+          user.user.updateProfile({photoURL: 'MUSICIAN'});
+          this.afs.collection<Musician>('musicianProfiles').doc(user.user.uid)
+            .set(musician)
+            .catch(error => {
+              console.log('Something went wrong with added user to firestore: ', error);
+            });
+        });
       this.musicianProfiles.add(musician);
     } else if (this.firstFormGroup.value.profileRole  === 'fan'){
       // TODO Implement fan logic
