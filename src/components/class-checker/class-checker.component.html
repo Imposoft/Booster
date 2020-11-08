@@ -10,7 +10,7 @@
         <p class="card-text">Precio: {{classToCheck.price}}€</p>
         <div class="d-flex align-self-baseline">
           <ng-content></ng-content>
-          <a [routerLink]="'/tutorialModification'">
+          <a [routerLink]="['/tutorialModification',classToCheck.id]">
             <button class="btn btn-outline-primary m-2">Modificar</button>
           </a>
         </div>
