@@ -1,5 +1,6 @@
 <div class="container-fluid p-2">
   <form [formGroup]="modificationForm">
+
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
@@ -40,30 +41,36 @@
         <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
       </div>
       <input class="form-control" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
-
-      <div class="input-group mb-3 form-row" >
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon5" style="width:9vw">Instagram url</span>
-        </div>
-        <input class="form-control" value="{{(profile | async)?.socialNetworks[0].url}}" aria-label="Instagram" formControlName="urlInsta">
-      </div>
-      <div class="input-group mb-3 form-row">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon5" style="width:9vw">Spotify url</span>
-        </div>
-        <input class="form-control" value="{{(profile | async)?.socialNetworks[1].url}}" aria-label="Spotify" formControlName="urlSpotify">
-      </div>
-      <div class="input-group mb-3 form-row">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon5" style="width:9vw">Twitter url</span>
-        </div>
-        <input class="form-control" value="{{(profile | async)?.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
-      </div>
     </div>
+
+    <div class="input-group mb-3 form-row" >
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instagram url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[0].url}}" aria-label="Instagram" formControlName="urlInsta">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Spotify url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[1].url}}" aria-label="Spotify" formControlName="urlSpotify">
+    </div>
+
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Twitter url</span>
+      </div>
+      <input class="form-control" value="{{(profile | async)?.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
+    </div>
+
   </form>
-<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-  <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
-  <button class="btn btn-outline-primary m-1" (click)="changeView()">Cancelar</button>
-</div>
-<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+
+  <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+    <button class="btn btn-outline-primary m-1" (click)="sendForm()">Guardar</button>
+    <button class="btn btn-outline-primary m-1" (click)="changeView()">Cancelar</button>
+  </div>
+
+  <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+
 </div>

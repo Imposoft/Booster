@@ -4,5 +4,5 @@ import {UserDetails} from '../userDetails/user-details.model';
 export class Tutorial extends Post{
   price?: number;
   userWaitList: UserDetails[];
-  id: string;
+  id?: string;
 }
