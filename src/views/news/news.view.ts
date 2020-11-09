@@ -14,7 +14,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 export class NewsView implements OnInit {
   news;
   modificationForm: FormGroup;
-
   exclusive = false;
   promoted = false;
 
@@ -32,11 +31,11 @@ export class NewsView implements OnInit {
       body: ['', []],
       exclusive: ['', [Validators.required]],
       promoted: ['', [Validators.required]],
-      owner: ['', [Validators.required]]
+      owner: null,
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
   }
 
@@ -51,5 +50,9 @@ export class NewsView implements OnInit {
     };
     this.news.add(post);
     this._success.next('Noticia creada con exito!');
+  }
+
+  removeNew(): void {
+
   }
 }

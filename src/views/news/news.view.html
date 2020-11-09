@@ -5,6 +5,13 @@
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
       </div>
       <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title">
+      <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">⋮</button>
+        <div class="dropdown-menu" aria-labelledby="options">
+          <a class="dropdown-item" href="#">Compartir</a>
+          <a class="dropdown-item" href="#" (click)="removeNew()">Eliminar</a>
+        </div>
+      </div>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
