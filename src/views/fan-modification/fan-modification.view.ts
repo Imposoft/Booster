@@ -74,9 +74,9 @@ export class FanModificationView implements OnInit {
       this.modLocation = value.location;
       this.modPhone = value.phone;
       this.modSocial = [
-        new Map([['socialNetwork', 'INSTRAGRAM'], ['url', value.socialNetworks[0].url]]),
-        new Map([['socialNetwork', 'SPORITY'], ['url', value.socialNetworks[1].url]]),
-        new Map([['socialNetwork', 'TWITTER'], ['url', value.socialNetworks[2].url]])
+        {socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: value.socialNetworks[0].url},
+        {socialNetwork: SocialNetworkEnum.SPOTIFY, url: value.socialNetworks[1].url},
+        {socialNetwork: SocialNetworkEnum.TWITTER, url: value.socialNetworks[2].url},
       ];
     });
     /*this.profile.subscribe(value => {
