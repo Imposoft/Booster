@@ -37,12 +37,13 @@ import {LoginUserComponent} from '../components/login-user/login-user.component'
 import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
 import {NewsView} from '../views/news/news.view';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SocialAdderComponent} from '../components/social-adder/social-adder.component';
 
 @NgModule({
-  declarations: [
-    /**  COMPONENTS  */
-    AppComponent,
-    RegisterProfileComponent,
+    declarations: [
+        /**  COMPONENTS  */
+        AppComponent,
+        RegisterProfileComponent,
 
         /** VIEWS */
         HomeView,
@@ -61,8 +62,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         TutorialCreationView,
         LoginUserComponent,
         ProfileModificationView,
-        NewsView
-  ],
+        NewsView,
+        SocialAdderComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

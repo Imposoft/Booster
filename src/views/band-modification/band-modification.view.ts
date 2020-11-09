@@ -54,6 +54,7 @@ export class BandModificationView implements OnInit {
         });
       }
     });
+    this.profile = this.printedProfile.valueChanges();
   }
 
   ngOnInit(): void {
@@ -169,8 +170,9 @@ export class BandModificationView implements OnInit {
   }
 
   genresToString(): string{
+    const genres = this.genreModification;
     let result = '';
-    for (const genre of this.genreModification) {
+    for (const genre of genres) {
       result += genre.name + ', ';
     }
     return result;

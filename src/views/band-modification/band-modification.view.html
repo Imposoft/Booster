@@ -32,7 +32,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
       </div>
-        <input class="form-control" value="{{profile.imageSource.valueOf()}}" aria-label="image url" formControlName="imageurl">
+        <input class="form-control" value="{{profile.imageSource}}" aria-label="image url" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
@@ -65,7 +65,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon3" style="width:9vw">Generos</span>
       </div>
-      <input class="form-control" value="{{profile.genres.genresToString()}}" aria-label="genres" placeHolder="Formato: Rock, Pop..." formControlName="genres">
+      <input class="form-control" value="{{genresToString()}}" aria-label="genres" placeHolder="Formato: Rock, Pop..." formControlName="genres">
     </div>
 
     <div class="input-group mb-3 form-row">
