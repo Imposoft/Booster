@@ -17,7 +17,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class FanModificationView implements OnInit {
 
   printedProfile: any;
-  profile: any;
+  profile: Fan;
   modificationForm: FormGroup;
   path: string;
   pathId: string;
@@ -32,9 +32,9 @@ export class FanModificationView implements OnInit {
   private modLocation: any;
   private modPhone: any;
   private modSocial: any;
-  //private modSocial1: any;
-  //private modSocial2: any;
-  //private modSocial3: any;
+  // private modSocial1: any;
+  // private modSocial2: any;
+  // private modSocial3: any;
   /*private nameModification: any;
   private phoneModification: any;
   private emailModification: any;
@@ -48,7 +48,10 @@ export class FanModificationView implements OnInit {
   private spotifyNetwork: any;
   private twitterNetwork: any;*/
 
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder,
+              private firestore: AngularFirestore,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.route.params.subscribe( params => {
       if (params.id) {
         this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
@@ -59,17 +62,16 @@ export class FanModificationView implements OnInit {
         this.path = 'fanProfiles/NKUHb5YBHaCDQmSpWUFh';
         this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
       }
-      /*this.printedProfile.valueChanges().subscribe((fan) => {
+      this.printedProfile.valueChanges().subscribe((fan) => {
         console.log(fan);
         this.profile = fan;
-      });*/
-      this.profile = this.printedProfile.valueChanges();
+      });
     });
   }
 
 
   ngOnInit(): void {
-    this.profile.subscribe(value => {
+    this.printedProfile.valueChanges().subscribe(value => {
       this.modName = value.name;
       this.modEmail = value.email;
       this.modPassword = value.password;
@@ -147,6 +149,7 @@ export class FanModificationView implements OnInit {
     if (this.modificationForm.value.imageurl !== ''){ this.imageModification = this.modificationForm.value.imageurl; }
     if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
     */
+    /*
     if (this.modificationForm.value.name === ''){
       this.profile.subscribe((doc: { name: string; }) => { this.modName = doc.name; });
     } else {
@@ -192,6 +195,7 @@ export class FanModificationView implements OnInit {
     } else {
       this.modSocial[2] = {socialNetwork: SocialNetworkEnum.TWITTER, url: this.modificationForm.value.urlTwitter};
     }
+    */
   }
 
   changeView(): void {

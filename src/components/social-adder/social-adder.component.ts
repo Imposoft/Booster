@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetworkEnum, stringToSocialEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {Profile} from '../../models/profile/profile.model';
 
 @Component({
@@ -24,19 +24,19 @@ export class SocialAdderComponent implements OnInit {
       networks: new FormArray([])
     });
     this.profile = this.profileInput;
-    this.numberOfSN = 2;
+    this.numberOfSN = this.profile.socialNetworks.length;
 
     if (this.networks.length < this.numberOfSN) {
       for (let i = 0; i < this.numberOfSN; i++) {
       this.networks.push(this.formBuilder.group({
-        socialNetwork: ['', [Validators.required]], // this.profile.socialNetworks[i].socialNetwork.value,
-        url: ['', [Validators.required]] // this.profile.socialNetworks[i].url,
+        socialNetwork: this.profile.socialNetworks[i].socialNetwork, // ,
+        url: this.profile.socialNetworks[i].url // this.profile.socialNetworks[i].url,
       }));
       }
     }
   }
 
-  get form() { return this.dynamicForm.controls; }
+  get form(): any { return this.dynamicForm.controls; }
   get networks(): FormArray { return this.form.networks as FormArray; }
 
   addSocialNetwork(): void {
@@ -112,5 +112,4 @@ export class SocialAdderComponent implements OnInit {
       }
     }
   }
-
 }

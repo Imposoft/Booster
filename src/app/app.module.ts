@@ -65,7 +65,7 @@ import {NewsContainerComponent} from '../components/news-container/news-containe
         ProfileModificationView,
         NewsView,
         SocialAdderComponent,
-        NewsContainerComponent
+        NewsContainerComponent,
     ],
   imports: [
     BrowserModule,

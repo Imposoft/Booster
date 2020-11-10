@@ -5,66 +5,66 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.name}}" aria-label="name" formControlName="name">
+      <input class="form-control" [(ngModel)]="profile.name" aria-label="name" formControlName="name">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+        <span class="input-group-text" id="basic-addon2" style="width:9vw">Telefono</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.phone}}" aria-label="phone" formControlName="phone">
+      <input class="form-control" [(ngModel)]="profile.phone" aria-label="phone" formControlName="phone">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon4" style="width:9vw">Email</span>
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Email</span>
       </div>
-      <input class="form-control" type="email" value="{{(profile | async)?.email}}" aria-label="email" formControlName="email">
+      <input class="form-control" type="email" [(ngModel)]="profile.email" aria-label="email" formControlName="email">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon4" style="width:9vw">Contraseña</span>
       </div>
-      <input class="form-control" rows="1" value="{{(profile | async)?.password}}" aria-label="password" formControlName="password">
+      <input class="form-control" rows="1" [(ngModel)]="profile.password" aria-label="password" formControlName="password">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.imageSource.valueOf()}}" aria-label="image url" formControlName="imageurl">
+      <input class="form-control" [(ngModel)]="profile.imageSource" aria-label="image url" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Localizacion</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.location}}" aria-label="location" formControlName="location">
+      <input class="form-control" [(ngModel)]="profile.location" aria-label="location" formControlName="location">
     </div>
 
     <div class="input-group mb-3 form-row" >
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instagram url</span>
+        <span class="input-group-text" id="basic-addon7" style="width:9vw">Instagram url</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.socialNetworks[0].url}}" aria-label="Instagram" formControlName="urlInsta">
+      <input class="form-control" [(ngModel)]="profile.socialNetworks[0].url" aria-label="Instagram" formControlName="urlInsta">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Spotify url</span>
+        <span class="input-group-text" id="basic-addon8" style="width:9vw">Spotify url</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.socialNetworks[1].url}}" aria-label="Spotify" formControlName="urlSpotify">
+      <input class="form-control" [(ngModel)]="profile.socialNetworks[1].url" aria-label="Spotify" formControlName="urlSpotify">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Twitter url</span>
+        <span class="input-group-text" id="basic-addon9" style="width:9vw">Twitter url</span>
       </div>
-      <input class="form-control" value="{{(profile | async)?.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
+      <input class="form-control" [(ngModel)]="profile.socialNetworks[2].url" aria-label="Twitter" formControlName="urlTwitter">
     </div>
 
-    <app-social-adder [profileInput]="printedProfile"> </app-social-adder>
+    <app-social-adder [profileInput]="profile"> </app-social-adder>
 
   </form>
 
