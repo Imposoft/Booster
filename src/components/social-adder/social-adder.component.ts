@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SocialNetworkEnum, stringToSocialEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {Profile} from '../../models/profile/profile.model';
 
 @Component({
