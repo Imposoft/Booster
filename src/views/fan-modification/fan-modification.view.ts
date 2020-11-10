@@ -25,14 +25,6 @@ export class FanModificationView implements OnInit {
   private _success = new Subject<string>();
   successMessage = '';
 
-  private modName: any;
-  private modEmail: any;
-  private modPassword: any;
-  private modImage: any;
-  private modLocation: any;
-  private modPhone: any;
-  private modSocial: any;
-
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
