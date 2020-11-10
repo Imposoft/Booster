@@ -13,36 +13,33 @@ import {AngularFireAuth} from '@angular/fire/auth';
   styleUrls: ['./band.view.sass']
 })
 export class BandView implements OnInit {
-
-  profile: Band;
-  items: Observable<any[]>;
-  bandProfiles;
-  printedProfile: any;
-  pathId: string;
-  loggedId: string;
+  public profile: Band;
+  private printedProfile: any;
+  public pathId: string;
+  private loggedId: string;
 
   members: Musician[];
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+    // Perfil vacio sobre el que cargar los datos
+    this.profile = {auditions: [undefined], description: '', email: '', genres: [], imageSource: '', jobOffers: [undefined], location: '', members: [], name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
+
+    // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
         if (params.id) {
-          console.log(params);
-          this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
           this.pathId = params.id;
-          this.printedProfile.valueChanges().subscribe((band) => {
-            console.log(band);
-            this.profile = band;
-          });
         } else {
-          console.log(params);
-          this.printedProfile = firestore.doc<Band>('bandProfiles/n6ZhZ1TJI7iayJS4GQrc');
           this.pathId = 'n6ZhZ1TJI7iayJS4GQrc';
-          this.printedProfile.valueChanges().subscribe(band => {
-            this.profile = band;
-          });
         }
+        // Cargamos el perfil sobre el perfil vacio
+        this.printedProfile = firestore.doc<Band>('bandProfiles/' + this.pathId);
+        this.printedProfile.valueChanges().subscribe((band) => {
+          this.profile = band;
+        });
       }
     );
+
+    // Si hemos iniciado sesion, loggedId sera nuestro id
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.loggedId = user.uid;

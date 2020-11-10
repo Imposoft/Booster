@@ -115,7 +115,6 @@ export class RegisterProfileComponent implements OnInit {
         });
       this.musicianProfiles.add(musician);
     } else if (this.firstFormGroup.value.profileRole  === 'fan'){
-      // TODO Implement fan logic
       const fan = {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
@@ -126,7 +125,6 @@ export class RegisterProfileComponent implements OnInit {
       };
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
-      // TODO Implement band logic
       const user1 = {
         name: this.thirdFormGroupBand.value.member1Name,
         email: '',

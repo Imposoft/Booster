@@ -9,8 +9,8 @@ export class Musician extends Profile{
   description?: string;
   genres: Genre[];
   subscriptionPrice: number;
-  tutorials?: [Tutorial];
-  instruments: [Instrument];
-  jobOffers?: [JobOffer];
+  tutorials?: Tutorial[];
+  instruments: Instrument[];
+  jobOffers?: JobOffer[];
   subscription?: Subscription;
 }
