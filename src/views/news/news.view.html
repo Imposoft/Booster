@@ -16,17 +16,17 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imageUrl">
+      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' [(ngModel)]="exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' [(ngModel)]="promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="form-control-name mat-checkbox" style="margin: 10px" color='primary' [checked]="false" (change)="!exclusive" [(ngModel)]="exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="form-control-name mat-checkbox" style="margin: 10px" color='primary' [checked]="false" (change)=!promoted [(ngModel)]="promoted">Promoted</mat-checkbox>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Cuerpo</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="description" placeholder="Texto..."></textarea>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="body" placeholder="Texto..."></textarea>
     </div>
   </form>
 </div>
