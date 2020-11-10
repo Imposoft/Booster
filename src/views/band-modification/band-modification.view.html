@@ -4,68 +4,49 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Nombre</span>
       </div>
-      <input class="form-control" value="{{profile.name}}" aria-label="name" formControlName="name">
+      <input class="form-control" [value]="profile.name" aria-label="name" formControlName="name">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon2" style="width:9vw">Email</span>
       </div>
-      <input class="form-control" value="{{profile.email}}" aria-label="email" formControlName="email">
+      <input class="form-control" [value]="profile.email" aria-label="email" formControlName="email">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon4" style="width:9vw">Contraseña</span>
+        <span class="input-group-text" id="basic-addon3" style="width:9vw">Contraseña</span>
       </div>
-      <input class="form-control" value="{{profile.password}}" aria-label="password" formControlName="password">
+      <input class="form-control" [value]="profile.password" aria-label="password" formControlName="password">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3" style="width:9vw">Telefono</span>
+        <span class="input-group-text" id="basic-addon4" style="width:9vw">Telefono</span>
       </div>
-      <input class="form-control" value="{{profile.phone}}" aria-label="phone" formControlName="phone">
+      <input class="form-control" [value]="profile.phone" aria-label="phone" formControlName="phone">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon4" style="width:9vw">Imagen</span>
+        <span class="input-group-text" id="basic-addon5" style="width:9vw">Imagen</span>
       </div>
-        <input class="form-control" value="{{profile.imageSource}}" aria-label="image url" formControlName="imageurl">
+        <input class="form-control" [value]="profile.imageSource" aria-label="image url" formControlName="imageurl">
     </div>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Localizacion</span>
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Localizacion</span>
       </div>
-      <input class="form-control" value="{{profile.location}}" aria-label="location" formControlName="location">
+      <input class="form-control" [value]="profile.location" aria-label="location" formControlName="location">
     </div>
 
-    <div class="input-group mb-3 form-row" >
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Instagram url</span>
-      </div>
-      <input class="form-control" value="{{profile.socialNetworks[0].url}}" aria-label="Instagram" formControlName="urlInsta">
-    </div>
-    <div class="input-group mb-3 form-row">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Spotify url</span>
-      </div>
-      <input class="form-control" value="{{profile.socialNetworks[1].url}}" aria-label="Spotify" formControlName="urlSpotify">
-    </div>
-    <div class="input-group mb-3 form-row">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon5" style="width:9vw">Twitter url</span>
-      </div>
-      <input class="form-control" value="{{profile.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
-    </div>
-
-    <!--<app-social-adder [profileInput]="printedProfile"> </app-social-adder>-->
+    <app-social-adder [socialNetworks]="profile.socialNetworks"></app-social-adder>
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3" style="width:9vw">Generos</span>
+        <span class="input-group-text" id="basic-addon7" style="width:9vw">Generos</span>
       </div>
       <input class="form-control" value="{{genresToString()}}" aria-label="genres" placeHolder="Formato: Rock, Pop..." formControlName="genres">
     </div>
@@ -75,7 +56,7 @@
         <span class="input-group-text" style="width:12.5vw" >Precio de suscripcion</span>
       </div>
       <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
-      <input class="form-control"  value="{{profile.subscriptionPrice}}" aria-label="subscription price" formControlName="subscriptionPrice" >
+      <input class="form-control"  [value]="profile.subscriptionPrice" aria-label="subscription price" formControlName="subscriptionPrice" >
       <div class="input-group-append">
         <span class="input-group-text" style="width:2.5vw">€</span>
       </div>
@@ -85,7 +66,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="description" formControlName="description" value="{{(profile | async)?.description}}"></textarea>
+      <textarea class="form-control" rows="5" aria-label="description" formControlName="description" [value]="profile.description"></textarea>
     </div>
   </form>
 </div>
