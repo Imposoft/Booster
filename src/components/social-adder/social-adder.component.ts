@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
+import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {Profile} from '../../models/profile/profile.model';
 
 @Component({
@@ -8,33 +8,15 @@ import {Profile} from '../../models/profile/profile.model';
   templateUrl: './social-adder.component.html',
   styleUrls: ['./social-adder.component.sass']
 })
-export class SocialAdderComponent implements OnInit {
-  @Input() profileInput: Profile;
+export class SocialAdderComponent implements OnChanges {
+  @Input() socialNetworks: SocialNetworks[];
   dynamicForm: FormGroup;
   submitted = false;
   numberOfSN: number;
-  profile: Profile;
   sne = SocialNetworkEnum;
 
 
-  constructor(private formBuilder: FormBuilder ) { }
-
-  ngOnInit(): void {
-    this.dynamicForm = this.formBuilder.group({
-      networks: new FormArray([])
-    });
-    this.profile = this.profileInput;
-    this.numberOfSN = this.profile.socialNetworks.length;
-
-    if (this.networks.length < this.numberOfSN) {
-      for (let i = 0; i < this.numberOfSN; i++) {
-      this.networks.push(this.formBuilder.group({
-        socialNetwork: this.profile.socialNetworks[i].socialNetwork, // ,
-        url: this.profile.socialNetworks[i].url // this.profile.socialNetworks[i].url,
-      }));
-      }
-    }
-  }
+  constructor(private formBuilder: FormBuilder) { }
 
   get form(): any { return this.dynamicForm.controls; }
   get networks(): FormArray { return this.form.networks as FormArray; }
@@ -83,32 +65,48 @@ export class SocialAdderComponent implements OnInit {
     for (const network of this.networks.value) {
       switch (network.value.socialNetwork) {
         case 'Bandcamp':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.value.url});
           break;
         case 'Facebook':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.value.url});
           break;
         case 'Instagram':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: network.value.url});
           break;
         case 'Drooble':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.value.url});
           break;
         case 'TikTok':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.value.url});
           break;
         case 'Reverbnation':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.value.url});
           break;
         case 'Soundcloud':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.value.url});
           break;
         case 'Twitter':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.value.url});
           break;
         case 'Spotify':
-          this.profile.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.value.url});
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.value.url});
           break;
+      }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dynamicForm = this.formBuilder.group({
+      networks: new FormArray([])
+    });
+    this.numberOfSN = this.socialNetworks.length;
+
+    if (this.networks.length < this.numberOfSN) {
+      for (let i = 0; i < this.numberOfSN; i++) {
+        this.networks.push(this.formBuilder.group({
+          socialNetwork: this.socialNetworks[i].socialNetwork, // ,
+          url: this.socialNetworks[i].url // this.profile.socialNetworks[i].url,
+        }));
       }
     }
   }
