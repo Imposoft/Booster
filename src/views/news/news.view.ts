@@ -42,8 +42,8 @@ export class NewsView implements OnInit {
   sendForm(): void {
     const post = {
       title: this.modificationForm.value.title,
-      imgUrl: this.modificationForm.value.imageUrl,
-      body: this.modificationForm.value.description,
+      imgUrl: this.modificationForm.value.imgUrl,
+      body: this.modificationForm.value.body,
       exclusive: this.modificationForm.value.exclusive,
       promoted: this.modificationForm.value.promoted,
       owner: null,
