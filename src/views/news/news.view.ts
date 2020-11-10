@@ -52,7 +52,9 @@ export class NewsView implements OnInit {
     this._success.next('Noticia creada con exito!');
   }
 
-  removeNew(): void {
-
-  }
+  // Métodos en el contenedor
+  /*
+  removeNews(): void { }
+  share(): void { }
+  */
 }

@@ -38,6 +38,7 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
 import {NewsView} from '../views/news/news.view';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SocialAdderComponent} from '../components/social-adder/social-adder.component';
+import {NewsContainerComponent} from '../components/news-container/news-container.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import {SocialAdderComponent} from '../components/social-adder/social-adder.comp
         LoginUserComponent,
         ProfileModificationView,
         NewsView,
-        SocialAdderComponent
+        SocialAdderComponent,
+        NewsContainerComponent
     ],
   imports: [
     BrowserModule,
