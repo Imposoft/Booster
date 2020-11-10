@@ -13,44 +13,43 @@ import {Musician} from '../../models/musician/musician.model';
   styleUrls: ['./tutorial.view.sass']
 })
 export class TutorialView implements OnInit {
-  tutorialPost: Tutorial;
-  tutorialOwner: Musician;
-  fanDetails: UserDetails;
+  public tutorialPost: Tutorial;
+  public tutorialOwner: Musician;
+  private fanDetails: UserDetails;
 
-
-
-  ButtonVisible = true;
+  public ButtonVisible = true;
 
   private _success = new Subject<string>();
-  successMessage = '';
-  pathId: string;
+  public successMessage = '';
+
+  public pathId: string;
+  public userPathId: string;
   private printedProfile: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore) {
-    this.tutorialPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, price: 0, promoted: false, title: '', userWaitList: []};
+    // Clase particular vacia sobre el que cargar los datos
+    this.tutorialPost = {body: '', exclusive: false, id: '', imgUrl: '', owner: undefined, price: 0, promoted: false, title: '', userWaitList: []};
+    this.tutorialOwner = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
+
+    // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
         if (params.id) {
-          console.log(params);
-          this.printedProfile = afs.doc<Tutorial>('tutorialPosts/' + params.id);
           this.pathId = params.id;
-          this.printedProfile.valueChanges().subscribe((tutorial) => {
-            console.log(tutorial);
-            this.tutorialPost = tutorial;
-          });
         } else {
-          console.log(params);
-          this.printedProfile = afs.doc<Tutorial>('tutorialPosts/IG1rNplbyfMAmuCbTMdJ');
           this.pathId = 'IG1rNplbyfMAmuCbTMdJ';
-          this.printedProfile.valueChanges().subscribe(tutorial => {
-            this.tutorialPost = tutorial;
-          });
         }
+        // Cargamos el perfil sobre el perfil vacio
+        this.printedProfile = afs.doc<Tutorial>('tutorialPosts/' + this.pathId);
+        this.printedProfile.valueChanges().subscribe((tutorial) => {
+          this.tutorialPost = tutorial;
+        });
       }
     );
+
+    // Cargamos el usuario owner de la clase
     this.printedProfile = afs.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
-    this.pathId = 'IfcscpI7GL2pFaZKEccf';
+    this.userPathId = 'IfcscpI7GL2pFaZKEccf';
     this.printedProfile.valueChanges().subscribe((musician) => {
-      console.log(musician);
       this.tutorialOwner = musician;
     });
   }
