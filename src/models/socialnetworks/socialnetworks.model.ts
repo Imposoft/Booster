@@ -4,13 +4,13 @@ export class SocialNetworks {
 }
 
 export enum SocialNetworkEnum {
-  INSTRAGRAM = 'INSTRAGRAM',
-  SPOTIFY = 'SPOTIFY',
-  TWITTER = 'TWITTER',
-  SOUNDCLOUD = 'SOUNDCLOUD',
-  FACEBOOK = 'FACEBOOK',
-  BANDCAMP = 'BANDCAMP',
-  TIKTOK = 'TIKTOK',
-  REVERBNATION = 'REVERBNATION',
-  DROOBLE = 'DROOBLE'
+  INSTRAGRAM = 'Instagram',
+  SPOTIFY = 'Spotify',
+  TWITTER = 'Twitter',
+  SOUNDCLOUD = 'Soundcloud',
+  FACEBOOK = 'Facebook',
+  BANDCAMP = 'Bandcamp',
+  TIKTOK = 'TikTok',
+  REVERBNATION = 'Reverbnation',
+  DROOBLE = 'Drooble'
 }

@@ -5,6 +5,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserDetails} from '../../models/userDetails/user-details.model';
 import {Musician} from '../../models/musician/musician.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-band',
@@ -18,10 +19,11 @@ export class BandView implements OnInit {
   bandProfiles;
   printedProfile: any;
   pathId: string;
+  loggedId: string;
 
   members: Musician[];
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     this.route.params.subscribe( params => {
         if (params.id) {
           console.log(params);
@@ -41,6 +43,14 @@ export class BandView implements OnInit {
         }
       }
     );
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+      }
+      else{
+
+      }
+    });
   }
 
   ngOnInit(): void {

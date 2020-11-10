@@ -8,12 +8,12 @@
             <div [formGroup]="network" class="form-row mb-1">
               <div class="col-md-2">
                 <select id="inputSocial" class="form-control" formControlName="socialNetwork" >
-                  <option selected>Selecciona una opcion</option>
-                  <option *ngFor="let i of ['Instagram','Spotify','Twitter','Drooble','Facebook','Soundcloud','TikTok','Bandcamp','Reverbnation']">{{i}}</option>
+                  <option selected>Selecciona una opcion...</option>
+                  <option *ngFor="let item of sne | keyvalue">{{item.value}}</option>
                 </select>
               </div>
               <div class="col-md-9">
-                <input class="form-control mr-2" name="fields[]" type="text" placeholder="Type something" formControlName="url" value=""/>
+                <input class="form-control mr-2" name="fields[]" type="text" placeholder="social network" formControlName="url"/>
               </div>
               <button class="btn btn-danger" (click)="deleteSocialNetwork(i)"><b>-</b></button>
             </div>

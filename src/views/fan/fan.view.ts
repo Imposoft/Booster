@@ -5,6 +5,7 @@ import {Fan} from '../../models/fan/fan.model';
 import {SocialNetworkEnum} from '../../models/socialnetworks/socialnetworks.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Band} from '../../models/band/band.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-fan',
@@ -17,8 +18,9 @@ export class FanView implements OnInit {
   items: Observable<any[]>;
   fanProfiles: any;
   pathId: string;
+  loggedId: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     this.route.params.subscribe( params => {
         if (params.id) {
           console.log(params);
@@ -32,6 +34,15 @@ export class FanView implements OnInit {
       }
     );
     this.profile = this.printedProfile.valueChanges();
+
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+      }
+      else{
+
+      }
+    });
   }
 
   ngOnInit(): void {

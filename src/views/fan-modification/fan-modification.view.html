@@ -64,7 +64,7 @@
       <input class="form-control" value="{{(profile | async)?.socialNetworks[2].url}}" aria-label="Twitter" formControlName="urlTwitter">
     </div>
 
-    <app-social-adder [profile]="(profile | async)"> </app-social-adder>
+    <app-social-adder [profileInput]="printedProfile"> </app-social-adder>
 
   </form>
 

@@ -20,6 +20,7 @@ export class FanModificationView implements OnInit {
   profile: any;
   modificationForm: FormGroup;
   path: string;
+  pathId: string;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -52,16 +53,18 @@ export class FanModificationView implements OnInit {
       if (params.id) {
         this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
         this.path = 'fanProfile/' + params.id;
+        this.pathId = params.id;
       } else {
         this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
         this.path = 'fanProfiles/NKUHb5YBHaCDQmSpWUFh';
+        this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
       }
       /*this.printedProfile.valueChanges().subscribe((fan) => {
         console.log(fan);
         this.profile = fan;
       });*/
+      this.profile = this.printedProfile.valueChanges();
     });
-    this.profile = this.printedProfile.valueChanges();
   }
 
 

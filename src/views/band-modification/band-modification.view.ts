@@ -54,7 +54,7 @@ export class BandModificationView implements OnInit {
         });
       }
     });
-    this.profile = this.printedProfile.valueChanges();
+    // this.profile = this.printedProfile.valueChanges();
   }
 
   ngOnInit(): void {
