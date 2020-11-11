@@ -15,6 +15,7 @@ import {Genre} from '../../models/genre/genre.model';
 })
 export class BandModificationView implements OnInit {
   public socialNetworksModified: SocialNetworks[];
+  public genreModified: Genre[];
   public profile: Band;
   private printedProfile: any;
   public modificationForm: FormGroup;
@@ -56,8 +57,7 @@ export class BandModificationView implements OnInit {
       urlSpotify: ['', []],
       urlTwitter: ['', []],
       description: ['', []],
-      subscriptionPrice: ['', [Validators.required]],
-      genres: ['', [Validators.required]]
+      subscriptionPrice: ['', [Validators.required]]
     });
 
     this._success.subscribe(message => this.successMessage = message);
@@ -85,6 +85,7 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
     if (this.modificationForm.value.genres !== ''){ this.profile.genres = this.stringToGenresB(); }
     this.profile.socialNetworks = this.socialNetworksModified;
+    this.profile.genres = this.genreModified;
   }
 
   changeView(): void {
@@ -108,6 +109,11 @@ export class BandModificationView implements OnInit {
 
   changeSocialNetworks($event: SocialNetworks[]): void {
     this.socialNetworksModified = $event;
+    console.log($event);
+  }
+
+  changeGenres($event: Genre[]): void {
+    this.genreModified = $event;
     console.log($event);
   }
 }

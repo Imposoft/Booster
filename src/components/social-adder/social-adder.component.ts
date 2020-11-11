@@ -19,7 +19,6 @@ export class SocialAdderComponent implements OnChanges {
 
 
   constructor(private formBuilder: FormBuilder) {
-    this.socialNetworks = [];
   }
 
   get form(): any { return this.dynamicForm.controls; }

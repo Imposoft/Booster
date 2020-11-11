@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Genre} from '../../models/genre/genre.model';
 import {SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatChip} from '@angular/material/chips';
 
@@ -17,21 +17,17 @@ export class GenreAdderComponent implements OnChanges {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  @Input() genre: Genre[];
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
+  @Input() genreList: Genre[];
+  @Output() genreListModified = new EventEmitter<Genre[]>();
   matChipFrom: FormGroup;
   numberOfG: number;
 
   constructor(private formBuilder: FormBuilder) {
   }
 
-  get form(): any {
-    return this.matChipFrom.controls;
-  }
-
-  get genres(): FormArray {
-    return this.form.genres as FormArray;
-  }
+  get form(): any { return this.matChipFrom.controls; }
+  get genres(): FormArray { return this.form.genres as FormArray; }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -39,7 +35,7 @@ export class GenreAdderComponent implements OnChanges {
 
     // Add genre
     if ((value || '').trim()) {
-      this.genre.push({name: value.trim()});
+      this.genreList.push({name: value.trim()});
     }
 
     // Reset the input value
@@ -49,10 +45,10 @@ export class GenreAdderComponent implements OnChanges {
   }
 
   remove(genre: Genre): void {
-    const index = this.genre.indexOf(genre);
+    const index = this.genreList.indexOf(genre);
 
     if (index >= 0) {
-      this.genre.splice(index, 1);
+      this.genreList.splice(index, 1);
     }
   }
 
@@ -60,15 +56,20 @@ export class GenreAdderComponent implements OnChanges {
     this.matChipFrom = this.formBuilder.group({
       genres: new FormArray([])
     });
-    this.numberOfG = this.genre.length;
+    this.numberOfG = this.genreList.length;
 
-    if (this.genres.length < this.numberOfG) {
+    /*if (this.genres.length < this.numberOfG) {
       for (let i = 0; i < this.numberOfG; i++) {
         this.genres.push(this.formBuilder.group({
-          name: this.genre[i].name,
+          name: this.genreList[i].name,
         }));
       }
-    }
+    }*/
+    this.matChipFrom.valueChanges.subscribe(value => {
+        this.genreList = [];
+        this.genreListModified.emit(this.genreList);
+      }
+    );
   }
 
 }
