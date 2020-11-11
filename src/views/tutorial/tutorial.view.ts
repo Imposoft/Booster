@@ -59,7 +59,7 @@ export class TutorialView implements OnInit {
     this.afAuth.authState.subscribe(user => {
       if (user){
         this.loggedId = user.uid;
-        if (user.photoURL === 'FAN') {
+        if (user.photoURL === 'FAN' && !this.checkIfApplied()) {
           this.isFan = true;
         } else {
           this.isFan = false;
@@ -90,5 +90,13 @@ export class TutorialView implements OnInit {
     this.tutorialPost.userWaitList.push(this.loggedId);
     this.printedProfile.update(this.tutorialPost);
     this._success.next('Reserva solicitada con exito! ');
+  }
+
+  checkIfApplied(): boolean {
+    for (const id of this.tutorialPost.userWaitList) {
+      if (this.loggedId === id) {
+        return true;
+      }
+    }
   }
 }
