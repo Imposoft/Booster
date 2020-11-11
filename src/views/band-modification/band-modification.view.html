@@ -42,7 +42,7 @@
       <input class="form-control" [value]="profile.location" aria-label="location" formControlName="location">
     </div>
 
-    <app-social-adder [socialNetworks]="profile.socialNetworks"></app-social-adder>
+    <app-social-adder [socialNetworks]="profile.socialNetworks" (socialNetworksModified)="changeSocialNetworks($event)"></app-social-adder>
 
      <app-genre-adder [genre]="profile.genres"></app-genre-adder>
 

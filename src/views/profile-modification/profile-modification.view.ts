@@ -17,6 +17,7 @@ import {Musician} from '../../models/musician/musician.model';
 })
 
 export class ProfileModificationView implements OnInit {
+  public socialNetworksModified: SocialNetworks[];
   private printedProfile: any;
   public profile: Musician;
   public modificationForm: FormGroup;
@@ -83,6 +84,7 @@ export class ProfileModificationView implements OnInit {
     if (this.modificationForm.value.instruments !== ''){ this.profile.instruments = this.modificationForm.value.instruments; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
     if (this.modificationForm.value.genres !== ''){ this.profile.genres = this.stringToGenresM(); }
+    this.profile.socialNetworks = this.socialNetworksModified;
   }
 
   changeView(): void {
@@ -93,5 +95,10 @@ export class ProfileModificationView implements OnInit {
   stringToGenresM(): Genre[]{
     const genreString = this.modificationForm.value.genres;
     return genreString.split(',');
+  }
+
+  changeSocialNetworks($event: SocialNetworks[]): void {
+    this.socialNetworksModified = $event;
+    console.log($event);
   }
 }

@@ -4,7 +4,7 @@ export class SocialNetworks {
 }
 
 export enum SocialNetworkEnum {
-  INSTRAGRAM = 'INSTRAGRAM',
+  INSTAGRAM = 'INSTAGRAM',
   SPOTIFY = 'SPOTIFY',
   TWITTER = 'TWITTER',
   SOUNDCLOUD = 'SOUNDCLOUD',

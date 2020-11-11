@@ -14,6 +14,7 @@ import {Genre} from '../../models/genre/genre.model';
   styleUrls: ['./band-modification.view.sass']
 })
 export class BandModificationView implements OnInit {
+  public socialNetworksModified: SocialNetworks[];
   public profile: Band;
   private printedProfile: any;
   public modificationForm: FormGroup;
@@ -83,6 +84,7 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
     if (this.modificationForm.value.genres !== ''){ this.profile.genres = this.stringToGenresB(); }
+    this.profile.socialNetworks = this.socialNetworksModified;
   }
 
   changeView(): void {
@@ -102,5 +104,10 @@ export class BandModificationView implements OnInit {
       result += genre.name + ', ';
     }
     return result;
+  }
+
+  changeSocialNetworks($event: SocialNetworks[]): void {
+    this.socialNetworksModified = $event;
+    console.log($event);
   }
 }

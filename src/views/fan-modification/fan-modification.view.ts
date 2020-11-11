@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 
 export class FanModificationView implements OnInit {
-
+  public socialNetworksModified: SocialNetworks[];
   private printedProfile: any;
   public profile: Fan;
   private pathId: string;
@@ -28,6 +28,7 @@ export class FanModificationView implements OnInit {
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
+    this.socialNetworksModified = [];
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
@@ -69,6 +70,7 @@ export class FanModificationView implements OnInit {
     this._success.next('Perfil guardado con exito!');
     this.changeView();
   }
+
   checkValues(): void {
     if (this.modificationForm.value.name !== ''){ this.profile.name = this.modificationForm.value.name; }
     if (this.modificationForm.value.phone !== ''){ this.profile.phone = this.modificationForm.value.phone; }
@@ -76,10 +78,16 @@ export class FanModificationView implements OnInit {
     if (this.modificationForm.value.password !== ''){ this.profile.password = this.modificationForm.value.password; }
     if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
+    this.profile.socialNetworks = this.socialNetworksModified;
   }
 
   changeView(): void {
     this.successMessage = '';
     this.router.navigate(['fanProfile/' + this.pathId]);
+  }
+
+  changeSocialNetworks($event: SocialNetworks[]): void {
+    this.socialNetworksModified = $event;
+    console.log($event);
   }
 }

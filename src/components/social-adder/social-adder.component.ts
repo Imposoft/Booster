@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {Profile} from '../../models/profile/profile.model';
@@ -10,13 +10,17 @@ import {Profile} from '../../models/profile/profile.model';
 })
 export class SocialAdderComponent implements OnChanges {
   @Input() socialNetworks: SocialNetworks[];
+  @Output() socialNetworksModified = new EventEmitter<SocialNetworks[]>();
+
   dynamicForm: FormGroup;
   submitted = false;
   numberOfSN: number;
   sne = SocialNetworkEnum;
 
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+    this.socialNetworks = [];
+  }
 
   get form(): any { return this.dynamicForm.controls; }
   get networks(): FormArray { return this.form.networks as FormArray; }
@@ -26,7 +30,7 @@ export class SocialAdderComponent implements OnChanges {
     if (this.networks.length < this.numberOfSN) {
       this.networks.push(this.formBuilder.group({
         socialNetwork: ['', [Validators.required]],
-        url: ['', [Validators.required]]
+        url: ['a', [Validators.required]]
       }));
     }
   }
@@ -36,60 +40,35 @@ export class SocialAdderComponent implements OnChanges {
     this.networks.removeAt(e);
   }
 
-  onSubmit(): void {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.dynamicForm.invalid) {
-      return;
-    }
-
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.dynamicForm.value, null, 4));
-  }
-
-  onReset(): void {
-    // reset whole form back to initial state
-    this.submitted = false;
-    this.dynamicForm.reset();
-    this.networks.clear();
-  }
-
-  onClear(): void {
-    // clear errors and reset ticket fields
-    this.submitted = false;
-    this.networks.reset();
-  }
-
   modifySocialNetworks(): void {
     for (const network of this.networks.value) {
-      switch (network.value.socialNetwork) {
-        case 'Bandcamp':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.value.url});
+      switch (network.socialNetwork) {
+        case 'BANDCAMP':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.url});
           break;
-        case 'Facebook':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.value.url});
+        case 'FACEBOOK':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.url});
           break;
-        case 'Instagram':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: network.value.url});
+        case 'INSTAGRAM':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTAGRAM, url: network.url});
           break;
-        case 'Drooble':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.value.url});
+        case 'DROOBLE':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.url});
           break;
-        case 'TikTok':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.value.url});
+        case 'TIKTOK':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.url});
           break;
-        case 'Reverbnation':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.value.url});
+        case 'REVERBNATION':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.url});
           break;
-        case 'Soundcloud':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.value.url});
+        case 'SOUNDCLOUD':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.url});
           break;
-        case 'Twitter':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.value.url});
+        case 'TWITTER':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.url});
           break;
-        case 'Spotify':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.value.url});
+        case 'SPOTIFY':
+          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.url});
           break;
       }
     }
@@ -109,5 +88,12 @@ export class SocialAdderComponent implements OnChanges {
         }));
       }
     }
+
+    this.dynamicForm.valueChanges.subscribe(value => {
+        this.socialNetworks = [];
+        this.modifySocialNetworks();
+        this.socialNetworksModified.emit(this.socialNetworks);
+      }
+    );
   }
 }
