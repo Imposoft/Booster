@@ -7,7 +7,7 @@
             <div [formGroup]="network" class="form-row mb-1">
               <div class="col-md-2">
                 <select id="inputSocial" class="form-control" formControlName="socialNetwork">
-                  <option selected>Selecciona una opcion...</option>
+                  <!-- <option selected>Selecciona una opcion...</option> -->
                   <option *ngFor="let item of sne | keyvalue" [value]="item.value">{{item.value}}</option>
                 </select>
               </div>

@@ -28,8 +28,8 @@ export class SocialAdderComponent implements OnChanges {
     this.numberOfSN++;
     if (this.networks.length < this.numberOfSN) {
       this.networks.push(this.formBuilder.group({
-        socialNetwork: ['', [Validators.required]],
-        url: ['a', [Validators.required]]
+        socialNetwork: [SocialNetworkEnum.INSTAGRAM, [Validators.required]],
+        url: ['', [Validators.required]]
       }));
     }
   }
@@ -43,31 +43,31 @@ export class SocialAdderComponent implements OnChanges {
     for (const network of this.networks.value) {
       switch (network.socialNetwork) {
         case 'BANDCAMP':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.BANDCAMP, url: network.url}); }
           break;
         case 'FACEBOOK':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.FACEBOOK, url: network.url}); }
           break;
         case 'INSTAGRAM':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTAGRAM, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.INSTAGRAM, url: network.url}); }
           break;
         case 'DROOBLE':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.DROOBLE, url: network.url}); }
           break;
         case 'TIKTOK':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TIKTOK, url: network.url}); }
           break;
         case 'REVERBNATION':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.REVERBNATION, url: network.url}); }
           break;
         case 'SOUNDCLOUD':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SOUNDCLOUD, url: network.url}); }
           break;
         case 'TWITTER':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.TWITTER, url: network.url}); }
           break;
         case 'SPOTIFY':
-          this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.url});
+          if (network.url !== '') { this.socialNetworks.push({socialNetwork: SocialNetworkEnum.SPOTIFY, url: network.url}); }
           break;
       }
     }
