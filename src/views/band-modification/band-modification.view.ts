@@ -83,27 +83,13 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
-    this.profile.socialNetworks = this.socialNetworksModified;
-    this.profile.genres = this.genreModified;
+    if (this.socialNetworksModified !== undefined) { this.profile.socialNetworks = this.socialNetworksModified; }
+    if (this.genreModified !== undefined) { this.profile.genres = this.genreModified; }
   }
 
   changeView(): void {
     this.successMessage = '';
     this.router.navigate(['bandProfile/' + this.pathId]);
-  }
-
-  stringToGenresB(): Genre[]{
-    const genreString = this.modificationForm.value.genres;
-    return genreString.split(', ');
-  }
-
-  genresToString(): string{
-    const genres = this.profile.genres;
-    let result = '';
-    for (const genre of genres) {
-      result += genre.name + ', ';
-    }
-    return result;
   }
 
   changeSocialNetworks($event: SocialNetworks[]): void {

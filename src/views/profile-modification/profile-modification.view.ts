@@ -83,18 +83,13 @@ export class ProfileModificationView implements OnInit {
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.instruments !== ''){ this.profile.instruments = this.modificationForm.value.instruments; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
-    this.profile.socialNetworks = this.socialNetworksModified;
-    this.profile.genres = this.genreModified;
+    if (this.socialNetworksModified !== undefined) { this.profile.socialNetworks = this.socialNetworksModified; }
+    if (this.genreModified !== undefined) { this.profile.genres = this.genreModified; }
   }
 
   changeView(): void {
     this.successMessage = '';
     this.router.navigate(['profile/' + this.pathId]);
-  }
-
-  stringToGenresM(): Genre[]{
-    const genreString = this.modificationForm.value.genres;
-    return genreString.split(',');
   }
 
   changeSocialNetworks($event: SocialNetworks[]): void {

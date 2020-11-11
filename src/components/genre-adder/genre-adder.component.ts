@@ -1,11 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Genre} from '../../models/genre/genre.model';
-import {SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatChip} from '@angular/material/chips';
 
 @Component({
   selector: 'app-genre-adder',
@@ -21,13 +18,9 @@ export class GenreAdderComponent {
   @Input() genreList: Genre[];
   @Output() genreListModified = new EventEmitter<Genre[]>();
   matChipFrom: FormGroup;
-  numberOfG: number;
 
   constructor(private formBuilder: FormBuilder) {
   }
-
-  get form(): any { return this.matChipFrom.controls; }
-  get genres(): FormArray { return this.form.genres as FormArray; }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -42,15 +35,7 @@ export class GenreAdderComponent {
     if (input) {
       input.value = '';
     }
-
     this.genreListModified.emit(this.genreList);
-    /*if (this.genres.length < this.numberOfG) {
-      for (let i = 0; i < this.numberOfG; i++) {
-        this.genres.push(this.formBuilder.group({
-          name: this.genreList[i].name,
-        }));
-      }
-    }*/
   }
 
   remove(genre: Genre): void {
@@ -62,4 +47,5 @@ export class GenreAdderComponent {
 
     this.genreListModified.emit(this.genreList);
   }
+
 }

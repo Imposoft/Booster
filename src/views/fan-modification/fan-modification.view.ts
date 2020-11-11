@@ -78,7 +78,7 @@ export class FanModificationView implements OnInit {
     if (this.modificationForm.value.password !== ''){ this.profile.password = this.modificationForm.value.password; }
     if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
-    this.profile.socialNetworks = this.socialNetworksModified;
+    if (this.socialNetworksModified !== undefined) { this.profile.socialNetworks = this.socialNetworksModified; }
   }
 
   changeView(): void {
