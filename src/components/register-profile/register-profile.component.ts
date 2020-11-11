@@ -43,7 +43,7 @@ export class RegisterProfileComponent implements OnInit {
 
     this.socialNetworksTemplate = [{
       url: '',
-      socialNetwork: SocialNetworkEnum.INSTRAGRAM
+      socialNetwork: SocialNetworkEnum.INSTAGRAM
     }, {
       url: '',
       socialNetwork: SocialNetworkEnum.SPOTIFY
