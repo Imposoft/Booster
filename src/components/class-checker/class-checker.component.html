@@ -2,15 +2,15 @@
   <div class="card-body p-0 overflow-hidden">
     <div class="row">
       <div class="col-sm-3" style="object-fit: cover">
-        <img src="{{classToCheck.imgUrl}}" alt="" class="img-fluid z-depth-0 align-center my-2 my-sm-0" style="width: 100%;height: 100%;object-fit: cover">
+        <img src="{{classInput.imgUrl}}" alt="" class="img-fluid z-depth-0 align-center my-2 my-sm-0" style="width: 100%;height: 100%;object-fit: cover">
       </div>
       <div class="col-sm-9 p-1">
-        <h1 class="card-title">{{classToCheck.title}}</h1>
-        <p class="card-text">{{classToCheck.body}}</p>
-        <p class="card-text">Precio: {{classToCheck.price}}€</p>
+        <h1 class="card-title">{{classInput.title}}</h1>
+        <p class="card-text">{{classInput.body}}</p>
+        <p class="card-text">Precio: {{classInput.price}}€</p>
         <div class="d-flex align-self-baseline">
           <ng-content></ng-content>
-          <a [routerLink]="['/tutorialModification',classToCheck.id]">
+          <a [routerLink]="['/tutorialModification',classInput.id]">
             <button class="btn btn-outline-primary m-2">Modificar</button>
           </a>
         </div>
@@ -19,10 +19,10 @@
     <div></div>
   </div>
   <ul class="list-group list-group-flush" *ngIf="usersShown">
-    <li *ngFor="let user of classToCheck.userWaitList" class="list-group-item">
+    <li *ngFor="let user of userList" class="list-group-item">
       <div class="d-flex bd-highlight mb-3">
         <div class="p-2 bd-highlight">
-          <img src="{{user.imageurl}}" alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+          <img src="{{user.imageSource}}" alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
         </div>
         <div class="p-2 bd-highlight">{{user.name}}</div>
         <div class="ml-auto p-2 bd-highlight">
@@ -41,7 +41,7 @@
         </div>
       </div>
     </li>
-    <li class="list-group-item" *ngIf="classToCheck.userWaitList.length<=0">
+    <li class="list-group-item" *ngIf="classInput.userWaitList.length<=0">
       Aun no tienes nadie apuntado a esta clase, sigue esperando!
     </li>
   </ul>
@@ -60,7 +60,9 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        {{chosenUser.contact}}
+        {{chosenUser.phone}}
+        <br>
+        {{chosenUser.email}}
       </div>
     </form>
   </div>
