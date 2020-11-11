@@ -41,6 +41,9 @@ import {SocialAdderComponent} from '../components/social-adder/social-adder.comp
 import {NewsContainerComponent} from '../components/news-container/news-container.component';
 import {PostFeedComponent} from "../components/post-feed/post-feed.component";
 import {GenreAdderComponent} from '../components/genre-adder/genre-adder.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @NgModule({
     declarations: [
@@ -88,9 +91,16 @@ import {GenreAdderComponent} from '../components/genre-adder/genre-adder.compone
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    MatChipsModule
   ],
-  providers: [],
+  providers: [ {
+    provide: MAT_CHIPS_DEFAULT_OPTIONS,
+    useValue: {
+      separatorKeyCodes: [ENTER, COMMA]
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
