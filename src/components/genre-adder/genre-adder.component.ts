@@ -12,7 +12,7 @@ import {MatChip} from '@angular/material/chips';
   templateUrl: './genre-adder.component.html',
   styleUrls: ['./genre-adder.component.sass']
 })
-export class GenreAdderComponent implements OnChanges {
+export class GenreAdderComponent {
   visible = true;
   selectable = true;
   removable = true;
@@ -42,6 +42,15 @@ export class GenreAdderComponent implements OnChanges {
     if (input) {
       input.value = '';
     }
+
+    this.genreListModified.emit(this.genreList);
+    /*if (this.genres.length < this.numberOfG) {
+      for (let i = 0; i < this.numberOfG; i++) {
+        this.genres.push(this.formBuilder.group({
+          name: this.genreList[i].name,
+        }));
+      }
+    }*/
   }
 
   remove(genre: Genre): void {
@@ -50,26 +59,7 @@ export class GenreAdderComponent implements OnChanges {
     if (index >= 0) {
       this.genreList.splice(index, 1);
     }
+
+    this.genreListModified.emit(this.genreList);
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.matChipFrom = this.formBuilder.group({
-      genres: new FormArray([])
-    });
-    this.numberOfG = this.genreList.length;
-
-    /*if (this.genres.length < this.numberOfG) {
-      for (let i = 0; i < this.numberOfG; i++) {
-        this.genres.push(this.formBuilder.group({
-          name: this.genreList[i].name,
-        }));
-      }
-    }*/
-    this.matChipFrom.valueChanges.subscribe(value => {
-        this.genreList = [];
-        this.genreListModified.emit(this.genreList);
-      }
-    );
-  }
-
 }

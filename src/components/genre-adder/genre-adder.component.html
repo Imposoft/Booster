@@ -1,5 +1,5 @@
 <div class="container-fluid p-2">
-  <mat-form-field [formControl]="matChipFrom" class="example-chip-list" [style.width.%]="100" >
+  <mat-form-field [formGroup]="matChipFrom" class="example-chip-list" [style.width.%]="100" >
     <mat-chip-list #genresList aria-label="Añadir género" >
       <mat-chip *ngFor="let genre of genreList" [selectable]="selectable"
                 [removable]="removable" (removed)="remove(genre)" [value]="genre.name" color="primary">

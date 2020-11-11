@@ -83,7 +83,6 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }
-    if (this.modificationForm.value.genres !== ''){ this.profile.genres = this.stringToGenresB(); }
     this.profile.socialNetworks = this.socialNetworksModified;
     this.profile.genres = this.genreModified;
   }
