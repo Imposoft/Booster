@@ -95,5 +95,6 @@ export class TutorialView implements OnInit {
         return true;
       }
     }
+    return false;
   }
 }

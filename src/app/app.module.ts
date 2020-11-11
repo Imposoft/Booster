@@ -40,6 +40,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SocialAdderComponent} from '../components/social-adder/social-adder.component';
 import {NewsContainerComponent} from '../components/news-container/news-container.component';
 import {PostFeedComponent} from "../components/post-feed/post-feed.component";
+import {GenreAdderComponent} from '../components/genre-adder/genre-adder.component';
 
 @NgModule({
     declarations: [
@@ -66,6 +67,7 @@ import {PostFeedComponent} from "../components/post-feed/post-feed.component";
         ProfileModificationView,
         NewsView,
         SocialAdderComponent,
+        GenreAdderComponent,
         NewsContainerComponent,
         PostFeedComponent,
     ],
