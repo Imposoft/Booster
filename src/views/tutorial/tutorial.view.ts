@@ -6,6 +6,7 @@ import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {UserDetails} from '../../models/userDetails/user-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Musician} from '../../models/musician/musician.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tutorial',
@@ -24,9 +25,11 @@ export class TutorialView implements OnInit {
 
   public pathId: string;
   public userPathId: string;
+  private loggedId: string;
   private printedProfile: any;
+  private isFan: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore) {
+  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     // Clase particular vacia sobre el que cargar los datos
     this.tutorialPost = {body: '', exclusive: false, id: '', imgUrl: '', owner: undefined, price: 0, promoted: false, title: '', userWaitList: []};
     this.tutorialOwner = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
@@ -52,6 +55,20 @@ export class TutorialView implements OnInit {
     this.printedProfile.valueChanges().subscribe((musician) => {
       this.tutorialOwner = musician;
     });
+
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+        if (user.photoURL === 'FAN') {
+          this.isFan = true;
+        } else {
+          this.isFan = false;
+        }
+      }
+      else{
+
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -70,7 +87,7 @@ export class TutorialView implements OnInit {
 
   applyForTutorial(): void{
     // TODO Change for logged user
-    this.tutorialPost.userWaitList.push(this.fanDetails);
+    this.tutorialPost.userWaitList.push(this.loggedId);
     this.printedProfile.update(this.tutorialPost);
     this._success.next('Reserva solicitada con exito! ');
   }
