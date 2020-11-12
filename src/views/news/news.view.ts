@@ -39,22 +39,17 @@ export class NewsView implements OnInit {
     ).subscribe(() => this.successMessage = '');
   }
 
+  // ERROR: exclusive y promoted no representan el valor real de sus checkbox
   sendForm(): void {
     const post = {
       title: this.modificationForm.value.title,
       imgUrl: this.modificationForm.value.imgUrl,
       body: this.modificationForm.value.body,
-      exclusive: this.modificationForm.value.exclusive,
-      promoted: this.modificationForm.value.promoted,
+      exclusive: this.exclusive.valueOf(),
+      promoted: this.promoted.valueOf(),
       owner: null,
     };
     this.news.add(post);
     this._success.next('Noticia creada con exito!');
   }
-
-  // Métodos en el contenedor
-  /*
-  removeNews(): void { }
-  share(): void { }
-  */
 }
