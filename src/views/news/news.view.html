@@ -19,8 +19,8 @@
       <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' [(ngModel)]="exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' [(ngModel)]="promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted">Promoted</mat-checkbox>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">

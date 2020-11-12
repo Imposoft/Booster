@@ -39,7 +39,6 @@ export class NewsView implements OnInit {
     ).subscribe(() => this.successMessage = '');
   }
 
-  // ERROR: exclusive y promoted no representan el valor real de sus checkbox
   sendForm(): void {
     const post = {
       title: this.modificationForm.value.title,
