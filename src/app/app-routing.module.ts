@@ -14,6 +14,7 @@ import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutor
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
 import {NewsView} from '../views/news/news.view';
+import {JobOfferView} from '../views/job-offer/job-offer.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -33,7 +34,9 @@ const routes: Routes = [
   {path: 'userTutorialListing', component: UserTutorialListingView},
   {path: 'fanModification/:id', component: FanModificationView},
   {path: 'profileModification/:id', component: ProfileModificationView},
-  {path: 'news', component: NewsView}
+  {path: 'news', component: NewsView},
+  {path: 'jobOffer', component: JobOfferView},
+  {path: 'jobOffer/:id', component: JobOfferView}
 ];
 
 @NgModule({

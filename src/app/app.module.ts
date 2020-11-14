@@ -44,36 +44,40 @@ import {GenreAdderComponent} from '../components/genre-adder/genre-adder.compone
 import {MatIconModule} from '@angular/material/icon';
 import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {JobOfferView} from '../views/job-offer/job-offer.view';
+import {DownloadUrlComponent} from '../components/download-url/download-url.component';
 
 @NgModule({
-    declarations: [
-        /**  COMPONENTS  */
-        AppComponent,
-        RegisterProfileComponent,
+  declarations: [
+    /**  COMPONENTS  */
+    AppComponent,
+    RegisterProfileComponent,
+    SocialAdderComponent,
+    GenreAdderComponent,
+    NewsContainerComponent,
+    PostFeedComponent,
+    NavigationbarComponent,
+    SocialLinksComponent,
+    LoginUserComponent,
 
-        /** VIEWS */
-        HomeView,
-        RegisterView,
-        ProfileView,
-        BandView,
-        BandModificationView,
-        FanView,
-        NavigationbarComponent,
-        SocialLinksComponent,
-        FanModificationView,
-        TutorialView,
-        TutorialModificationView,
-        ClassCheckerComponent,
-        UserTutorialListingView,
-        TutorialCreationView,
-        LoginUserComponent,
-        ProfileModificationView,
-        NewsView,
-        SocialAdderComponent,
-        GenreAdderComponent,
-        NewsContainerComponent,
-        PostFeedComponent,
-    ],
+    /** VIEWS */
+    HomeView,
+    RegisterView,
+    ProfileView,
+    BandView,
+    BandModificationView,
+    FanView,
+    FanModificationView,
+    TutorialView,
+    TutorialModificationView,
+    ClassCheckerComponent,
+    UserTutorialListingView,
+    TutorialCreationView,
+    ProfileModificationView,
+    NewsView,
+    JobOfferView,
+    DownloadUrlComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
