@@ -6,5 +6,5 @@ export class Post {
   promoted: boolean;
   exclusive: boolean;
   imgUrl: string;
-  owner: UserDetails;
+  owner: string;
 }
