@@ -18,8 +18,8 @@ export class NewsView implements OnInit {
   public news: Post;
   private newsPrinted: any;
   public modificationForm: FormGroup;
-  private exclusive = false;
-  private promoted = false;
+  public exclusive = false;
+  public promoted = false;
   private pathId: string;
 
   private _success = new Subject<string>();

@@ -46,38 +46,40 @@ import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {JobOfferView} from '../views/job-offer/job-offer.view';
 import {DownloadUrlComponent} from '../components/download-url/download-url.component';
+import {PostCardComponent} from '../components/post-card/post-card.component';
 
 @NgModule({
-  declarations: [
-    /**  COMPONENTS  */
-    AppComponent,
-    RegisterProfileComponent,
-    SocialAdderComponent,
-    GenreAdderComponent,
-    NewsContainerComponent,
-    PostFeedComponent,
-    NavigationbarComponent,
-    SocialLinksComponent,
-    LoginUserComponent,
+    declarations: [
+        /**  COMPONENTS  */
+        AppComponent,
+        RegisterProfileComponent,
+        SocialAdderComponent,
+        GenreAdderComponent,
+        NewsContainerComponent,
+        PostFeedComponent,
+        NavigationbarComponent,
+        SocialLinksComponent,
+        LoginUserComponent,
 
-    /** VIEWS */
-    HomeView,
-    RegisterView,
-    ProfileView,
-    BandView,
-    BandModificationView,
-    FanView,
-    FanModificationView,
-    TutorialView,
-    TutorialModificationView,
-    ClassCheckerComponent,
-    UserTutorialListingView,
-    TutorialCreationView,
-    ProfileModificationView,
-    NewsView,
-    JobOfferView,
-    DownloadUrlComponent,
-  ],
+        /** VIEWS */
+        HomeView,
+        RegisterView,
+        ProfileView,
+        BandView,
+        BandModificationView,
+        FanView,
+        FanModificationView,
+        TutorialView,
+        TutorialModificationView,
+        ClassCheckerComponent,
+        UserTutorialListingView,
+        TutorialCreationView,
+        ProfileModificationView,
+        NewsView,
+        JobOfferView,
+        DownloadUrlComponent,
+        PostCardComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

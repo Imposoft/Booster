@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from "../../models/post/post.model";
+import {Post} from '../../models/post/post.model';
 
 @Component({
   selector: 'app-post-feed',
@@ -7,10 +7,26 @@ import {Post} from "../../models/post/post.model";
   styleUrls: ['./post-feed.component.sass']
 })
 export class PostFeedComponent implements OnInit {
-
   public postList: Post[];
   public postOne: Post;
-  constructor() {  this.postOne= {body: "", exclusive: false, imgUrl: "", owner: undefined, promoted: false, title: ""}; }
+  public postTwo: Post;
+
+  constructor() {
+    this.postList = [];
+    this.postOne = {body: '',
+      exclusive: false,
+      imgUrl: '',
+      owner: undefined,
+      promoted: false,
+      title: ''};
+    this.postTwo = {body: '',
+      exclusive: false,
+      imgUrl: '',
+      owner: undefined,
+      promoted: false,
+      title: ''};
+    this.postList.push(this.postOne, this.postTwo);
+  }
 
   ngOnInit(): void {
   }
