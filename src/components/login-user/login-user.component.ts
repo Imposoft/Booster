@@ -14,6 +14,7 @@ export class LoginUserComponent implements OnInit {
   registrationForm: FormGroup;
   private _error = new Subject<string>();
   public errorMessage = '';
+  hide: boolean = true;
 
   constructor(private fb: FormBuilder, public auth: AngularFireAuth, private router: Router, private route: ActivatedRoute) { }
 
@@ -46,5 +47,9 @@ export class LoginUserComponent implements OnInit {
 
   changeView(): void {
     this.router.navigate(['home']);
+  }
+
+  toggleFieldTextType(): void {
+    this.hide = !this.hide;
   }
 }
