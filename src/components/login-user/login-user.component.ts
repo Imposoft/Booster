@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-user',
@@ -10,6 +12,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class LoginUserComponent implements OnInit {
   registrationForm: FormGroup;
+  private _error = new Subject<string>();
+  public errorMessage = '';
 
   constructor(private fb: FormBuilder, public auth: AngularFireAuth, private router: Router, private route: ActivatedRoute) { }
 
@@ -18,6 +22,11 @@ export class LoginUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    this._error.subscribe(message => this.errorMessage = message);
+    this._error.pipe(
+      debounceTime(3500)
+    ).subscribe(() => this.errorMessage = '');
   }
 
   logIn(): void {
@@ -31,6 +40,7 @@ export class LoginUserComponent implements OnInit {
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
+        this._error.next('Error al iniciar sesion. Email y/o contraseña incorrecto/s ');
       });
   }
 
