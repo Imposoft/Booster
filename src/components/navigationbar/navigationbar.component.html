@@ -11,6 +11,6 @@
   </div>
   <div>
     <a [routerLink]="'/register'"><button type="button" class="btn btn-outline-light m-1 mr-3">Inicio de sesion</button></a>
-    <img src="assets/fan/avatar-man.jpg" alt="" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px">
+    <img [src]="imageURL" alt="profile pic" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="max-width: 50px" (click)="goToProfile()">
   </div>
 </nav>
