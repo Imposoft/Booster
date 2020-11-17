@@ -123,6 +123,15 @@ export class RegisterProfileComponent implements OnInit {
         phone: this.secondFormGroup.value.phone,
         socialNetworks: this.socialNetworksTemplate
       };
+      this.fireauth.createUserWithEmailAndPassword(fan.email, fan.password)
+        .then((user) => {
+          user.user.updateProfile({photoURL: 'FAN'});
+          this.afs.collection<Fan>('fanProfiles').doc(user.user.uid)
+            .set(fan)
+            .catch(error => {
+              console.log('Something went wrong with added user to firestore: ', error);
+            });
+        });
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       const user1 = {
@@ -174,6 +183,15 @@ export class RegisterProfileComponent implements OnInit {
         socialNetworks: this.socialNetworksTemplate,
         subscriptionPrice: this.thirdFormGroupBand.value.subscriptionPrice
       };
+      this.fireauth.createUserWithEmailAndPassword(band.email, band.password)
+        .then((user) => {
+          user.user.updateProfile({photoURL: 'BAND'});
+          this.afs.collection<Band>('bandProfiles').doc(user.user.uid)
+            .set(band)
+            .catch(error => {
+              console.log('Something went wrong with added user to firestore: ', error);
+            });
+        });
       this.bandProfiles.add(band);
     } // else {
       // TODO Implement contratante logic
