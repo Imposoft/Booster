@@ -13,6 +13,7 @@
           <br>
           <h1>{{jobOfferPost.title}}</h1>
           <h2>Sueldo: <b>{{jobOfferPost.budget}} €</b></h2>
+          <h3>Fecha de terminación: <b>{{jobOfferPost.endData}}</b></h3>
         </div>
       </div>
       <div *ngIf='isButtonVisible'>
@@ -29,9 +30,9 @@
       </div>
     </div>
     <br> <br>
-    <div class="p-2">
-      <h3>Descripcion aqui</h3>
-      <app-download-url [urlToDownload]="'https://www.marlosonline.es/blog/wp-content/uploads/2016/05/fib-logo.png'"></app-download-url>
+    <div class="p-2" *ngIf="(jobOfferPost.extraFiles !='')">
+      <h3>Archivos adjuntos</h3>
+      <app-download-url  [urlToDownload]= "jobOfferPost.extraFiles"> </app-download-url>
     </div>
   </div>
 </div>
