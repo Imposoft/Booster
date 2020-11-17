@@ -78,14 +78,10 @@ export class JobOfferView implements OnInit {
   }
 
   checkIfApplied(): void {
-    console.log('entra al metodo');
     if (this.isMusician) {
-      console.log('soy un musico logueado');
       for (const id of this.jobOfferPost.userWaitList) {
-        console.log('he entrado con mi id: ' + id);
         if (this.loggedId === id) {
           this.isButtonVisible = false;
-          console.log('estoy en la lista ya, asi que he cambiado el boton');
         }
       }
     }

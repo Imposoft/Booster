@@ -17,7 +17,7 @@ export class TutorialView implements OnInit {
   public tutorialOwner: Musician;
   private printedTutorialPost: any;
 
-  public ButtonVisible = true;
+  public isButtonVisible = true;
 
   private _success = new Subject<string>();
   public successMessage = '';
@@ -42,6 +42,12 @@ export class TutorialView implements OnInit {
         }
         // Cargamos el perfil sobre el perfil vacio
         this.printedTutorialPost = afs.doc<Tutorial>('tutorialPosts/' + this.pathId);
+
+      /*this.afAuth.authState.subscribe(user => {
+        if (user){
+          this.loggedId = user.uid;
+          this.isFan = user.photoURL === 'FAN';
+        }*/
         this.printedTutorialPost.valueChanges().subscribe((tutorial) => {
           this.tutorialPost = tutorial;
           // Cargamos el usuario owner de la clase
@@ -50,20 +56,22 @@ export class TutorialView implements OnInit {
           this.printedProfile.valueChanges().subscribe((musician) => {
             this.tutorialOwner = musician;
           });
-        });
-      }
-    );
+          this.checkIfApplied();
+        // });
+      });
+    }
+  );
 
-    // TODO DESCOMENTAR CUANDO SE PUEDAN CREAR USUARIOS FAN
-    /*this.afAuth.authState.subscribe(user => {
-      if (user){
-        this.loggedId = user.uid;
-        this.isFan = user.photoURL === 'FAN';
-      }
-      else{
+  // TODO DESCOMENTAR CUANDO SE PUEDAN CREAR USUARIOS FAN
+  /*this.afAuth.authState.subscribe(user => {
+    if (user){
+      this.loggedId = user.uid;
+      this.isFan = user.photoURL === 'FAN';
+    }
+    else{
 
-      }
-    });*/
+    }
+  });*/
     this.loggedId = '06jZPowdcMvZnUXzSUg9';
     this.isFan = true;
   }
@@ -77,19 +85,19 @@ export class TutorialView implements OnInit {
   }
 
   applyForTutorial(): void{
-    // TODO Change for logged user
+    this.isButtonVisible = false;
     this.tutorialPost.userWaitList.push(this.loggedId);
     this.printedTutorialPost.update(this.tutorialPost);
     this._success.next('Reserva solicitada con éxito! ');
-    this.ButtonVisible = false;
   }
 
   checkIfApplied(): void {
-    for (const id of this.tutorialPost.userWaitList) {
-      if (this.loggedId === id) {
-        this.ButtonVisible = false;
+    if (this.isFan) {
+      for (const id of this.tutorialPost.userWaitList) {
+        if (this.loggedId === id) {
+          this.isButtonVisible = false;
+        }
       }
     }
-    this.ButtonVisible = true;
   }
 }
