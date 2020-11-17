@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {JobOffer} from '../../models/jobs/job-offer.model';
-import {Musician} from '../../models/musician/musician.model';
 import {Band} from '../../models/band/band.model';
-import {Genre} from '../../models/genre/genre.model';
+import {debounceTime} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-job-offer',
@@ -16,45 +15,81 @@ import {Genre} from '../../models/genre/genre.model';
 export class JobOfferView implements OnInit {
   public pathId: string;
   private printedJobOffer: any;
-  public jobOffer: JobOffer;
+  public jobOfferPost: JobOffer;
   public jobOfferOwner: Band;
 
-  public userPathId: string;
+  public ownerPathId: string;
   private loggedId: string;
   private printedProfile: any;
+
+  public isButtonVisible = false;
+  public isMusician: boolean;
+
+  private _success = new Subject<string>();
+  public successMessage = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     // Oferta de trabajo  vacia sobre el que cargar los datos
 
-    // this.jobOffer = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], musician: [], band: [], endData: '', extraFiles: ''};
-    // this.jobOfferOwner = {description: '', email: '', members: Musician[], genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
+    this.jobOfferPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], userWaitList: [], endData: '', extraFiles: ''};
+    this.jobOfferOwner = {description: '', email: '', members: [], genres: [], imageSource: '', jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
         if (params.id) {
           this.pathId = params.id;
         } else {
-          this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
+          this.pathId = 'dKAmFasidHlD5ZpD9ttP';
         }
+        this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
 
-      // this.printedJobOffer = afs.
-
-     /* this.printedJobOffer.valueChanges().subscribe(() => {
-        this.jobOffer = ;
-      }); */
+        this.afAuth.authState.subscribe(user => {
+          if (user){
+            this.loggedId = user.uid;
+            this.isMusician = user.photoURL === 'MUSICIAN';
+          }
+          this.printedJobOffer.valueChanges().subscribe((jobOffer) => {
+            this.jobOfferPost = jobOffer;
+            // Cargamos el usuario owner de la oferta de trabajo
+            this.printedProfile = afs.doc<Band>('bandProfiles/' + this.jobOfferPost.owner);
+            this.ownerPathId = this.jobOfferPost.owner;
+            this.printedProfile.valueChanges().subscribe((band) => {
+              this.jobOfferOwner = band;
+            });
+            this.checkIfApplied();
+          });
+        });
       }
     );
-
-    // Cargamos el usuario owner de la oferta de trabajo
-    this.printedProfile = afs.doc<Band>('bandProfile/n6ZhZ1TJI7iayJS4GQrc');
-    this.userPathId = 'n6ZhZ1TJI7iayJS4GQrc';
-    this.printedProfile.valueChanges().subscribe((band) => {
-      this.jobOfferOwner = band;
-    });
-
   }
 
   ngOnInit(): void {
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(2500)
+    ).subscribe(() => this.successMessage = '');
+  }
+
+  applyForJobOffer(): void {
+    this.jobOfferPost.userWaitList.push(this.loggedId);
+    this.printedJobOffer.update(this.jobOfferPost);
+    this._success.next('Solicitud de trabajo realizada con éxito! ');
+    this.isButtonVisible = false;
+  }
+
+  checkIfApplied(): void {
+    console.log('entra al metodo');
+    if (this.isMusician) {
+      console.log('musico logueado');
+      for (const id of this.jobOfferPost.userWaitList) {
+        console.log('he entrado con: ' + id);
+        if (this.loggedId === id) {
+          this.isButtonVisible = false;
+          console.log('he cambiado el boton');
+        }
+      }
+      this.isButtonVisible = true;
+    }
   }
 
 }

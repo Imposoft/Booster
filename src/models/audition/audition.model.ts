@@ -1,4 +1,4 @@
 export class Audition {
-  // category:[Category];
+  // category: Category[];
   salary?: number;
 }

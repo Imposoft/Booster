@@ -1,25 +1,30 @@
+<div *ngIf="successMessage" class="m-0" style="width: 100%;">
+  <ngb-alert type="success" class="m-0" (close)="successMessage = ''">{{successMessage + (jobOfferOwner.name)}}</ngb-alert>
+</div>
 <div class="container-fluid d-flex justify-content-center bg-light" >
   <div class="row bg-white" style="width:90vw">
     <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-      <img src="https://www.marlosonline.es/blog/wp-content/uploads/2016/05/fib-logo.png" alt="Imagen de Oferta" style="max-width: 250px">
+      <img [src]="jobOfferPost.imgUrl" alt="Imagen de Oferta" style="max-width: 250px">
     </div>
     <br> <br>
     <div class="col-md-6 col-sm-12">
       <div class="row">
         <div class="col-md-12">
           <br>
-          <h1>TITULO DE LA OFERTA DE TRABAJO AQUI</h1>
-          <h2>Sueldo: <b>25 €</b></h2>
+          <h1>{{jobOfferPost.title}}</h1>
+          <h2>Sueldo: <b>{{jobOfferPost.budget}} €</b></h2>
         </div>
       </div>
-      <button class="d-flex ml-auto btn btn-outline-primary m-2">Inscribirse</button>
+      <div *ngIf='isButtonVisible'>
+        <button class="d-flex ml-auto btn btn-outline-primary m-2" (click)="applyForJobOffer()">Inscribirse</button>
+      </div>
     </div>
     <br> <br>
     <div class="card p-1 col-md-2" style="width: 18rem;">
       <div class="card-body">
-        <img class="card-img" src="https://www.marlosonline.es/blog/wp-content/uploads/2016/05/fib-logo.png" alt="Imagen de perfil" style="max-width: 75px">
-        <h5 class="card-title">Contratante: <b>FIB</b></h5>
-        <a [routerLink]="['/bandProfile']" class="card-link">Perfil de la banda</a>
+        <img class="card-img" [src]="jobOfferOwner.imageSource" alt="Imagen de perfil" style="max-width: 75px">
+        <h5 class="card-title">Contratante: <b>{{jobOfferOwner.name}}</b></h5>
+        <a [routerLink]="['/bandProfile', pathId]" class="card-link">Perfil de la banda</a>
         <!--<a [routerLink]="'profile/FVgBtsJlkRl0qZU4VaiW'" class="card-link">Perfil del musico</a>-->
       </div>
     </div>

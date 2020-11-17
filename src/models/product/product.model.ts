@@ -5,5 +5,5 @@ export class Product {
   description: string;
   price: number;
   stock: number;
-  profile: [Profile];
+  profile: Profile[];
 }

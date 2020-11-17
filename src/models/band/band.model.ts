@@ -10,8 +10,8 @@ export class Band extends Profile{
   members: Musician[];
   genres: Genre[];
   subscriptionPrice: number;
-  auditions?: [Audition];
+  auditions?: Audition[];
   // lista de ofertas de trabajo a las que se suscribe
-  jobOffers?: [JobOffer];
+  jobOffers?: JobOffer[];
   subscription?: Subscription;
 }

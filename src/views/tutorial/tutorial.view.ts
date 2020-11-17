@@ -3,7 +3,6 @@ import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {debounceTime} from 'rxjs/operators';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
-import {UserDetails} from '../../models/userDetails/user-details.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -16,7 +15,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class TutorialView implements OnInit {
   public tutorialPost: Tutorial;
   public tutorialOwner: Musician;
-  private fanDetails: UserDetails;
   private printedTutorialPost: any;
 
   public ButtonVisible = true;
@@ -25,7 +23,7 @@ export class TutorialView implements OnInit {
   public successMessage = '';
 
   public pathId: string;
-  public userPathId: string;
+  public ownerPathId: string;
   private loggedId: string;
   private printedProfile: any;
   public isFan: boolean;
@@ -46,26 +44,21 @@ export class TutorialView implements OnInit {
         this.printedTutorialPost = afs.doc<Tutorial>('tutorialPosts/' + this.pathId);
         this.printedTutorialPost.valueChanges().subscribe((tutorial) => {
           this.tutorialPost = tutorial;
+          // Cargamos el usuario owner de la clase
+          this.printedProfile = afs.doc<Musician>('musicianProfiles/' + this.tutorialPost.owner);
+          this.ownerPathId = this.tutorialPost.owner;
+          this.printedProfile.valueChanges().subscribe((musician) => {
+            this.tutorialOwner = musician;
+          });
         });
       }
     );
-
-    // Cargamos el usuario owner de la clase
-    this.printedProfile = afs.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
-    this.userPathId = 'IfcscpI7GL2pFaZKEccf';
-    this.printedProfile.valueChanges().subscribe((musician) => {
-      this.tutorialOwner = musician;
-    });
 
     // TODO DESCOMENTAR CUANDO SE PUEDAN CREAR USUARIOS FAN
     /*this.afAuth.authState.subscribe(user => {
       if (user){
         this.loggedId = user.uid;
-        if (user.photoURL === 'FAN' && !this.checkIfApplied()) {
-          this.isFan = true;
-        } else {
-          this.isFan = false;
-        }
+        this.isFan = user.photoURL === 'FAN';
       }
       else{
 
@@ -80,21 +73,23 @@ export class TutorialView implements OnInit {
     this._success.pipe(
       debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
+    this.checkIfApplied();
   }
 
   applyForTutorial(): void{
     // TODO Change for logged user
     this.tutorialPost.userWaitList.push(this.loggedId);
     this.printedTutorialPost.update(this.tutorialPost);
-    this._success.next('Reserva solicitada con exito! ');
+    this._success.next('Reserva solicitada con éxito! ');
+    this.ButtonVisible = false;
   }
 
-  checkIfApplied(): boolean {
+  checkIfApplied(): void {
     for (const id of this.tutorialPost.userWaitList) {
       if (this.loggedId === id) {
-        return true;
+        this.ButtonVisible = false;
       }
     }
-    return false;
+    this.ButtonVisible = true;
   }
 }
