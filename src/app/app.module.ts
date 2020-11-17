@@ -47,6 +47,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {JobOfferView} from '../views/job-offer/job-offer.view';
 import {DownloadUrlComponent} from '../components/download-url/download-url.component';
 import {PostCardComponent} from '../components/post-card/post-card.component';
+import {JobOfferModificationView} from '../views/job-offer-modification/job-offer-modification.view';
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import {PostCardComponent} from '../components/post-card/post-card.component';
         ProfileModificationView,
         NewsView,
         JobOfferView,
+        JobOfferModificationView,
         DownloadUrlComponent,
         PostCardComponent,
     ],
