@@ -22,7 +22,7 @@ export class JobOfferView implements OnInit {
   private loggedId: string;
   private printedProfile: any;
 
-  public isButtonVisible = false;
+  public isButtonVisible = true;
   public isMusician: boolean;
 
   private _success = new Subject<string>();
@@ -71,24 +71,23 @@ export class JobOfferView implements OnInit {
   }
 
   applyForJobOffer(): void {
+    this.isButtonVisible = false;
     this.jobOfferPost.userWaitList.push(this.loggedId);
     this.printedJobOffer.update(this.jobOfferPost);
     this._success.next('Solicitud de trabajo realizada con éxito! ');
-    this.isButtonVisible = false;
   }
 
   checkIfApplied(): void {
     console.log('entra al metodo');
     if (this.isMusician) {
-      console.log('musico logueado');
+      console.log('soy un musico logueado');
       for (const id of this.jobOfferPost.userWaitList) {
-        console.log('he entrado con: ' + id);
+        console.log('he entrado con mi id: ' + id);
         if (this.loggedId === id) {
           this.isButtonVisible = false;
-          console.log('he cambiado el boton');
+          console.log('estoy en la lista ya, asi que he cambiado el boton');
         }
       }
-      this.isButtonVisible = true;
     }
   }
 
