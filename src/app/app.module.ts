@@ -39,7 +39,7 @@ import {NewsView} from '../views/news/news.view';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SocialAdderComponent} from '../components/social-adder/social-adder.component';
 import {NewsContainerComponent} from '../components/news-container/news-container.component';
-import {PostFeedComponent} from "../components/post-feed/post-feed.component";
+import {PostFeedComponent} from '../components/post-feed/post-feed.component';
 import {GenreAdderComponent} from '../components/genre-adder/genre-adder.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
@@ -48,6 +48,8 @@ import {JobOfferView} from '../views/job-offer/job-offer.view';
 import {DownloadUrlComponent} from '../components/download-url/download-url.component';
 import {PostCardComponent} from '../components/post-card/post-card.component';
 import {JobOfferModificationView} from '../views/job-offer-modification/job-offer-modification.view';
+import {JobOfferCheckerComponent} from '../components/job-offer-checker/job-offer-checker.component';
+import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-offer-listing.view';
 
 @NgModule({
     declarations: [
@@ -61,6 +63,7 @@ import {JobOfferModificationView} from '../views/job-offer-modification/job-offe
         NavigationbarComponent,
         SocialLinksComponent,
         LoginUserComponent,
+        JobOfferCheckerComponent,
 
         /** VIEWS */
         HomeView,
@@ -74,6 +77,7 @@ import {JobOfferModificationView} from '../views/job-offer-modification/job-offe
         TutorialModificationView,
         ClassCheckerComponent,
         UserTutorialListingView,
+        UserJobOfferListingView,
         TutorialCreationView,
         ProfileModificationView,
         NewsView,

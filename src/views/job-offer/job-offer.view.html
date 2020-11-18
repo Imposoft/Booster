@@ -27,7 +27,7 @@
       <div class="card-body">
         <img class="card-img" [src]="jobOfferOwner.imageSource" alt="Imagen de perfil" style="max-width: 75px">
         <h5 class="card-title">Contratante: <b>{{jobOfferOwner.name}}</b></h5>
-        <a [routerLink]="['/bandProfile', pathId]" class="card-link">Perfil de la banda</a>
+        <a [routerLink]="['/bandProfile', ownerPathId]" class="card-link">Perfil de la banda</a>
         <!--<a [routerLink]="'profile/FVgBtsJlkRl0qZU4VaiW'" class="card-link">Perfil del musico</a>-->
       </div>
     </div>
@@ -38,7 +38,7 @@
     </div>
     <div class="mt-2 p-1 pl-2">
       {{jobOfferPost.body}}
-      <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+      <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom" *ngIf="checkIfOwnerLoged()">
         <a [routerLink]="['/JobOfferModification',pathId]">
           <button class="btn btn-outline-primary m-2">Modificar Oferta</button>
         </a>

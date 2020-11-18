@@ -43,11 +43,11 @@ export class TutorialView implements OnInit {
         // Cargamos el perfil sobre el perfil vacio
         this.printedTutorialPost = afs.doc<Tutorial>('tutorialPosts/' + this.pathId);
 
-      /*this.afAuth.authState.subscribe(user => {
+        this.afAuth.authState.subscribe(user => {
         if (user){
           this.loggedId = user.uid;
           this.isFan = user.photoURL === 'FAN';
-        }*/
+        }
         this.printedTutorialPost.valueChanges().subscribe((tutorial) => {
           this.tutorialPost = tutorial;
           // Cargamos el usuario owner de la clase
@@ -57,23 +57,9 @@ export class TutorialView implements OnInit {
             this.tutorialOwner = musician;
           });
           this.checkIfApplied();
-        // });
+        });
       });
-    }
-  );
-
-  // TODO DESCOMENTAR CUANDO SE PUEDAN CREAR USUARIOS FAN
-  /*this.afAuth.authState.subscribe(user => {
-    if (user){
-      this.loggedId = user.uid;
-      this.isFan = user.photoURL === 'FAN';
-    }
-    else{
-
-    }
-  });*/
-    this.loggedId = '06jZPowdcMvZnUXzSUg9';
-    this.isFan = true;
+    });
   }
 
   ngOnInit(): void {

@@ -47,7 +47,7 @@ export class TutorialModificationView implements OnInit {
       imgUrl: this.modificationForm.value.imageUrl,
       promoted: false,
       exclusive: false,
-      owner: null
+      owner: this.tutorial.owner
     };
     this.printedTutorial.update(tutorial)
       .catch(error => console.log(error));

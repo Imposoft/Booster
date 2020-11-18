@@ -22,27 +22,22 @@ export class FanView implements OnInit {
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
-        if (params.id) {
-          this.pathId = params.id;
-        } else {
-          this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
+      if (params.id) {
+        this.pathId = params.id;
+      } else {
+        this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
+      }
+      // Si hemos iniciado sesion, loggedId sera nuestro id
+      this.afAuth.authState.subscribe(user => {
+        if (user){
+          this.loggedId = user.uid;
         }
-        // Cargamos el perfil sobre el perfil vacio
-        this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
-        this.printedProfile.valueChanges().subscribe(fan => {
-          this.profile = fan;
-        });
-      }
-    );
-
-    // Si hemos iniciado sesion, loggedId sera nuestro id
-    this.afAuth.authState.subscribe(user => {
-      if (user){
-        this.loggedId = user.uid;
-      }
-      else{
-
-      }
+      });
+      // Cargamos el perfil sobre el perfil vacio
+      this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
+      this.printedProfile.valueChanges().subscribe(fan => {
+        this.profile = fan;
+      });
     });
   }
 

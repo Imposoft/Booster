@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {JobOffer} from '../../models/jobs/job-offer.model';
+import {JobOffer} from '../../models/jobOffer/job-offer.model';
 import {Band} from '../../models/band/band.model';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
@@ -85,6 +85,10 @@ export class JobOfferView implements OnInit {
         }
       }
     }
+  }
+
+  checkIfOwnerLoged(): boolean {
+    return this.loggedId === this.ownerPathId;
   }
 
 }

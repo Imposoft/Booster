@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {JobOffer} from '../../models/jobs/job-offer.model';
+import {JobOffer} from '../../models/jobOffer/job-offer.model';
 import {Band} from '../../models/band/band.model';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';

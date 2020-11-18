@@ -31,6 +31,12 @@ export class BandView implements OnInit {
         } else {
           this.pathId = 'n6ZhZ1TJI7iayJS4GQrc';
         }
+        // Si hemos iniciado sesion, loggedId sera nuestro id
+        this.afAuth.authState.subscribe(user => {
+          if (user){
+            this.loggedId = user.uid;
+          }
+        });
         // Cargamos el perfil sobre el perfil vacio
         this.printedProfile = firestore.doc<Band>('bandProfiles/' + this.pathId);
         this.printedProfile.valueChanges().subscribe((band) => {
@@ -38,16 +44,6 @@ export class BandView implements OnInit {
         });
       }
     );
-
-    // Si hemos iniciado sesion, loggedId sera nuestro id
-    this.afAuth.authState.subscribe(user => {
-      if (user){
-        this.loggedId = user.uid;
-      }
-      else{
-
-      }
-    });
   }
 
   ngOnInit(): void {

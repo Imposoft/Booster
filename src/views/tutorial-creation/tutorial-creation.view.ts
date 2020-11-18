@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tutorial-creation',
@@ -14,11 +15,20 @@ export class TutorialCreationView implements OnInit {
   tutorialPosts;
   modificationForm: FormGroup;
 
+  private loggedId: string;
+  public isMusician: boolean;
+
   private _success = new Subject<string>();
   successMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+        this.isMusician = user.photoURL === 'MUSICIAN';
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -42,7 +52,7 @@ export class TutorialCreationView implements OnInit {
       imgUrl: this.modificationForm.value.imageUrl,
       promoted: false,
       exclusive: false,
-      owner: null,
+      owner: this.loggedId,
       userWaitList: []
     };
     this.tutorialPosts.add(tutorial);

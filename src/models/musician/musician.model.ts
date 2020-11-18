@@ -1,7 +1,7 @@
 import {Profile} from '../profile/profile.model';
 import {Genre} from '../genre/genre.model';
 import {Subscription} from 'rxjs';
-import {JobOffer} from '../jobs/job-offer.model';
+import {JobOffer} from '../jobOffer/job-offer.model';
 import {Instrument} from '../instrument/instrument.model';
 import {Tutorial} from '../tutorial/tutorial.model';
 

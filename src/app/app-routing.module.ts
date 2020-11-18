@@ -16,6 +16,7 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
 import {NewsView} from '../views/news/news.view';
 import {JobOfferView} from '../views/job-offer/job-offer.view';
 import {JobOfferModificationView} from '../views/job-offer-modification/job-offer-modification.view';
+import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-offer-listing.view';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification/:id', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},
+  {path: 'userJobOfferListing', component: UserJobOfferListingView},
   {path: 'fanModification/:id', component: FanModificationView},
   {path: 'profileModification/:id', component: ProfileModificationView},
   {path: 'news', component: NewsView},
