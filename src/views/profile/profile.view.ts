@@ -48,4 +48,8 @@ export class ProfileView implements OnInit {
 
   ngOnInit(): void {
   }
+
+  userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
+  }
 }

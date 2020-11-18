@@ -15,8 +15,8 @@
       </div>
     </div>
     <a [routerLink]="['/fanModification',pathId]">
-      <!-- <button *ngIf="pathId==loggedId" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button> -->
-      <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
+      <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
+      <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>-->
     </a>
 
 

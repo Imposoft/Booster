@@ -52,4 +52,8 @@ export class BandView implements OnInit {
 
   ngOnInit(): void {
   }
+
+  userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
+  }
 }

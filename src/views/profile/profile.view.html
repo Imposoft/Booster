@@ -20,21 +20,21 @@
     <br>
     <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight">
       <a [routerLink]="['/profileModification',pathId]">
-        <button class="btn btn-outline-primary m-2"> Modificar Perfil</button>
-        <!-- <button *ngIf="pathId==loggedId" class="btn btn-outline-primary m-2"> Modificar Perfil</button> -->
+        <!-- <button class="btn btn-outline-primary m-2"> Modificar Perfil</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Modificar Perfil</button>
       </a>
       <br>
       <a [routerLink]="'/tutorialCreation'">
-        <button class="btn btn-outline-primary m-2"> Crear clase particular</button>
-        <!-- <button *ngIf="pathId==loggedId" class="btn btn-outline-primary m-2"> Crear clase particular</button> -->
+        <!-- <button class="btn btn-outline-primary m-2"> Crear clase particular</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear clase particular</button>
       </a>
       <a [routerLink]="'/userTutorialListing'">
-        <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button>
-        <!-- <button *ngIf="pathId==loggedId" class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
+        <!-- <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Revisar clases particulares</button>
       </a>
       <a [routerLink]="'/news'">
-        <button class="btn btn-outline-primary m-2"> Crear Noticia</button>
-        <!-- <button *ngIf="pathId==loggedId" class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
+        <!-- <button class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear Noticia</button>
       </a>
     </div>
 

@@ -47,4 +47,8 @@ export class FanView implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
+  }
 }
