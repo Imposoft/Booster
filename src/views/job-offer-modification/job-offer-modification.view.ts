@@ -38,15 +38,17 @@ export class JobOfferModificationView implements OnInit {
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
-        if (params.id) {
-          this.pathId = params.id;
-        } else {
-          this.pathId = 'dKAmFasidHlD5ZpD9ttP';
-        }
-        this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
+      if (params.id) {
+        this.pathId = params.id;
+      } else {
+        console.log(params);
+        this.pathId = 'dKAmFasidHlD5ZpD9ttP';
       }
-    );
-    this.jobOfferPost = this.printedJobOffer.valueChanges();
+    });
+    this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
+    this.printedJobOffer.valueChanges().subscribe((band) => {
+      this.jobOfferPost = band;
+    });
   }
 
   ngOnInit(): void {

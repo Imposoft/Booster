@@ -4,42 +4,42 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
       </div>
-      <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title">
+      <input class="form-control" [value]="jobOfferPost.title" aria-label="Titulo" formControlName="title">
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl">
+      <input class="form-control" [value]="jobOfferPost.imgUrl" aria-label="Imagen" formControlName="imgUrl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' [value]="jobOfferPost.exclusive" (click)="exclusive = !exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' [value]="jobOfferPost.promoted" (click)="promoted = !promoted">Promoted</mat-checkbox>
     </div>
     <app-genre-adder [genreList]="jobOfferPost.genres" (genreListModified)="changeGenres($event)"></app-genre-adder>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon2" style="width:9vw">Sueldo ofertado</span>
       </div>
-      <input class="form-control" placeholder="Sueldo" aria-label="Sueldo" formControlName="budget">
+      <input class="form-control" [value]="jobOfferPost.budget" aria-label="Sueldo" formControlName="budget">
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Cuerpo</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="body" placeholder="Texto..."></textarea>
+      <textarea class="form-control" rows="5" [value]="jobOfferPost.body" aria-label="With textarea" formControlName="body"></textarea>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon3" style="width:9vw">Archivos extra</span>
       </div>
-      <input class="form-control" placeholder="Archivos" aria-label="Archivos" formControlName="extraFiles">
+      <input class="form-control" [value]="jobOfferPost.extraFiles" aria-label="Archivos" formControlName="extraFiles">
     </div>
   </form>
 </div>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
   <button class="btn btn-outline-primary m-1" (click)="sendForm()">Publicar</button>
-  <a [routerLink]="'/profile'"><button class="btn btn-outline-primary m-1">Cancelar</button></a>
+  <a [routerLink]="'/jobOffer'"><button class="btn btn-outline-primary m-1">Cancelar</button></a>
 </div>
 
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
