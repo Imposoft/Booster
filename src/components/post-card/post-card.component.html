@@ -1,17 +1,17 @@
-<div class="card bg-warning border-danger" style="width: 40rem;">
+<div class="card" style="width: 40rem;">
   <div class="card-body">
 
-    <h5 class="card-title text-center font-weight-bold">{{postToDisplay.title}}</h5>
+    <h2 class="card-title text-center font-weight-bold">{{postToDisplay.title}}</h2>
 
     <p class="card-text text-justify">{{postToDisplay.body}}</p>
 
-    <!--<img class="card-img-bottom" src="post-card.component.ts" height="20%"> {{postToDisplay.imgUrl}} > -->
-    <div *ngIf="postToDisplay.promoted">Anuncio de publicación</div>
+    <img class="card-img-top" src="post-card.component.ts" height="20%" [src]="postToDisplay.imgUrl">
     <br>
-    <a href="#" class="btn btn-success border-danger" > Me gusta</a>
+    <!-- TODO EN ALGUN SPRINT -->
+    <!--<a href="#" class="btn btn-success m-1">Me gusta</a>-->
   </div>
-  <div class="card-footer text-muted">
-    Fecha de la Publicación
+  <div class="card-footer text-muted bg-warning border-danger" *ngIf="postToDisplay.promoted">
+    Contenido promocionado
   </div>
 </div>
 

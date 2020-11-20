@@ -1,5 +1,5 @@
-<div class="container-fluid d-flex justify-content-center bg-light" >
-  <div class="row bg-white" style="width:90vw">
+<div class="container-fluid d-flex justify-content-center bg-light flex-wrap" >
+  <div class="row bg-white p-2" style="width:90vw">
     <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
       <img [src]="profile.imageSource" alt="Imagen de perfil" style="max-width: 200px">
     </div>
@@ -18,8 +18,8 @@
       <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
       <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>-->
     </a>
-
-
+  </div>
+  <div class="row bg-white mt-4 p-2" style="width:90vw">
     <app-post-feed> </app-post-feed>
   </div>
 </div>
