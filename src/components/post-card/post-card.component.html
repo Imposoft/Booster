@@ -6,10 +6,12 @@
     <p class="card-text text-justify">{{postToDisplay.body}}</p>
 
     <!--<img class="card-img-bottom" src="post-card.component.ts" height="20%"> {{postToDisplay.imgUrl}} > -->
+    <div *ngIf="postToDisplay.promoted">Anuncio de publicación</div>
+    <br>
     <a href="#" class="btn btn-success border-danger" > Me gusta</a>
   </div>
   <div class="card-footer text-muted">
-    2 days ago
+    Fecha de la Publicación
   </div>
 </div>
 

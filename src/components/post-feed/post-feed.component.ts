@@ -17,7 +17,7 @@ export class PostFeedComponent implements OnInit {
       exclusive: false,
       imgUrl: 'Aquí iría la imagen del feedd1?',
       owner: undefined,
-      promoted: false,
+      promoted: true,
       title: 'Titulo de Publicación 1'};
     this.postTwo = {body: ' Me llamo Juana es una música muy poco profesional y la verdad que no aconsejo contratarta..cuerpo del feed 2......',
       exclusive: false,
