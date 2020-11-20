@@ -19,14 +19,14 @@ export class PostFeedComponent implements OnInit {
       owner: undefined,
       promoted: true,
       title: 'Titulo de Publicación 1',
-      creation: ''};
+      creation: 'Post publicado el 22/22/2222'};
     this.postTwo = {body: ' Me llamo Juana es una música muy poco profesional y la verdad que no aconsejo contratarta..cuerpo del feed 2......',
       exclusive: false,
       imgUrl: 'https://firebasestorage.googleapis.com/v0/b/booster-dceeb.appspot.com/o/temp%2Fbisbal.png?alt=media&token=d34d3ee8-1f87-4ee0-8a94-ca939e67310a',
       owner: undefined,
       promoted: false,
       title: 'Titulo de Publicación 2',
-      creation: ''};
+      creation: 'Post Publicado el 33/33/3333'};
     this.postList.push(this.postOne, this.postTwo);
   }
 
