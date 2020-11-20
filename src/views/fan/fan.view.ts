@@ -35,7 +35,7 @@ export class FanView implements OnInit {
           this.loggedId = user.uid;
         }
       });
-      this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges();
+      this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges({ idField: 'id' });
       // Cargamos el perfil sobre el perfil vacio
       this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
       this.printedProfile.valueChanges().subscribe(fan => {

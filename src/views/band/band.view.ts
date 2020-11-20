@@ -38,7 +38,7 @@ export class BandView implements OnInit {
             this.loggedId = user.uid;
           }
         });
-        this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges();
+        this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges({ idField: 'id' });
         // Cargamos el perfil sobre el perfil vacio
         this.printedProfile = firestore.doc<Band>('bandProfiles/' + this.pathId);
         this.printedProfile.valueChanges().subscribe((band) => {
