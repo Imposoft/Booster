@@ -18,13 +18,15 @@ export class PostFeedComponent implements OnInit {
       imgUrl: 'https://firebasestorage.googleapis.com/v0/b/booster-dceeb.appspot.com/o/temp%2Fviolinista--644x362.jpg?alt=media&token=dcaeb0db-6f5e-4472-875b-3dd77de70c08',
       owner: undefined,
       promoted: true,
-      title: 'Titulo de Publicación 1'};
+      title: 'Titulo de Publicación 1',
+      creation: ''};
     this.postTwo = {body: ' Me llamo Juana es una música muy poco profesional y la verdad que no aconsejo contratarta..cuerpo del feed 2......',
       exclusive: false,
       imgUrl: 'https://firebasestorage.googleapis.com/v0/b/booster-dceeb.appspot.com/o/temp%2Fbisbal.png?alt=media&token=d34d3ee8-1f87-4ee0-8a94-ca939e67310a',
       owner: undefined,
       promoted: false,
-      title: 'Titulo de Publicación 2'};
+      title: 'Titulo de Publicación 2',
+      creation: ''};
     this.postList.push(this.postOne, this.postTwo);
   }
 
