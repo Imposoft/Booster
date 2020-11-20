@@ -9,6 +9,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Fan} from '../../models/fan/fan.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Location} from '@angular/common';
+import {Musician} from '../../models/musician/musician.model';
+import {Band} from '../../models/band/band.model';
 
 @Component({
   selector: 'app-news',
@@ -27,6 +29,7 @@ export class NewsView implements OnInit {
   private _success = new Subject<string>();
   successMessage = '';
   public loggedId: string;
+  public role: string;
 
   constructor(private formBuilder: FormBuilder,
               public firestore: AngularFirestore,
@@ -51,6 +54,7 @@ export class NewsView implements OnInit {
       this.afAuth.authState.subscribe(user => {
         if (user){
           this.loggedId = user.uid;
+          this.role = user.photoURL;
         }
       });
     });
@@ -84,8 +88,8 @@ export class NewsView implements OnInit {
       owner: null,
     };
     this.news.add(post);*/
+    console.log(this.role);
     this.checkValues();
-    console.log(this.pathId);
     if (this.pathId !== undefined){
       this.newsPrinted.update(this.news)
         .catch(error => console.log(error));
@@ -110,20 +114,15 @@ export class NewsView implements OnInit {
   }
 
   changeView(): void {
-    this.location.back();
-  }
-}
-
-// service to get prev route
-@Injectable()
-export class RouteBackService {
-  public getPreviousUrl(routeArray): string {
-    let prevRoute = '';
-    for (let i = 0; i < routeArray.length - 1; i++) {
-      if (routeArray[i].url._value[0].length > 0) {
-        prevRoute += routeArray[i].url._value[0].path + '/';
-      }
+    this.successMessage = '';
+    if (this.role === 'FAN') {
+      this.router.navigate(['fanProfile/' + this.loggedId]);
+    } else if (this.role === 'BAND') {
+      this.router.navigate(['bandProfile/' + this.loggedId]);
+    } else if (this.role === 'MUSICIAN') {
+      this.router.navigate(['profile/' + this.loggedId]);
+    } else {
+      this.location.back();
     }
-    return prevRoute.slice(0, -1);
   }
 }

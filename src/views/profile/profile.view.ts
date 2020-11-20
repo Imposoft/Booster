@@ -35,7 +35,6 @@ export class ProfileView implements OnInit {
         }
       });
       this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges();
-      console.log(this.postList);
       // Cargamos el perfil sobre el perfil vacio
       this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + this.pathId);
       this.printedProfile.valueChanges().subscribe((musician) => {
