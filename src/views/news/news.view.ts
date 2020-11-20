@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -7,6 +7,8 @@ import {Post} from '../../models/post/post.model';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Fan} from '../../models/fan/fan.model';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-news',
@@ -24,8 +26,14 @@ export class NewsView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
+  public loggedId: string;
 
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder,
+              public firestore: AngularFirestore,
+              private router: Router,
+              private route: ActivatedRoute,
+              public afAuth: AngularFireAuth,
+              public location: Location) {
     // Perfil vacio sobre el que cargar los datos
     this.news = {title: '', body: '', promoted: false, exclusive: false, imgUrl: '', owner: ''};
 
@@ -33,15 +41,17 @@ export class NewsView implements OnInit {
     this.route.params.subscribe( params => {
       if (params.id) {
         this.pathId = params.id;
-        this.news.owner = params.id;
-      } else {
-        this.pathId = 'iKnNeDc6s9VItopdYLuR';
-        this.news.owner = 'iKnNeDc6s9VItopdYLuR';
+        // Cargamos el perfil sobre el perfil vacio
+        this.newsPrinted = firestore.doc<Post>('posts/' + this.pathId);
+        this.newsPrinted.valueChanges().subscribe((news) => {
+          this.news = news;
+        });
       }
-      // Cargamos el perfil sobre el perfil vacio
-      this.newsPrinted = firestore.doc<Post>('posts/' + this.pathId);
-      this.newsPrinted.valueChanges().subscribe((news) => {
-        this.news = news;
+      // Si hemos iniciado sesion, loggedId sera nuestro id
+      this.afAuth.authState.subscribe(user => {
+        if (user){
+          this.loggedId = user.uid;
+        }
       });
     });
   }
@@ -75,9 +85,18 @@ export class NewsView implements OnInit {
     };
     this.news.add(post);*/
     this.checkValues();
-    this.newsPrinted.update(this.news)
-      .catch(error => console.log(error));
-    this._success.next('Noticia creada con exito!');
+    console.log(this.pathId);
+    if (this.pathId !== undefined){
+      this.newsPrinted.update(this.news)
+        .catch(error => console.log(error));
+      this._success.next('Noticia modificada con exito!');
+    } else {
+      this.newsPrinted = this.firestore.collection<Post>('posts');
+      this.pathId = '';
+      this.newsPrinted.add(this.news)
+        .catch(error => console.log(error));
+      this._success.next('Noticia creada con exito!');
+    }
     this.changeView();
   }
 
@@ -87,10 +106,24 @@ export class NewsView implements OnInit {
     if (this.modificationForm.value.body !== ''){ this.news.body = this.modificationForm.value.body; }
     if (this.modificationForm.value.exclusive !== ''){ this.news.exclusive = this.modificationForm.value.exclusive; }
     if (this.modificationForm.value.promoted !== ''){ this.news.promoted = this.modificationForm.value.promoted; }
+    this.news.owner = this.loggedId;
   }
 
   changeView(): void {
-    this.successMessage = '';
-    this.router.navigate(['musicianProfiles/' + this.pathId]);
+    this.location.back();
+  }
+}
+
+// service to get prev route
+@Injectable()
+export class RouteBackService {
+  public getPreviousUrl(routeArray): string {
+    let prevRoute = '';
+    for (let i = 0; i < routeArray.length - 1; i++) {
+      if (routeArray[i].url._value[0].length > 0) {
+        prevRoute += routeArray[i].url._value[0].path + '/';
+      }
+    }
+    return prevRoute.slice(0, -1);
   }
 }

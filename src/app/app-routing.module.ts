@@ -38,6 +38,7 @@ const routes: Routes = [
   {path: 'fanModification/:id', component: FanModificationView},
   {path: 'profileModification/:id', component: ProfileModificationView},
   {path: 'news', component: NewsView},
+  {path: 'news/:id', component: NewsView},
   {path: 'jobOffer', component: JobOfferView},
   {path: 'jobOffer/:id', component: JobOfferView},
   {path: 'JobOfferModification/:id', component: JobOfferModificationView},

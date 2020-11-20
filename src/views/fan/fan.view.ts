@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {Post} from '../../models/post/post.model';
 
 @Component({
   selector: 'app-fan',
@@ -15,8 +16,9 @@ export class FanView implements OnInit {
   public profile: Fan;
   public pathId: string;
   private loggedId: string;
+  public postList: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+  constructor(private router: Router, private route: ActivatedRoute, public firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
 
@@ -33,6 +35,8 @@ export class FanView implements OnInit {
           this.loggedId = user.uid;
         }
       });
+      this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges();
+      console.log(this.postList);
       // Cargamos el perfil sobre el perfil vacio
       this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
       this.printedProfile.valueChanges().subscribe(fan => {

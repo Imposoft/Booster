@@ -32,7 +32,7 @@
         <!-- <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
         <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Revisar clases particulares</button>
       </a>
-      <a [routerLink]="'/news'">
+      <a [routerLink]="['/news']">
         <!-- <button class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
         <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear Noticia</button>
       </a>
@@ -47,6 +47,6 @@
 <!-- TODO Add Map Component -->
 <div class="container-fluid d-flex justify-content-center bg-light" >
   <div class="row bg-white mt-4 p-2" style="width:90vw">
-    <app-post-feed> </app-post-feed>
+    <app-post-feed [postList]="(this.postList | async)"> </app-post-feed>
   </div>
 </div>

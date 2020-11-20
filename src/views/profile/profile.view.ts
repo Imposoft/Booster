@@ -15,6 +15,7 @@ export class ProfileView implements OnInit {
   private printedProfile: any;
   public pathId: string;
   private loggedId: string;
+  public postList: any;
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     // Perfil vacio sobre el que cargar los datos
@@ -33,6 +34,8 @@ export class ProfileView implements OnInit {
           this.loggedId = user.uid;
         }
       });
+      this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges();
+      console.log(this.postList);
       // Cargamos el perfil sobre el perfil vacio
       this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + this.pathId);
       this.printedProfile.valueChanges().subscribe((musician) => {
