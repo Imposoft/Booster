@@ -84,6 +84,8 @@ export class JobOfferView implements OnInit {
           this.isButtonVisible = false;
         }
       }
+    } else {
+      this.isButtonVisible = false;
     }
   }
 
