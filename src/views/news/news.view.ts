@@ -44,6 +44,7 @@ export class NewsView implements OnInit {
     this.route.params.subscribe( params => {
       if (params.id) {
         this.pathId = params.id;
+        console.log('pathId = ' + this.pathId);
         // Cargamos el perfil sobre el perfil vacio
         this.newsPrinted = firestore.doc<Post>('posts/' + this.pathId);
         this.newsPrinted.valueChanges().subscribe((news) => {
@@ -65,13 +66,27 @@ export class NewsView implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.modificationForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      imgUrl: ['', [Validators.required]],
-      body: ['', []],
-      exclusive: ['', [Validators.required]],
-      promoted: ['', [Validators.required]],
-    });
+    console.log('onInit pathId = ' + this.pathId);
+    if (this.pathId !== undefined){
+      console.log('es distinto de undefined');
+      this.modificationForm = this.formBuilder.group({
+        title: [this.news.title, [Validators.required]],
+        imgUrl: [this.news.imgUrl, [Validators.required]],
+        body: [this.news.body, []],
+        exclusive: ['', [Validators.required]],
+        promoted: ['', [Validators.required]],
+      });
+      this.exclusive = this.news.exclusive;
+      this.promoted = this.news.promoted;
+    } else {
+      this.modificationForm = this.formBuilder.group({
+        title: ['', [Validators.required]],
+        imgUrl: ['', [Validators.required]],
+        body: ['', []],
+        exclusive: ['', [Validators.required]],
+        promoted: ['', [Validators.required]],
+      });
+    }
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
       debounceTime(2500)

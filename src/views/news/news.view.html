@@ -2,11 +2,11 @@
   <form [formGroup]="modificationForm">
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1" style="width:9vw">Titulo</span>
+        <span class="input-group-text" id="basic-addon1" style="width:9vw" >Titulo</span>
       </div>
-      <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title">
+      <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title" [value]="news.title">
       <div class="dropdown">
-        <button class="btn btn-secondary" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">⋮</button>
+        <button class="btn btn-secondary" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >⋮</button>
         <div class="dropdown-menu" aria-labelledby="options">
           <!-- <a class="dropdown-item" (click)="removeNews()">Eliminar</a> -->
         </div>
@@ -16,17 +16,17 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl">
+      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl" [value]="news.imgUrl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive" [checked]="news.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted" [checked]="news.promoted">Promoted</mat-checkbox>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Cuerpo</span>
       </div>
-      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="body" placeholder="Texto..."></textarea>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="body" placeholder="Texto..." [value]="news.body"></textarea>
     </div>
   </form>
 </div>
