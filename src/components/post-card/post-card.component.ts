@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class PostCardComponent implements OnInit {
   @Input() postToDisplay: Post;
+  @Input() isOwner: boolean;
   public firestore: AngularFirestore;
 
   constructor(firestore: AngularFirestore, private router: Router) {
@@ -27,4 +28,7 @@ export class PostCardComponent implements OnInit {
     this.router.navigate(['news/' + this.postToDisplay.id]);
   }
 
+  /*userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
+  }*/
 }

@@ -20,7 +20,7 @@
     </a>
   </div>
   <div class="row bg-white mt-4 p-2" style="width:90vw">
-    <app-post-feed [postList]="(this.postList | async)"> </app-post-feed>
+    <app-post-feed [postList]="(this.postList | async)" [userLoggedId]="userLoggedIsProfileOwner()"> </app-post-feed>
   </div>
 </div>
 

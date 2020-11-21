@@ -8,6 +8,7 @@ import {Post} from '../../models/post/post.model';
 })
 export class PostFeedComponent implements OnInit {
   @Input() postList: Post[];
+  @Input() userLoggedId: boolean;
 
   constructor() {
   }
