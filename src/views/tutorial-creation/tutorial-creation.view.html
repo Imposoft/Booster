@@ -24,7 +24,10 @@
       </div>
       <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imageUrl">
     </div>
-
+    <div>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)">Promoted</mat-checkbox>
+    </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Descripcion</span>

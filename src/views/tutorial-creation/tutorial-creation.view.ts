@@ -20,6 +20,8 @@ export class TutorialCreationView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
+  private exclusive: boolean;
+  private promoted: boolean;
 
   constructor(private formBuilder: FormBuilder, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
@@ -50,12 +52,21 @@ export class TutorialCreationView implements OnInit {
       body: this.modificationForm.value.description,
       price: this.modificationForm.value.price,
       imgUrl: this.modificationForm.value.imageUrl,
-      promoted: false,
-      exclusive: false,
+      promoted: this.promoted,
+      exclusive: this.exclusive,
       owner: this.loggedId,
       userWaitList: []
     };
     this.tutorialPosts.add(tutorial);
     this._success.next('Clase creada con exito!');
+  }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
   }
 }

@@ -13,7 +13,10 @@
       </div>
       <input class="form-control"  value="{{(tutorial | async)?.imgUrl}}" aria-label="Imagen" formControlName="imageUrl">
     </div>
-
+    <div>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="(tutorial | async)?.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)" [checked]="(tutorial | async)?.promoted">Promoted</mat-checkbox>
+    </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" style="width:12.5vw" >Precio de la clase</span>

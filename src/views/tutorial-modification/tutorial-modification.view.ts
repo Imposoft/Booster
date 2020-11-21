@@ -18,6 +18,8 @@ export class TutorialModificationView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
+  private exclusive: boolean;
+  private promoted: boolean;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.printedTutorial = firestore.doc<Tutorial>('tutorialPosts/nWog3AOCpmhE3wDQcHNo');
@@ -45,13 +47,22 @@ export class TutorialModificationView implements OnInit {
       price: this.modificationForm.value.price,
       userWaitList: this.modificationForm.value.userWaitList,
       imgUrl: this.modificationForm.value.imageUrl,
-      promoted: false,
-      exclusive: false,
+      promoted: this.promoted,
+      exclusive: this.exclusive,
       owner: this.tutorial.owner
     };
     this.printedTutorial.update(tutorial)
       .catch(error => console.log(error));
     this._success.next('Clase particular guardada con exito!');
+  }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
   }
 
 }
