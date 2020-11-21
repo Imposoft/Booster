@@ -15,10 +15,28 @@
         </div>
       </div>
     </div>
-    <a [routerLink]="['/bandModification',pathId]">
-      <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button> -->
-      <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
-    </a>
+
+    <br>
+    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight">
+      <a [routerLink]="['/bandModification',pathId]">
+        <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
+      </a>
+      <br>
+      <a [routerLink]="'/JobOfferModification'">
+        <!-- <button class="btn btn-outline-primary m-2"> Crear clase particular</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear oferta de trabajo</button>
+      </a>
+      <a [routerLink]="'/userJobOfferListing'">
+        <!-- <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Revisar ofertas de trabajo</button>
+      </a>
+      <a [routerLink]="['/news']">
+        <!-- <button class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
+        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear Noticia</button>
+      </a>
+    </div>
+
     <br> <br>
     <div class="d-flex justify-content-center p-3 w-100">
       <div class="row w-100">
