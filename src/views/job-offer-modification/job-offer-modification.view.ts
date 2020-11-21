@@ -70,11 +70,9 @@ export class JobOfferModificationView implements OnInit {
     }
     this.modificationForm = this.formBuilder.group({
       body: ['', [Validators.required]],
-      exclusive: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       owner: ['', [Validators.required]],
       budget: ['', [Validators.required]],
-      promoted: ['', [Validators.required]],
       title: ['', [Validators.required]],
       usertWaitList: ['', [Validators.required]],
       endData: ['', [Validators.required]],
@@ -106,15 +104,15 @@ export class JobOfferModificationView implements OnInit {
 
   checkValues(): void {
     if (this.modificationForm.value.body !== ''){ this.jobOfferPost.body = this.modificationForm.value.body; }
-    if (this.modificationForm.value.exclusive !== ''){ this.jobOfferPost.exclusive = this.modificationForm.value.exclusive; }
     if (this.modificationForm.value.imageurl !== ''){ this.jobOfferPost.imgUrl = this.modificationForm.value.imageurl; }
     if (this.modificationForm.value.owner !== ''){ this.jobOfferPost.owner = this.modificationForm.value.owner; }
     if (this.modificationForm.value.budget !== ''){ this.jobOfferPost.budget = this.modificationForm.value.budget; }
-    if (this.modificationForm.value.promoted !== ''){ this.jobOfferPost.promoted = this.modificationForm.value.promoted; }
     if (this.modificationForm.value.title !== ''){ this.jobOfferPost.title = this.modificationForm.value.title; }
     if (this.modificationForm.value.endData !== ''){ this.jobOfferPost.endData = this.modificationForm.value.endData; }
     if (this.modificationForm.value.extraFiles !== ''){ this.jobOfferPost.extraFiles = this.modificationForm.value.extraFiles; }
     if (this.genreModified !== undefined) { this.jobOfferPost.genres = this.genreModified; }
+    this.jobOfferPost.promoted = this.promoted;
+    this.jobOfferPost.exclusive = this.exclusive;
   }
 
   changeView(): void {

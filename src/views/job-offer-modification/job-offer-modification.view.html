@@ -27,6 +27,12 @@
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2" style="width:9vw">Fecha finalizacion</span>
+      </div>
+      <input class="form-control" [value]="jobOfferPost.endData" aria-label="Fecha fin" formControlName="endData" placeholder="Formato: dd/mm/aaaa">
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
         <span class="input-group-text" style="width:9vw">Cuerpo</span>
       </div>
       <textarea class="form-control" rows="5" [value]="jobOfferPost.body" aria-label="With textarea" formControlName="body"></textarea>

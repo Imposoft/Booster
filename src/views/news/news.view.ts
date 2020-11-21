@@ -100,6 +100,7 @@ export class NewsView implements OnInit {
     } else {
       this.newsPrinted = this.firestore.collection<Post>('posts');
       this.pathId = '';
+      this.news.owner = this.loggedId;
       this.newsPrinted.add(this.news)
         .catch(error => console.log(error));
       this._success.next('Noticia creada con exito!');
@@ -111,9 +112,8 @@ export class NewsView implements OnInit {
     if (this.modificationForm.value.title !== ''){ this.news.title = this.modificationForm.value.title; }
     if (this.modificationForm.value.imgUrl !== ''){ this.news.imgUrl = this.modificationForm.value.imgUrl; }
     if (this.modificationForm.value.body !== ''){ this.news.body = this.modificationForm.value.body; }
-    if (this.modificationForm.value.exclusive !== ''){ this.news.exclusive = this.modificationForm.value.exclusive; }
-    if (this.modificationForm.value.promoted !== ''){ this.news.promoted = this.modificationForm.value.promoted; }
-    this.news.owner = this.loggedId;
+    this.news.promoted = this.promoted;
+    this.news.exclusive = this.exclusive;
   }
 
   changeView(): void {
