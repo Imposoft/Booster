@@ -27,7 +27,7 @@ export class JobOfferCheckerComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.userList = [];
-    this.printedProfile = this.firestore.collection<Fan>('fanProfiles');
+    this.printedProfile = this.firestore.collection<Musician>('musicianProfiles');
     for (let i = 0; i < this.jobInput.userWaitList.length; i++){
       this.printedProfile.doc(this.jobInput.userWaitList[i]).valueChanges().subscribe((musicianToAdd) => {
         this.userList.push(musicianToAdd);
@@ -36,13 +36,14 @@ export class JobOfferCheckerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usersShown = false;
   }
 
   toggleVisible(): void{
     this.usersShown = !this.usersShown;
   }
 
-  deleteUserInfo(user: Fan): void {
+  deleteUserInfo(user: Musician): void {
     for (let i = 0; i < this.userList.length; i++) {
       if (this.userList[i] === user){
         this.userList.splice(i, 1);

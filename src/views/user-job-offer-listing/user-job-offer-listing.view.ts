@@ -36,9 +36,9 @@ export class UserJobOfferListingView implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteClass(delClass: Tutorial): void {
+  deleteClass(delJobOffer: JobOffer): void {
     for (let i = 0; i < this.jobList.length; i++) {
-      if (this.jobList[i] === delClass){
+      if (this.jobList[i] === delJobOffer){
         this.jobList.splice(i, 1);
       }
     }
