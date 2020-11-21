@@ -13,8 +13,8 @@
       <input class="form-control" [value]="jobOfferPost.imgUrl" aria-label="image url" formControlName="imageurl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive" [checked]="jobOfferPost.exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted" [checked]="jobOfferPost.promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="jobOfferPost.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)" [checked]="jobOfferPost.promoted">Promoted</mat-checkbox>
     </div>
 
     <app-genre-adder [genreList]="jobOfferPost.genres" (genreListModified)="changeGenres($event)"></app-genre-adder>

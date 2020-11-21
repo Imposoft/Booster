@@ -124,4 +124,13 @@ export class JobOfferModificationView implements OnInit {
     this.genreModified = $event;
     console.log($event);
   }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
+  }
 }

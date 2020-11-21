@@ -19,8 +19,8 @@
       <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl" [value]="news.imgUrl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive" [checked]="news.exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted" [checked]="news.promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="news.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)" [checked]="news.promoted">Promoted</mat-checkbox>
     </div>
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">

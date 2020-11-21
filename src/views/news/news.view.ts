@@ -7,6 +7,7 @@ import {Post} from '../../models/post/post.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Location} from '@angular/common';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-news',
@@ -127,5 +128,14 @@ export class NewsView implements OnInit {
     } else {
       this.location.back();
     }
+  }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
   }
 }
