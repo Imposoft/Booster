@@ -9,16 +9,21 @@
     <br> <br>
     <div class="col-md-6 col-sm-12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <br>
           <h1>{{jobOfferPost.title}}</h1>
           <h2>Sueldo: <b>{{jobOfferPost.budget}} €</b></h2>
           <h3>Fecha de terminación: <b>{{jobOfferPost.endData}}</b></h3>
         </div>
-      </div>
-      <div class="mat-action-row">
-        <div *ngIf='isButtonVisible'>
-          <button class="d-flex ml-auto btn btn-outline-primary m-2" (click)="applyForJobOffer()">Inscribirse</button>
+        <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom" *ngIf="checkIfOwnerLoged()">
+          <div class="mat-action-row">
+            <a [routerLink]="['/jobOfferModification',pathId]">
+              <button class="btn btn-outline-primary m-2">Modificar Oferta</button>
+            </a>
+            <div *ngIf='isButtonVisible'>
+              <button class="d-flex ml-auto btn btn-outline-primary m-2" (click)="applyForJobOffer()">Inscribirse</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -38,11 +43,6 @@
     </div>
     <div class="mt-2 p-1 pl-2">
       {{jobOfferPost.body}}
-      <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom" *ngIf="checkIfOwnerLoged()">
-        <a [routerLink]="['/jobOfferModification',pathId]">
-          <button class="btn btn-outline-primary m-2">Modificar Oferta</button>
-        </a>
-      </div>
     </div>
   </div>
 </div>

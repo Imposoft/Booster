@@ -9,14 +9,16 @@
     <br> <br>
     <div class="col-md-6 col-sm-12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <br>
           <h1>{{tutorialPost.title}}</h1>
           <h2>Precio: <b>{{tutorialPost.price}} €</b></h2>
         </div>
-      </div>
-      <div *ngIf='isButtonVisible'>
-      <button class="d-flex ml-auto btn btn-outline-primary m-2" (click)="applyForTutorial()">Solicitar reserva</button>
+        <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom" *ngIf='isButtonVisible'>
+          <div class="mat-action-row">
+            <button class="btn btn-outline-primary m-2" (click)="applyForTutorial()">Solicitar reserva</button>
+          </div>
+        </div>
       </div>
     </div>
     <br> <br>
