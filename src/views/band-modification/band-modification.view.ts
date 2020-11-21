@@ -53,9 +53,6 @@ export class BandModificationView implements OnInit {
       members: ['', []],
       phone: ['', []],
       location: ['', [Validators.required]],
-      urlInsta: ['', []],
-      urlSpotify: ['', []],
-      urlTwitter: ['', []],
       description: ['', []],
       subscriptionPrice: ['', [Validators.required]]
     });

@@ -29,8 +29,14 @@ export class JobOfferModificationView implements OnInit {
 
   private _success = new Subject<string>();
   public successMessage = '';
+  public loggedId: string;
+  public role: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute,
+              private afs: AngularFirestore,
+              public afAuth: AngularFireAuth) {
 
     // Oferta de trabajo  vacia sobre el que cargar los datos
     this.jobOfferPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], userWaitList: [], endData: '', extraFiles: ''};
@@ -40,27 +46,36 @@ export class JobOfferModificationView implements OnInit {
     this.route.params.subscribe( params => {
       if (params.id) {
         this.pathId = params.id;
-      } else {
-        console.log(params);
-        this.pathId = 'dKAmFasidHlD5ZpD9ttP';
+        this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
+        this.printedJobOffer.valueChanges().subscribe((jobOffer) => {
+          this.jobOfferPost = jobOffer;
+        });
       }
-    });
-    this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
-    this.printedJobOffer.valueChanges().subscribe((band) => {
-      this.jobOfferPost = band;
+      // Si hemos iniciado sesion, loggedId sera nuestro id
+      this.afAuth.authState.subscribe(user => {
+        if (user){
+          this.loggedId = user.uid;
+          this.role = user.photoURL;
+        }
+      });
     });
   }
 
   ngOnInit(): void {
+    console.log('onInit pathId = ' + this.pathId);
+    if (this.pathId !== undefined){
+      console.log('es distinto de undefined');
+      this.exclusive = this.jobOfferPost.exclusive;
+      this.promoted = this.jobOfferPost.promoted;
+    }
     this.modificationForm = this.formBuilder.group({
       body: ['', [Validators.required]],
       exclusive: ['', [Validators.required]],
-      imgUrl: ['', [Validators.required]],
+      imageurl: ['', [Validators.required]],
       owner: ['', [Validators.required]],
       budget: ['', [Validators.required]],
       promoted: ['', [Validators.required]],
       title: ['', [Validators.required]],
-      genres: ['', [Validators.required]],
       usertWaitList: ['', [Validators.required]],
       endData: ['', [Validators.required]],
       extraFiles: ['', [Validators.required]]
@@ -72,22 +87,31 @@ export class JobOfferModificationView implements OnInit {
   }
 
   sendForm(): void {
+    console.log(this.role);
     this.checkValues();
-    this.printedJobOffer.update(this.jobOfferPost)
-      .catch(error => console.log(error));
-    this._success.next('Noticia creada con exito!');
+    if (this.pathId !== undefined){
+      this.printedJobOffer.update(this.jobOfferPost)
+        .catch(error => console.log(error));
+      this._success.next('Oferta de trabajo modificada con exito!');
+    } else {
+      this.printedJobOffer = this.afs.collection<JobOffer>('jobOfferPosts');
+      this.pathId = '';
+      this.jobOfferPost.owner = this.loggedId;
+      this.printedJobOffer.add(this.jobOfferPost)
+        .catch(error => console.log(error));
+      this._success.next('Oferta de trabajo creada con exito!');
+    }
     this.changeView();
   }
 
   checkValues(): void {
     if (this.modificationForm.value.body !== ''){ this.jobOfferPost.body = this.modificationForm.value.body; }
     if (this.modificationForm.value.exclusive !== ''){ this.jobOfferPost.exclusive = this.modificationForm.value.exclusive; }
-    if (this.modificationForm.value.imgUrl !== ''){ this.jobOfferPost.imgUrl = this.modificationForm.value.imageUrl; }
+    if (this.modificationForm.value.imageurl !== ''){ this.jobOfferPost.imgUrl = this.modificationForm.value.imageurl; }
     if (this.modificationForm.value.owner !== ''){ this.jobOfferPost.owner = this.modificationForm.value.owner; }
     if (this.modificationForm.value.budget !== ''){ this.jobOfferPost.budget = this.modificationForm.value.budget; }
     if (this.modificationForm.value.promoted !== ''){ this.jobOfferPost.promoted = this.modificationForm.value.promoted; }
-    if (this.modificationForm.value.title !== ''){ this.jobOfferPost.body = this.modificationForm.value.title; }
-    if (this.modificationForm.value.genres !== ''){ this.jobOfferPost.genres = this.modificationForm.value.genres; }
+    if (this.modificationForm.value.title !== ''){ this.jobOfferPost.title = this.modificationForm.value.title; }
     if (this.modificationForm.value.endData !== ''){ this.jobOfferPost.endData = this.modificationForm.value.endData; }
     if (this.modificationForm.value.extraFiles !== ''){ this.jobOfferPost.extraFiles = this.modificationForm.value.extraFiles; }
     if (this.genreModified !== undefined) { this.jobOfferPost.genres = this.genreModified; }

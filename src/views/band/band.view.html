@@ -23,11 +23,11 @@
         <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
       </a>
       <br>
-      <a [routerLink]="'/JobOfferModification'">
+      <a [routerLink]="['/jobOfferModification']">
         <!-- <button class="btn btn-outline-primary m-2"> Crear clase particular</button> -->
         <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear oferta de trabajo</button>
       </a>
-      <a [routerLink]="'/userJobOfferListing'">
+      <a [routerLink]="['/userJobOfferListing']">
         <!-- <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
         <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Revisar ofertas de trabajo</button>
       </a>

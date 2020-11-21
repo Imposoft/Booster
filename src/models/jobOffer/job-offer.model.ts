@@ -10,5 +10,4 @@ export class JobOffer extends Post {
   endData: string;
   // contractor: Contractor[];
   userWaitList: string[];
-  id?: string;
 }

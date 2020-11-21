@@ -10,13 +10,15 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" [value]="jobOfferPost.imgUrl" aria-label="Imagen" formControlName="imgUrl">
+      <input class="form-control" [value]="jobOfferPost.imgUrl" aria-label="image url" formControlName="imageurl">
     </div>
     <div>
-      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' [value]="jobOfferPost.exclusive" (click)="exclusive = !exclusive">Exclusive</mat-checkbox>
-      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' [value]="jobOfferPost.promoted" (click)="promoted = !promoted">Promoted</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' (click)="exclusive = !exclusive" [checked]="jobOfferPost.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="form-control-name" style="margin: 10px" color='primary' (click)="promoted = !promoted" [checked]="jobOfferPost.promoted">Promoted</mat-checkbox>
     </div>
+
     <app-genre-adder [genreList]="jobOfferPost.genres" (genreListModified)="changeGenres($event)"></app-genre-adder>
+
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon2" style="width:9vw">Sueldo ofertado</span>

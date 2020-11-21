@@ -1,16 +1,12 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Post} from '../../models/post/post.model';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Fan} from '../../models/fan/fan.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Location} from '@angular/common';
-import {Musician} from '../../models/musician/musician.model';
-import {Band} from '../../models/band/band.model';
 
 @Component({
   selector: 'app-news',
@@ -69,24 +65,16 @@ export class NewsView implements OnInit {
     console.log('onInit pathId = ' + this.pathId);
     if (this.pathId !== undefined){
       console.log('es distinto de undefined');
-      this.modificationForm = this.formBuilder.group({
-        title: [this.news.title, [Validators.required]],
-        imgUrl: [this.news.imgUrl, [Validators.required]],
-        body: [this.news.body, []],
-        exclusive: ['', [Validators.required]],
-        promoted: ['', [Validators.required]],
-      });
       this.exclusive = this.news.exclusive;
       this.promoted = this.news.promoted;
-    } else {
-      this.modificationForm = this.formBuilder.group({
-        title: ['', [Validators.required]],
-        imgUrl: ['', [Validators.required]],
-        body: ['', []],
-        exclusive: ['', [Validators.required]],
-        promoted: ['', [Validators.required]],
-      });
     }
+    this.modificationForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      imgUrl: ['', [Validators.required]],
+      body: ['', []],
+      exclusive: ['', [Validators.required]],
+      promoted: ['', [Validators.required]],
+    });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
       debounceTime(2500)

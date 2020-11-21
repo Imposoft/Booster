@@ -41,7 +41,8 @@ const routes: Routes = [
   {path: 'news/:id', component: NewsView},
   {path: 'jobOffer', component: JobOfferView},
   {path: 'jobOffer/:id', component: JobOfferView},
-  {path: 'JobOfferModification/:id', component: JobOfferModificationView},
+  {path: 'jobOfferModification', component: JobOfferModificationView},
+  {path: 'jobOfferModification/:id', component: JobOfferModificationView},
 ];
 
 @NgModule({
