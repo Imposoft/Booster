@@ -27,6 +27,7 @@
     "bootstrap": "^4.5.3",
     "firebase": "^7.13.1",
     "jquery": "^3.5.1",
+    "mat-firebase-upload": "^10.0.5",
     "node.js": "0.0.1-security",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",

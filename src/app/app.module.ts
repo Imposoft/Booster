@@ -50,6 +50,7 @@ import {PostCardComponent} from '../components/post-card/post-card.component';
 import {JobOfferModificationView} from '../views/job-offer-modification/job-offer-modification.view';
 import {JobOfferCheckerComponent} from '../components/job-offer-checker/job-offer-checker.component';
 import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-offer-listing.view';
+import {MatFirebaseUploadModule} from 'mat-firebase-upload';
 
 @NgModule({
     declarations: [
@@ -105,7 +106,8 @@ import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-
     AngularFirestoreModule,
     MatCheckboxModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatFirebaseUploadModule
   ],
   providers: [ {
     provide: MAT_CHIPS_DEFAULT_OPTIONS,

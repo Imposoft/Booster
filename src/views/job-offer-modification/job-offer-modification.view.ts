@@ -6,8 +6,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {debounceTime} from 'rxjs/operators';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Genre} from '../../models/genre/genre.model';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {environment} from '../../environments/environment.prod';
+import {app} from 'firebase';
 
 @Component({
   selector: 'app-job-offer-modification',
@@ -31,6 +34,8 @@ export class JobOfferModificationView implements OnInit {
   public successMessage = '';
   public loggedId: string;
   public role: string;
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -82,6 +87,14 @@ export class JobOfferModificationView implements OnInit {
     this._success.pipe(
       debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `jobOffers`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
+
   }
 
   sendForm(): void {
@@ -109,7 +122,7 @@ export class JobOfferModificationView implements OnInit {
     if (this.modificationForm.value.budget !== ''){ this.jobOfferPost.budget = this.modificationForm.value.budget; }
     if (this.modificationForm.value.title !== ''){ this.jobOfferPost.title = this.modificationForm.value.title; }
     if (this.modificationForm.value.endData !== ''){ this.jobOfferPost.endData = this.modificationForm.value.endData; }
-    if (this.modificationForm.value.extraFiles !== ''){ this.jobOfferPost.extraFiles = this.modificationForm.value.extraFiles; }
+    if (this.modificationForm.value.extraFiles !== ''){ this.jobOfferPost.extraFiles = 'jobOffers/' + this.controlFile.value.value.name; }
     if (this.genreModified !== undefined) { this.jobOfferPost.genres = this.genreModified; }
     this.jobOfferPost.promoted = this.promoted;
     this.jobOfferPost.exclusive = this.exclusive;
