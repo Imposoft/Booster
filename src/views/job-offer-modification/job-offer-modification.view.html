@@ -37,17 +37,17 @@
       </div>
       <textarea class="form-control" rows="5" [value]="jobOfferPost.body" aria-label="With textarea" formControlName="body"></textarea>
     </div>
-    <div class="input-group mb-3 form-row">
+    <!-- <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon3" style="width:9vw">Archivos extra</span>
       </div>
       <input class="form-control" [value]="jobOfferPost.extraFiles" aria-label="Archivos" formControlName="extraFiles">
-    </div>
+    </div> -->
   </form>
   <form-firebase-file
     [formControl]="controlFile"
     [config]="config"
-    placeholder="Drop files here!"
+    placeholder="Selecciona un archivo!"
   >
   </form-firebase-file>
 </div>

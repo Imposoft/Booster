@@ -122,7 +122,7 @@ export class JobOfferModificationView implements OnInit {
     if (this.modificationForm.value.budget !== ''){ this.jobOfferPost.budget = this.modificationForm.value.budget; }
     if (this.modificationForm.value.title !== ''){ this.jobOfferPost.title = this.modificationForm.value.title; }
     if (this.modificationForm.value.endData !== ''){ this.jobOfferPost.endData = this.modificationForm.value.endData; }
-    if (this.modificationForm.value.extraFiles !== ''){ this.jobOfferPost.extraFiles = 'jobOffers/' + this.controlFile.value.value.name; }
+    if (this.controlFile.value != null){ this.jobOfferPost.extraFiles = 'jobOffers/' + this.controlFile.value.value.name; }
     if (this.genreModified !== undefined) { this.jobOfferPost.genres = this.genreModified; }
     this.jobOfferPost.promoted = this.promoted;
     this.jobOfferPost.exclusive = this.exclusive;
