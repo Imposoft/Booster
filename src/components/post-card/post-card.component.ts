@@ -12,12 +12,16 @@ export class PostCardComponent implements OnInit {
   @Input() postToDisplay: Post;
   @Input() isOwner: boolean;
   public firestore: AngularFirestore;
+  public likes: number;
+  public dislikes: number;
 
   constructor(firestore: AngularFirestore, private router: Router) {
     this.firestore = firestore;
   }
 
   ngOnInit(): void {
+    this.likes = this.numberLikes();
+    this.dislikes = this.numberDislikes();
   }
 
   delete(): void {
@@ -27,6 +31,23 @@ export class PostCardComponent implements OnInit {
   modifyPost(): void{
     this.router.navigate(['news/' + this.postToDisplay.id]);
   }
+
+  like(): void {
+    this.likes = this.likes + 1;
+  }
+
+  dislike(): void {
+    this.likes = this.dislikes + 1;
+  }
+
+  numberLikes(): number {
+    return 7342;
+  }
+
+  numberDislikes(): number {
+    return 1230;
+  }
+
 
   /*userLoggedIsProfileOwner(): boolean {
     return this.loggedId === this.pathId;
