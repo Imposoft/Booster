@@ -1,0 +1,27 @@
+<div class="container-fluid p-2">
+  <form [formGroup]="dynamicForm">
+    <div class="control-group" id="fields">
+      <div class="controls">
+        <form role="form" autocomplete="off">
+          <div *ngFor="let network of networks.controls; let i = index" class="list-group list-group-flush">
+            <div [formGroup]="network" class="form-row mb-1">
+              <div class="col-md-2">
+                <select id="inputSocial" class="form-control" formControlName="socialNetwork">
+                  <!-- <option selected>Selecciona una opcion...</option> -->
+                  <option *ngFor="let item of sne | keyvalue" [value]="item.value">{{item.value}}</option>
+                </select>
+              </div>
+              <div class="col-md-9">
+                <input class="form-control mr-2" name="fields[]" type="text" [value]="network.value.url" formControlName="url"/>
+              </div>
+              <button class="btn btn-danger" (click)="deleteSocialNetwork(i)"><b>-</b></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button  class="btn btn-success rounded-circle " type="button" (click)="addSocialNetwork()"><b>+</b></button>
+    </div>
+  </form>
+</div>

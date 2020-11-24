@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tutorial-creation',
@@ -14,11 +15,22 @@ export class TutorialCreationView implements OnInit {
   tutorialPosts;
   modificationForm: FormGroup;
 
+  private loggedId: string;
+  public isMusician: boolean;
+
   private _success = new Subject<string>();
   successMessage = '';
+  private exclusive: boolean;
+  private promoted: boolean;
 
-  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore) {
+  constructor(private formBuilder: FormBuilder, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     this.tutorialPosts = afs.collection<Tutorial>('tutorialPosts');
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+        this.isMusician = user.photoURL === 'MUSICIAN';
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -26,7 +38,7 @@ export class TutorialCreationView implements OnInit {
       title: ['', [Validators.required]],
       description: ['', []],
       price: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -37,11 +49,24 @@ export class TutorialCreationView implements OnInit {
   sendForm(): void {
     const tutorial = {
       title: this.modificationForm.value.title,
-      description: this.modificationForm.value.description,
+      body: this.modificationForm.value.description,
       price: this.modificationForm.value.price,
-      imaUrl: this.modificationForm.value.imageUrl,
+      imgUrl: this.modificationForm.value.imageUrl,
+      promoted: this.promoted,
+      exclusive: this.exclusive,
+      owner: this.loggedId,
+      userWaitList: []
     };
     this.tutorialPosts.add(tutorial);
     this._success.next('Clase creada con exito!');
+  }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
   }
 }

@@ -1,0 +1,18 @@
+<div class="container-fluid p-2">
+  <mat-form-field class="example-chip-list" [style.width.%]="100" >
+    <mat-chip-list #genresList aria-label="Añadir género" >
+      <mat-chip *ngFor="let genre of genreList" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(genre)" [value]="genre.name">
+        {{genre.name}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Añadir nuevo género..."
+             [matChipInputFor]="genresList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+</div>
+
+

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ExampleComponentComponent} from '../components/example-component/example-component.component';
 import {HomeView} from '../views/home/home.view';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -36,13 +35,36 @@ import {UserTutorialListingView} from '../views/user-tutorial-listing/user-tutor
 import {TutorialCreationView} from '../views/tutorial-creation/tutorial-creation.view';
 import {LoginUserComponent} from '../components/login-user/login-user.component';
 import {ProfileModificationView} from '../views/profile-modification/profile-modification.view';
+import {NewsView} from '../views/news/news.view';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SocialAdderComponent} from '../components/social-adder/social-adder.component';
+import {NewsContainerComponent} from '../components/news-container/news-container.component';
+import {PostFeedComponent} from '../components/post-feed/post-feed.component';
+import {GenreAdderComponent} from '../components/genre-adder/genre-adder.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {JobOfferView} from '../views/job-offer/job-offer.view';
+import {DownloadUrlComponent} from '../components/download-url/download-url.component';
+import {PostCardComponent} from '../components/post-card/post-card.component';
+import {JobOfferModificationView} from '../views/job-offer-modification/job-offer-modification.view';
+import {JobOfferCheckerComponent} from '../components/job-offer-checker/job-offer-checker.component';
+import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-offer-listing.view';
+import {MatFirebaseUploadModule} from 'mat-firebase-upload';
 
 @NgModule({
-  declarations: [
-    /**  COMPONENTS  */
-    AppComponent,
-    ExampleComponentComponent,
-    RegisterProfileComponent,
+    declarations: [
+        /**  COMPONENTS  */
+        AppComponent,
+        RegisterProfileComponent,
+        SocialAdderComponent,
+        GenreAdderComponent,
+        NewsContainerComponent,
+        PostFeedComponent,
+        NavigationbarComponent,
+        SocialLinksComponent,
+        LoginUserComponent,
+        JobOfferCheckerComponent,
 
         /** VIEWS */
         HomeView,
@@ -51,17 +73,20 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
         BandView,
         BandModificationView,
         FanView,
-        NavigationbarComponent,
-        SocialLinksComponent,
         FanModificationView,
         TutorialView,
         TutorialModificationView,
         ClassCheckerComponent,
         UserTutorialListingView,
+        UserJobOfferListingView,
         TutorialCreationView,
-        LoginUserComponent,
-        ProfileModificationView
-  ],
+        ProfileModificationView,
+        NewsView,
+        JobOfferView,
+        JobOfferModificationView,
+        DownloadUrlComponent,
+        PostCardComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -78,9 +103,18 @@ import {ProfileModificationView} from '../views/profile-modification/profile-mod
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatChipsModule,
+    MatFirebaseUploadModule
   ],
-  providers: [],
+  providers: [ {
+    provide: MAT_CHIPS_DEFAULT_OPTIONS,
+    useValue: {
+      separatorKeyCodes: [ENTER, COMMA]
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

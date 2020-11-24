@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {UserDetails} from '../../models/userDetails/user-details.model';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Musician} from '../../models/musician/musician.model';
 
 @Component({
   selector: 'app-tutorial-listing',
@@ -13,38 +15,21 @@ export class UserTutorialListingView implements OnInit {
   singleClass: Tutorial;
   secondClass: Tutorial;
   tutorialOwner: UserDetails;
-  constructor() {
-    this.tutorialOwner = {
-      contact: '1231231312',
-      id: 'asdadsada',
-      imageurl: 'assets/fan/avatar-man.jpg',
-      name: 'Pepe'
-    };
-    this.singleClass = {
-      body: 'Cuerpo de la clase',
-      exclusive: false,
-      imgUrl: 'assets/class/guitarclass.jpg',
-      price: 25,
-      promoted: false,
-      title: 'Test Titulo',
-      userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo', contact: '611222333'},
-        {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo2', contact: '611222334'},
-        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pablo3', contact: '611222336'}],
-      owner: this.tutorialOwner
-    };
-    this.secondClass = {
-      body: 'Cuerpo de la clase',
-      exclusive: false,
-      imgUrl: 'assets/class/guitarclass.jpg',
-      price: 25,
-      promoted: false,
-      title: 'Test Titulo',
-      userWaitList: [{id: '20', imageurl: 'assets/fan/avatar-man.jpg', name: 'Pedro', contact: '611222333'},
-        {id: '30', imageurl: 'assets/fan/avatar-man.jpg', name: 'Juan', contact: '611222334'},
-        {id: '40', imageurl: 'assets/fan/avatar-man.jpg', name: 'Patricio', contact: '611222336'}],
-      owner: this.tutorialOwner
-    };
-    this.classList = [this.singleClass , this.secondClass];
+
+  printedProfileOwner: any;
+  printedProfileSubscriber: any;
+  classListings: any;
+
+  constructor(firestore: AngularFirestore) {
+    this.printedProfileOwner = firestore.doc<Musician>('musicianProfiles/g0TPmRbfEZeVqUKEx4zOr9Y8uTU2');
+    this.printedProfileOwner.valueChanges().subscribe((fanProfile) => {
+      this.tutorialOwner = fanProfile;
+    });
+
+    this.classListings = firestore.collection('tutorialPosts');
+    this.classListings.valueChanges({ idField: 'id' }).subscribe((classList) => {
+      this.classList = classList;
+    });
   }
 
   ngOnInit(): void {

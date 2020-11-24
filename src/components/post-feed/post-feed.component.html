@@ -1,0 +1,3 @@
+<div *ngFor="let post of postList" class="m-2">
+  <app-post-card [postToDisplay]="post" [isOwner]="userLoggedId"></app-post-card>
+</div>

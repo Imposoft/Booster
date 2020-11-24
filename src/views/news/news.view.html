@@ -1,0 +1,38 @@
+<div class="container-fluid p-2">
+  <form [formGroup]="modificationForm">
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" style="width:9vw" >Titulo</span>
+      </div>
+      <input class="form-control" placeholder="Titulo" aria-label="Titulo" formControlName="title" [value]="news.title">
+      <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >⋮</button>
+        <div class="dropdown-menu" aria-labelledby="options">
+          <!-- <a class="dropdown-item" (click)="removeNews()">Eliminar</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
+      </div>
+      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl" [value]="news.imgUrl">
+    </div>
+    <div>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="news.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)" [checked]="news.promoted">Promoted</mat-checkbox>
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="width:9vw">Cuerpo</span>
+      </div>
+      <textarea class="form-control" rows="5" aria-label="With textarea" formControlName="body" placeholder="Texto..." [value]="news.body"></textarea>
+    </div>
+  </form>
+</div>
+<div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
+  <button class="btn btn-outline-primary m-1" (click)="sendForm()">Publicar</button>
+  <button class="btn btn-outline-primary m-1" (click)="changeView()">Cancelar</button>
+</div>
+
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>

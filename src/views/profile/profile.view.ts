@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Musician} from '../../models/musician/musician.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-profile',
@@ -10,29 +11,42 @@ import {Musician} from '../../models/musician/musician.model';
   styleUrls: ['./profile.view.sass']
 })
 export class ProfileView implements OnInit {
-  profile: Musician;
-  items: Observable<any[]>;
-  printedProfile: any;
-  pathId: string;
+  public profile: Musician;
+  private printedProfile: any;
+  public pathId: string;
+  private loggedId: string;
+  public postList: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
-    this.items = firestore.collection('test').valueChanges();
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+    // Perfil vacio sobre el que cargar los datos
+    this.profile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscriptionPrice: 0, tutorials: []};
+
+    // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
-        if (params.id) {
-          console.log(params);
-          this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + params.id);
-          this.pathId = params.id;
-        } else {
-          console.log(params);
-          this.printedProfile = firestore.doc<Musician>('musicianProfiles/IfcscpI7GL2pFaZKEccf');
-          this.pathId = 'IfcscpI7GL2pFaZKEccf';
-        }
+      if (params.id) {
+        this.pathId = params.id;
+      } else {
+        this.pathId = 'IfcscpI7GL2pFaZKEccf';
       }
-    );
-    this.profile = this.printedProfile.valueChanges();
+      // Si hemos iniciado sesion, loggedId sera nuestro id
+      this.afAuth.authState.subscribe(user => {
+        if (user){
+          this.loggedId = user.uid;
+        }
+      });
+      this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges({ idField: 'id' });
+      // Cargamos el perfil sobre el perfil vacio
+      this.printedProfile = firestore.doc<Musician>('musicianProfiles/' + this.pathId);
+      this.printedProfile.valueChanges().subscribe((musician) => {
+        this.profile = musician;
+      });
+    });
   }
 
   ngOnInit(): void {
   }
 
+  userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
+  }
 }

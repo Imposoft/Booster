@@ -1,17 +1,33 @@
+<div *ngIf="errorMessage" class="m-0" style="width: 100%;">
+  <ngb-alert type="danger" class="m-0 mb-2" (close)="errorMessage = ''">{{errorMessage}}</ngb-alert>
+</div>
 <div>
-  <div class="input-group mb-3 form-row">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1" style="width:9vw">Email</span>
+  <form [formGroup]="registrationForm" class="mx-auto">
+    <div class="form-group">
+      <label>Email:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="miemail@mail.com"
+        formControlName="email"
+      />
     </div>
-    <input class="form-control" aria-label="Email">
-  </div>
-  <div class="input-group mb-3 form-row">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon2" style="width:9vw">Contraseña</span>
+    <div class="form-group">
+      <label>Contraseña:</label>
+      <div class="input-group">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            [type]="hide ? 'password' : 'text'"
+          />
+        <span class="d-flex align-self-center p-2">
+          <mat-icon matSuffix class="placeholder" (click)="toggleFieldTextType()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </span>
+      </div>
     </div>
-    <input class="form-control" aria-label="Contraseña" formControlName="name">
-  </div>
+  </form>
   <div class="d-flex justify-content-end">
-  <button class="d-flex justify-content-end btn btn-outline-primary m-2">Iniciar sesion</button>
+  <button class="d-flex justify-content-end btn btn-outline-primary m-2" (click)="logIn()">Iniciar sesion</button>
   </div>
 </div>

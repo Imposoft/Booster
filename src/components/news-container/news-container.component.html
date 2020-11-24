@@ -1,0 +1,24 @@
+<div class="card" style="width: 70vw">
+  <div class="card-body p-0 overflow-hidden">
+    <div class="row">
+      <!-- Modificar -->
+      <div class="d-flex align-self-auto">
+        <a [routerLink]="['/news']">
+          <button class="btn btn-outline-primary m-2">Modificar</button>
+        </a>
+        <!-- -->
+        <!-- Menú desplegable -->
+        <div class="dropdown-menu"  aria-labelledby="options">
+          <a class="dropdown-item" (click)="removeNews()">Eliminar</a>
+          <a class="dropdown-item" (click)="share()">Compartir</a>
+        </div>
+      </div>
+      <!-- Título, cuerpo e imagen de la noticia -->
+      <h1 class="card-title">{{classToCheck.title}}</h1>
+      <p class="card-text">{{classToCheck.body}}</p>
+      <div class="col-sm-3" style="object-fit: cover">
+        <img src="{{classToCheck.imgUrl}}" alt="" class="img-fluid z-depth-0 align-center my-2 my-sm-0" style="width: 100%;height: 100%;object-fit: cover">
+      </div>
+    </div>
+  </div>
+</div>

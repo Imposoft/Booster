@@ -15,71 +15,48 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 
 export class FanModificationView implements OnInit {
+  public socialNetworksModified: SocialNetworks[];
+  private printedProfile: any;
+  public profile: Fan;
+  private pathId: string;
 
-  printedProfile: any;
-  profile: any;
-  fanProfiles;
-  modificationForm: FormGroup;
-  path: string;
+  public modificationForm: FormGroup;
 
   private _success = new Subject<string>();
   successMessage = '';
-  private nameModification: any; private phoneModification: any;
-  private emailModification: any; private imageModification: any;
-  private locModification: any; private passModification: any;
-  private instaModification: string; private spotifyModification: string; private twitterModification: string;
-  private instaNetwork: any;
-  private spotifyNetwork: any;
-  private twitterNetwork: any;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
+    // Perfil vacio sobre el que cargar los datos
+    this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
+    this.socialNetworksModified = [];
+
+    // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
-        if (params.id) {
-          console.log(params);
-          this.printedProfile = firestore.doc<Fan>('fanProfiles/' + params.id);
-          this.path = 'fanProfile/' + params.id;
-        } else {
-          console.log(params);
-          this.printedProfile = firestore.doc<Fan>('fanProfiles/NKUHb5YBHaCDQmSpWUFh');
-          this.path = 'fanProfile/NKUHb5YBHaCDQmSpWUFh';
-        }
+      if (params.id) {
+        this.pathId = params.id;
+      } else {
+        this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
+      }
+      // Cargamos el perfil sobre el perfil vacio
+      this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
+      this.printedProfile.valueChanges().subscribe((fan) => {
+        this.profile = fan;
+        this.profile.socialNetworks = fan.socialNetworks;
       });
-    this.profile = this.printedProfile.valueChanges();
+    });
   }
 
 
   ngOnInit(): void {
-    this.profile.subscribe(value => {
-      this.nameModification = value.name;
-      this.phoneModification = value.phone;
-      this.emailModification = value.email;
-      this.passModification = value.password;
-      this.imageModification = value.imageSource;
-      this.locModification = value.location;
-
-      if (value.socialNetworks === undefined) {
-        this.instaModification = '';
-        this.spotifyModification = '';
-        this.twitterModification = '';
-      } else {
-        if (value.socialNetworks[0].url !== undefined) {
-          this.instaModification = value.socialNetworks[0].url;
-        }
-        if (value.socialNetworks[1].url !== undefined) {
-          this.spotifyModification = value.socialNetworks[1].url;
-        }
-        if (value.socialNetworks[2].url !== undefined) {
-          this.twitterModification = value.socialNetworks[2].url;
-        }}
-    });
     this.modificationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
       location: ['', []],
+      phone: ['', [Validators.required]],
     });
+
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
       debounceTime(5000)
@@ -88,52 +65,29 @@ export class FanModificationView implements OnInit {
 
   sendForm(): void {
     this.checkValues();
-    const fan = {
-      name: this.nameModification,
-      phone: this.phoneModification,
-      email: this.emailModification,
-      password: this.passModification,
-      imageSource: this.imageModification,
-      location: this.locModification,
-      socialNetworks: this.checkNetworks(),
-    };
-    console.warn(fan.name + ';' + fan.phone + ';' + fan.email + ';' + fan.imageSource + ';'  + fan.location);
-    this.printedProfile.update(fan)
+    this.printedProfile.update(this.profile)
       .catch(error => console.log(error));
     this._success.next('Perfil guardado con exito!');
     this.changeView();
   }
+
   checkValues(): void {
-    if (this.modificationForm.value.name !== ''){ this.nameModification = this.modificationForm.value.name; }
-    if (this.modificationForm.value.phone !== ''){ this.phoneModification = this.modificationForm.value.phone; }
-    if (this.modificationForm.value.email !== ''){ this.emailModification = this.modificationForm.value.email; }
-    if (this.modificationForm.value.password !== ''){ this.passModification = this.modificationForm.value.password; }
-    if (this.modificationForm.value.imageurl !== ''){ this.imageModification = this.modificationForm.value.imageurl; }
-    if (this.modificationForm.value.location !== ''){ this.locModification = this.modificationForm.value.location; }
+    if (this.modificationForm.value.name !== ''){ this.profile.name = this.modificationForm.value.name; }
+    if (this.modificationForm.value.phone !== ''){ this.profile.phone = this.modificationForm.value.phone; }
+    if (this.modificationForm.value.email !== ''){ this.profile.email = this.modificationForm.value.email; }
+    if (this.modificationForm.value.password !== ''){ this.profile.password = this.modificationForm.value.password; }
+    if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
+    if (this.socialNetworksModified !== undefined) { this.profile.socialNetworks = this.socialNetworksModified; }
   }
 
   changeView(): void {
     this.successMessage = '';
-    this.router.navigate([this.path]);
+    this.router.navigate(['fanProfile/' + this.pathId]);
   }
 
-  checkNetworks(): SocialNetworks[] {
-    if (this.modificationForm.value.urlInsta !== '') {
-      this.instaNetwork = { socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: this.modificationForm.value.urlInsta };
-    } else {
-      this.instaNetwork = { socialNetwork: SocialNetworkEnum.INSTRAGRAM, url: this.instaModification };
-    }
-    if (this.modificationForm.value.urlSpotify !== '') {
-      this.spotifyNetwork = { socialNetwork: SocialNetworkEnum.SPOTIFY, url: this.modificationForm.value.urlSpotify };
-    } else {
-      this.spotifyNetwork = { socialNetwork: SocialNetworkEnum.SPOTIFY, url: this.spotifyModification };
-    }
-    if (this.modificationForm.value.urlTwitter !== '') {
-      this.twitterNetwork = { socialNetwork: SocialNetworkEnum.TWITTER, url: this.modificationForm.value.urlTwitter };
-    } else {
-      this.twitterNetwork = { socialNetwork: SocialNetworkEnum.TWITTER, url: this.twitterModification };
-    }
-
-    return [this.instaNetwork, this.spotifyNetwork, this.twitterNetwork];
+  changeSocialNetworks($event: SocialNetworks[]): void {
+    this.socialNetworksModified = $event;
+    console.log($event);
   }
 }

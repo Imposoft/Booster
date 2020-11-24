@@ -1,16 +1,16 @@
 import {Profile} from '../profile/profile.model';
 import {Genre} from '../genre/genre.model';
 import {Subscription} from 'rxjs';
-import {JobOffer} from '../jobs/job-offer.model';
+import {JobOffer} from '../jobOffer/job-offer.model';
 import {Instrument} from '../instrument/instrument.model';
 import {Tutorial} from '../tutorial/tutorial.model';
 
 export class Musician extends Profile{
   description?: string;
-  genres: [Genre];
+  genres: Genre[];
   subscriptionPrice: number;
-  tutorials?: [Tutorial];
-  instruments: [Instrument];
-  jobOffers?: [JobOffer];
+  tutorials?: Tutorial[];
+  instruments: Instrument[];
+  jobOffers?: JobOffer[];
   subscription?: Subscription;
 }

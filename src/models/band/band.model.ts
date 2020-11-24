@@ -2,7 +2,7 @@ import {Profile} from '../profile/profile.model';
 import {Musician} from '../musician/musician.model';
 import {Genre} from '../genre/genre.model';
 import {Audition} from '../audition/audition.model';
-import {JobOffer} from '../jobs/job-offer.model';
+import {JobOffer} from '../jobOffer/job-offer.model';
 import {Subscription} from 'rxjs';
 
 export class Band extends Profile{
@@ -10,8 +10,8 @@ export class Band extends Profile{
   members: Musician[];
   genres: Genre[];
   subscriptionPrice: number;
-  auditions?: [Audition];
+  auditions?: Audition[];
   // lista de ofertas de trabajo a las que se suscribe
-  jobOffers?: [JobOffer];
+  jobOffers?: JobOffer[];
   subscription?: Subscription;
 }

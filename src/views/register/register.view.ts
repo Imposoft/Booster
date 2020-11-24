@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.view.sass']
 })
 export class RegisterView implements OnInit {
-  showingLogin: boolean;
+  public showingLogin: boolean;
+
   constructor() { }
 
   ngOnInit(): void {

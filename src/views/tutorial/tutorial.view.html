@@ -9,21 +9,25 @@
     <br> <br>
     <div class="col-md-6 col-sm-12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <br>
           <h1>{{tutorialPost.title}}</h1>
-          <h2>Precio: <b>{{tutorialPost.price}}</b></h2>
+          <h2>Precio: <b>{{tutorialPost.price}} €</b></h2>
+        </div>
+        <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom" *ngIf='isButtonVisible'>
+          <div class="mat-action-row">
+            <button class="btn btn-outline-primary m-2" (click)="applyForTutorial()">Solicitar reserva</button>
+          </div>
         </div>
       </div>
-      <button class="d-flex ml-auto btn btn-outline-primary m-2" *ngIf='this.ButtonVisible' (click)="applyForTutorial()" (click)="this.ButtonVisible = false">Solicitar reserva</button>
     </div>
     <br> <br>
     <div class="card p-1 col-md-2" style="width: 18rem;">
       <div class="card-body">
-        <img class="card-img" [src]="tutorialOwner.imageurl" alt="Imagen de perfil" style="max-width: 75px">
+        <img class="card-img" [src]="tutorialOwner.imageSource" alt="Imagen de perfil" style="max-width: 75px">
         <h5 class="card-title">Profesor/a: <b>{{tutorialOwner.name}}</b></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Contacto: <b>{{tutorialOwner.contact}}</b></h6>
-        <a [routerLink]="['/profile', tutorialOwner.id]" class="card-link">Perfil del musico</a>
+        <h6 class="card-subtitle mb-2 text-muted">Contacto: <b>{{tutorialOwner.phone}}</b></h6>
+        <a [routerLink]="['/profile', ownerPathId]" class="card-link">Perfil del musico</a>
         <!--<a [routerLink]="'profile/FVgBtsJlkRl0qZU4VaiW'" class="card-link">Perfil del musico</a>-->
       </div>
     </div>

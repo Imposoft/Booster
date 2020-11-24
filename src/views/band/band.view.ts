@@ -5,6 +5,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserDetails} from '../../models/userDetails/user-details.model';
 import {Musician} from '../../models/musician/musician.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-band',
@@ -12,37 +13,45 @@ import {Musician} from '../../models/musician/musician.model';
   styleUrls: ['./band.view.sass']
 })
 export class BandView implements OnInit {
-
-  profile: Band;
-  items: Observable<any[]>;
-  bandProfiles;
-  printedProfile: any;
-  pathId: string;
+  public profile: Band;
+  private printedProfile: any;
+  public pathId: string;
+  private loggedId: string;
 
   members: Musician[];
+  public postList: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore) {
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+    // Perfil vacio sobre el que cargar los datos
+    this.profile = {auditions: [undefined], description: '', email: '', genres: [], imageSource: '', jobOffers: [undefined], location: '', members: [], name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
+
+    // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
         if (params.id) {
-          console.log(params);
-          this.printedProfile = firestore.doc<Band>('bandProfiles/' + params.id);
           this.pathId = params.id;
-          this.printedProfile.valueChanges().subscribe((tutorial) => {
-            console.log(tutorial);
-            this.profile = tutorial;
-          });
         } else {
-          console.log(params);
-          this.printedProfile = firestore.doc<Band>('bandProfiles/CBaWe62HROxtyWDY050Y');
-          this.pathId = 'CBaWe62HROxtyWDY050Y';
-          this.printedProfile.valueChanges().subscribe(tutorial => {
-            this.profile = tutorial;
-          });
+          this.pathId = 'n6ZhZ1TJI7iayJS4GQrc';
         }
+        // Si hemos iniciado sesion, loggedId sera nuestro id
+        this.afAuth.authState.subscribe(user => {
+          if (user){
+            this.loggedId = user.uid;
+          }
+        });
+        this.postList = firestore.collection('posts', ref => ref.where('owner', '==', this.pathId)).valueChanges({ idField: 'id' });
+        // Cargamos el perfil sobre el perfil vacio
+        this.printedProfile = firestore.doc<Band>('bandProfiles/' + this.pathId);
+        this.printedProfile.valueChanges().subscribe((band) => {
+          this.profile = band;
+        });
       }
     );
   }
 
   ngOnInit(): void {
+  }
+
+  userLoggedIsProfileOwner(): boolean {
+    return this.loggedId === this.pathId;
   }
 }

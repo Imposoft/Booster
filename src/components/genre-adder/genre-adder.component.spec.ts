@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExampleComponentComponent } from './example-component.component';
+import { GenreAdderComponent } from './genre-adder.component';
 
-describe('ExampleComponentComponent', () => {
-  let component: ExampleComponentComponent;
-  let fixture: ComponentFixture<ExampleComponentComponent>;
+describe('GenreAdderComponent', () => {
+  let component: GenreAdderComponent;
+  let fixture: ComponentFixture<GenreAdderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExampleComponentComponent ]
+      declarations: [ GenreAdderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExampleComponentComponent);
+    fixture = TestBed.createComponent(GenreAdderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,6 +18,8 @@ export class TutorialModificationView implements OnInit {
 
   private _success = new Subject<string>();
   successMessage = '';
+  private exclusive: boolean;
+  private promoted: boolean;
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.printedTutorial = firestore.doc<Tutorial>('tutorialPosts/nWog3AOCpmhE3wDQcHNo');
@@ -29,7 +31,8 @@ export class TutorialModificationView implements OnInit {
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      userWaitList: ['', [Validators.required]]
+      userWaitList: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]]
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(
@@ -40,13 +43,26 @@ export class TutorialModificationView implements OnInit {
   sendForm(): void {
     const tutorial = {
       title: this.modificationForm.value.title,
-      description: this.modificationForm.value.description,
+      body: this.modificationForm.value.description,
       price: this.modificationForm.value.price,
-      userWaitList: this.modificationForm.value.userWaitList
+      userWaitList: this.modificationForm.value.userWaitList,
+      imgUrl: this.modificationForm.value.imageUrl,
+      promoted: this.promoted,
+      exclusive: this.exclusive,
+      owner: this.tutorial.owner
     };
     this.printedTutorial.update(tutorial)
       .catch(error => console.log(error));
     this._success.next('Clase particular guardada con exito!');
+  }
+
+  toggleExclusive(b: boolean): void {
+    console.log(b);
+    this.exclusive = b;
+  }
+  togglePromoted(b: boolean): void {
+    console.log(b);
+    this.promoted = b;
   }
 
 }

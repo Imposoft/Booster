@@ -9,10 +9,20 @@
 
     <div class="input-group mb-3 form-row">
       <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
+      </div>
+      <input class="form-control"  value="{{(tutorial | async)?.imgUrl}}" aria-label="Imagen" formControlName="imageUrl">
+    </div>
+    <div>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="(tutorial | async)?.exclusive">Exclusive</mat-checkbox>
+      <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="togglePromoted(!c.checked)" [checked]="(tutorial | async)?.promoted">Promoted</mat-checkbox>
+    </div>
+    <div class="input-group mb-3 form-row">
+      <div class="input-group-prepend">
         <span class="input-group-text" style="width:12.5vw" >Precio de la clase</span>
       </div>
       <!-- <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"> -->
-      <input class="form-control" rows="1" value="{{(tutorial | async)?.price}}" aria-label="Precio de la clase" formControlName="price">
+      <input class="form-control" value="{{(tutorial | async)?.price}}" aria-label="Precio de la clase" formControlName="price">
       <div class="input-group-append">
         <!-- <span class="input-group-text">.00</span> -->
       </div>
@@ -23,7 +33,7 @@
         <span class="input-group-text" style="width:9vw">Descripcion</span>
       </div>
       <!-- <textarea id="descriptionInput" class="form-control" rows="5" aria-label="With textarea" formControlName="description" [attr.disabled]="!click ? '' : null">{{(tutorial | async)?.description}}</textarea> -->
-      <textarea id="descriptionInput" class="form-control" rows="5" value="{{(tutorial | async)?.description}}" aria-label="With textarea" formControlName="description"></textarea>
+      <textarea id="descriptionInput" class="form-control" rows="5" value="{{(tutorial | async)?.body}}" aria-label="With textarea" formControlName="description"></textarea>
     </div>
   </form>
 </div>
