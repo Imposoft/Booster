@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {browser, by, element, logging} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -12,6 +12,19 @@ describe('workspace-project App', () => {
     page.navigateTo();
     console.log(page.getTitleText());
     expect(page.getTitleText()).toEqual('Booster');
+  });
+
+  it('should change to register page', () => {
+    browser.get('http://localhost:4200/register');
+    element(by.id('registerToggle')).click();
+    expect(element(by.className('card-title')).getText()).toEqual('Registro:');
+  });
+
+  it('should display login page', () => {
+    browser.get('http://localhost:4200/register');
+    element(by.id('registerToggle')).click();
+    element(by.id('loginToggle')).click();
+    expect(element(by.className('card-title')).getText()).toEqual('Registro:');
   });
 
   afterEach(async () => {
