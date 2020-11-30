@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import {browser, by, element, logging} from 'protractor';
+import {browser, by, element, logging, protractor} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -24,7 +24,34 @@ describe('workspace-project App', () => {
     browser.get('http://localhost:4200/register');
     element(by.id('registerToggle')).click();
     element(by.id('loginToggle')).click();
-    expect(element(by.className('card-title')).getText()).toEqual('Registro:');
+    expect(element(by.className('card-title')).getText()).toEqual('Iniciar sesion:');
+  });
+
+  it('should change to login page', () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    expect(element(by.className('card-title')).getText()).toEqual('Iniciar sesion:');
+  });
+
+  it('should log', () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    element(by.id('login')).click();
+    let EC = protractor.ExpectedConditions;
+    // Waits for the URL to contain 'foo'.
+    browser.wait(EC.urlContains('home'), 5000);
+    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/home');
+  });
+
+  it('should show error login', () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdj@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    element(by.id('login')).click();
+    expect(element(by.id('errorAlert')).getText()).toEqual('Iniciar sesion:');
   });
 
   afterEach(async () => {
