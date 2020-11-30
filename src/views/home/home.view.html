@@ -3,3 +3,12 @@
     <img src="assets/icon/boosterbg.png" style="width: 70vw; height: 41vw">
   </div>
 </div>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    (beforeViewRender)="beforeMonthViewRender($event)"
+    (dayClicked)="dayClicked($event.day)"
+  ></mwl-calendar-month-view>
+</div>

@@ -51,6 +51,8 @@ import {JobOfferModificationView} from '../views/job-offer-modification/job-offe
 import {JobOfferCheckerComponent} from '../components/job-offer-checker/job-offer-checker.component';
 import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-offer-listing.view';
 import {MatFirebaseUploadModule} from 'mat-firebase-upload';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     declarations: [
@@ -107,7 +109,8 @@ import {MatFirebaseUploadModule} from 'mat-firebase-upload';
     MatCheckboxModule,
     MatIconModule,
     MatChipsModule,
-    MatFirebaseUploadModule
+    MatFirebaseUploadModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [ {
     provide: MAT_CHIPS_DEFAULT_OPTIONS,
