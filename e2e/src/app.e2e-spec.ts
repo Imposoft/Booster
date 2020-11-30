@@ -57,8 +57,7 @@ describe('workspace-project App', () => {
     await browser.waitForAngularEnabled(false);
     await browser.wait(until.presenceOf(element(by.id('errorAlert'))), 1500)
       .then((isPresent) => {
-        console.log(isPresent);
-        expect(isPresent);
+        expect(isPresent).toBe(true);
       });
     await browser.waitForAngularEnabled(true);
   });
