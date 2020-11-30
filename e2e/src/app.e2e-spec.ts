@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import {browser, by, element, logging, protractor} from 'protractor';
+import {browser, by, element, logging, protractor, ExpectedConditions as until} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -33,25 +33,34 @@ describe('workspace-project App', () => {
     expect(element(by.className('card-title')).getText()).toEqual('Iniciar sesion:');
   });
 
-  it('should log', () => {
+  it('should log', async () => {
     browser.get('http://localhost:4200/');
     element(by.id('loginButton')).click();
     element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
     element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
     element(by.id('login')).click();
-    let EC = protractor.ExpectedConditions;
-    // Waits for the URL to contain 'foo'.
-    browser.wait(EC.urlContains('home'), 5000);
-    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/home');
+
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
   });
 
-  it('should show error login', () => {
+  it('should show error login', async () => {
     browser.get('http://localhost:4200/');
     element(by.id('loginButton')).click();
     element(by.id('emailInput')).sendKeys('arturosdj@gmail.com');
     element(by.id('passwordInput')).sendKeys('12341234');
     element(by.id('login')).click();
-    expect(element(by.id('errorAlert')).getText()).toEqual('Iniciar sesion:');
+    await browser.waitForAngularEnabled(false);
+    await browser.wait(until.presenceOf(element(by.id('errorAlert'))), 1500)
+      .then((isPresent) => {
+        console.log(isPresent);
+        expect(isPresent);
+      });
+    await browser.waitForAngularEnabled(true);
   });
 
   afterEach(async () => {
