@@ -18,12 +18,12 @@ export class NavigationbarComponent implements OnInit {
   private role: string;
   private printedProfile: any;
   private profile: Profile;
-  public imageURL: string;
+  public imageURL = 'assets/fan/avatar-man.jpg';
 
   constructor(public afAuth: AngularFireAuth, private route: ActivatedRoute, private afs: AngularFirestore, private router: Router) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
-    this.imageURL = 'assets/fan/avatar-man.jpg';
+    // this.imageURL = 'assets/fan/avatar-man.jpg';
 
     this.afAuth.authState.subscribe(user => {
       if (user){
@@ -74,10 +74,9 @@ export class NavigationbarComponent implements OnInit {
     // this.afAuth.authState.subscribe(() => this.router.navigate(['home']));
     this.afAuth.signOut().then(() => {
       this.loggedId = null;
-      this.imageURL = null;
-      this.router.navigate(['home']);
+      this.imageURL = 'assets/fan/avatar-man.jpg';
     });
-
+    this.router.navigate(['home']);
   }
 
   goToProfile(): void {
