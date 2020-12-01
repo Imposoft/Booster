@@ -67,7 +67,7 @@ export class TutorialView implements OnInit {
     this._success.pipe(
       debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
-    this.checkIfApplied();
+    // this.checkIfApplied();
   }
 
   applyForTutorial(): void{
@@ -79,11 +79,15 @@ export class TutorialView implements OnInit {
 
   checkIfApplied(): void {
     if (this.isFan) {
+      console.log('Im fan');
       for (const id of this.tutorialPost.userWaitList) {
         if (this.loggedId === id) {
           this.isButtonVisible = false;
         }
       }
+    } else {
+      console.log('Im not fan');
+      this.isButtonVisible = false;
     }
   }
 }

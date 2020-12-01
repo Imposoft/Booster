@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { CalendarMonthViewDay, CalendarView } from 'angular-calendar';
-import { CalendarEvent, CalendarWeekViewBeforeRenderEvent } from 'angular-calendar';
-import { WeekViewHour, WeekViewHourColumn } from 'calendar-utils';
+import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
+import {WeekViewHourColumn} from 'calendar-utils';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.view.html',
-  styleUrls: ['./home.view.sass'],
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.sass'],
   styles: [
     `
       .cal-day-selected,
@@ -17,7 +16,7 @@ import { WeekViewHour, WeekViewHourColumn } from 'calendar-utils';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class HomeView implements OnInit {
+export class CalendarComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
 
