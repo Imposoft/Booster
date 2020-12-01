@@ -14,7 +14,7 @@ import {Profile} from '../../models/profile/profile.model';
 })
 export class NavigationbarComponent implements OnInit {
 
-  private loggedId: string;
+  public loggedId: string;
   private role: string;
   private printedProfile: any;
   private profile: Profile;
@@ -68,6 +68,16 @@ export class NavigationbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  logOut(): void{
+    // this.afAuth.authState.subscribe(() => this.router.navigate(['home']));
+    this.afAuth.signOut().then(() => {
+      this.loggedId = null;
+      this.imageURL = null;
+      this.router.navigate(['home']);
+    });
+
   }
 
   goToProfile(): void {
