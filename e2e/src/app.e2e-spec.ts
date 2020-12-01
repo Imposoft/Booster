@@ -62,6 +62,13 @@ describe('workspace-project App', () => {
     await browser.waitForAngularEnabled(true);
   });
 
+  it('should not finish form', async () => {
+    browser.get('http://localhost:4200/register');
+    element(by.id('registerToggle')).click();
+    element(by.id('nextButton1')).click();
+    await expect(element(by.id('nameField')).isDisplayed()).toBe(false);
+  });
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
@@ -70,3 +77,22 @@ describe('workspace-project App', () => {
     } as logging.Entry));
   });
 });
+
+function selectOptionByOptionValue(selectFormFieldElementId, valueToFind): void {
+  const formField = element(by.id(selectFormFieldElementId));
+  formField.click().then(() => {
+    formField.element(by.tagName('mat-select'))
+      .getAttribute('aria-owns').then((optionIdsString: string) => {
+      const optionIds = optionIdsString.split(' ');
+
+      for (const optionId of optionIds) {
+        const option = element(by.id(optionId));
+        option.getText().then((text) => {
+          if (text === valueToFind) {
+            option.click();
+          }
+        });
+      }
+    });
+  });
+}

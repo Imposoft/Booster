@@ -2,7 +2,7 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Tipo de perfil</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" id="roleSelector">
         <mat-label>Dinos quien eres</mat-label>
         <mat-select [(value)]="selected" formControlName="profileRole">
           <mat-option></mat-option>
@@ -13,13 +13,13 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext id="nextButton1">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" label="Datos basicos">
     <form [formGroup]="secondFormGroup">
-      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value!='band')">
+      <mat-form-field *ngIf="(firstFormGroup.get('profileRole').value!='band')" id="nameField">
         <mat-label>Nombre</mat-label>
         <input matInput placeholder="Antonio" formControlName="name" required>
       </mat-form-field>
