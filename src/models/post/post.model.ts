@@ -10,5 +10,5 @@ export class Post {
   imgUrl: string;
   owner: string;
   creation?: string;
-  likes: Like[];
+  likes?: Like[];
 }

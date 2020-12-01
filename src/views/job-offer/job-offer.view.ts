@@ -31,7 +31,7 @@ export class JobOfferView implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     // Oferta de trabajo  vacia sobre el que cargar los datos
 
-    this.jobOfferPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], userWaitList: [], endData: '', extraFiles: '', like: ['']};
+    this.jobOfferPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], userWaitList: [], endData: '', extraFiles: ''};
     this.jobOfferOwner = {description: '', email: '', members: [], genres: [], imageSource: '', jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto

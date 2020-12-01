@@ -56,7 +56,7 @@ export class PostCardComponent implements OnInit {
   pruebaTexto(): any {
     // this.variable = '';
     this.coleccionValoraciones = this.firestore.collection('posts').doc(this.postToDisplay.id).
-      collection('pruebaValoraciones', ref => ref.where('esPositiva', '==', true));
+      collection('likes', ref => ref.where('isLike', '==', true));
 
     this.coleccionValoraciones.valueChanges().subscribe(value => {
       this.likes = value.length;
