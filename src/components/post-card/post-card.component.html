@@ -30,6 +30,7 @@
     <div class="float-left">
       <a>Me gusta: {{numberLikes()}}, </a>
       <a>No me gusta: {{numberDislikes()}}</a>
+      <a>Prueba texto: {{pruebaTexto() | async}}</a>
     </div>
   </div>
   <div class="card-footer text-muted text-center bg-warning border-danger" *ngIf="postToDisplay.promoted">
