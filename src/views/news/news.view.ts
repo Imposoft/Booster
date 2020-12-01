@@ -95,7 +95,7 @@ export class NewsView implements OnInit {
       this.news.owner = this.loggedId;
       this.newsPrinted.add(this.news)
         .catch(error => console.log(error)).then( docRef => {
-        this.newsPrinted.doc(docRef.id).collection('likes').add({ownerId: 'notOwner', isLike: null});
+        this.newsPrinted.doc(docRef.id).collection('likes').doc(this.loggedId).set({ownerId: 'notOwner', isLike: null});
       });
       this._success.next('Noticia creada con exito!');
     }
