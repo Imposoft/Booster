@@ -53,6 +53,7 @@ import {UserJobOfferListingView} from '../views/user-job-offer-listing/user-job-
 import {MatFirebaseUploadModule} from 'mat-firebase-upload';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {CalendarComponent} from '../components/calendar/calendar.component';
 
 @NgModule({
     declarations: [
@@ -88,6 +89,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
         JobOfferModificationView,
         DownloadUrlComponent,
         PostCardComponent,
+        CalendarComponent,
     ],
   imports: [
     BrowserModule,
