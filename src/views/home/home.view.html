@@ -21,4 +21,27 @@
     (beforeViewRender)="beforeMonthViewRender($event)"
     (dayClicked)="dayClicked($event.day)"
   ></mwl-calendar-month-view>
+<div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
+  <div class="flex-column">
+    <div class="row bg-white d-flex justify-content-center align-items-center" style="width:90vw">
+      <img src="assets/icon/boosterbg.png" style="width: 45vw; height: 27vw; margin-bottom: 25px">
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+      <div class="flex-column">
+        <div class="h1">Últimas novedades en...</div>
+        <button type="button" class="btn btn-link">Usuarios</button>
+        <button type="button" class="btn btn-link">Clases particulares</button>
+        <button type="button" class="btn btn-link">Ofertas de trabajo</button>
+      </div>
+    </div>
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (beforeViewRender)="beforeMonthViewRender($event)"
+        (dayClicked)="dayClicked($event.day)"
+      ></mwl-calendar-month-view>
+    </div>
+  </div>
 </div>
