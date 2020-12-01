@@ -13,7 +13,7 @@ export class PostCardComponent implements OnInit {
   @Input() postToDisplay: Post;
   @Input() isOwner: boolean;
   public firestore: AngularFirestore;
-  public likes: number = 0;
+  public likes: any = 0;
   public dislikes: number = 0;
   public variable: string;
   public numeroLikes: AngularFirestoreCollection<DocumentData>;
@@ -25,7 +25,7 @@ export class PostCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.likes = this.numberLikes();
+    this.likes = this.pruebaTexto();
     this.dislikes = this.numberDislikes();
   }
 
@@ -56,21 +56,12 @@ export class PostCardComponent implements OnInit {
   pruebaTexto(): any {
     // this.variable = '';
     this.coleccionValoraciones = this.firestore.collection('posts').doc(this.postToDisplay.id).
-      collection('pruebaValoraciones');
+      collection('pruebaValoraciones', ref => ref.where('esPositiva', '==', true));
 
-    this.coleccionValoraciones.snapshotChanges(['added', 'removed']).subscribe(
-      documentos => {documentos.forEach((documento) => {
-        if (documento.esPositiva) {
-          this.likes++;
-          console.log(documento);
-        }
-        console.log(documento);
-      });
-                     return this.likes;
-      }
-    );
-
-
+    this.coleccionValoraciones.valueChanges().subscribe(value => {
+      this.likes = value.length;
+      return this.likes;
+    });
 
     /*const numberDis: number = this.numeroDislikes.get().toPromise.length;
     // for (let counter: number = 0; counter < numberDis; counter++) {

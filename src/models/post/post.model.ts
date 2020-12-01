@@ -1,4 +1,5 @@
 import {UserDetails} from '../userDetails/user-details.model';
+import {Like} from '../like/like.model';
 
 export class Post {
   id?: string;
@@ -9,5 +10,5 @@ export class Post {
   imgUrl: string;
   owner: string;
   creation?: string;
-  like: [string];
+  likes: Like[];
 }

@@ -35,7 +35,7 @@ export class NewsView implements OnInit {
               public afAuth: AngularFireAuth,
               public location: Location) {
     // Perfil vacio sobre el que cargar los datos
-    this.news = {title: '', body: '', promoted: false, exclusive: false, imgUrl: '', owner: '', like: ['']};
+    this.news = {title: '', body: '', promoted: false, exclusive: false, imgUrl: '', owner: '', likes: [{ownerId: 'tete', isLike: true}]};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
