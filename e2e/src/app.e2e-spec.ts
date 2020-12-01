@@ -48,18 +48,32 @@ describe('workspace-project App', () => {
     }, 3000);
   });
 
-  it('should show error login', async () => {
+  it('should not log', async () => {
     browser.get('http://localhost:4200/');
     element(by.id('loginButton')).click();
     element(by.id('emailInput')).sendKeys('arturosdj@gmail.com');
     element(by.id('passwordInput')).sendKeys('12341234');
     element(by.id('login')).click();
-    await browser.waitForAngularEnabled(false);
-    await browser.wait(until.presenceOf(element(by.id('errorAlert'))), 1500)
-      .then((isPresent) => {
-        expect(isPresent).toBe(true);
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/register'));
       });
-    await browser.waitForAngularEnabled(true);
+    }, 3000);
+  });
+
+  it('should show logout button', async () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
+    element(by.id('login')).click();
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+    await expect(element(by.id('logoutButton')).isPresent()).toBe(true);
   });
 
   it('should not finish form', async () => {
