@@ -145,6 +145,39 @@ describe('workspace-project App', () => {
     await expect(element(by.id('logoutButton')).isPresent()).toBe(true);
   });
 
+  it('should show modification buttons', async () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
+    element(by.id('login')).click();
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+    element(by.id('profileIcon')).click();
+    // browser.get('http://localhost:4200/profile/g0TPmRbfEZeVqUKEx4zOr9Y8uTU2');
+    await expect(element(by.id('modifyProfileButton')).isPresent());
+  });
+
+  it('should not show modification buttons', async () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
+    element(by.id('login')).click();
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+    browser.get('http://localhost:4200/profile');
+    await expect(element(by.id('modifyProfileButton')).isPresent()).toBe(false);
+  });
+
   it('should not finish form', async () => {
     browser.get('http://localhost:4200/register');
     element(by.id('registerToggle')).click();
