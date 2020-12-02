@@ -44,6 +44,7 @@ describe('workspace-project App', () => {
 
   it('should load profile page', () => {
     browser.get('http://localhost:4200/profile');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/profile'));
@@ -53,6 +54,7 @@ describe('workspace-project App', () => {
 
   it('should load fanProfile page', () => {
     browser.get('http://localhost:4200/fanProfile');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/fanProfile'));
@@ -62,6 +64,7 @@ describe('workspace-project App', () => {
 
   it('should load jobOffer page', () => {
     browser.get('http://localhost:4200/jobOffer');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/jobOffer'));
@@ -71,6 +74,7 @@ describe('workspace-project App', () => {
 
   it('should load tutorial page', () => {
     browser.get('http://localhost:4200/tutorial');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/tutorial'));
@@ -80,6 +84,7 @@ describe('workspace-project App', () => {
 
   it('should load bandProfile page', () => {
     browser.get('http://localhost:4200/bandProfile');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/bandProfile'));
@@ -89,6 +94,7 @@ describe('workspace-project App', () => {
 
   it('should load register page', () => {
     browser.get('http://localhost:4200/register');
+    browser.waitForAngularEnabled(false);
     browser.wait( function() {
       return browser.getCurrentUrl().then(function(url) {
         return (url === ('http://localhost:4200/register'));
