@@ -157,8 +157,8 @@ describe('workspace-project App', () => {
         return (url === ('http://localhost:4200/home'));
       });
     }, 3000);
-    //element(by.id('profileIcon')).click();
-    browser.get('http://localhost:4200/profile/g0TPmRbfEZeVqUKEx4zOr9Y8uTU2');
+    element(by.id('profileIcon')).click();
+    // browser.get('http://localhost:4200/profile/g0TPmRbfEZeVqUKEx4zOr9Y8uTU2');
     await expect(element(by.id('modifyProfileButton')).isPresent());
   });
 
