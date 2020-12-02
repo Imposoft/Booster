@@ -29,7 +29,7 @@ export class ProfileModificationView implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     // Perfil vacio sobre el que cargar los datos
-    this.profile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
+    this.profile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: [], reservations: []};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {

@@ -1,6 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
+import {Fan} from '../../models/fan/fan.model';
+import {Musician} from '../../models/musician/musician.model';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-calendar',
@@ -17,6 +20,8 @@ import {WeekViewHourColumn} from 'calendar-utils';
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit {
+  @Input() ownerId: string;
+
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
 
@@ -28,11 +33,31 @@ export class CalendarComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  selectedDays: any = [];
+  musicianProfile: Musician;
 
-  constructor() { }
+  selectedDays: any = [];
+  public printedProfile: any;
+
+  constructor(public firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    this.musicianProfile = {
+      description: '',
+      email: '',
+      genres: [],
+      imageSource: '',
+      instruments: [],
+      jobOffers: [],
+      location: '',
+      name: '',
+      password: '',
+      phone: '',
+      reservations: [],
+      socialNetworks: [],
+      subscription: undefined,
+      subscriptionPrice: 0,
+      tutorials: []
+    };
   }
 
   dayClicked(day: CalendarMonthViewDay): void {
@@ -91,4 +116,12 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  mostrarSeleccion(): void {
+    this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
+    this.printedProfile.valueChanges().subscribe((fan) => {
+      this.musicianProfile = fan;
+      this.musicianProfile.reservations = this.selectedDays;
+    });
+    this.printedProfile.update(this.musicianProfile);
+  }
 }
