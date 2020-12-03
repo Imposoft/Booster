@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {JobOffer} from '../jobOffer/job-offer.model';
 import {Instrument} from '../instrument/instrument.model';
 import {Tutorial} from '../tutorial/tutorial.model';
+import {CalendarMonthViewDay} from 'angular-calendar';
 
 export class Musician extends Profile{
   description?: string;
@@ -13,4 +14,5 @@ export class Musician extends Profile{
   instruments: Instrument[];
   jobOffers?: JobOffer[];
   subscription?: Subscription;
+  reservations: CalendarMonthViewDay[];
 }

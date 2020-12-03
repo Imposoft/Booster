@@ -33,6 +33,75 @@ describe('workspace-project App', () => {
     expect(element(by.className('card-title')).getText()).toEqual('Iniciar sesion:');
   });
 
+  it('should load home page', () => {
+    browser.get('http://localhost:4200/home');
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+  });
+
+  it('should load profile page', () => {
+    browser.get('http://localhost:4200/profile');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/profile'));
+      });
+    }, 3000);
+  });
+
+  it('should load fanProfile page', () => {
+    browser.get('http://localhost:4200/fanProfile');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/fanProfile'));
+      });
+    }, 3000);
+  });
+
+  it('should load jobOffer page', () => {
+    browser.get('http://localhost:4200/jobOffer');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/jobOffer'));
+      });
+    }, 3000);
+  });
+
+  it('should load tutorial page', () => {
+    browser.get('http://localhost:4200/tutorial');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/tutorial'));
+      });
+    }, 3000);
+  });
+
+  it('should load bandProfile page', () => {
+    browser.get('http://localhost:4200/bandProfile');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/bandProfile'));
+      });
+    }, 3000);
+  });
+
+  it('should load register page', () => {
+    browser.get('http://localhost:4200/register');
+    browser.waitForAngularEnabled(false);
+    browser.wait( function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/register'));
+      });
+    }, 3000);
+  });
+
   it('should log', async () => {
     browser.get('http://localhost:4200/');
     element(by.id('loginButton')).click();
@@ -74,6 +143,39 @@ describe('workspace-project App', () => {
       });
     }, 3000);
     await expect(element(by.id('logoutButton')).isPresent()).toBe(true);
+  });
+
+  it('should show modification buttons', async () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
+    element(by.id('login')).click();
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+    element(by.id('profileIcon')).click();
+    // browser.get('http://localhost:4200/profile/g0TPmRbfEZeVqUKEx4zOr9Y8uTU2');
+    await expect(element(by.id('modifyProfileButton')).isPresent());
+  });
+
+  it('should not show modification buttons', async () => {
+    browser.get('http://localhost:4200/');
+    element(by.id('loginButton')).click();
+    element(by.id('emailInput')).sendKeys('arturosdg@gmail.com');
+    element(by.id('passwordInput')).sendKeys('12341234');
+    browser.waitForAngularEnabled(false);
+    element(by.id('login')).click();
+    browser.wait(function() {
+      return browser.getCurrentUrl().then(function(url) {
+        return (url === ('http://localhost:4200/home'));
+      });
+    }, 3000);
+    browser.get('http://localhost:4200/profile');
+    await expect(element(by.id('modifyProfileButton')).isPresent()).toBe(false);
   });
 
   it('should not finish form', async () => {
