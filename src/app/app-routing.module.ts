@@ -31,7 +31,6 @@ const routes: Routes = [
   {path: 'bandModification/:id', component: BandModificationView},
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorial/:id', component: TutorialView},
-  {path: 'tutorialCreation', component: TutorialCreationView},
   {path: 'tutorialModification', component: TutorialModificationView},
   {path: 'tutorialModification/:id', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},

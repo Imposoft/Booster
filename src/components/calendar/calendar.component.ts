@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
-import {Fan} from '../../models/fan/fan.model';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 
@@ -35,7 +34,7 @@ export class CalendarComponent implements OnInit {
 
   musicianProfile: Musician;
 
-  selectedDays: any = [];
+  selectedDays: any;
   public printedProfile: any;
 
   constructor(public firestore: AngularFirestore) {
