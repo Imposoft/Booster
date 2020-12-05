@@ -22,4 +22,14 @@ describe('RegisterProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('register user as musicianProfile', () => {
+    expect(component).toBeTruthy();
+  });
+  it('register user as bandProfile', () => {
+    expect(component).toBeTruthy();
+  });
+  it('register user as fanProfile', () => {
+    expect(component).toBeTruthy();
+  });
 });

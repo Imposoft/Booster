@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JobOfferView } from './job-offer.view';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('JobOfferView', () => {
   let component: JobOfferView;
@@ -8,7 +11,12 @@ describe('JobOfferView', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JobOfferView ]
+      declarations: [ JobOfferView ],
+      imports: [ReactiveFormsModule, AngularFirestore,
+        RouterTestingModule],
+      providers: [
+        { provide: AngularFirestore, useValue: AngularFirestoreModule},
+      ]
     })
     .compileComponents();
   });
