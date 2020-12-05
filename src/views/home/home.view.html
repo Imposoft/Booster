@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
+<!--<div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
   <div class="flex-column">
     <div class="row bg-white d-flex justify-content-center align-items-center" style="width:90vw">
       <img src="assets/icon/boosterbg.png" style="width: 45vw; height: 27vw; margin-bottom: 25px">
@@ -9,6 +9,50 @@
         <button type="button" class="btn btn-link">Usuarios</button>
         <button type="button" class="btn btn-link">Clases particulares</button>
         <button type="button" class="btn btn-link">Ofertas de trabajo</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
+  <div class="flex-column">
+    <div class="row bg-white d-flex justify-content-center align-items-center" style="width:90vw">
+      <img src="assets/icon/boosterbg.png" style="width: 45vw; height: 27vw; margin-bottom: 25px">
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+      <div class="flex-column">
+        <div class="h1">Últimas novedades en...</div>
+        <button type="button" class="btn btn-link" (click)="DropdownVar=0" (click)="show = !show">Usuarios</button>
+        <button type="button" class="btn btn-link">Clases particulares</button>
+        <button type="button" class="btn btn-link">Ofertas de trabajo</button>
+      </div>
+    </div>
+    <div div *ngIf="show">
+      <div *ngIf="DropdownVar == 0" class="dropdown-content" >
+        <div id="container" class="container-fluid d-flex justify-content-center">
+          <div>
+            <img alt="imagen1" routerLink="" class="image" src={{usersProfile[0].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{usersProfile[0].name}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{usersProfile[1].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{usersProfile[1].name}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{usersProfile[2].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{usersProfile[2].name}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{usersProfile[3].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <div class="justify-content-center">
+              <h3>{{usersProfile[3].name}}</h3>
+            </div>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{usersProfile[4].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{usersProfile[4].name}}</h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>
