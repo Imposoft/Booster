@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
 
   musicianProfile: Musician;
 
-  selectedDays: any;
+  selectedDays: any = [];
   public printedProfile: any;
 
   refresh: Subject<any> = new Subject();
