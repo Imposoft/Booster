@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -18,7 +19,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
   @Input() ownerId: string;
 
   view: CalendarView = CalendarView.Month;
@@ -34,8 +35,10 @@ export class CalendarComponent implements OnInit {
 
   musicianProfile: Musician;
 
-  selectedDays: any;
+  selectedDays: any = [];
   public printedProfile: any;
+
+  refresh: Subject<any> = new Subject();
 
   constructor(public firestore: AngularFirestore) {
     this.musicianProfile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [],
@@ -44,13 +47,18 @@ export class CalendarComponent implements OnInit {
     this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
     this.printedProfile.valueChanges().subscribe((musician) => {
       this.musicianProfile = musician;
+      console.log(musician.reservations);
       this.selectedDays = this.musicianProfile.reservations;
     });
   }
 
   ngOnInit(): void {
-    console.log(this.ownerId);
-    console.log(this.musicianProfile.name.toString());
+    console.log(this.ownerId + ' init');
+    setTimeout(() => this.mostrarSeleccion(), 1000 * .8);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
   dayClicked(day: CalendarMonthViewDay): void {
@@ -109,6 +117,25 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  updateDay(day): void {
+    this.selectedMonthViewDay = day;
+    console.log(this.selectedMonthViewDay);
+    const selectedDateTime = this.selectedMonthViewDay.date.getTime();
+    const dateIndex = this.selectedDays.findIndex(
+      (selectedDay) => selectedDay.date.getTime() === selectedDateTime
+    );
+    if (dateIndex > -1) {
+      console.log(day + 'here');
+      delete this.selectedMonthViewDay.cssClass;
+      this.selectedDays.splice(dateIndex, 1);
+    } else {
+      console.log(day + 'there');
+      this.selectedDays.push(this.selectedMonthViewDay);
+      day.cssClass = 'cal-day-selected';
+      this.selectedMonthViewDay = day;
+    }
+  }
+
   subirSeleccion(): void {
     this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
     this.printedProfile.valueChanges().subscribe((musician) => {
@@ -120,13 +147,18 @@ export class CalendarComponent implements OnInit {
   }
 
   mostrarSeleccion(): void {
-    this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
+    this.printedProfile = this.firestore.doc('musicianProfiles/' + this.ownerId);
     this.printedProfile.valueChanges().subscribe((musician) => {
+      console.log(musician.reservations);
       this.musicianProfile = musician;
-      this.selectedDays = this.musicianProfile.reservations;
+      console.log(musician.reservations);
+      musician.reservations.forEach(element => {
+        console.log(element.date.toDate());
+        element.date = element.date.toDate();
+        element.cssClass = 'cal-day-selected';
+        this.updateDay(element);
+        this.refresh.next();
+      });
     });
-    console.log(this.ownerId);
-    console.log(this.selectedDays.valueOf());
-    console.log(this.musicianProfile.name.toString());
   }
 }

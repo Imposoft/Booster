@@ -37,14 +37,11 @@ export class UserTutorialListingView implements OnInit {
     this.classListings = firestore.collection('tutorialPosts');
     this.classListings.valueChanges({ idField: 'id' }).subscribe((classList) => {
       this.classListAux = classList;
-      // this.classList = classList;
-      console.log(this.classListAux);
       /*for (let i = 0; i < this.classListAux.length; i++) {
         if (this.classListAux[i].owner === this.loggedId) {
           this.classList.push(this.classListAux[i]);
         }
       } */
-      console.log(this.classList);
       for (const item of Object.keys(this.classListAux)) {
         const tutorial = this.classListAux[item];
         console.log(tutorial);
@@ -52,20 +49,10 @@ export class UserTutorialListingView implements OnInit {
           this.classList.push(tutorial);
         }
       }
-      console.log(this.classList + ' - 2');
     });
-
-    /*for (const tutorial of this.classListAux.values()) {
-      // const tutorial = this.classListAux[tut];
-      if (tutorial.owner === this.loggedId) {
-        this.classList.push(tutorial);
-      }
-    }*/
   }
 
-  ngOnInit(): void {
-    console.log(this.classListAux + ' - init');
-  }
+  ngOnInit(): void {  }
 
   deleteClass(delClass: Tutorial): void {
     for (let i = 0; i < this.classList.length; i++) {
