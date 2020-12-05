@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
 import {Musician} from '../../models/musician/musician.model';
@@ -19,7 +19,7 @@ import {Subject} from 'rxjs';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
   @Input() ownerId: string;
 
   view: CalendarView = CalendarView.Month;
@@ -53,6 +53,12 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.ownerId + ' init');
+    setTimeout(() => this.mostrarSeleccion(), 1000 * .8);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
   dayClicked(day: CalendarMonthViewDay): void {
