@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
-import {Fan} from '../../models/fan/fan.model';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 
@@ -35,29 +34,23 @@ export class CalendarComponent implements OnInit {
 
   musicianProfile: Musician;
 
-  selectedDays: any = [];
+  selectedDays: any;
   public printedProfile: any;
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor(public firestore: AngularFirestore) {
+    this.musicianProfile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [],
+      location: '', name: '', password: '', phone: '', reservations: [], socialNetworks: [], subscriptionPrice: 0, tutorials: []
+    };
+    this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
+    this.printedProfile.valueChanges().subscribe((musician) => {
+      this.musicianProfile = musician;
+      this.selectedDays = this.musicianProfile.reservations;
+    });
+  }
 
   ngOnInit(): void {
-    this.musicianProfile = {
-      description: '',
-      email: '',
-      genres: [],
-      imageSource: '',
-      instruments: [],
-      jobOffers: [],
-      location: '',
-      name: '',
-      password: '',
-      phone: '',
-      reservations: [],
-      socialNetworks: [],
-      subscription: undefined,
-      subscriptionPrice: 0,
-      tutorials: []
-    };
+    console.log(this.ownerId);
+    console.log(this.musicianProfile.name.toString());
   }
 
   dayClicked(day: CalendarMonthViewDay): void {
@@ -116,12 +109,24 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  mostrarSeleccion(): void {
+  subirSeleccion(): void {
     this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
-    this.printedProfile.valueChanges().subscribe((fan) => {
-      this.musicianProfile = fan;
+    this.printedProfile.valueChanges().subscribe((musician) => {
+      this.musicianProfile = musician;
       this.musicianProfile.reservations = this.selectedDays;
     });
     this.printedProfile.update(this.musicianProfile);
+    console.log(this.selectedDays.valueOf());
+  }
+
+  mostrarSeleccion(): void {
+    this.printedProfile = this.firestore.doc<Musician>('musicianProfiles/' + this.ownerId);
+    this.printedProfile.valueChanges().subscribe((musician) => {
+      this.musicianProfile = musician;
+      this.selectedDays = this.musicianProfile.reservations;
+    });
+    console.log(this.ownerId);
+    console.log(this.selectedDays.valueOf());
+    console.log(this.musicianProfile.name.toString());
   }
 }

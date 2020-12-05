@@ -52,7 +52,7 @@
   </form-firebase-file>
 </div>
 <div class="d-flex flex-row-reverse m-2 mr-1 sticky-bottom">
-  <button class="btn btn-outline-primary m-1" (click)="sendForm()">Publicar</button>
+  <button class="btn btn-outline-primary m-1" (click)="sendForm()">{{noPathID ? 'Publicar' : 'Guardar'}}</button>
   <a [routerLink]="'/jobOffer'"><button class="btn btn-outline-primary m-1">Cancelar</button></a>
 </div>
 
