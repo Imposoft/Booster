@@ -32,6 +32,7 @@ const routes: Routes = [
   {path: 'tutorial', component: TutorialView},
   {path: 'tutorial/:id', component: TutorialView},
   {path: 'tutorialCreation', component: TutorialCreationView},
+  {path: 'tutorialModification', component: TutorialModificationView},
   {path: 'tutorialModification/:id', component: TutorialModificationView},
   {path: 'userTutorialListing', component: UserTutorialListingView},
   {path: 'userJobOfferListing', component: UserJobOfferListingView},
