@@ -3,6 +3,8 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {Musician} from '../../models/musician/musician.model';
 import {map} from 'rxjs/operators';
 import {Profile} from '../../models/profile/profile.model';
+import {Tutorial} from '../../models/tutorial/tutorial.model';
+import {JobOffer} from '../../models/jobOffer/job-offer.model';
 
 
 @Component({
@@ -21,16 +23,23 @@ import {Profile} from '../../models/profile/profile.model';
 })
 export class HomeView implements OnInit {
   private perfiles: AngularFirestoreCollection<Musician>;
+  private clases: AngularFirestoreCollection<Tutorial>;
+  private ofertas: AngularFirestoreCollection<JobOffer>;
   private usersProfile: Profile[];
-  private usersAux: Profile[];
+  private clase: Tutorial[];
+  private oferta: JobOffer[];
   DropdownVar: number;
-  show: boolean;
+  show1: boolean;
+  show2: boolean;
+  show3: boolean;
 
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.usersProfile = [];
-    this.usersAux = [];
+    this.clase = [];
+    this.oferta = [];
+
     this.perfiles = this.firestore.collection<Musician>('musicianProfiles/', ref => ref.limitToLast(10).orderBy('name'));
     this.perfiles.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
@@ -38,27 +47,42 @@ export class HomeView implements OnInit {
         this.usersProfile.push(val);
       });
     });
-    console.log('Entra');
-    this.usersProfile = this.mezclar(this.usersProfile);
-    console.log('Hace');
+    this.clases = this.firestore.collection<Tutorial>('tutorialPosts/', ref => ref.limitToLast(10).orderBy('title'));
+    this.clases.snapshotChanges().subscribe(actions => {
+      return actions.map(a => {
+        const val1 = a.payload.doc.data();
+        this.clase.push(val1);
+      });
+    });
+    this.ofertas = this.firestore.collection<JobOffer>('jobOfferPosts/', ref => ref.limitToLast(10).orderBy('title'));
+    this.ofertas.snapshotChanges().subscribe(actions => {
+      return actions.map(a => {
+        const val2 = a.payload.doc.data();
+        this.oferta.push(val2);
+      });
+    });
+
+    this.show1 = true;
+    this.show2 = false;
+    this.show3 = false;
+    this.DropdownVar = 1;
   }
 
-  private mezclar(array: Profile[]): Profile[] {
-    console.log(array.length);
-    let currentIndex: any = array.length;
-    let temporaryValue: any;
-    let randomIndex: any;
-    console.log(currentIndex);
-    while (0 !== currentIndex) {
-      console.log('Jelou');
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-      console.log(randomIndex);
+  showFunction(num: any): void {
+    console.log('Entro');
+    if (num === 1) {
+      this.show1 = true;
+      this.show2 = false;
+      this.show3 = false;
+    } else if (num === 2) {
+      this.show1 = false;
+      this.show2 = true;
+      this.show3 = false;
+    } else {
+      this.show1 = false;
+      this.show2 = false;
+      this.show3 = true;
     }
-    return array;
   }
 
 }

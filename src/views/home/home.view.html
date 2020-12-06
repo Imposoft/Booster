@@ -1,19 +1,3 @@
-<!--<div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
-  <div class="flex-column">
-    <div class="row bg-white d-flex justify-content-center align-items-center" style="width:90vw">
-      <img src="assets/icon/boosterbg.png" style="width: 45vw; height: 27vw; margin-bottom: 25px">
-    </div>
-    <div class="container-fluid d-flex justify-content-center">
-      <div class="flex-column">
-        <div class="h1">Últimas novedades en...</div>
-        <button type="button" class="btn btn-link">Usuarios</button>
-        <button type="button" class="btn btn-link">Clases particulares</button>
-        <button type="button" class="btn btn-link">Ofertas de trabajo</button>
-      </div>
-    </div>
-  </div>
-</div>-->
-
 <div class="container-fluid d-flex justify-content-center bg-light" style="height: 50vh">
   <div class="flex-column">
     <div class="row bg-white d-flex justify-content-center align-items-center" style="width:90vw">
@@ -22,16 +6,16 @@
     <div class="container-fluid d-flex justify-content-center">
       <div class="flex-column">
         <div class="h1">Últimas novedades en...</div>
-        <button type="button" class="btn btn-link" (click)="DropdownVar=0" (click)="show = !show">Usuarios</button>
-        <button type="button" class="btn btn-link">Clases particulares</button>
-        <button type="button" class="btn btn-link">Ofertas de trabajo</button>
+        <button type="button" class="btn btn-link" (click)="DropdownVar=0" (click)="showFunction(1)">Usuarios</button>
+        <button type="button" class="btn btn-link" (click)="DropdownVar=1" (click)="showFunction(2)">Clases particulares</button>
+        <button type="button" class="btn btn-link" (click)="DropdownVar=2" (click)="showFunction(3)">Ofertas de trabajo</button>
       </div>
     </div>
-    <div div *ngIf="show">
+    <div div *ngIf="show1">
       <div *ngIf="DropdownVar == 0" class="dropdown-content" >
         <div id="container" class="container-fluid d-flex justify-content-center">
           <div>
-            <img alt="imagen1" routerLink="" class="image" src={{usersProfile[0].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <img routerLink="" class="image" src={{usersProfile[0].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
             <h3>{{usersProfile[0].name}}</h3>
           </div>
           <div>
@@ -44,13 +28,65 @@
           </div>
           <div>
             <img routerLink="" class="image" src={{usersProfile[3].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
-            <div class="justify-content-center">
-              <h3>{{usersProfile[3].name}}</h3>
-            </div>
+            <h3>{{usersProfile[3].name}}</h3>
           </div>
           <div>
             <img routerLink="" class="image" src={{usersProfile[4].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
             <h3>{{usersProfile[4].name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div div *ngIf="show2">
+      <div *ngIf="DropdownVar == 1" class="dropdown-content" >
+        <div id="container2" class="container-fluid d-flex justify-content-center">
+          <div>
+            <figure>
+              <img routerLink="" class="image" src={{clase[0].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+              <h3>{{clase[0].title}}</h3>
+            </figure>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{clase[1].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{clase[1].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{clase[2].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{clase[2].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{clase[3].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{clase[3].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{clase[4].imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{clase[4].title}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div div *ngIf="show3">
+      <div *ngIf="DropdownVar == 2" class="dropdown-content" >
+        <div id="container3" class="container-fluid d-flex justify-content-center">
+          <div class="img-with-text">
+            <img routerLink="" class="image" src={{oferta[0].imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{oferta[0].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{oferta[1].imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{oferta[1].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{oferta[2].imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{oferta[2].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{oferta[3].imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{oferta[3].title}}</h3>
+          </div>
+          <div>
+            <img routerLink="" class="image" src={{oferta[4].imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+            <h3>{{oferta[4].title}}</h3>
           </div>
         </div>
       </div>
