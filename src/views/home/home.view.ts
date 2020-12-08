@@ -29,9 +29,9 @@ export class HomeView implements OnInit {
   private clase: Tutorial[];
   private oferta: JobOffer[];
   DropdownVar: number;
-  show1: boolean;
-  show2: boolean;
-  show3: boolean;
+  show1 = true;
+  show2 = false;
+  show3 = false;
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -61,11 +61,7 @@ export class HomeView implements OnInit {
         this.oferta.push(val2);
       });
     });
-
-    this.show1 = true;
-    this.show2 = false;
-    this.show3 = false;
-    this.DropdownVar = 1;
+    this.DropdownVar = 0;
   }
 
   showFunction(num: any): void {
