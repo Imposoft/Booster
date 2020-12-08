@@ -54,6 +54,7 @@ import {MatFirebaseUploadModule} from 'mat-firebase-upload';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {CalendarComponent} from '../components/calendar/calendar.component';
+import {SearchFilterComponent} from '../components/search-filter/search-filter.component';
 
 @NgModule({
     declarations: [
@@ -90,6 +91,7 @@ import {CalendarComponent} from '../components/calendar/calendar.component';
         DownloadUrlComponent,
         PostCardComponent,
         CalendarComponent,
+        SearchFilterComponent,
     ],
   imports: [
     BrowserModule,
