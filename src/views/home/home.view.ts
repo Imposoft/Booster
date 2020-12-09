@@ -43,7 +43,9 @@ export class HomeView implements OnInit {
     this.perfiles = this.firestore.collection<Musician>('musicianProfiles/', ref => ref.limitToLast(10).orderBy('name'));
     this.perfiles.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
+        console.log(a.payload.doc.id);
         const val = a.payload.doc.data();
+        val.id = a.payload.doc.id;
         this.usersProfile.push(val);
       });
     });
@@ -65,7 +67,6 @@ export class HomeView implements OnInit {
   }
 
   showFunction(num: any): void {
-    console.log('Entro');
     if (num === 1) {
       this.show1 = true;
       this.show2 = false;

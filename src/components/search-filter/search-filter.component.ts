@@ -15,68 +15,21 @@ import {Fan} from '../../models/fan/fan.model';
 })
 
 export class SearchFilterComponent implements OnInit {
-  countries$: Observable<Country[]>;
   filter = new FormControl('');
 
   model = 1;
 
-  private printedJobOffers: any;
   jobOffers: Observable<JobOffer[]>;
 
   constructor(pipe: DecimalPipe, private afs: AngularFirestore) {
-    this.printedJobOffers =  this.afs.collection<JobOffer>('jobOfferPosts').valueChanges();
-
-    this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts').valueChanges();
+    this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts').valueChanges({idField: 'id'});
 
     this.filter.valueChanges.subscribe( text =>
-      this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts', ref => ref.orderBy('title').startAt(text).endAt(text + "\uf8ff")).valueChanges()
+      this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts', ref => ref.orderBy('title').startAt(text).endAt(text + '\uf8ff')).valueChanges({idField: 'id'})
     );
   }
 
   ngOnInit(): void {
   }
 
-}
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];
-
-function search(text: string, pipe: PipeTransform): Country[] {
-  return COUNTRIES.filter(country => {
-    const term = text.toLowerCase();
-    return country.name.toLowerCase().includes(term)
-      || pipe.transform(country.area).includes(term)
-      || pipe.transform(country.population).includes(term);
-  });
 }
