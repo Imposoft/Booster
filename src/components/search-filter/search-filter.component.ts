@@ -24,13 +24,12 @@ export class SearchFilterComponent implements OnInit {
   jobOffers: Observable<JobOffer[]>;
 
   constructor(pipe: DecimalPipe, private afs: AngularFirestore) {
-    this.printedJobOffers =  this.afs.collection<JobOffer>('jobOfferPosts');
+    this.printedJobOffers =  this.afs.collection<JobOffer>('jobOfferPosts').valueChanges();
 
-    this.jobOffers = this.printedJobOffers.valueChanges();
+    this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts').valueChanges();
 
-    this.countries$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => search(text, pipe))
+    this.filter.valueChanges.subscribe( text =>
+      this.jobOffers = this.afs.collection<JobOffer>('jobOfferPosts', ref => ref.orderBy('title').startAt(text).endAt(text + "\uf8ff")).valueChanges()
     );
   }
 
