@@ -27,7 +27,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let country of jobOffers | async; index as i">
+    <tr *ngFor="let country of jobOffers; index as i">
       <th scope="row">{{ i + 1 }}</th>
       <td><ngb-highlight [result]="country.title" [term]="filter.value"></ngb-highlight></td>
       <td><ngb-highlight [result]="country.body" [term]="filter.value"></ngb-highlight></td>
@@ -44,7 +44,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let job of jobOffers | async; index as i">
+    <tr *ngFor="let job of realJobOffers; index as i">
       <th scope="row">{{ i + 1 }}</th>
       <td><ngb-highlight [result]="job.title" [term]="filter.value"></ngb-highlight></td>
       <td><ngb-highlight [result]="job.body" [term]="filter.value"></ngb-highlight></td>
