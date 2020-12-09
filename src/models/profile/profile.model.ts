@@ -8,4 +8,5 @@ export class Profile {
   location: string;
   phone: string;
   socialNetworks: SocialNetworks[];
+  id?: string;
 }
