@@ -48,7 +48,9 @@
       <th scope="row">{{ i + 1 }}</th>
       <td><ngb-highlight [result]="job.title" [term]="filter.value"></ngb-highlight></td>
       <td><ngb-highlight [result]="job.body" [term]="filter.value"></ngb-highlight></td>
-      <td><a [routerLink]="['/jobOffer',job.id]">Enlace</a></td>
+      <td><a [routerLink]="['/jobOffer',job.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
     </tr>
     </tbody>
   </table>

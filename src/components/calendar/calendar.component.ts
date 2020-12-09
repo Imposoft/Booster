@@ -4,6 +4,7 @@ import {WeekViewHourColumn} from 'calendar-utils';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Subject} from 'rxjs';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-calendar',
@@ -38,9 +39,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   selectedDays: any = [];
   public printedProfile: any;
 
+  public loggedId: string;
+
   refresh: Subject<any> = new Subject();
 
-  constructor(public firestore: AngularFirestore) {
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth) {
     this.musicianProfile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [],
       location: '', name: '', password: '', phone: '', reservations: [], socialNetworks: [], subscriptionPrice: 0, tutorials: []
     };
@@ -49,6 +52,13 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.musicianProfile = musician;
       console.log(musician.reservations);
       this.selectedDays = this.musicianProfile.reservations;
+    });
+
+    // Si hemos iniciado sesion, loggedId sera nuestro id
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+      }
     });
   }
 

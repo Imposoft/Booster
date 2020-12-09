@@ -9,6 +9,8 @@
       (dayClicked)="dayClicked($event.day)"
     ></mwl-calendar-month-view>
   </div>
-  <button (click)="subirSeleccion()">Subir seleccion</button>
-  <button (click)="mostrarSeleccion()">Mostrar seleccion</button>
+  <div *ngIf="this.loggedId === ownerId" class="d-flex justify-content-center mt-1">
+    <button type="button" class="btn btn-outline-primary mr-1" (click)="subirSeleccion()">Subir seleccion</button>
+    <button type="button" class="btn btn-outline-primary ml-1" (click)="mostrarSeleccion()">Mostrar seleccion</button>
+  </div>
 </div>
