@@ -5,6 +5,8 @@ import {map} from 'rxjs/operators';
 import {Profile} from '../../models/profile/profile.model';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {JobOffer} from '../../models/jobOffer/job-offer.model';
+import {Band} from '../../models/band/band.model';
+import {Fan} from '../../models/fan/fan.model';
 
 
 @Component({
@@ -22,34 +24,54 @@ import {JobOffer} from '../../models/jobOffer/job-offer.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeView implements OnInit {
-  private perfiles: AngularFirestoreCollection<Musician>;
+  private musicians: AngularFirestoreCollection<Musician>;
+  private bands: AngularFirestoreCollection<Band>;
+  private fans: AngularFirestoreCollection<Fan>;
   private clases: AngularFirestoreCollection<Tutorial>;
   private ofertas: AngularFirestoreCollection<JobOffer>;
-  private usersProfile: Profile[];
+  private musicianProfiles: Profile[];
+  private bandProfiles: Profile[];
+  private fanProfiles: Profile[];
   private clase: Tutorial[];
   private oferta: JobOffer[];
   DropdownVar: number;
-  show1 = true;
-  show2 = false;
-  show3 = false;
-
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.usersProfile = [];
+    this.musicianProfiles = [];
+    this.bandProfiles = [];
+    this.fanProfiles = [];
     this.clase = [];
     this.oferta = [];
 
-    this.perfiles = this.firestore.collection<Musician>('musicianProfiles/', ref => ref.limitToLast(10).orderBy('name'));
-    this.perfiles.snapshotChanges().subscribe(actions => {
+    this.musicians = this.firestore.collection<Musician>('musicianProfiles/', ref => ref.limitToLast(5).orderBy('name'));
+    this.musicians.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
-        console.log(a.payload.doc.id);
         const val = a.payload.doc.data();
         val.id = a.payload.doc.id;
-        this.usersProfile.push(val);
+        this.musicianProfiles.push(val);
+        console.log(this.musicianProfiles.length);
       });
     });
-    this.clases = this.firestore.collection<Tutorial>('tutorialPosts/', ref => ref.limitToLast(10).orderBy('title'));
+    this.bands = this.firestore.collection<Band>('bandProfiles/', ref => ref.limitToLast(5).orderBy('name'));
+    this.bands.snapshotChanges().subscribe(actions => {
+      return actions.map(a => {
+        const val = a.payload.doc.data();
+        val.id = a.payload.doc.id;
+        this.bandProfiles.push(val);
+        console.log(this.bandProfiles.length);
+      });
+    });
+    this.fans = this.firestore.collection<Fan>('fanProfiles/', ref => ref.limitToLast(5).orderBy('name'));
+    this.fans.snapshotChanges().subscribe(actions => {
+      return actions.map(a => {
+        const val = a.payload.doc.data();
+        val.id = a.payload.doc.id;
+        this.fanProfiles.push(val);
+        console.log(this.fanProfiles.length);
+      });
+    });
+    this.clases = this.firestore.collection<Tutorial>('tutorialPosts/', ref => ref.limitToLast(5).orderBy('title'));
     this.clases.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
         const val1 = a.payload.doc.data();
@@ -57,7 +79,7 @@ export class HomeView implements OnInit {
         this.clase.push(val1);
       });
     });
-    this.ofertas = this.firestore.collection<JobOffer>('jobOfferPosts/', ref => ref.limitToLast(10).orderBy('title'));
+    this.ofertas = this.firestore.collection<JobOffer>('jobOfferPosts/', ref => ref.limitToLast(5).orderBy('title'));
     this.ofertas.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
         const val2 = a.payload.doc.data();
@@ -67,21 +89,4 @@ export class HomeView implements OnInit {
     });
     this.DropdownVar = 0;
   }
-
-  showFunction(num: any): void {
-    if (num === 1) {
-      this.show1 = true;
-      this.show2 = false;
-      this.show3 = false;
-    } else if (num === 2) {
-      this.show1 = false;
-      this.show2 = true;
-      this.show3 = false;
-    } else {
-      this.show1 = false;
-      this.show2 = false;
-      this.show3 = true;
-    }
-  }
-
 }
