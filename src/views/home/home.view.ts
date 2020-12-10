@@ -53,6 +53,7 @@ export class HomeView implements OnInit {
     this.clases.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
         const val1 = a.payload.doc.data();
+        val1.id = a.payload.doc.id;
         this.clase.push(val1);
       });
     });
@@ -60,6 +61,7 @@ export class HomeView implements OnInit {
     this.ofertas.snapshotChanges().subscribe(actions => {
       return actions.map(a => {
         const val2 = a.payload.doc.data();
+        val2.id = a.payload.doc.id;
         this.oferta.push(val2);
       });
     });
