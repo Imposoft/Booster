@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between p-2">
   <form>
     <div class="form-group form-inline">
       Introduce tu busqueda aqui: <input class="form-control ml-2" type="text" [formControl]="filter"/>
@@ -6,7 +6,7 @@
   </form>
   <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
     <label ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" [value]="1"> Musicos
+      <input ngbButton type="radio" [value]="1"> Músicos
     </label>
     <label ngbButtonLabel class="btn-primary">
       <input ngbButton type="radio" [value]="4"> Bandas
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div [ngSwitch]="model" style="width: 90vw">
+<div [ngSwitch]="model" style="width: 90vw" class="p-2">
   <table class="table table-striped" *ngSwitchCase="1">
     <thead>
     <tr>

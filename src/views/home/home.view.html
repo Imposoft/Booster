@@ -5,74 +5,78 @@
       <div class="container-fluid d-flex justify-content-center">
         <div class="flex-column">
           <div class="h1">Últimas novedades en...</div>
-          <button type="button" class="btn btn-link" (click)="DropdownVar=0" >Musicos</button>
+          <button type="button" class="btn btn-link" (click)="DropdownVar=0" >Músicos</button>
           <button type="button" class="btn btn-link" (click)="DropdownVar=3" >Bandas</button>
           <button type="button" class="btn btn-link" (click)="DropdownVar=4" >Aficionados</button>
           <button type="button" class="btn btn-link" (click)="DropdownVar=1" >Clases particulares</button>
           <button type="button" class="btn btn-link" (click)="DropdownVar=2" >Ofertas de trabajo</button>
         </div>
       </div>
-      <div class="p-2" *ngIf="DropdownVar===0">
-        <div class="dropdown-content" >
-          <div id="container1" class="container-fluid d-flex justify-content-center">
-            <figure class="item" *ngFor="let musician of musicianProfiles">
-              <a [routerLink]="['/musicianProfile',musician.id]">
-                <img class="img2" routerLink="" class="image" src={{musician.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
-                <figcaption class="caption">{{musician.name}}</figcaption>
-              </a>
-            </figure>
+      <div class="pb-3">
+        <div class="p-2" *ngIf="DropdownVar===0">
+          <div class="dropdown-content" >
+            <div id="container1" class="container-fluid d-flex justify-content-center">
+              <figure class="item" *ngFor="let musician of musicianProfiles">
+                <a [routerLink]="['/profile',musician.id]">
+                  <img class="img2" routerLink="" class="image" src={{musician.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <figcaption class="caption">{{musician.name}}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="p-2" *ngIf="DropdownVar===3">
+          <div class="dropdown-content" >
+            <div id="container4" class="container-fluid d-flex justify-content-center">
+              <figure class="item" *ngFor="let band of bandProfiles">
+                <a [routerLink]="['/bandProfile',band.id]">
+                  <img class="img2" routerLink="" class="image" src={{band.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <figcaption class="caption">{{band.name}}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="p-2"  *ngIf="DropdownVar===4">
+          <div class="dropdown-content" >
+            <div id="container5" class="container-fluid d-flex justify-content-center">
+              <figure class="item" *ngFor="let fan of fanProfiles">
+                <a [routerLink]="['/fanProfile',fan.id]">
+                  <img class="img2" routerLink="" class="image" src={{fan.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <figcaption class="caption">{{fan.name}}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="p-2"  *ngIf="DropdownVar===1">
+          <div class="dropdown-content" >
+            <div id="container2" class="container-fluid d-flex justify-content-center">
+              <figure class="item" *ngFor="let tutorial of clase">
+                <a [routerLink]="['/tutorial',tutorial.id]">
+                  <img class="img2" routerLink="" class="image" src={{tutorial.imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <figcaption class="caption">{{tutorial.title}}</figcaption>
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="p-2"  *ngIf="DropdownVar===2">
+          <div class="dropdown-content" >
+            <div id="container3" class="container-fluid d-flex justify-content-center">
+              <figure class="item" *ngFor="let job of oferta">
+                <a [routerLink]="['/jobOffer',job.id]">
+                  <img class="img2" routerLink="" class="image" src={{job.imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <figcaption class="caption">{{job.title}}</figcaption>
+                </a>
+              </figure>
+            </div>
           </div>
         </div>
       </div>
-      <div class="p-2" *ngIf="DropdownVar===3">
-        <div class="dropdown-content" >
-          <div id="container4" class="container-fluid d-flex justify-content-center">
-            <figure class="item" *ngFor="let band of bandProfiles">
-              <a [routerLink]="['/bandProfile',band.id]">
-                <img class="img2" routerLink="" class="image" src={{band.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
-                <figcaption class="caption">{{band.name}}</figcaption>
-              </a>
-            </figure>
-          </div>
-        </div>
+      <div class="p-2">
+        <app-search-filter></app-search-filter>
       </div>
-      <div class="p-2"  *ngIf="DropdownVar===4">
-        <div class="dropdown-content" >
-          <div id="container5" class="container-fluid d-flex justify-content-center">
-            <figure class="item" *ngFor="let fan of fanProfiles">
-              <a [routerLink]="['/fanProfile',fan.id]">
-                <img class="img2" routerLink="" class="image" src={{fan.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
-                <figcaption class="caption">{{fan.name}}</figcaption>
-              </a>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div class="p-2"  *ngIf="DropdownVar===1">
-        <div class="dropdown-content" >
-          <div id="container2" class="container-fluid d-flex justify-content-center">
-            <figure class="item" *ngFor="let tutorial of clase">
-              <a [routerLink]="['/tutorial',tutorial.id]">
-                <img class="img2" routerLink="" class="image" src={{tutorial.imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
-                <figcaption class="caption">{{tutorial.title}}</figcaption>
-              </a>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div class="p-2"  *ngIf="DropdownVar===2">
-        <div class="dropdown-content" >
-          <div id="container3" class="container-fluid d-flex justify-content-center">
-            <figure class="item" *ngFor="let job of oferta">
-              <a [routerLink]="['/jobOffer',job.id]">
-                <img class="img2" routerLink="" class="image" src={{job.imgUrl}} style="width: 10vw; height: 10vw; margin: 10px"/>
-                <figcaption class="caption">{{job.title}}</figcaption>
-              </a>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <app-search-filter></app-search-filter>
     </div>
   </div>
 </div>
