@@ -1,29 +1,29 @@
-<p>You can do filter table data, in this case with observables and our <code>NgbHighlight</code> component used in Typeahead</p>
-
-<form>
-  <div class="form-group form-inline">
-    Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+<div class="d-flex justify-content-between">
+  <form>
+    <div class="form-group form-inline">
+      Introduce tu busqueda aqui: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+    </div>
+  </form>
+  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="1"> Musicos
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="4"> Bandas
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="5"> Aficionados
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="2"> Ofertas de trabajo
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="3"> Clases particulares
+    </label>
   </div>
-</form>
-<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" [value]="1"> Musicos
-  </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" [value]="4"> Bandas
-  </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" [value]="5"> Aficionados
-  </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" [value]="2"> Ofertas de trabajo
-  </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" [value]="3"> Clases particulares
-  </label>
 </div>
 
-<div [ngSwitch]="model">
+<div [ngSwitch]="model" style="width: 90vw">
   <table class="table table-striped" *ngSwitchCase="1">
     <thead>
     <tr>
@@ -64,7 +64,7 @@
     </tr>
     </tbody>
   </table>
-  <table class="table table-striped" *ngSwitchCase="5">
+  <table class="table table-striped" style="width: available" *ngSwitchCase="5">
     <thead>
     <tr>
       <th scope="col">#</th>
