@@ -97,4 +97,11 @@ export class BandView implements OnInit {
       .catch(error => console.log(error));
     setTimeout(() => this.refresh.next(), 1000);
   }
+
+  deleteMember(i: number): void {
+    this.profile.members.splice(i, 1);
+    this.printedProfile.update(this.profile)
+      .catch(error => console.log(error));
+    setTimeout(() => this.refresh.next(), 1000);
+  }
 }
