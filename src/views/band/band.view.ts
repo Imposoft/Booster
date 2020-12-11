@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Band} from '../../models/band/band.model';
 import {Observable, Subject} from 'rxjs';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserDetails} from '../../models/userDetails/user-details.model';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {map} from 'rxjs/operators';
