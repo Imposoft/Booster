@@ -142,7 +142,7 @@ export class RegisterProfileComponent implements OnInit {
         });
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
-      const band = {
+      const band: Band = {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,

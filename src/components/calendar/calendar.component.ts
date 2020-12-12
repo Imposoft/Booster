@@ -78,20 +78,22 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   dayClicked(day: CalendarMonthViewDay): void {
-    this.selectedMonthViewDay = day;
-    const selectedDateTime = this.selectedMonthViewDay.date.getTime();
-    const dateIndex = this.selectedDays.findIndex(
-      (selectedDay) => selectedDay.date.getTime() === selectedDateTime
-    );
-    if (dateIndex > -1) {
-      console.log(day);
-      delete this.selectedMonthViewDay.cssClass;
-      this.selectedDays.splice(dateIndex, 1);
-    } else {
-      console.log(day);
-      this.selectedDays.push(this.selectedMonthViewDay);
-      day.cssClass = 'cal-day-selected';
+    if (this.loggedId === this.ownerId){
       this.selectedMonthViewDay = day;
+      const selectedDateTime = this.selectedMonthViewDay.date.getTime();
+      const dateIndex = this.selectedDays.findIndex(
+        (selectedDay) => selectedDay.date.getTime() === selectedDateTime
+      );
+      if (dateIndex > -1) {
+        console.log(day);
+        delete this.selectedMonthViewDay.cssClass;
+        this.selectedDays.splice(dateIndex, 1);
+      } else {
+        console.log(day);
+        this.selectedDays.push(this.selectedMonthViewDay);
+        day.cssClass = 'cal-day-selected';
+        this.selectedMonthViewDay = day;
+      }
     }
   }
 
