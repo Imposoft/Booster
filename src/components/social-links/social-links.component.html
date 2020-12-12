@@ -1,6 +1,6 @@
 <div class="d-flex">
   <div *ngFor="let recipient of socialNetworks" style="width: fit-content" class="m-1">
-    <a href="//{{recipient.url}}">
+    <a href="//{{getClickableLink(recipient.url)}}">
       <button type="button" class="btn btn-outline-primary" style="width: fit-content" *ngIf="recipient.url !== ''">
         <!-- INSTAGRAM -->
         <svg *ngIf="recipient.socialNetwork=='INSTAGRAM'" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
