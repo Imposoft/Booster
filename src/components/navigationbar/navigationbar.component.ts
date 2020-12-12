@@ -6,6 +6,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
 import {Band} from '../../models/band/band.model';
 import {Profile} from '../../models/profile/profile.model';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-navigationbar',
@@ -20,7 +21,9 @@ export class NavigationbarComponent implements OnInit {
   private profile: Profile;
   public imageURL = 'assets/fan/avatar-man.jpg';
 
-  constructor(public afAuth: AngularFireAuth, private route: ActivatedRoute, private afs: AngularFirestore, private router: Router) {
+  private finalUrl: any;
+
+  constructor(public afAuth: AngularFireAuth, private route: ActivatedRoute, private afs: AngularFirestore, private router: Router, public storage: AngularFireStorage) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
     // this.imageURL = 'assets/fan/avatar-man.jpg';
@@ -36,21 +39,30 @@ export class NavigationbarComponent implements OnInit {
         this.printedProfile = afs.doc<Fan>('fanProfiles/' + this.loggedId);
         this.printedProfile.valueChanges().subscribe((fan) => {
           this.profile = fan;
-          this.imageURL = this.profile.imageSource;
+          const ref = this.storage.ref(this.profile.imageSource);
+          this.finalUrl = ref.getDownloadURL().subscribe(url => {
+            this.imageURL = url;
+          });
         });
       }
       if (this.role === 'MUSICIAN') {
         this.printedProfile = afs.doc<Musician>('musicianProfiles/' + this.loggedId);
         this.printedProfile.valueChanges().subscribe((musician) => {
           this.profile = musician;
-          this.imageURL = this.profile.imageSource;
+          const ref = this.storage.ref(this.profile.imageSource);
+          this.finalUrl = ref.getDownloadURL().subscribe(url => {
+            this.imageURL = url;
+          });
         });
       }
       if (this.role === 'BAND') {
         this.printedProfile = afs.doc<Band>('bandProfiles/' + this.loggedId);
         this.printedProfile.valueChanges().subscribe((band) => {
           this.profile = band;
-          this.imageURL = this.profile.imageSource;
+          const ref = this.storage.ref(this.profile.imageSource);
+          this.finalUrl = ref.getDownloadURL().subscribe(url => {
+            this.imageURL = url;
+          });
         });
       }
     });

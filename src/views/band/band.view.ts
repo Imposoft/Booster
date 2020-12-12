@@ -7,6 +7,7 @@ import {Musician} from '../../models/musician/musician.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {map} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-band',
@@ -30,7 +31,10 @@ export class BandView implements OnInit {
   public postList: any;
   public shown = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+  private finalUrl: any;
+  private profPic: any;
+
+  constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {auditions: [undefined], description: '', email: '', genres: [], imageSource: '', jobOffers: [undefined], location: '', members: [], name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
     this.member = { description: '', email: '', genres: [], id: '', imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', reservations: [], socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: [] };
@@ -54,6 +58,10 @@ export class BandView implements OnInit {
         this.printedProfile = firestore.doc<Band>('bandProfiles/' + this.pathId);
         this.printedProfile.valueChanges().subscribe((band) => {
           this.profile = band;
+          const ref = this.storage.ref(this.profile.imageSource);
+          this.finalUrl = ref.getDownloadURL().subscribe(url => {
+            this.profPic = url;
+          });
           this.membersToShow = [];
           for (const item of this.profile.members) {
             console.log(item);
