@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-post-card',
@@ -16,6 +17,7 @@ export class PostCardComponent implements OnInit {
   commentsShown: boolean;
   public firestore: AngularFirestore;
   public loggedId: string;
+  comment: FormGroup;
 
   constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth) {
     this.firestore = firestore;

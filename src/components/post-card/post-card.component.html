@@ -30,12 +30,14 @@
   <div class="mat-button">
     <div class="d-flex flex-row-reverse card-footer">
       <!-- <svg width="24" height="24" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"><path d="M 200 360 C 200 60 620 80 620 80 C 620 80 1040 60 1040 360 C 1040 560 800 600 800 600 Q 740 660 880 720 C 720 720 660 700 620 620 C 620 620 200 640 200 360 Z"/></svg> -->
-      <div>
       <button type="button" class="btn btn-primary" (click)="toggleVisible()">{{ commentsShown ? "Ocultar Comentarios" : "Ver Comentarios"}}</button>
-      </div>
-      <div>
-        <div class="input-group mb-3 form-row">
-          <input class="form-control" aria-label="Cuéntame como te ha ido" formControlName="Cuéntame como te ha ido">
+      <div class="p-2" *ngIf="commentsShown === true">
+        <div class="dropdown-content">
+          <div id="container1" class="container-fluid d-flex" *ngIf="loggedId != ''">
+            <div class="input-group mb-3 form-row">
+              <input class="form-control" aria-label="Cuéntame como te ha ido" formControlName="Cuéntame como te ha ido">
+            </div>
+          </div>
         </div>
       </div>
     </div>
