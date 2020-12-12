@@ -32,7 +32,7 @@ export class BandView implements OnInit {
   public shown = false;
 
   private finalUrl: any;
-  private profPic: any;
+  public profPic: any;
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Perfil vacio sobre el que cargar los datos
@@ -64,7 +64,6 @@ export class BandView implements OnInit {
           });
           this.membersToShow = [];
           for (const item of this.profile.members) {
-            console.log(item);
             // @ts-ignore
             this.printedMember = firestore.doc<Musician>('musicianProfiles/' + item);
             this.printedMember.valueChanges().subscribe((musician) => {
