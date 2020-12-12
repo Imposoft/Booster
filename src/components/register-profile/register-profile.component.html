@@ -97,33 +97,6 @@
         <mat-label>Genero:</mat-label>
         <input matInput formControlName="genre" placeholder="Formato: Pop, Rock..." required>
       </mat-form-field><br>
-      <div>Miembro 1:</div>
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Miembro 1" formControlName="member1Name">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Imagen</mat-label>
-        <input matInput placeholder="Miembros 1 imagen" formControlName="member1Url" >
-      </mat-form-field>
-      <div>Miembro 2:</div>
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Miembro 2" formControlName="member2Name" >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Imagen</mat-label>
-        <input matInput placeholder="Miembro 2 imagen" formControlName="member2Url" >
-      </mat-form-field>
-      <div>Miembro 3:</div>
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Miembro 3" formControlName="member3Name" >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Imagen</mat-label>
-        <input matInput placeholder="Miembro 3 imagen" formControlName="member3Url" >
-      </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>

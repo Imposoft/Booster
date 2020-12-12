@@ -68,10 +68,9 @@ export class BandView implements OnInit {
 
         this.musicians = firestore.collection<Musician>('musicianProfiles').valueChanges({idField: 'id'});
         this.musicians.subscribe(value => this.realMusicians = value);
-
         this.filter.valueChanges.subscribe( text => {
           this.musicians.pipe(
-            map(users => users.filter(user => user.name.toLowerCase().includes(text.toLowerCase())))
+            map(users => users.filter(user => user.name.toLowerCase().includes(text.toLowerCase()) && !this.profile.members.includes(user.id)))
           ).subscribe(value => this.realMusicians = [...value]);
         }
       );
