@@ -31,20 +31,20 @@
       <div class="p-2" *ngIf="commentsShown === true">
         <div class="dropdown-content">
           <div>
-            <div>
-              <table class="table table-striped">
-                <tbody>
-                <tr *ngFor="let comments of postToDisplay.creation">
-                  <th scope="row">{{ comments.toString()}}</th>
-                </tr>
-                </tbody>
-              </table>
+            <table class="table table-striped">
+              <tbody>
+              <tr *ngFor="let comments of postToDisplay.creationOwner; index as i">
+                <th scope="row">{{ comments.ownerName}}</th>
+                <th scope="row">{{ comments.comment}}</th>
+              </tr>
+              </tbody>
+            </table>
               <!-- <p class="card-text text-muted">{{postToDisplay.creation}}</p> -->
-            </div>
             <!-- CAJA DE TEXTO - Sólo loggeado -->
             <div id="container1" class="container-fluid d-flex" *ngIf="loggedId != ''">
               <div class="input-group mb-3 form-row">
                 <input class="form-control" aria-label="Cuéntame como te ha ido" formControlName="Cuéntame como te ha ido">
+                <button class="mat-button">Enviar</button>
               </div>
             </div>
           </div>

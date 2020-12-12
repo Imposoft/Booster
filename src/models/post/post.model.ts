@@ -8,6 +8,6 @@ export class Post {
   exclusive: boolean;
   imgUrl: string;
   owner: string;
-  creation?: string[];
-  creationOwner?: string[];
+  // creation?: string[];
+  creationOwner?: [{comment: string, ownerName: string, id: string}];
 }
