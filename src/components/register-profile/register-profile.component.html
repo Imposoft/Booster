@@ -38,10 +38,23 @@
         <input matInput placeholder="*******" type="password" formControlName="password" required>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Imagen</mat-label>
+        <form-firebase-file matInput
+          [formControl]="controlFile"
+          [config]="config"
+          placeholder="Selecciona un archivo!"
+        required>
+        </form-firebase-file>
         <input matInput placeholder="En formato jpg y png" formControlName="imageurl" required>
-      </mat-form-field>
+      </mat-form-field> -->
+      <label>Imagen</label>
+      <form-firebase-file
+        [formControl]="controlFile"
+        [config]="config"
+        placeholder="Selecciona un archivo!"
+        >
+      </form-firebase-file>
       <br>
       <mat-form-field>
         <mat-label>Telefono</mat-label>
@@ -97,7 +110,7 @@
         <mat-label>Genero:</mat-label>
         <input matInput formControlName="genre" placeholder="Formato: Pop, Rock..." required>
       </mat-form-field><br>
-      <div>Miembro 1:</div>
+      <!-- <div>Miembro 1:</div>
       <mat-form-field>
         <mat-label>Nombre</mat-label>
         <input matInput placeholder="Miembro 1" formControlName="member1Name">
@@ -123,7 +136,7 @@
       <mat-form-field>
         <mat-label>Imagen</mat-label>
         <input matInput placeholder="Miembro 3 imagen" formControlName="member3Url" >
-      </mat-form-field>
+      </mat-form-field> -->
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" (click)="sendForm();stepper.reset()">Enviar</button>
