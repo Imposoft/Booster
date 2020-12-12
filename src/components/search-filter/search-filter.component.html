@@ -108,13 +108,17 @@
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Descripcion</th>
+      <th scope="col">Enlace</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let country of jobOffers | async; index as i">
+    <tr *ngFor="let tutorial of realTutorials; index as i">
       <th scope="row">{{ i + 1 }}</th>
-      <td><ngb-highlight [result]="country.title" [term]="filter.value"></ngb-highlight></td>
-      <td><ngb-highlight [result]="country.body" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="tutorial.title" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="tutorial.body" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/tutorial',tutorial.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
     </tr>
     </tbody>
   </table>
