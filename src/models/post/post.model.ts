@@ -8,5 +8,5 @@ export class Post {
   exclusive: boolean;
   imgUrl: string;
   owner: string;
-  creation?: string;
+  creation?: string[];
 }
