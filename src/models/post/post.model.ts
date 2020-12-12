@@ -9,4 +9,5 @@ export class Post {
   imgUrl: string;
   owner: string;
   creation?: string[];
+  creationOwner?: string[];
 }
