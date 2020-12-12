@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class PostCardComponent implements OnInit {
   @Input() postToDisplay: Post;
   @Input() isOwner: boolean;
+  commentsShown: boolean;
   public firestore: AngularFirestore;
 
   constructor(firestore: AngularFirestore, private router: Router) {
@@ -26,6 +27,10 @@ export class PostCardComponent implements OnInit {
 
   modifyPost(): void{
     this.router.navigate(['news/' + this.postToDisplay.id]);
+  }
+
+  toggleVisible(): void{
+    this.commentsShown = !this.commentsShown;
   }
 
   /*userLoggedIsProfileOwner(): boolean {
