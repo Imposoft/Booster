@@ -1,10 +1,12 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, LOCALE_ID, Inject} from '@angular/core';
 import {CalendarEvent, CalendarMonthViewDay, CalendarView, CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import {WeekViewHourColumn} from 'calendar-utils';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Subject} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
+import localeEs from '@angular/common/locales/es';
+import {registerLocaleData} from '@angular/common';
 
 @Component({
   selector: 'app-calendar',
@@ -43,7 +45,11 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   refresh: Subject<any> = new Subject();
 
+  locale = 'es';
+
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+    registerLocaleData(localeEs);
+
     this.musicianProfile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [],
       location: '', name: '', password: '', phone: '', reservations: [], socialNetworks: [], subscriptionPrice: 0, tutorials: []
     };
