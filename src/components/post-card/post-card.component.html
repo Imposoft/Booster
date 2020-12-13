@@ -28,14 +28,11 @@
       <a class="btn btn-outline-danger m-1" (click)="dislike()">No me gusta</a>
     </div>
     <div class="float-left">
-      <a>Me gusta: {{numberLikes()}}, </a>
-      <a>No me gusta: {{numberDislikes()}}</a>
-      <a>Prueba texto: {{likes}}</a>
+      <a>Me gusta: {{likes}}, </a>
+      <a>No me gusta: {{dislikes}}</a>
     </div>
   </div>
   <div class="card-footer text-muted text-center bg-warning border-danger" *ngIf="postToDisplay.promoted">
     Contenido promocionado
   </div>
 </div>
-
-

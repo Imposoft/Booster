@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from '../../models/post/post.model';
-import {AngularFirestore, AngularFirestoreCollection, CollectionReference} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import DocumentData = firebase.firestore.DocumentData;
+
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-post-card',
@@ -14,19 +16,26 @@ export class PostCardComponent implements OnInit {
   @Input() isOwner: boolean;
   public firestore: AngularFirestore;
   public likes: any = 0;
-  public dislikes: number = 0;
+  public dislikes: any = 0;
   public variable: string;
-  public numeroLikes: AngularFirestoreCollection<DocumentData>;
-  public coleccionValoraciones: AngularFirestoreCollection<DocumentData>;
+  public likesCollection: AngularFirestoreCollection<DocumentData>;
+  public dislikesCollection: AngularFirestoreCollection<DocumentData>;
+  public loggedId: string;
+  public existsUserRating: boolean;
 
-
-  constructor(firestore: AngularFirestore, private router: Router) {
+  constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth) {
     this.firestore = firestore;
+    // Si hemos iniciado sesion, loggedId sera nuestro id
+    this.afAuth.authState.subscribe(user => {
+      if (user){
+        this.loggedId = user.uid;
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.likes = this.pruebaTexto();
-    this.dislikes = this.numberDislikes();
+    this.likeDislikeUpdate();
+    this.existsOwnerUpdate();
   }
 
   delete(): void {
@@ -38,40 +47,61 @@ export class PostCardComponent implements OnInit {
   }
 
   like(): void {
-    this.likes = this.likes + 1;
+    this.setRating(true);
   }
 
   dislike(): void {
-    this.likes = this.dislikes + 1;
+    this.setRating(false);
   }
 
-  numberLikes(): number {
-    return 7342;
+  setRating(value: boolean): void {
+    if (this.loggedId == null) {
+      return;
+    }
+    if (this.existsUserRating) {
+      this.firestore
+        .collection('posts')
+        .doc(this.postToDisplay.id)
+        .collection('likes').doc(this.loggedId).update({
+          isLike: value,
+          ownerId: this.loggedId
+        }
+      ).then( () => {
+        console.log('likes: ' + this.likes + ' / dislikes: ' + this.dislikes);
+      });
+    } else {
+      this.firestore
+        .collection('posts')
+        .doc(this.postToDisplay.id)
+        .collection('likes').doc(this.loggedId).set({
+        isLike: value,
+        ownerId: this.loggedId
+      }).then(() => {
+        console.log('likes: ' + this.likes + ' / dislikes: ' + this.dislikes);
+      });
+    }
   }
 
-  numberDislikes(): number {
-    return 1230;
+  existsOwnerUpdate(): void {
+    this.firestore.collection('posts').doc(this.postToDisplay.id).
+    collection('likes', ref => ref.where('ownerId', '==', this.loggedId)).
+    valueChanges().subscribe(value => {
+      this.existsUserRating = value.length > 0;
+    });
   }
 
-  pruebaTexto(): any {
-    // this.variable = '';
-    this.coleccionValoraciones = this.firestore.collection('posts').doc(this.postToDisplay.id).
-      collection('likes', ref => ref.where('isLike', '==', true));
-
-    this.coleccionValoraciones.valueChanges().subscribe(value => {
+  likeDislikeUpdate(): any {
+    this.likesCollection = this.firestore.collection('posts').doc(this.postToDisplay.id).
+    collection('likes', ref => ref.where('isLike', '==', true));
+    this.likesCollection.valueChanges().subscribe(value => {
       this.likes = value.length;
       return this.likes;
     });
-
-    /*const numberDis: number = this.numeroDislikes.get().toPromise.length;
-    // for (let counter: number = 0; counter < numberDis; counter++) {
-    //   this.numeroDislikes.doc(1);
-    // }
-    return 'unTexto';
-    return '';*/
+    this.dislikesCollection = this.firestore.collection('posts').doc(this.postToDisplay.id).
+    collection('likes', ref => ref.where('isLike', '==', false));
+    this.dislikesCollection.valueChanges().subscribe(value => {
+      this.dislikes = value.length;
+      return this.dislikes;
+    });
   }
-
-  /*userLoggedIsProfileOwner(): boolean {
-    return this.loggedId === this.pathId;
-  }*/
 }
