@@ -35,7 +35,7 @@ export class NewsView implements OnInit {
               public afAuth: AngularFireAuth,
               public location: Location) {
     // Perfil vacio sobre el que cargar los datos
-    this.news = {title: '', body: '', promoted: false, exclusive: false, imgUrl: '', owner: ''};
+    this.news = {title: '', body: '', promoted: false, exclusive: false, imgUrl: '', owner: '', likes: [{ownerId: 'tete', isLike: true}]};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
@@ -83,15 +83,6 @@ export class NewsView implements OnInit {
   }
 
   sendForm(): void {
-    /*const post = {
-      title: this.modificationForm.value.title,
-      imgUrl: this.modificationForm.value.imgUrl,
-      body: this.modificationForm.value.body,
-      exclusive: this.exclusive.valueOf(),
-      promoted: this.promoted.valueOf(),
-      owner: null,
-    };
-    this.news.add(post);*/
     console.log(this.role);
     this.checkValues();
     if (this.pathId !== undefined){
@@ -103,7 +94,9 @@ export class NewsView implements OnInit {
       this.pathId = '';
       this.news.owner = this.loggedId;
       this.newsPrinted.add(this.news)
-        .catch(error => console.log(error));
+        .catch(error => console.log(error)).then( docRef => {
+        this.newsPrinted.doc(docRef.id).collection('likes').doc(this.loggedId).set({ownerId: 'notOwner', isLike: null});
+      });
       this._success.next('Noticia creada con exito!');
     }
     this.changeView();
