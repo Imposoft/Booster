@@ -43,8 +43,8 @@
             <!-- CAJA DE TEXTO - Sólo loggeado -->
             <div id="container1" class="container-fluid d-flex" *ngIf="loggedId != ''">
               <div class="input-group mb-3 form-row">
-                <input class="form-control" aria-label="Cuéntame como te ha ido" formControlName="Cuéntame como te ha ido">
-                <button class="mat-button">Enviar</button>
+                <input class="form-control" formControlName="comentario">
+                <button class="mat-button" (click)="enviar()">Enviar</button>
               </div>
             </div>
           </div>
