@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from '../../models/post/post.model';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, CollectionReference} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import DocumentData = firebase.firestore.DocumentData;
 

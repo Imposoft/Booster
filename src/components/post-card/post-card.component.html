@@ -23,16 +23,19 @@
     <br>
     <!-- TODO EN ALGUN SPRINT -->
     <!-- (21/11/2020) BOTON ME GUSTA IMPLEMENTADO -->
-    <div class="float-right">
-      <a class="btn btn-success m-1" (click)="like()">Me gusta</a>
-      <a class="btn btn-outline-danger m-1" (click)="dislike()">No me gusta</a>
-    </div>
     <div class="float-left">
       <a>Me gusta: {{likes}}, </a>
       <a>No me gusta: {{dislikes}}</a>
     </div>
+    <div rateButtons *ngIf="loggedId != null">
+      <div class="float-right">
+        <a class="btn btn-success m-1" (click)="like()">Me gusta</a>
+        <a class="btn btn-outline-danger m-1" (click)="dislike()">No me gusta</a>
+      </div>
+    </div>
   </div>
-  <div class="card-footer text-muted text-center bg-warning border-danger" *ngIf="postToDisplay.promoted">
+  <div class="card-footer text-muted text-center bg-warning border-danger"
+       *ngIf="postToDisplay.promoted && true"  style="margin-top: 30px;">
     Contenido promocionado
   </div>
 </div>
