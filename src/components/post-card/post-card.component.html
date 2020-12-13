@@ -22,7 +22,16 @@
     <p class="card-text text-muted">{{postToDisplay.creation}}</p>
     <br>
     <!-- TODO EN ALGUN SPRINT -->
-    <!--<a href="#" class="btn btn-success m-1">Me gusta</a>-->
+    <!-- (21/11/2020) BOTON ME GUSTA IMPLEMENTADO -->
+    <div class="float-right">
+      <a class="btn btn-success m-1" (click)="like()">Me gusta</a>
+      <a class="btn btn-outline-danger m-1" (click)="dislike()">No me gusta</a>
+    </div>
+    <div class="float-left">
+      <a>Me gusta: {{numberLikes()}}, </a>
+      <a>No me gusta: {{numberDislikes()}}</a>
+      <a>Prueba texto: {{likes}}</a>
+    </div>
   </div>
   <div class="card-footer text-muted text-center bg-warning border-danger" *ngIf="postToDisplay.promoted">
     Contenido promocionado
