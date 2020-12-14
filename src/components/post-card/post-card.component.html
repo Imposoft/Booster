@@ -42,10 +42,12 @@
               <!-- <p class="card-text text-muted">{{postToDisplay.creation}}</p> -->
             <!-- CAJA DE TEXTO - Sólo loggeado -->
             <div id="container1" class="container-fluid d-flex" *ngIf="loggedId != ''">
-              <div class="input-group mb-3 form-row">
-                <input class="form-control" formControlName="comentario">
-                <button class="mat-button" (click)="enviar()">Enviar</button>
-              </div>
+              <form [formGroup]="modificationForm">
+                <div class="input-group mb-3 form-row">
+                  <input class="form-control" placeholder="Comenta aquí!" aria-label="Comentario" formControlName="comment" >
+                  <button type="button" class="btn btn-primary" (click)="enviar()">Enviar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

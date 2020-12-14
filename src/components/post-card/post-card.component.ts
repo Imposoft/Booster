@@ -11,6 +11,9 @@ import {BandModificationView} from '../../views/band-modification/band-modificat
 import {Band} from '../../models/band/band.model';
 import {Fan} from '../../models/fan/fan.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import * as firebase from 'firebase';
+import {Observable} from 'rxjs';
+import {max} from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-card',
@@ -30,6 +33,7 @@ export class PostCardComponent implements OnInit {
   public modificationForm: FormGroup;
   public perfil: any;
   public guardar: any;
+  // public map: Map<string, string>;
 
   constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth, private formBuilder: FormBuilder) {
     this.firestore = firestore;
@@ -63,7 +67,7 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.modificationForm = this.formBuilder.group({
-      comentario: ['', []],
+      comment: ['', []]
     });
   }
 
@@ -81,18 +85,30 @@ export class PostCardComponent implements OnInit {
   }
 
   enviar(): void {
-    this.guardar = {comment: this.modificationForm.value.comentario, ownerName: this.name, id: this.loggedId};
-    console.log(this.guardar);
+    // this.guardar = {comment: this.modificationForm.value.comentario, ownerName: this.name, id: this.loggedId};
+    // console.log(this.guardar);
     // guardar en firebase
+    /*
     if (this.role === 'BAND') {
       // subir
     } else if (this.role === 'MUSICIAN') {
       // subir
     } else if (this.role === 'FAN') {
       // subir
-    }
+    }*/
     // No funciona la siguiente función para borrar el comentario de la caja que acaba de subir
     // this.modificationForm.reset('');
+    const commentMessage: any = {comment: this.modificationForm.value.comment, id: this.loggedId, ownerName: this.name, randomID: Math.floor(Math.random() * 10000)};
+    this.firestore
+      .collection('posts')
+      .doc(this.postToDisplay.id).get().subscribe();
+    this.firestore
+      .collection('posts')
+      .doc(this.postToDisplay.id).update({
+        creationOwner: firebase.firestore.FieldValue.arrayUnion(commentMessage)
+      }).then(() => {
+      console.log('todo ok');
+    });
   }
 
   /*userLoggedIsProfileOwner(): boolean {
