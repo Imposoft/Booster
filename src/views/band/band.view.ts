@@ -28,6 +28,7 @@ export class BandView implements OnInit {
   refresh: Subject<any> = new Subject();
 
   membersToShow: Musician[];
+  membersIDs: string[];
   public postList: any;
   public shown = false;
 
@@ -63,12 +64,14 @@ export class BandView implements OnInit {
             this.profPic = url;
           });
           this.membersToShow = [];
+          this.membersIDs = [];
           for (const item of this.profile.members) {
             // @ts-ignore
             this.printedMember = firestore.doc<Musician>('musicianProfiles/' + item);
             this.printedMember.valueChanges().subscribe((musician) => {
               this.member = musician;
               this.membersToShow.push(this.member);
+              this.membersIDs.push(item);
             });
           }
         });
