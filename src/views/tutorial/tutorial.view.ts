@@ -31,7 +31,7 @@ export class TutorialView implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
     // Clase particular vacia sobre el que cargar los datos
     this.tutorialPost = {body: '', exclusive: false, id: '', imgUrl: '', owner: undefined, price: 0, promoted: false, title: '', userWaitList: []};
-    this.tutorialOwner = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
+    this.tutorialOwner = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: null, subscriptionPrice: 0, tutorials: [], reservations: []};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
@@ -67,7 +67,7 @@ export class TutorialView implements OnInit {
     this._success.pipe(
       debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
-    this.checkIfApplied();
+    // this.checkIfApplied();
   }
 
   applyForTutorial(): void{
@@ -79,11 +79,15 @@ export class TutorialView implements OnInit {
 
   checkIfApplied(): void {
     if (this.isFan) {
+      console.log('Im fan');
       for (const id of this.tutorialPost.userWaitList) {
         if (this.loggedId === id) {
           this.isButtonVisible = false;
         }
       }
+    } else {
+      console.log('Im not fan');
+      this.isButtonVisible = false;
     }
   }
 }

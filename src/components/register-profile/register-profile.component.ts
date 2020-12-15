@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {Musician} from '../../models/musician/musician.model';
@@ -10,6 +10,8 @@ import {Fan} from 'src/models/fan/fan.model';
 import {Router} from '@angular/router';
 import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {Genre} from '../../models/genre/genre.model';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {environment} from '../../environments/environment.prod';
 
 
 @Component({
@@ -29,6 +31,9 @@ export class RegisterProfileComponent implements OnInit {
   musicianProfiles;
   fanProfiles;
   bandProfiles;
+
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
 
   socialNetworksTemplate: SocialNetworks[];
   genresTemplate: Genre[] = [];
@@ -61,7 +66,7 @@ export class RegisterProfileComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      imageurl: ['', [Validators.required]],
+      // imageurl: ['', [Validators.required]],
       phone: ['', [Validators.required]],
     });
     this.thirdFormGroupMusician = this.formBuilder.group({
@@ -74,12 +79,6 @@ export class RegisterProfileComponent implements OnInit {
       location: ['', [Validators.required]],
       description: ['', []],
       subscriptionPrice: ['', [Validators.required]],
-      member1Name: ['', []],
-      member2Name: ['', []],
-      member3Name: ['', []],
-      member1Url: ['', []],
-      member2Url: ['', []],
-      member3Url: ['', []],
       genre: ['', []],
     });
 
@@ -87,6 +86,13 @@ export class RegisterProfileComponent implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `userProfilePic`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
 
   }
 
@@ -96,7 +102,8 @@ export class RegisterProfileComponent implements OnInit {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
-        imageSource: this.secondFormGroup.value.imageurl,
+        // imageSource: this.secondFormGroup.value.imageurl,
+        imageSource: 'userProfilePic/' + this.controlFile.value.value.name,
         phone: this.secondFormGroup.value.phone,
         description: this.thirdFormGroupMusician.value.description,
         genres: this.stringToGenresM(),
@@ -119,7 +126,8 @@ export class RegisterProfileComponent implements OnInit {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
-        imageSource: this.secondFormGroup.value.imageurl,
+        // imageSource: this.secondFormGroup.value.imageurl,
+        imageSource: 'userProfilePic/' + this.controlFile.value.value.name,
         phone: this.secondFormGroup.value.phone,
         socialNetworks: this.socialNetworksTemplate
       };
@@ -134,49 +142,14 @@ export class RegisterProfileComponent implements OnInit {
         });
       this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
-      const user1 = {
-        name: this.thirdFormGroupBand.value.member1Name,
-        email: '',
-        password: '',
-        imageSource: this.thirdFormGroupBand.value.member1Url,
-        phone: '',
-        description: '',
-        genres: ['EjemploGenero'],
-        location: '',
-        socialNetworks: [],
-        subscriptionPrice: 25
-      };
-      const user2 = {
-        name: this.thirdFormGroupBand.value.member2Name,
-        email: '',
-        password: '',
-        imageSource: this.thirdFormGroupBand.value.member2Url,
-        phone: '',
-        description: '',
-        genres: ['EjemploGenero'],
-        location: '',
-        socialNetworks: [],
-        subscriptionPrice: 25
-      };
-      const user3 = {
-        name: this.thirdFormGroupBand.value.member3Name,
-        email: '',
-        password: '',
-        imageSource: this.thirdFormGroupBand.value.member3Url,
-        phone: '',
-        description: '',
-        genres: ['EjemploGenero'],
-        location: '',
-        socialNetworks: [],
-        subscriptionPrice: 25
-      };
-      const band = {
+      const band: Band = {
         name: this.secondFormGroup.value.name,
         email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
-        imageSource: this.secondFormGroup.value.imageurl,
+        // imageSource: this.secondFormGroup.value.imageurl,
+        imageSource: 'userProfilePic/' + this.controlFile.value.value.name,
         phone: this.secondFormGroup.value.phone,
-        members: [user1, user2, user3],
+        members: [],
         description: this.thirdFormGroupBand.value.description,
         genres: this.stringToGenresB(),
         location: this.thirdFormGroupBand.value.location,

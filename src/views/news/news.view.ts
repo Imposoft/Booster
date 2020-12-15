@@ -27,6 +27,7 @@ export class NewsView implements OnInit {
   successMessage = '';
   public loggedId: string;
   public role: string;
+  public noPathID = false;
 
   constructor(private formBuilder: FormBuilder,
               public firestore: AngularFirestore,
@@ -47,6 +48,8 @@ export class NewsView implements OnInit {
         this.newsPrinted.valueChanges().subscribe((news) => {
           this.news = news;
         });
+      } else {
+        this.noPathID = true;
       }
       // Si hemos iniciado sesion, loggedId sera nuestro id
       this.afAuth.authState.subscribe(user => {
@@ -73,8 +76,6 @@ export class NewsView implements OnInit {
       title: ['', [Validators.required]],
       imgUrl: ['', [Validators.required]],
       body: ['', []],
-      exclusive: ['', [Validators.required]],
-      promoted: ['', [Validators.required]],
     });
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(

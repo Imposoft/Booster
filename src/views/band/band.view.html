@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center bg-light" >
   <div class="row bg-white" style="width:90vw">
     <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-      <img [src]="profile.imageSource" alt="Imagen de perfil" style="max-width: 200px">
+      <img [src]="this.profPic" alt="Imagen de perfil" style="max-width: 200px">
     </div>
     <div class="col-md-6 col-sm-12">
       <div class="row">
@@ -17,23 +17,23 @@
     </div>
 
     <br>
-    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight">
+    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight" *ngIf="userLoggedIsProfileOwner()">
       <a [routerLink]="['/bandModification',pathId]">
         <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button> -->
-        <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
+        <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
       </a>
       <br>
       <a [routerLink]="['/jobOfferModification']">
         <!-- <button class="btn btn-outline-primary m-2"> Crear clase particular</button> -->
-        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear oferta de trabajo</button>
+        <button class="btn btn-outline-primary m-2"> Crear oferta de trabajo</button>
       </a>
       <a [routerLink]="['/userJobOfferListing']">
         <!-- <button class="btn btn-outline-primary m-2"> Revisar clases particulares</button> -->
-        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Revisar ofertas de trabajo</button>
+        <button class="btn btn-outline-primary m-2"> Revisar ofertas de trabajo</button>
       </a>
       <a [routerLink]="['/news']">
         <!-- <button class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
-        <button *ngIf="userLoggedIsProfileOwner()" class="btn btn-outline-primary m-2"> Crear Noticia</button>
+        <button class="btn btn-outline-primary m-2"> Crear Noticia</button>
       </a>
     </div>
 
@@ -52,20 +52,55 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let member of profile.members; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td>{{member.name}}</td>
+            <tr *ngFor="let member of membersToShow; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>
+                <a [routerLink]="['/profile', membersIDs[i]]" style="color: white">{{member.name}}</a>
+              </td>
               <td><img [src]="member.imageSource" alt="Imagen de perfil" style="width: 50px;height: 50px;border-radius: 100px"></td>
+              <td *ngIf="userLoggedIsProfileOwner()">
+                <button type="button" class="btn btn-outline-light ml-1" (click)="deleteMember(i)">Eliminar</button></td>
             </tr>
             </tbody>
           </table>
+          <button class="btn btn-outline-primary m-2 d-flex align-items-end" *ngIf="userLoggedIsProfileOwner()" (click)="showAddMembers()">{{shown ? "Ocultar" : "Añadir miembros"}}</button>
+          <div *ngIf="shown" class="p-2">
+            <form>
+              <div class="form-group form-inline">
+                Introduce tu busqueda aqui: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+              </div>
+            </form>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <!-- <th scope="col">Descripcion</th> -->
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let musician of realMusicians; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td><ngb-highlight [result]="musician.name" [term]="filter.value"></ngb-highlight></td>
+                <!-- <td><ngb-highlight [result]="musician.description" [term]="filter.value"></ngb-highlight></td> -->
+                <td>
+                  <button type="button" class="btn btn-outline-primary mr-1" (click)="addMember(musician.id)">Añadir miembro</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="container-fluid d-flex justify-content-center bg-light" >
+      <div class="row bg-white">
+        <app-post-feed [postList]="(this.postList | async)" [userLoggedId]="userLoggedIsProfileOwner()"> </app-post-feed>
+      </div>
+    </div>
+
   </div>
 </div>
-<div class="container-fluid d-flex justify-content-center bg-light" >
-<div class="row bg-white mt-4 p-2" style="width:90vw">
-  <app-post-feed [postList]="(this.postList | async)" [userLoggedId]="userLoggedIsProfileOwner()"> </app-post-feed>
-</div>
-</div>
+

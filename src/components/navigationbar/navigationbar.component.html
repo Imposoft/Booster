@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">
-    <img src="assets/icon/booster.png" width="120" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    <img src="assets/icon/booster.png" width="150" class="d-inline-block align-top" alt="" loading="lazy" id="profileIcon">
   </a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <a [routerLink]="'/profile'"><button type="button" class="btn btn-outline-light m-1">Perfil Musico</button></a>
@@ -10,7 +10,8 @@
     <a [routerLink]="'/jobOffer'"><button type="button" class="btn btn-outline-light m-1">Oferta de trabajo</button></a>
   </div>
   <div>
-    <a [routerLink]="'/register'"><button type="button" class="btn btn-outline-light m-1 mr-3">Inicio de sesion</button></a>
-    <img [src]="imageURL" alt="profile pic" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="width: 50px;height: 50px" (click)="goToProfile()">
+    <a [routerLink]="'/register'" *ngIf="loggedId == null"><button type="button" class="btn btn-outline-light m-1 mr-3" id="loginButton">Inicio de sesion</button></a>
+    <a *ngIf="loggedId != null"><button type="button" class="btn btn-outline-light m-1 mr-3" id="logoutButton" (click)="logOut()">Cerrar sesion</button></a>
+    <img [src]="this.imageURL" alt="profile pic" class="img-fluid rounded-circle z-depth-0 align-center my-2 my-sm-0" style="width: 50px;height: 50px" (click)="goToProfile()">
   </div>
 </nav>

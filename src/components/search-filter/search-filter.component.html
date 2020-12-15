@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-between p-2">
+  <form>
+    <div class="form-group form-inline">
+      Introduce tu busqueda aqui: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+    </div>
+  </form>
+  <div class="btn-group btn-group-toggle mb-3" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="1"> Músicos
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="4"> Bandas
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="5"> Aficionados
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="2"> Ofertas de trabajo
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" [value]="3"> Clases particulares
+    </label>
+  </div>
+</div>
+
+<div [ngSwitch]="model" style="width: 90vw" class="p-2">
+  <table class="table table-striped" *ngSwitchCase="1">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Enlace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let musician of realMusicians; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><ngb-highlight [result]="musician.name" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="musician.description" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/profile',musician.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngSwitchCase="4">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Enlace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let band of realBands; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><ngb-highlight [result]="band.name" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="band.description" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/bandProfile',band.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" style="width: available" *ngSwitchCase="5">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Enlace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let fan of realFans; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><ngb-highlight [result]="fan.name" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/fanProfile',fan.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngSwitchCase="2">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Enlace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let job of realJobOffers; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><ngb-highlight [result]="job.title" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="job.body" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/jobOffer',job.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngSwitchCase="3">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Enlace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tutorial of realTutorials; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><ngb-highlight [result]="tutorial.title" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="tutorial.body" [term]="filter.value"></ngb-highlight></td>
+      <td><a [routerLink]="['/tutorial',tutorial.id]">
+        <button type="button" class="btn btn-outline-primary mr-1">Abrir</button>
+      </a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

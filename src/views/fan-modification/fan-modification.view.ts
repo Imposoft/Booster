@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Fan} from '../../models/fan/fan.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
 import {debounceTime} from 'rxjs/operators';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {environment} from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-fan-modification',
@@ -21,6 +23,9 @@ export class FanModificationView implements OnInit {
   private pathId: string;
 
   public modificationForm: FormGroup;
+
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -61,6 +66,13 @@ export class FanModificationView implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `userProfilePic`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
   }
 
   sendForm(): void {
@@ -76,7 +88,8 @@ export class FanModificationView implements OnInit {
     if (this.modificationForm.value.phone !== ''){ this.profile.phone = this.modificationForm.value.phone; }
     if (this.modificationForm.value.email !== ''){ this.profile.email = this.modificationForm.value.email; }
     if (this.modificationForm.value.password !== ''){ this.profile.password = this.modificationForm.value.password; }
-    if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    // if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    if (this.controlFile.value != null){ this.profile.imageSource = 'userProfilePic/' + this.controlFile.value.value.name; }
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
     if (this.socialNetworksModified !== undefined) { this.profile.socialNetworks = this.socialNetworksModified; }
   }

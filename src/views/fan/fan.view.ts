@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Post} from '../../models/post/post.model';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {FirebaseApp} from '@angular/fire';
 
 @Component({
   selector: 'app-fan',
@@ -18,7 +20,11 @@ export class FanView implements OnInit {
   private loggedId: string;
   public postList: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, public firestore: AngularFirestore, public afAuth: AngularFireAuth) {
+  public finalUrl: any;
+  public profPic: any;
+  private firebaseApp: FirebaseApp;
+
+  constructor(private router: Router, private route: ActivatedRoute, public firestore: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {email: '', imageSource: '', location: '', name: '', password: '', phone: '', socialNetworks: []};
 
@@ -40,9 +46,14 @@ export class FanView implements OnInit {
       this.printedProfile = firestore.doc<Fan>('fanProfiles/' + this.pathId);
       this.printedProfile.valueChanges().subscribe(fan => {
         this.profile = fan;
+        const ref = this.storage.ref(this.profile.imageSource);
+        this.finalUrl = ref.getDownloadURL().subscribe(url => {
+          this.profPic = url;
+        });
       });
     });
   }
+
 
   ngOnInit(): void {}
 

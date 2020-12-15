@@ -14,4 +14,13 @@ export class SocialLinksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getClickableLink(link: string): string {
+    if (link.startsWith('http://')){
+      return link.slice(7);
+    } else if (link.startsWith('https://')){
+      return link.slice(8);
+    } else {
+      return link;
+    }
+  }
 }

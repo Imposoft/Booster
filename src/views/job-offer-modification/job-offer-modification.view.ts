@@ -36,6 +36,7 @@ export class JobOfferModificationView implements OnInit {
   public role: string;
   public controlFile: FormControl;
   public config: FormFirebaseFilesConfiguration;
+  public noPathID = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -55,6 +56,8 @@ export class JobOfferModificationView implements OnInit {
         this.printedJobOffer.valueChanges().subscribe((jobOffer) => {
           this.jobOfferPost = jobOffer;
         });
+      } else {
+        this.noPathID = true;
       }
       // Si hemos iniciado sesion, loggedId sera nuestro id
       this.afAuth.authState.subscribe(user => {

@@ -1,7 +1,7 @@
-import { Auditions } from './audition.model';
+import { Audition } from './audition.model';
 
 describe('Auditions', () => {
   it('should create an instance', () => {
-    expect(new Auditions()).toBeTruthy();
+    expect(new Audition()).toBeTruthy();
   });
 });

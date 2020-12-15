@@ -3,10 +3,12 @@ import {Band} from '../../models/band/band.model';
 import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/socialnetworks.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Genre} from '../../models/genre/genre.model';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {environment} from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-band-modification',
@@ -20,6 +22,9 @@ export class BandModificationView implements OnInit {
   private printedProfile: any;
   public modificationForm: FormGroup;
   private pathId: string;
+
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
 
   private _success = new Subject<string>();
   successMessage = '';
@@ -61,6 +66,13 @@ export class BandModificationView implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `userProfilePic`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
   }
 
   sendForm(): void {
@@ -76,7 +88,8 @@ export class BandModificationView implements OnInit {
     if (this.modificationForm.value.phone !== ''){ this.profile.phone = this.modificationForm.value.phone; }
     if (this.modificationForm.value.email !== ''){ this.profile.email = this.modificationForm.value.email; }
     if (this.modificationForm.value.password !== ''){ this.profile.password = this.modificationForm.value.password; }
-    if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    // if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    if (this.controlFile.value != null){ this.profile.imageSource = 'userProfilePic/' + this.controlFile.value.value.name; }
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.subscriptionPrice !== ''){ this.profile.subscriptionPrice = this.modificationForm.value.subscriptionPrice; }

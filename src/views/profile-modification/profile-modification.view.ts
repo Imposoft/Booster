@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {debounceTime} from 'rxjs/operators';
@@ -9,6 +9,8 @@ import {SocialNetworkEnum, SocialNetworks} from '../../models/socialnetworks/soc
 import {Genre} from '../../models/genre/genre.model';
 import {Band} from '../../models/band/band.model';
 import {Musician} from '../../models/musician/musician.model';
+import {environment} from '../../environments/environment.prod';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
 
 @Component({
   selector: 'app-profile-modification',
@@ -24,19 +26,22 @@ export class ProfileModificationView implements OnInit {
   public modificationForm: FormGroup;
   private pathId: string;
 
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
+
   private _success = new Subject<string>();
   successMessage = '';
 
   constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {
     // Perfil vacio sobre el que cargar los datos
-    this.profile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: []};
+    this.profile = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: [], reservations: []};
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
         if (params.id) {
           this.pathId = params.id;
         } else {
-          this.pathId = 'profile/IfcscpI7GL2pFaZKEccf';
+          this.pathId = 'IfcscpI7GL2pFaZKEccf';
         }
       });
     // Cargamos el perfil sobre el perfil vacio
@@ -64,6 +69,13 @@ export class ProfileModificationView implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `userProfilePic`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
   }
 
   sendForm(): void {
@@ -78,7 +90,8 @@ export class ProfileModificationView implements OnInit {
     if (this.modificationForm.value.phone !== ''){ this.profile.phone = this.modificationForm.value.phone; }
     if (this.modificationForm.value.email !== ''){ this.profile.email = this.modificationForm.value.email; }
     if (this.modificationForm.value.pass !== ''){ this.profile.password = this.modificationForm.value.password; }
-    if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    // if (this.modificationForm.value.imageurl !== ''){ this.profile.imageSource = this.modificationForm.value.imageurl; }
+    if (this.controlFile.value != null){ this.profile.imageSource = 'userProfilePic/' + this.controlFile.value.value.name; }
     if (this.modificationForm.value.location !== ''){ this.profile.location = this.modificationForm.value.location; }
     if (this.modificationForm.value.description !== ''){ this.profile.description = this.modificationForm.value.description; }
     if (this.modificationForm.value.instruments !== ''){ this.profile.instruments = this.modificationForm.value.instruments; }

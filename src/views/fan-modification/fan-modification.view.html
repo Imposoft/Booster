@@ -33,7 +33,13 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon5" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control" [value]="profile.imageSource" aria-label="image url" formControlName="imageurl">
+      <form-firebase-file
+        [formControl]="controlFile"
+        [config]="config"
+        placeholder="Selecciona un archivo!"
+      >
+      </form-firebase-file>
+      <!-- <input class="form-control" [value]="profile.imageSource" aria-label="image url" formControlName="imageurl"> -->
     </div>
 
     <div class="input-group mb-3 form-row">
