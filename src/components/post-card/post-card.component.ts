@@ -14,11 +14,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as firebase from 'firebase';
 import {Observable} from 'rxjs';
 import {max} from 'rxjs/operators';
-import {AngularFirestore, AngularFirestoreCollection, CollectionReference} from '@angular/fire/firestore';
-import {Router} from '@angular/router';
+import {CollectionReference} from '@angular/fire/firestore';
 import DocumentData = firebase.firestore.DocumentData;
-
-import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-post-card',
@@ -45,10 +42,9 @@ export class PostCardComponent implements OnInit {
   public variable: string;
   public likesCollection: AngularFirestoreCollection<DocumentData>;
   public dislikesCollection: AngularFirestoreCollection<DocumentData>;
-  public loggedId: string;
   public existsUserRating: boolean;
 
-  constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth) {
+  constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth, private formBuilder: FormBuilder) {
     this.firestore = firestore;
     this.loggedId = '';
     // Si hemos iniciado sesion, loggedId sera nuestro id
