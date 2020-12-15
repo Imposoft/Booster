@@ -7,6 +7,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Fan} from '../../models/fan/fan.model';
 import {Musician} from '../../models/musician/musician.model';
 import {Band} from '../../models/band/band.model';
+import {Tutorial} from '../../models/tutorial/tutorial.model';
 
 @Component({
   selector: 'app-search-filter',
@@ -23,11 +24,13 @@ export class SearchFilterComponent implements OnInit {
   musicians: Observable<Musician[]>;
   bands: Observable<Band[]>;
   fans: Observable<Fan[]>;
+  tutorialList: Observable<Tutorial[]>;
 
   realJobOffers: JobOffer[];
   realMusicians: Musician[];
   realBands: Band[];
   realFans: Fan[];
+  realTutorials: Tutorial[];
 
   public trackItem(index: number, item: JobOffer): string {
     return item.id;
@@ -74,6 +77,16 @@ export class SearchFilterComponent implements OnInit {
         ).subscribe(value => this.realFans = [...value]);
       }
     );
+    this.tutorialList = this.afs.collection<Tutorial>('tutorialPosts').valueChanges({idField: 'id'});
+    this.tutorialList.subscribe(value => this.realTutorials = value);
+
+    this.filter.valueChanges.subscribe( text => {
+        this.tutorialList.pipe(
+          map(jobOffers => jobOffers.filter(jobOffer => jobOffer.title.toLowerCase().includes(text.toLowerCase())))
+        ).subscribe(value => this.realTutorials = [...value]);
+      }
+    );
+
   }
 
   ngOnInit(): void {

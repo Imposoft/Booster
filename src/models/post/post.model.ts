@@ -1,4 +1,5 @@
 import {UserDetails} from '../userDetails/user-details.model';
+import {Like} from '../like/like.model';
 
 export class Post {
   id?: string;
@@ -8,6 +9,6 @@ export class Post {
   exclusive: boolean;
   imgUrl: string;
   owner: string;
-  // creation?: string[];
   creationOwner?: [{comment: string, ownerName: string, id: string}];
+  likes?: Like[];
 }

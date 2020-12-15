@@ -28,11 +28,12 @@ export class BandView implements OnInit {
   refresh: Subject<any> = new Subject();
 
   membersToShow: Musician[];
+  membersIDs: string[];
   public postList: any;
   public shown = false;
 
   private finalUrl: any;
-  private profPic: any;
+  public profPic: any;
 
   constructor(private router: Router, private route: ActivatedRoute, firestore: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Perfil vacio sobre el que cargar los datos
@@ -63,13 +64,14 @@ export class BandView implements OnInit {
             this.profPic = url;
           });
           this.membersToShow = [];
+          this.membersIDs = [];
           for (const item of this.profile.members) {
-            console.log(item);
             // @ts-ignore
             this.printedMember = firestore.doc<Musician>('musicianProfiles/' + item);
             this.printedMember.valueChanges().subscribe((musician) => {
               this.member = musician;
               this.membersToShow.push(this.member);
+              this.membersIDs.push(item);
             });
           }
         });
