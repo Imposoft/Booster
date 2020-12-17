@@ -56,6 +56,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {CalendarComponent} from '../components/calendar/calendar.component';
 import {SearchFilterComponent} from '../components/search-filter/search-filter.component';
 
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
+
 @NgModule({
     declarations: [
         /**  COMPONENTS  */
@@ -121,7 +123,9 @@ import {SearchFilterComponent} from '../components/search-filter/search-filter.c
     useValue: {
       separatorKeyCodes: [ENTER, COMMA]
     }
-  }],
+  },
+    {provide : LocationStrategy , useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
