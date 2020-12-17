@@ -16,7 +16,12 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon6" style="width:9vw">Imagen</span>
       </div>
-      <input class="form-control"  aria-label="Imagen" placeholder="En formato jpg o png" formControlName="imgUrl" [value]="news.imgUrl">
+      <form-firebase-file
+        [formControl]="controlFile"
+        [config]="config"
+        placeholder="Selecciona un archivo!"
+      >
+      </form-firebase-file>
     </div>
     <div>
       <mat-checkbox class="mat-checkbox" style="margin: 10px" color='primary' #c (click)="toggleExclusive(!c.checked)" [checked]="news.exclusive">Exclusive</mat-checkbox>
