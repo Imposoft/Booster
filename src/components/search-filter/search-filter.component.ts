@@ -8,6 +8,7 @@ import {Fan} from '../../models/fan/fan.model';
 import {Musician} from '../../models/musician/musician.model';
 import {Band} from '../../models/band/band.model';
 import {Tutorial} from '../../models/tutorial/tutorial.model';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-search-filter',

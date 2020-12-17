@@ -18,7 +18,7 @@
             <div id="container1" class="container-fluid d-flex justify-content-center">
               <figure class="item" *ngFor="let musician of musicianProfiles">
                 <a [routerLink]="['/profile',musician.id]">
-                  <img class="img2" routerLink="" class="image" src={{musician.imageSource}} style="width: 10vw; height: 10vw; margin: 10px"/>
+                  <img class="img2" routerLink="" class="image" [src]="musician.imageSource" style="width: 10vw; height: 10vw; margin: 10px"/>
                   <figcaption class="caption">{{musician.name}}</figcaption>
                 </a>
               </figure>

@@ -39,7 +39,7 @@ export class BandView implements OnInit {
     // Perfil vacio sobre el que cargar los datos
     this.profile = {auditions: [undefined], description: '', email: '', genres: [], imageSource: '', jobOffers: [undefined], location: '', members: [], name: '', password: '', phone: '', socialNetworks: [], subscription: undefined, subscriptionPrice: 0};
     this.member = { description: '', email: '', genres: [], id: '', imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', reservations: [], socialNetworks: [], subscription: undefined, subscriptionPrice: 0, tutorials: [] };
-   // this.membersToShow = [];
+    this.membersToShow = [];
 
     // Recibimos el id del url de la web o en su defecto utilizamos uno por defecto
     this.route.params.subscribe( params => {
@@ -66,12 +66,14 @@ export class BandView implements OnInit {
           this.membersToShow = [];
           this.membersIDs = [];
           for (const item of this.profile.members) {
-            // @ts-ignore
             this.printedMember = firestore.doc<Musician>('musicianProfiles/' + item);
             this.printedMember.valueChanges().subscribe((musician) => {
-              this.member = musician;
-              this.membersToShow.push(this.member);
-              this.membersIDs.push(item);
+              this.storage.ref(musician.imageSource).getDownloadURL().subscribe(url => {
+                musician.imageSource = url;
+                this.member = musician;
+                this.membersToShow.push(this.member);
+                this.membersIDs.push(item);
+              });
             });
           }
         });
