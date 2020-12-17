@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Post} from '../../models/post/post.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Location} from '@angular/common';
-import {MatCheckboxChange} from '@angular/material/checkbox';
+import {environment} from '../../environments/environment.prod';
+import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-news',
@@ -28,6 +30,10 @@ export class NewsView implements OnInit {
   public loggedId: string;
   public role: string;
   public noPathID = false;
+
+  public controlFile: FormControl;
+  public config: FormFirebaseFilesConfiguration;
+
 
   constructor(private formBuilder: FormBuilder,
               public firestore: AngularFirestore,
@@ -81,6 +87,13 @@ export class NewsView implements OnInit {
     this._success.pipe(
       debounceTime(2500)
     ).subscribe(() => this.successMessage = '');
+
+    this.controlFile = new FormControl();
+    this.config = {
+      directory: `newsFiles`,
+      firebaseConfig: environment.firebase,
+      deleteOnStorage: true
+    };
   }
 
   sendForm(): void {
@@ -105,7 +118,7 @@ export class NewsView implements OnInit {
 
   checkValues(): void {
     if (this.modificationForm.value.title !== ''){ this.news.title = this.modificationForm.value.title; }
-    if (this.modificationForm.value.imgUrl !== ''){ this.news.imgUrl = this.modificationForm.value.imgUrl; }
+    if (this.controlFile.value != null){ this.news.imgUrl = 'newsFiles/' + this.controlFile.value.value.name; }
     if (this.modificationForm.value.body !== ''){ this.news.body = this.modificationForm.value.body; }
     this.news.promoted = this.promoted;
     this.news.exclusive = this.exclusive;

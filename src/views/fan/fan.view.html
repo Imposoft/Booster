@@ -14,10 +14,18 @@
         </div>
       </div>
     </div>
-    <a [routerLink]="['/fanModification',pathId]">
-      <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
-      <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>-->
-    </a>
+
+    <br>
+    <div class="col-md-2 col-sm-12 d-flex align-items-end flex-column bd-highlight" *ngIf="userLoggedIsProfileOwner()">
+      <a [routerLink]="['/fanModification',pathId]">
+        <button *ngIf="userLoggedIsProfileOwner()" class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>
+        <!-- <button class="d-flex align-self-baseline btn btn-outline-primary m-2"> Modificar Perfil</button>-->
+      </a>
+      <a [routerLink]="['/news']">
+        <!-- <button class="btn btn-outline-primary m-2"> Crear Noticia</button> -->
+        <button class="btn btn-outline-primary m-2"> Crear Noticia</button>
+      </a>
+    </div>
 
     <div class="d-flex justify-content-center p-3 mt-2 col-md-12">
       <div class="row bg-white">

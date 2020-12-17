@@ -7,6 +7,7 @@ import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {JobOffer} from '../../models/jobOffer/job-offer.model';
 import {Band} from '../../models/band/band.model';
 import {Fan} from '../../models/fan/fan.model';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class HomeView implements OnInit {
   private clase: Tutorial[];
   private oferta: JobOffer[];
   DropdownVar: number;
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, public storage: AngularFireStorage) { }
 
   ngOnInit(): void {
     this.musicianProfiles = [];
@@ -50,7 +51,12 @@ export class HomeView implements OnInit {
         const val = a.payload.doc.data();
         val.id = a.payload.doc.id;
         this.musicianProfiles.push(val);
-        console.log(this.musicianProfiles.length);
+        this.musicianProfiles.forEach((profile, index) => {
+          const ref = this.storage.ref(profile.imageSource);
+          ref.getDownloadURL().subscribe(url =>
+            this.musicianProfiles[index].imageSource = url
+          );
+        });
       });
     });
     this.bands = this.firestore.collection<Band>('bandProfiles/', ref => ref.limitToLast(5).orderBy('name'));
@@ -59,7 +65,12 @@ export class HomeView implements OnInit {
         const val = a.payload.doc.data();
         val.id = a.payload.doc.id;
         this.bandProfiles.push(val);
-        console.log(this.bandProfiles.length);
+        this.bandProfiles.forEach((profile, index) => {
+          const ref = this.storage.ref(profile.imageSource);
+          ref.getDownloadURL().subscribe(url =>
+            this.bandProfiles[index].imageSource = url
+          );
+        });
       });
     });
     this.fans = this.firestore.collection<Fan>('fanProfiles/', ref => ref.limitToLast(5).orderBy('name'));
@@ -68,7 +79,12 @@ export class HomeView implements OnInit {
         const val = a.payload.doc.data();
         val.id = a.payload.doc.id;
         this.fanProfiles.push(val);
-        console.log(this.fanProfiles.length);
+        this.fanProfiles.forEach((profile, index) => {
+          const ref = this.storage.ref(profile.imageSource);
+          ref.getDownloadURL().subscribe(url =>
+            this.fanProfiles[index].imageSource = url
+          );
+        });
       });
     });
     this.clases = this.firestore.collection<Tutorial>('tutorialPosts/', ref => ref.limitToLast(5).orderBy('title'));

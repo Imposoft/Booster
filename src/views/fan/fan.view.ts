@@ -33,7 +33,7 @@ export class FanView implements OnInit {
       if (params.id) {
         this.pathId = params.id;
       } else {
-        this.pathId = 'NKUHb5YBHaCDQmSpWUFh';
+        this.pathId = 'tX7a3M0NTKhFgGvYsjHP0yUX2jY2';
       }
       // Si hemos iniciado sesion, loggedId sera nuestro id
       this.afAuth.authState.subscribe(user => {

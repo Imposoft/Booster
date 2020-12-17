@@ -6,6 +6,7 @@ import {Tutorial} from '../../models/tutorial/tutorial.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Musician} from '../../models/musician/musician.model';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-tutorial',
@@ -28,7 +29,7 @@ export class TutorialView implements OnInit {
   private printedProfile: any;
   public isFan: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
+  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Clase particular vacia sobre el que cargar los datos
     this.tutorialPost = {body: '', exclusive: false, id: '', imgUrl: '', owner: undefined, price: 0, promoted: false, title: '', userWaitList: []};
     this.tutorialOwner = {description: '', email: '', genres: [], imageSource: '', instruments: [], jobOffers: [], location: '', name: '', password: '', phone: '', socialNetworks: [], subscription: null, subscriptionPrice: 0, tutorials: [], reservations: []};
@@ -55,6 +56,10 @@ export class TutorialView implements OnInit {
           this.ownerPathId = this.tutorialPost.owner;
           this.printedProfile.valueChanges().subscribe((musician) => {
             this.tutorialOwner = musician;
+            const ref = this.storage.ref(musician.imageSource);
+            ref.getDownloadURL().subscribe(url => {
+              this.tutorialOwner.imageSource = url;
+            });
           });
           this.checkIfApplied();
         });

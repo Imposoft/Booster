@@ -120,7 +120,7 @@ export class RegisterProfileComponent implements OnInit {
               console.log('Something went wrong with added user to firestore: ', error);
             });
         });
-      this.musicianProfiles.add(musician);
+      // this.musicianProfiles.add(musician);
     } else if (this.firstFormGroup.value.profileRole  === 'fan'){
       const fan = {
         name: this.secondFormGroup.value.name,
@@ -140,7 +140,7 @@ export class RegisterProfileComponent implements OnInit {
               console.log('Something went wrong with added user to firestore: ', error);
             });
         });
-      this.fanProfiles.add(fan);
+      // this.fanProfiles.add(fan);
     } else if (this.firstFormGroup.value.profileRole  === 'band'){
       const band: Band = {
         name: this.secondFormGroup.value.name,
@@ -165,7 +165,7 @@ export class RegisterProfileComponent implements OnInit {
               console.log('Something went wrong with added user to firestore: ', error);
             });
         });
-      this.bandProfiles.add(band);
+      // this.bandProfiles.add(band);
     } // else {
       // TODO Implement contratante logic
     // }
