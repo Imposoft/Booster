@@ -17,7 +17,7 @@
 
     <p class="card-text text-justify">{{postToDisplay.body}}</p>
 
-    <img class="card-img-top" src="post-card.component.ts" height="70%" [src]="postToDisplay.imgUrl">
+    <img class="card-img-top" [src]="this.newsPic" height="70%">
     <!-- TODO EN ALGUN SPRINT -->
     <!-- (21/11/2020) BOTON ME GUSTA IMPLEMENTADO -->
     <div class="float-left">
@@ -47,11 +47,11 @@
        *ngIf="postToDisplay.promoted && true"  style="margin-top: 30px;">
     Contenido promocionado
   </div>
-  <div class="mat-button">
-    <button type="button" class="btn btn-primary" (click)="toggleVisible()">{{ commentsShown ? "Ocultar Comentarios" : "Ver Comentarios"}}</button>
-    <div class="d-flex flex-row-reverse card-footer justify-content-lg-end">
+  <div class="mat-button d-flex align-items-end flex-column">
+    <button type="button" class="btn btn-primary m-1" (click)="toggleVisible()">{{ commentsShown ? "Ocultar Comentarios" : "Ver Comentarios"}}</button>
+    <div class="d-flex flex-row-reverse card-footer  m-1" style="min-width:98%">
       <!-- <svg width="24" height="24" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"><path d="M 200 360 C 200 60 620 80 620 80 C 620 80 1040 60 1040 360 C 1040 560 800 600 800 600 Q 740 660 880 720 C 720 720 660 700 620 620 C 620 620 200 640 200 360 Z"/></svg> -->
-      <div class="p-2" *ngIf="commentsShown === true">
+      <div class="p-2" style="min-width:98%" *ngIf="commentsShown === true">
         <div class="dropdown-content">
           <div>
             <table class="table table-striped">
@@ -64,9 +64,9 @@
             </table>
               <!-- <p class="card-text text-muted">{{postToDisplay.creation}}</p> -->
             <!-- CAJA DE TEXTO - Sólo loggeado -->
-            <div id="container1" class="container-fluid d-flex" *ngIf="loggedId != ''">
+            <div id="container1" class="container-fluid d-flex" style="min-width:98%" *ngIf="loggedId != ''">
               <form [formGroup]="modificationForm">
-                <div class="input-group mb-3 form-row">
+                <div class="input-group mb-3 form-row d-flex align-content-end">
                   <input class="form-control" placeholder="Comenta aquí!" aria-label="Comentario" formControlName="comment" >
                   <button type="button" class="btn btn-primary" (click)="enviar()">Enviar</button>
                 </div>

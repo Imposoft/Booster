@@ -9,6 +9,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Location} from '@angular/common';
 import {environment} from '../../environments/environment.prod';
 import {FormFirebaseFilesConfiguration} from 'mat-firebase-upload/lib/FormFirebaseFileConfiguration';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-news',
@@ -32,6 +33,7 @@ export class NewsView implements OnInit {
 
   public controlFile: FormControl;
   public config: FormFirebaseFilesConfiguration;
+
 
   constructor(private formBuilder: FormBuilder,
               public firestore: AngularFirestore,

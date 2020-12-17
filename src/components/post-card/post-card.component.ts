@@ -37,6 +37,9 @@ export class PostCardComponent implements OnInit {
   public perfil: any;
   public guardar: any;
 
+  private finalUrl: any;
+  public newsPic: any;
+
   public likes: any = 0;
   public dislikes: any = 0;
   public variable: string;
@@ -44,7 +47,7 @@ export class PostCardComponent implements OnInit {
   public dislikesCollection: AngularFirestoreCollection<DocumentData>;
   public existsUserRating: boolean;
 
-  constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth, private formBuilder: FormBuilder) {
+  constructor(firestore: AngularFirestore, private router: Router, public afAuth: AngularFireAuth, private formBuilder: FormBuilder, public storage: AngularFireStorage) {
     this.firestore = firestore;
     this.loggedId = '';
     // Si hemos iniciado sesion, loggedId sera nuestro id
@@ -80,6 +83,11 @@ export class PostCardComponent implements OnInit {
     });
     this.likeDislikeUpdate();
     this.existsOwnerUpdate();
+
+    const ref = this.storage.ref(this.postToDisplay.imgUrl);
+    this.finalUrl = ref.getDownloadURL().subscribe(url => {
+      this.newsPic = url;
+    });
   }
 
   delete(): void {
