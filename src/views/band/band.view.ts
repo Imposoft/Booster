@@ -46,7 +46,7 @@ export class BandView implements OnInit {
         if (params.id) {
           this.pathId = params.id;
         } else {
-          this.pathId = 'n6ZhZ1TJI7iayJS4GQrc';
+          this.pathId = 'YPZO5W1ifwckB68eW0b4xC8icyj2';
         }
         // Si hemos iniciado sesion, loggedId sera nuestro id
         this.afAuth.authState.subscribe(user => {

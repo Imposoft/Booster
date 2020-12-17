@@ -30,7 +30,7 @@ export class ProfileView implements OnInit {
       if (params.id) {
         this.pathId = params.id;
       } else {
-        this.pathId = 'IfcscpI7GL2pFaZKEccf';
+        this.pathId = 'UtxF06b0F6RBkX0zIAKrGtjAqzt2';
       }
       // Si hemos iniciado sesion, loggedId sera nuestro id
       this.afAuth.authState.subscribe(user => {
