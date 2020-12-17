@@ -6,6 +6,7 @@ import {JobOffer} from '../../models/jobOffer/job-offer.model';
 import {Band} from '../../models/band/band.model';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-job-offer',
@@ -28,7 +29,7 @@ export class JobOfferView implements OnInit {
   private _success = new Subject<string>();
   public successMessage = '';
 
-  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth) {
+  constructor(private router: Router, private route: ActivatedRoute, private afs: AngularFirestore, public afAuth: AngularFireAuth, public storage: AngularFireStorage) {
     // Oferta de trabajo  vacia sobre el que cargar los datos
 
     this.jobOfferPost = {body: '', exclusive: false, imgUrl: '', owner: undefined, budget: 0, promoted: false, title: '', genres: [], userWaitList: [], endData: '', extraFiles: ''};
@@ -39,7 +40,7 @@ export class JobOfferView implements OnInit {
         if (params.id) {
           this.pathId = params.id;
         } else {
-          this.pathId = 'dKAmFasidHlD5ZpD9ttP';
+          this.pathId = 'Ezb2bnJk8oFXkhk25FVH';
         }
         this.printedJobOffer = afs.doc<JobOffer>('jobOfferPosts/' + this.pathId);
 
@@ -55,6 +56,10 @@ export class JobOfferView implements OnInit {
             this.ownerPathId = this.jobOfferPost.owner;
             this.printedProfile.valueChanges().subscribe((band) => {
               this.jobOfferOwner = band;
+              const ref = this.storage.ref(band.imageSource);
+              ref.getDownloadURL().subscribe(url => {
+                  this.jobOfferOwner.imageSource = url;
+              });
             });
             this.checkIfApplied();
           });
