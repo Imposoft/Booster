@@ -93,12 +93,6 @@ export class HomeView implements OnInit {
         const val1 = a.payload.doc.data();
         val1.id = a.payload.doc.id;
         this.clase.push(val1);
-        this.clase.forEach((profile, index) => {
-          const ref = this.storage.ref(profile.imgUrl);
-          ref.getDownloadURL().subscribe(url =>
-            this.clase[index].imgUrl = url
-          );
-        });
       });
     });
     this.ofertas = this.firestore.collection<JobOffer>('jobOfferPosts/', ref => ref.limitToLast(5).orderBy('title'));
@@ -107,12 +101,6 @@ export class HomeView implements OnInit {
         const val2 = a.payload.doc.data();
         val2.id = a.payload.doc.id;
         this.oferta.push(val2);
-        this.oferta.forEach((profile, index) => {
-          const ref = this.storage.ref(profile.imgUrl);
-          ref.getDownloadURL().subscribe(url =>
-            this.oferta[index].imgUrl = url
-          );
-        });
       });
     });
     this.DropdownVar = 0;
